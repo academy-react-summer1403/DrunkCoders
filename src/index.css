@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @font-face {
+    font-family: IranSans;
+    src: url('fonts/iransans/IRANSansWeb_Black.woff2') format('woff2'),
+    url('fonts/iransans/IRANSansWeb_Bold.woff2') format('woff2'),
+    url('fonts/iransans/IRANSansWeb_FaNum_Black.woff2') format('woff2'),
+    url('public/fonts/iransans/IRANSansWeb_FaNum_Bold.woff2')
+} */
