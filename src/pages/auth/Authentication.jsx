@@ -1,13 +1,9 @@
-import React from 'react'
+import {Outlet} from 'react-router-dom'
 
-import { Outlet } from 'react-router-dom';
-
-const Authentication = () => {
-  return (
-    <div>
-      <Outlet />
-    </div>
-  )
+export function Authentication() {
+    return (
+        <div>
+            <Outlet />
+        </div>
+    )
 }
-
-export {Authentication}

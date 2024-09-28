@@ -1,21 +1,15 @@
-import React from 'react'
-import { QuickAccess } from '../components/QuickAccess'
-import { WeekPop } from '../components/WeekPop'
-import { WeekTeacher } from '../components/WeekTeacher'
-import { Article } from '../components/Article'
+import {Article, QuickAccess, WeekPop, WeekTeacher} from '../components/index'
 
-const Home = () => {
-  return (
-    <>
-    <QuickAccess/>
+export function Home() {
+    return (
+        <>
+            <QuickAccess />
 
-    <WeekPop/>
+            <WeekPop />
 
-    <WeekTeacher/>
+            <WeekTeacher />
 
-    <Article/>
-    </>
-  )
+            <Article />
+        </>
+    )
 }
-
-export {Home}
