@@ -7,7 +7,7 @@ import {useEffect, useState} from 'react'
 export function BaseInput({
     label = 'رمز عبور',
     placeholder = 'شماره همراه یا ایمیل خود را وارد کنید',
-    size,
+    size = 'lg',
     starIcon: StartIcons,
     type = 'password',
     register = () => {},
@@ -41,7 +41,7 @@ export function BaseInput({
                     ...props.classNames,
                 }}
                 size={size}
-                type={isVisible ? 'text' : 'password'}
+                type={isVisible ? type : 'password'}
                 label={label}
                 labelPlacement="outside"
                 placeholder={placeholder}
