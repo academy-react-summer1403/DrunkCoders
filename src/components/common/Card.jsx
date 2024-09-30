@@ -49,7 +49,7 @@ export function Card({buttonColor = '#1', ongoing = 'true'}) {
                     بسیبلممنون عالی کتاب خونه
                 </p>
                 <div className="flex gap-5 font-medium">
-                    <Teacher />
+                    <Teacher className="" />
                     <p>محمد‌حسین خلیل‌پور</p>
                 </div>
                 <div className="flex gap-5 font-medium">

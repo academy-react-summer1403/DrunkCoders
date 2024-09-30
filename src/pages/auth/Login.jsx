@@ -1,6 +1,8 @@
 import {Link} from 'react-router-dom'
 import ShortLogo from '../../assets/logo/short-Logo.svg?react'
 import LongLogo from '../../assets/logo/long-Logo.svg?react'
+import {BaseInput} from '../../components/index'
+import {Card} from '../../components/common/Card'
 
 export function Login() {
     return (
@@ -16,12 +18,17 @@ export function Login() {
             {/* Main content (full width on smaller screens) */}
             <div className="w-full h-screen flex justify-center ">
                 <div className="w-fit mt-[15%]">
-                    <h1 className="text-2xl font-bold">👋!خوش برگشتی</h1>
+                    <h1 className="text-2xl font-bold">!خوش برگشتی👋</h1>
                     <br />
                     <p className="text-gray-500">
                         لطفا برای ورود به پنل خود ایمیل یا شماره همراه و رمزعبور خود را وارد کنید
                     </p>
                     <br />
+
+                    <div>
+                        <BaseInput />
+                    </div>
+
                     <p>
                         حساب کاربری ندارید؟{' '}
                         <Link to="register" className="text-primary-blue hover:underline">
