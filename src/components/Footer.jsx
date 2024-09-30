@@ -19,7 +19,7 @@ function Explain() {
     <div className='explain sm:w-[315px] w-[296] sm:ml-10'>
       <h1 className='font-bold text-2xl'>آکادمی کدنویسی بحر</h1>
       <br />
-      <p className='text-gray-500 text-justify'>
+      <p className='text-gray-500 text-justify '>
         +13 سال سابقه فعالیت در زمینه آموزش کدنویسی از سنین کودکی تا بزرگسال. هدف ما همیشه این بوده که دانشجویان را با مهارت‌های لازم برای موفقیت در دنیای فناوری و برنامه نویسی مجهز کنیم.
       </p>
     </div>
@@ -62,33 +62,36 @@ function Namad() {
 
 export function Footer() {
   return (
-    <footer className='mb-2 p-5 py-12 rounded-[32px] bg-gray-100 flex flex-wrap justify-between gap-10 relative'>
+    <footer className='mb-2 px-5 py-12 rounded-[32px] bg-gray-100 '>
+      <div className='flex flex-wrap justify-between gap-10 relative'>
+        <div className='logo-contact flex flex-col order-1 lg:-order-1 lg:-mt-6'>
+          <Logo />
+          
+        </div>
+        <div className='order-6 lg:order-2 lg:absolute lg:-bottom-[35px]'>
 
-      <div className='logo-contact flex flex-col order-1 lg:-order-1 lg:-mt-6'>
-        <Logo />
-        
-      </div>
-      <div className='order-6 lg:order-2 lg:absolute lg:bottom-[68px]'>
+        <SubLogos  />
+        </div>
 
-      <SubLogos  />
-      </div>
+        <div className='order-2 ml-16 lg:order-5'>
+          <Namad />
+        </div>
 
-      <div className='order-2 lg:order-5'>
-        <Namad />
-      </div>
+        <div className='explain order-3 lg:order-2'>
+          <Explain />
+        </div>
 
-      <div className='explain order-3 lg:order-2'>
-        <Explain />
-      </div>
+        <div className='pages order-4 lg:order-3'>
+          <Pages />
+        </div>
 
-      <div className='pages order-4 lg:order-3'>
-        <Pages />
+        <div className='us order-5 lg:order-4'>
+          <Us />
+        </div>
       </div>
-
-      <div className='us order-5 lg:order-4'>
-        <Us />
+      <div className='mt-14 mb-8'>
+          <hr className='bg-gray-200 order-6 lg:block hidden w-full'/>
       </div>
-      <hr className='bg-gray-200 order-6 lg:block hidden w-full'/>
     </footer>
   );
 }
