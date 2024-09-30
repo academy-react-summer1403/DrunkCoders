@@ -2,7 +2,6 @@ import {Link} from 'react-router-dom'
 import ShortLogo from '../../assets/logo/short-Logo.svg?react'
 import LongLogo from '../../assets/logo/long-Logo.svg?react'
 import {BaseInput} from '../../components/index'
-import {Card} from '../../components/common/Card'
 
 export function Login() {
     return (
