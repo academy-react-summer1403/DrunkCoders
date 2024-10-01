@@ -1,15 +1,21 @@
-import {Article, QuickAccess, WeekPop, WeekTeacher} from '../components/index'
+import {
+    NewAndArticle,
+    Services,
+    PopularCourses,
+    WeekTeacher,
+    HeroSection,
+    Certificates,
+} from '../components/index'
 
 export function Home() {
     return (
         <>
-            <QuickAccess />
-
-            <WeekPop />
-
+            <HeroSection />
+            <Services />
+            <Certificates />
+            <PopularCourses />
             <WeekTeacher />
-
-            <Article />
+            <NewAndArticle />
         </>
     )
 }
