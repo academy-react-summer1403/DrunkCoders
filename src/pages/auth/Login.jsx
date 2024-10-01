@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import ShortLogo from '../../assets/logo/short-Logo.svg?react'
 import LongLogo from '../../assets/logo/long-Logo.svg?react'
-import {BaseInput, OtpInput} from '../../components/index'
+import {BaseInput} from '../../components/index'
 import {useForm} from 'react-hook-form'
 
 export function Login() {
