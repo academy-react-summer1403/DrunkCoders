@@ -3,7 +3,7 @@ import {Header, Footer} from '../components/index'
 
 export function RootLayout() {
     return (
-        <div className="container mx-auto flex-col">
+        <div className="px-12 mx-auto flex-col">
             <Header />
             <main className="flex-grow">
                 <Outlet />
