@@ -37,7 +37,7 @@ export function Register() {
                 ارسال کد تایید
                 </Button>
             </form>
-            <p>
+            <p className="mt-4 w-fit m-auto">
                 حساب کاربری دارید؟{' '}
                 <Link to="/auth/login" className="text-primary-blue hover:underline">
                     ورود به حساب کاربری

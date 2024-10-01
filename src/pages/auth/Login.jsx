@@ -2,6 +2,8 @@ import {Link} from 'react-router-dom'
 import {BaseInput, OtpInput, Button} from '../../components/index'
 import { useForm } from 'react-hook-form'
 import { AuthLayout } from './AuthLayout'
+import Mail from '../../assets/icons/mail-02-stroke-rounded 1.svg?react'
+import Lock from '../../assets/icons/lock-password-stroke-rounded 1.svg?react'
 
 export function Login() {
     const {
@@ -33,6 +35,7 @@ export function Login() {
                             register={register}
                             size="lg"
                             type="text"
+                            starIcon={Mail}
                         />
 
                         {/* BaseInput for Password */}
@@ -43,6 +46,7 @@ export function Login() {
                             register={register}
                             size="lg"
                             type="password"
+                            starIcon={Lock}
                         />
 
                         <Button type='submit' className='p-4 bg-primary-blue text-white w-full -mt-5'>

@@ -29,7 +29,6 @@ export function BaseInput({
     }
 
     const EndIcon = isVisible ? ShowPassword : HidePassword
-    StartIcons = Icon
 
     return (
         <>
