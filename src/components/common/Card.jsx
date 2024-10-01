@@ -1,11 +1,11 @@
 import {Button} from '../index'
 import {Card as NextUiCard, CardHeader, CardBody, CardFooter, Image} from '@nextui-org/react'
-import ThumbUp from '../../assets/icons/thumbs-up-stroke-rounded.svg?react'
-import ThumbDown from '../../assets/icons/thumbs-down-stroke-rounded 2.svg?react'
+import ThumbUp from '../../assets/icons/thumbs-up.svg?react'
+import ThumbDown from '../../assets/icons/thumbs-down.svg?react'
 import StartIcon from '../../assets/icons/star.svg?react'
-import Teacher from '../../assets/icons/teacher-stroke-rounded 1.svg?react'
-import Calender from '../../assets/icons/calendar-03-stroke-rounded 1@2x.svg?react'
-import Student from '../../assets/icons/students-stroke-rounded 1.svg?react'
+import Teacher from '../../assets/icons/teacher.svg?react'
+import Calender from '../../assets/icons/calendar.svg?react'
+import Student from '../../assets/icons/students.svg?react'
 
 export function Card({buttonColor = '#1', ongoing = 'true'}) {
     const buttonBgClass = buttonColor === '#5A7EFF' ? 'bg-[#5A7EFF]' : 'bg-[#DE59FF]'
