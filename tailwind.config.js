@@ -16,6 +16,9 @@ export default {
             fontFamily: {
                 sans: ['IRANSans', 'Arial', 'sans-serif'],
             },
+            screens: {
+                'footer-lg': '1106px',
+            },
         },
     },
     darkMode: 'class',

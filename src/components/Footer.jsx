@@ -71,7 +71,7 @@ export function Footer() {
                 <div className="logo-contact flex flex-col order-1 lg:-order-1 lg:-mt-6">
                     <Logo />
                 </div>
-                <div className="order-6 lg:order-2 lg:absolute lg:-bottom-[35px]">
+                <div className="order-6 lg:order-2 footer-lg:absolute lg:-bottom-[35px]">
                     <SubLogos />
                 </div>
 
