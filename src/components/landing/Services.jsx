@@ -13,7 +13,7 @@ export function Services() {
     return (
         <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap justify-center  gap-4 w-full sm">
             <div className="md:basis-[57%] lg:basis-[44%] border-4 pt-4 pr-4 rounded-[32px] relative  overflow-hidden h-[332px]">
-                <h2 className="lg:text-3xl text-2xl font-medium mb-4">پنل اختصاصی دانشجو</h2>
+                <h2 className=" text-2xl md:text-3xl font-medium mb-4">پنل اختصاصی دانشجو</h2>
                 <p className="text-[15px]">
                     پنل های اختصاصی دانشجو <br /> برای مدیریت دوره ها وتمرین ها
                 </p>
@@ -24,7 +24,9 @@ export function Services() {
             </div>
 
             <div className="md:basis-[100%] md:order-1 lg:order-[0] lg:basis-[34%]  text-white p-4 bg-primary-blue rounded-[32px] relative flex flex-col h-[332px]">
-                <h2 className="text-xl lg:text-2xl font-medium mb-4">دوره‌های جدید تابستانه!</h2>
+                <h2 className="text-xl md:text-2xl lg:text-[23px]  font-medium mb-4">
+                    دوره‌های جدید تابستانه!
+                </h2>
                 <p className="text-[15px]">
                     شروع دوره های جدید
                     <br /> مبتدی و پیشرفته برای
@@ -47,7 +49,7 @@ export function Services() {
             </div>
 
             <div className="md:basis-[40%] lg:basis-[22%] border-4 p-4 rounded-[32px] flex flex-col justify-between relative h-[332px]">
-                <h2 className="text-xl lg:text-2xl font-medium mb-10">
+                <h2 className="text-xl md:text-2xl font-medium mb-10">
                     درباره ما <br /> بیشتر بخوانید
                 </h2>
                 <div>
