@@ -1,4 +1,4 @@
-import {Authentication, Home, Login, NotFound, Register, RootLayout} from '../pages/index'
+import {Authentication, Home, Login, NotFound, Register, RootLayout,ForgetPass} from '../pages/index'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import './App.css'
 
@@ -32,6 +32,10 @@ const router = createBrowserRouter([
                 path: 'register',
                 element: <Register />,
             },
+            {
+                path: 'forget-pass',
+                element:<ForgetPass />,
+            }
         ],
     },
 ])
