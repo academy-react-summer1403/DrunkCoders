@@ -5,7 +5,7 @@ export function WeekTeacher() {
     return (
         <div className=" text-center my-20">
             <h2 className="text-[40px] font-medium ">برترین اساتید هفته</h2>
-            <p className="text-[#787878] text-xl font-medium mt-3 mb-20 lg:mb-40">
+            <p className="text-[#787878] text-xl  mt-3 mb-20 lg:mb-40">
                 اساتیدی که با نظر سنجی در دوره ها به آنها بیشترین رای مثبت را دادند
             </p>
 

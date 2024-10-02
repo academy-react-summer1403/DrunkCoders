@@ -12,7 +12,7 @@ import {
 export function Services() {
     return (
         <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap justify-center gap-4 w-full">
-            <div className="md:basis-[57%] lg:basis-[44%] border-4 pt-4 pr-4 rounded-[32px] relative  overflow-hidden h-[332px]">
+            <div className="md:basis-[57%] lg:basis-[40%] border-4 pt-4 pr-4 rounded-[32px] relative  overflow-hidden h-[332px]">
                 <h2 className=" text-2xl md:text-3xl font-medium mb-4">پنل اختصاصی دانشجو</h2>
                 <p className="text-[15px]">
                     پنل های اختصاصی دانشجو <br /> برای مدیریت دوره ها وتمرین ها
@@ -48,7 +48,7 @@ export function Services() {
                 </div>
             </div>
 
-            <div className="md:basis-[40%] lg:basis-[22%] border-4 p-4 rounded-[32px] flex flex-col justify-between relative h-[332px]">
+            <div className="md:basis-[40%] lg:basis-[26%] border-4 p-4 rounded-[32px] flex flex-col justify-between relative h-[332px]">
                 <h2 className="text-xl md:text-2xl font-medium mb-10">
                     درباره ما <br /> بیشتر بخوانید
                 </h2>

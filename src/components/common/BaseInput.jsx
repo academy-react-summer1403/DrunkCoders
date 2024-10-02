@@ -1,7 +1,5 @@
 import {Input} from '@nextui-org/react'
-import Icon from '../../assets/icons/calendar.svg?react'
-import HidePassword from '../../assets/icons/hide-eye.svg?react'
-import ShowPassword from '../../assets/icons/show-eye.svg?react'
+import {HidePassword, ShowPassword} from '../../assets/index'
 import {useEffect, useState} from 'react'
 
 export function BaseInput({
@@ -29,7 +27,6 @@ export function BaseInput({
     }
 
     const EndIcon = isVisible ? ShowPassword : HidePassword
-    StartIcons = Icon
 
     return (
         <>
