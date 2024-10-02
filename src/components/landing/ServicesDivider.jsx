@@ -1,6 +1,6 @@
 export function ServicesDivider() {
     return (
-        <div className="bg-primary-blue h-16  rotate-3 md:-rotate-3 mt-16 md:mt-20 relative left-64 flex items-center min-w-max">
+        <div className="bg-primary-blue h-16  rotate-3 md:-rotate-3 my-16 md:mb-0 md:mt-20 relative left-64 flex items-center min-w-max">
             {Array.from({length: 10}).map((_, index) => {
                 return (
                     <div key={index} className="flex text-white items-center">

@@ -11,7 +11,7 @@ import {
 
 export function Services() {
     return (
-        <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap justify-center  gap-4 w-full sm">
+        <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap justify-center gap-4 w-full">
             <div className="md:basis-[57%] lg:basis-[44%] border-4 pt-4 pr-4 rounded-[32px] relative  overflow-hidden h-[332px]">
                 <h2 className=" text-2xl md:text-3xl font-medium mb-4">پنل اختصاصی دانشجو</h2>
                 <p className="text-[15px]">
