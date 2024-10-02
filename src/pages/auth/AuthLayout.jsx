@@ -12,7 +12,7 @@ export function AuthLayout({ children, sideBar }) {
                 <LongLogo className="w-[189px] h-[38px]" />
             </div>
             
-            {sideBar && <div className="md:mt-8  flex flex-col gap-8 text-sm text-gray-500">{sideBar}</div>}
+            {sideBar && <div className="md:mt-8 ml-8  flex flex-col gap-8 text-sm text-gray-500">{sideBar}</div>}
         </div>      
       </aside>
 
