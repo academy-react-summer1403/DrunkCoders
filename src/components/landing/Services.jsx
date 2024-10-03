@@ -7,7 +7,7 @@ import {
   ReactIcon,
   UxIcon,
   ArrowUpLeft,
-} from "@components";
+} from "@assets";
 
 export function Services() {
   return (
