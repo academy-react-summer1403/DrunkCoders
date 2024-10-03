@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { AuthLayout } from './AuthLayout';
-import { Step } from './Step';
 import Code from '../../assets/icons/password-validation-stroke-rounded 2.svg?react';
 import Entering from '../../assets/icons/mail-edit-02-stroke-rounded 1.svg?react';
 import Mail from '../../assets/icons/mail-02-stroke-rounded 1.svg?react';
 import Lock from '../../assets/icons/lock-password-stroke-rounded 1.svg?react';
 import { useForm } from 'react-hook-form';
-import { BaseInput, Button } from '../../components/index';
+import { BaseInput, Button, Step, AuthLayout } from '../../components/index';
 import { Link } from 'react-router-dom';
 
 export function ForgetPass() {
@@ -83,7 +81,7 @@ export function ForgetPass() {
             <p className="text-gray-500 max-w-[538px]">
               رمزعبور جدید خود را وارد کنید
             </p>
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-[70px] ">
+            <form onSubmit={handleSubmit(onSubmit)} className="mt-[70px] flex flex-col">
               <BaseInput
                 label="رمزعبور جدید"
                 placeholder="رمزعبور جدید خود را وارد کنید"
@@ -109,7 +107,7 @@ export function ForgetPass() {
               />
               <Button
                 type="submit"
-                className="p-4 bg-primary-blue text-white w-full -mt-5"
+                className="p-4 bg-primary-blue text-white w-full -mt-4"
               >
                 تایید کد
               </Button>

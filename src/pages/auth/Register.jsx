@@ -1,13 +1,9 @@
-import { AuthLayout } from './AuthLayout';
 import { useForm } from 'react-hook-form';
 import Code from '../../assets/icons/password-validation-stroke-rounded 2.svg?react';
 import Entering from '../../assets/icons/mail-edit-02-stroke-rounded 1.svg?react';
 import Acount from '../../assets/icons/user-account-stroke-rounded 2.svg?react';
-import { Step } from './Step';
+import { AuthLayout, Step, RegisterForm, Verification, EnterInfo } from '../../components';
 import { useState } from 'react';
-import { RegisterForm } from './RegisterForm';
-import { Verification } from './Verification';
-import { EnterInfo } from './EnterInfo';
 
 export function Register() {
   const [currentStep, setCurrentStep] = useState(1);

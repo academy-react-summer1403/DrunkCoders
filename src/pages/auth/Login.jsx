@@ -1,11 +1,8 @@
 import { useForm } from 'react-hook-form';
-import { AuthLayout } from './AuthLayout';
 import Code from '../../assets/icons/password-validation-stroke-rounded 2.svg?react';
 import Entering from '../../assets/icons/mail-edit-02-stroke-rounded 1.svg?react';
 import { useState } from 'react';
-import { Step } from './Step'; // Import the Step component
-import { LoginForm } from './LoginForm';
-import { Verification } from './Verification'; // Import the Verification component
+import { AuthLayout, Step, LoginForm, Verification } from '../../components';
 
 export function Login() {
   const [currentStep, setCurrentStep] = useState(1);

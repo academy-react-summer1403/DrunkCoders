@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import { BaseInput, Button } from '../../components/index'; // Assuming these are custom components
+import { BaseInput, Button } from '../../components';
 import Mail from '../../assets/icons/mail-02-stroke-rounded 1.svg?react';
 import Lock from '../../assets/icons/lock-password-stroke-rounded 1.svg?react';
 
