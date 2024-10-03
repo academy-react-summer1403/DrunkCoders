@@ -21,6 +21,7 @@ export function LoginForm({ handleSubmit, register, onSubmit, currentStep, setCu
           type="text"
           starIcon={Mail}
           className="mb-16"
+          
         />
         <BaseInput
           label="رمز عبور"

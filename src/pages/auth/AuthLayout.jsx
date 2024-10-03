@@ -18,6 +18,11 @@ export function AuthLayout({ children, sideBar }) {
 
       <div className="w-full md:h-screen flex justify-center">
         <div className="w-fit mt-[15%] mx-3">
+          <div className='block md:hidden'>
+          {console.log('Rendering ShortLogo')}
+          {/* problem is here */}
+          <ShortLogo/>
+          </div>     
           {children}
         </div>
       </div>

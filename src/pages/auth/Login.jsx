@@ -13,7 +13,6 @@ export function Login() {
 
   const onSubmit = (data) => {
     console.log('Form Data: ', data);
-    // Handle login submission (e.g., API call)
   };
 
   const steps = [
