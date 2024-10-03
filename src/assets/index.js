@@ -10,3 +10,8 @@ export {default as Telegram} from './icons/telegram.svg?react'
 export {default as Logo} from './logo/complete-logo.svg?react'
 export {default as Instagram} from './icons/instagram.svg?react'
 export {default as eNamad} from './images/E-namd.png'
+export {default as MoonIcon} from './icons/moon.svg?react'
+export {default as BahrLogo} from './logo/bahrLogo.svg?react'
+export {default as BahrLogo1} from './logo/bahrLogo1.svg?react'
+export {default as Menu} from './icons/menu2.svg?react'
+
