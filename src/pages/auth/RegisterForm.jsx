@@ -1,8 +1,16 @@
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { BaseInput, Button } from '../../components';
 import MobileIcon from '../../assets/icons/smart-phone-01-stroke-rounded 2.svg?react';
 
-export function RegisterForm({ handleSubmit, onSubmit, register, currentStep, setCurrentStep }) {
+export function RegisterForm({ currentStep, setCurrentStep }) {
+  const { register, handleSubmit, getValues } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    setCurrentStep(2);
+  };
+
   return (
     <>
       <p className="text-gray-500">
@@ -22,7 +30,6 @@ export function RegisterForm({ handleSubmit, onSubmit, register, currentStep, se
         <Button
           type="submit"
           className="p-4 bg-primary-blue text-white w-full -mt-5"
-          onClick={() => setCurrentStep(2)}
           disabled={currentStep === 2}
         >
           ارسال کد تایید

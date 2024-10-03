@@ -48,6 +48,7 @@ export function Login() {
           onSubmit={onSubmit}
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
+          nextStep={2}
         />
       )}
     </AuthLayout>

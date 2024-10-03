@@ -17,8 +17,8 @@ export function AuthLayout({ children, sideBar }) {
       </aside>
 
       <div className="w-full md:h-screen flex justify-center">
-        <div className="w-fit mt-[15%] mx-3">
-          <div className='block md:hidden'>
+        <div className=" mt-[15%] mx-3 md:w-[530px] w-[90%]">
+          <div className='block md:hidden w-[58px] h-[55px]'>
           {console.log('Rendering ShortLogo')}
           {/* problem is here */}
           <ShortLogo/>

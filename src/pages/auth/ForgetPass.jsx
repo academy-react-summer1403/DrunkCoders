@@ -11,11 +11,17 @@ import { Link } from 'react-router-dom';
 
 export function ForgetPass() {
   const [currentStep, setCurrentStep] = useState(1);
-  const { register, handleSubmit } = useForm();
+  
+  const { register, handleSubmit, getValues } = useForm();
 
   const onSubmit = (data) => {
     console.log('Form Data: ', data);
-    // Handle login submission (e.g., API call)
+    if (currentStep === 1) {
+
+      setCurrentStep(2);
+    } else {
+      console.log('New Password Data:', data);
+    }
   };
 
   const steps = [
@@ -34,6 +40,7 @@ export function ForgetPass() {
           </>
         }
       >
+        {/* Step 1: Enter email */}
         {currentStep === 1 ? (
           <>
             <h1 className="text-2xl font-bold">فراموشی رمزعبور؟🔐</h1>
@@ -49,13 +56,13 @@ export function ForgetPass() {
                 type="email"
                 name="email"
                 register={register}
+                validation={{ required: 'ایمیل الزامی است' }}  // Adding validation
                 size="lg"
                 starIcon={Mail}
               />
               <Button
                 type="submit"
                 className="p-4 bg-primary-blue text-white w-full -mt-5"
-                onClick={() => setCurrentStep(2)}
                 disabled={currentStep === 2}
               >
                 ارسال لینک
@@ -69,30 +76,34 @@ export function ForgetPass() {
             </form>
           </>
         ) : (
+          // Step 2: Enter new password
           <>
-            {/* Render step 2 content here */}
             <h1 className="text-2xl font-bold">رمزعبور جدید🔒</h1>
             <br />
             <p className="text-gray-500 max-w-[538px]">
-            رمزعبور جدید خود را وارد کنید
+              رمزعبور جدید خود را وارد کنید
             </p>
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-[70px]">
-              {/* Assuming you have an OtpInput component for OTP verification */}
+            <form onSubmit={handleSubmit(onSubmit)} className="mt-[70px] ">
               <BaseInput
-                label='رمزعبور جدید'
-                placeholder='رمزعبور جدید خود را وارد کنید'
+                label="رمزعبور جدید"
+                placeholder="رمزعبور جدید خود را وارد کنید"
                 type="password"
                 name="newPass"
                 register={register}
+                validation={{ required: 'رمزعبور جدید الزامی است' }}  // Adding validation
                 size="lg"
                 starIcon={Lock}
               />
               <BaseInput
-                label='تکرار رمزعبور'
-                placeholder='رمزعبور جدید خود را دوباره وارد کنید'
+                label="تکرار رمزعبور"
+                placeholder="رمزعبور جدید خود را دوباره وارد کنید"
                 type="password"
-                name="newPass"
+                name="confirmPass"
                 register={register}
+                validation={{
+                  required: 'تکرار رمزعبور الزامی است',
+                  validate: value => value === getValues('newPass') || 'رمزعبورها مطابقت ندارند'
+                }}  // Validation for password confirmation
                 size="lg"
                 starIcon={Lock}
               />
