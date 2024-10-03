@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "../index";
+import { Button } from "@components";
 
 export function GridLayout({
   title,

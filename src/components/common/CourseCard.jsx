@@ -1,4 +1,4 @@
-import { Button } from "../index";
+import { Button } from "@components";
 import {
   Card as NextUiCard,
   CardHeader,
@@ -13,7 +13,7 @@ import {
   Teacher,
   Calender,
   Student,
-} from "../../assets/index";
+} from "@assets";
 
 export function CourseCard({ buttonColor = "#1", ongoing = "true" }) {
   const buttonBgClass =

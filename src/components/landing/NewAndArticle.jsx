@@ -1,4 +1,4 @@
-import { NewsCard, GridLayout } from "../index";
+import { NewsCard, GridLayout } from "@components";
 
 export function NewAndArticle() {
   return (

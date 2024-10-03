@@ -1,4 +1,4 @@
-import { Button } from "../index";
+import { Button } from "@components";
 import {
   Card as NextUiCard,
   CardHeader,
@@ -11,7 +11,7 @@ import {
   StarIcon,
   QuillWrite,
   HidePassword,
-} from "../../assets/index";
+} from "@assets";
 
 export function NewsCard({ buttonColor = "#5A7EFF" }) {
   const buttonBgClass =
