@@ -5,6 +5,7 @@ import {
     WeekTeacher,
     HeroSection,
     Certificates,
+    ServicesDivider,
 } from '../components/index'
 
 export function Home() {
@@ -12,6 +13,7 @@ export function Home() {
         <>
             <HeroSection />
             <Services />
+            <ServicesDivider />
             <Certificates />
             <PopularCourses />
             <WeekTeacher />
