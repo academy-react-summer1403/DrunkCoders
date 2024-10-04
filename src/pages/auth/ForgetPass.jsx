@@ -1,30 +1,26 @@
-import { useState } from 'react';
-import Code from '../../assets/icons/password-validation-stroke-rounded 2.svg?react';
-import Entering from '../../assets/icons/mail-edit-02-stroke-rounded 1.svg?react';
-import Mail from '../../assets/icons/mail-02-stroke-rounded 1.svg?react';
-import Lock from '../../assets/icons/lock-password-stroke-rounded 1.svg?react';
-import { useForm } from 'react-hook-form';
-import { BaseInput, Button, Step, AuthLayout } from '../../components/index';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Code, Entering, Mail, Lock } from "@assets";
+import { useForm } from "react-hook-form";
+import { BaseInput, Button, Step, AuthLayout } from "@components";
+import { Link } from "react-router-dom";
 
 export function ForgetPass() {
   const [currentStep, setCurrentStep] = useState(1);
-  
+
   const { register, handleSubmit, getValues } = useForm();
 
   const onSubmit = (data) => {
-    console.log('Form Data: ', data);
+    console.log("Form Data: ", data);
     if (currentStep === 1) {
-
       setCurrentStep(2);
     } else {
-      console.log('New Password Data:', data);
+      console.log("New Password Data:", data);
     }
   };
 
   const steps = [
-    { stepNumber: 1, label: 'وارد کردن شماره همراه یا ایمیل', icon: Entering },
-    { stepNumber: 2, label: 'تایید کد ارسال شده', icon: Code }
+    { stepNumber: 1, label: "وارد کردن شماره همراه یا ایمیل", icon: Entering },
+    { stepNumber: 2, label: "تایید کد ارسال شده", icon: Code },
   ];
 
   return (
@@ -33,7 +29,13 @@ export function ForgetPass() {
         sideBar={
           <>
             {steps.map(({ stepNumber, label, icon }) => (
-              <Step key={stepNumber} currentStep={currentStep} stepNumber={stepNumber} label={label} icon={icon} />
+              <Step
+                key={stepNumber}
+                currentStep={currentStep}
+                stepNumber={stepNumber}
+                label={label}
+                icon={icon}
+              />
             ))}
           </>
         }
@@ -43,8 +45,9 @@ export function ForgetPass() {
           <>
             <h1 className="text-2xl font-bold">فراموشی رمزعبور؟🔐</h1>
             <br />
-            <p className="text-gray-500 max-w-[538px]">
-              اگر رمزعبور خود را فراموش کرده‌اید ایمیل خود را وارد کنید تا لینک صفحه تغییر رمزعبور برای شما ارسال شود
+            <p className="max-w-[538px] text-gray-500">
+              اگر رمزعبور خود را فراموش کرده‌اید ایمیل خود را وارد کنید تا لینک
+              صفحه تغییر رمزعبور برای شما ارسال شود
             </p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="mt-20">
@@ -54,19 +57,19 @@ export function ForgetPass() {
                 type="email"
                 name="email"
                 register={register}
-                validation={{ required: 'ایمیل الزامی است' }}  // Adding validation
+                validation={{ required: "ایمیل الزامی است" }} // Adding validation
                 size="lg"
                 starIcon={Mail}
               />
               <Button
                 type="submit"
-                className="p-4 bg-primary-blue text-white w-full -mt-5"
+                className="-mt-5 w-full bg-primary-blue p-4 text-white"
                 disabled={currentStep === 2}
               >
                 ارسال لینک
               </Button>
-              <p className="mt-4 w-fit m-auto">
-                رمزعبور خود فراموش نکردید؟{' '}
+              <p className="m-auto mt-4 w-fit">
+                رمزعبور خود فراموش نکردید؟{" "}
                 <Link to="/auth" className="text-primary-blue hover:underline">
                   ورود به حساب کاربری
                 </Link>
@@ -78,17 +81,20 @@ export function ForgetPass() {
           <>
             <h1 className="text-2xl font-bold">رمزعبور جدید🔒</h1>
             <br />
-            <p className="text-gray-500 max-w-[538px]">
+            <p className="max-w-[538px] text-gray-500">
               رمزعبور جدید خود را وارد کنید
             </p>
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-[70px] flex flex-col">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="mt-[70px] flex flex-col"
+            >
               <BaseInput
                 label="رمزعبور جدید"
                 placeholder="رمزعبور جدید خود را وارد کنید"
                 type="password"
                 name="newPass"
                 register={register}
-                validation={{ required: 'رمزعبور جدید الزامی است' }}  // Adding validation
+                validation={{ required: "رمزعبور جدید الزامی است" }} // Adding validation
                 size="lg"
                 starIcon={Lock}
               />
@@ -99,15 +105,16 @@ export function ForgetPass() {
                 name="confirmPass"
                 register={register}
                 validation={{
-                  required: 'تکرار رمزعبور الزامی است',
-                  validate: value => value === getValues('newPass') || 'رمزعبورها مطابقت ندارند'
-                }}  // Validation for password confirmation
+                  required: "تکرار رمزعبور الزامی است",
+                  validate: (value) =>
+                    value === getValues("newPass") || "رمزعبورها مطابقت ندارند",
+                }} // Validation for password confirmation
                 size="lg"
                 starIcon={Lock}
               />
               <Button
                 type="submit"
-                className="p-4 bg-primary-blue text-white w-full -mt-4"
+                className="-mt-4 w-full bg-primary-blue p-4 text-white"
               >
                 تایید کد
               </Button>

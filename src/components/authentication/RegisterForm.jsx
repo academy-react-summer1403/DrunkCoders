@@ -1,7 +1,7 @@
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { BaseInput, Button } from '../../components';
-import MobileIcon from '../../assets/icons/smart-phone-01-stroke-rounded 2.svg?react';
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { BaseInput, Button } from "@components";
+import { MobileIcon } from "@assets";
 
 export function RegisterForm({ currentStep, setCurrentStep }) {
   const { register, handleSubmit, getValues } = useForm();
@@ -14,7 +14,8 @@ export function RegisterForm({ currentStep, setCurrentStep }) {
   return (
     <>
       <p className="text-gray-500">
-        لطفاً برای ثبت نام، شماره همراه خود را وارد کنید تا برای شما کد تایید ارسال شود.
+        لطفاً برای ثبت نام، شماره همراه خود را وارد کنید تا برای شما کد تایید
+        ارسال شود.
       </p>
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -29,14 +30,14 @@ export function RegisterForm({ currentStep, setCurrentStep }) {
         />
         <Button
           type="submit"
-          className="p-4 bg-primary-blue text-white w-full -mt-5"
+          className="-mt-5 w-full bg-primary-blue p-4 text-white"
           disabled={currentStep === 2}
         >
           ارسال کد تایید
         </Button>
       </form>
-      <p className="mt-4 w-fit m-auto">
-        حساب کاربری دارید؟{' '}
+      <p className="m-auto mt-4 w-fit">
+        حساب کاربری دارید؟{" "}
         <Link to="/auth" className="text-primary-blue hover:underline">
           ورود به حساب کاربری
         </Link>
