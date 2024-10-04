@@ -29,7 +29,6 @@ export function LoginForm({ currentStep, setCurrentStep }) {
           placeholder="ایمیل یا شماره همراه خود را وارد کنید"
           name="emailOrPhone"
           register={register}
-          validation={{ required: 'This field is required' }}
           size="lg"
           type="text"
           starIcon={Mail}
@@ -41,7 +40,6 @@ export function LoginForm({ currentStep, setCurrentStep }) {
           placeholder="رمز عبور خود را وارد کنید"
           name="password"
           register={register}
-          validation={{ required: 'Password is required' }}
           size="lg"
           type="password"
           starIcon={Lock}

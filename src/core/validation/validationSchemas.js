@@ -1,12 +1,13 @@
 import { z } from 'zod';
 
 export const registerSchema = z.object({
-  number: z
-    .string()
-    .min(10, { message: 'شماره همراه باید حداقل 10 رقم باشد' })
-    .max(11, { message: 'شماره همراه نباید بیشتر از 11 رقم باشد' })
-    .regex(/^(\+98|0)?9\d{9}$|^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: 'شماره همراه وارد شده صحیح نمی‌باشد' }),
-});
+    number: z
+      .string()
+      .regex(/^\d+$/, { message: 'فقط اعداد مجاز هستند' })
+      .min(10, { message: 'شماره همراه باید حداقل 10 رقم باشد' })
+      .max(11, { message: 'شماره همراه نباید بیشتر از 11 رقم باشد' })
+      .regex(/^(\+98|0)?9\d{9}$/, { message: 'شماره همراه وارد شده صحیح نمی‌باشد' })
+  });
 export const infoSchema = z.object({
     emailOrPhone: z
       .string()
