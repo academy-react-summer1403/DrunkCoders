@@ -6,7 +6,7 @@
       "@assets/*": ["assets/*"],
       "@layouts/*": ["layouts/*"],
       "@pages/*": ["pages/*"],
-      "@features/*": ["features/*"],
+      "@core/*": ["core/*"],
       "@hooks/*": ["hooks/*"],
       "@stores/*": ["stores/*"],
       "@utilities/*": ["utilities/*"],

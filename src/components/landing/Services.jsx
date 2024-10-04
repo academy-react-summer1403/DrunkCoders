@@ -8,6 +8,7 @@ import {
   UxIcon,
   ArrowUpLeft,
 } from "@assets";
+import { Link } from "react-router-dom";
 
 export function Services() {
   return (
@@ -45,9 +46,12 @@ export function Services() {
           </div>
         </div>
 
-        <div className="absolute left-4 top-4 flex h-12 w-12 cursor-pointer items-center rounded-full bg-white">
+        <Link
+          to="/courses"
+          className="absolute left-4 top-4 flex h-12 w-12 cursor-pointer items-center rounded-full bg-white"
+        >
           <ArrowUpLeft className="mx-auto text-black" />
-        </div>
+        </Link>
       </div>
 
       <div className="relative flex h-[332px] flex-col justify-between rounded-[32px] border-4 p-4 md:basis-[40%] lg:basis-[26%]">
@@ -65,9 +69,12 @@ export function Services() {
           </div>
         </div>
 
-        <div className="absolute left-3 top-3 flex h-12 w-12 cursor-pointer items-center rounded-full bg-primary-blue">
+        <Link
+          to="about-us"
+          className="absolute left-3 top-3 flex h-12 w-12 cursor-pointer items-center rounded-full bg-primary-blue"
+        >
           <ArrowUpLeft className="mx-auto text-white" />
-        </div>
+        </Link>
       </div>
     </div>
   );

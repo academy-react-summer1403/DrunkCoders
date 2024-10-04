@@ -12,6 +12,8 @@ export function GridLayout({
     window.innerWidth < 640 ? null : "sm",
   );
 
+  // console.log(dataArray);
+
   useEffect(() => {
     window.addEventListener("resize", () => {
       const width = window.innerWidth;
@@ -30,9 +32,36 @@ export function GridLayout({
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
         {windowWidth === null &&
-          dataArray.slice(0, 2).map((_, index) => <Card key={index} />)}
+          dataArray.slice(0, 2).map((item, index) => {
+            const buttonColor = item?.courseId
+              ? index % 2 === 0
+                ? "#5A7EFF"
+                : "#DE59FF"
+              : "#5A7EFF";
+
+            return (
+              <Card
+                key={item?.id ?? index}
+                data={item}
+                buttonColor={buttonColor}
+              />
+            );
+          })}
         {windowWidth === "sm" &&
-          dataArray.map((_, index) => <Card key={index} />)}
+          dataArray.map((item, index) => {
+            const buttonColor = item?.courseId
+              ? index % 2 === 0
+                ? "#5A7EFF"
+                : "#DE59FF"
+              : "#5A7EFF";
+            return (
+              <Card
+                key={item?.id ?? index}
+                data={item}
+                buttonColor={buttonColor}
+              />
+            );
+          })}
       </div>
 
       <Button className="mx-auto mt-6 block bg-primary-blue text-white sm:hidden">
