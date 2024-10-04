@@ -1,5 +1,4 @@
 import {Input} from '@nextui-org/react'
-import Icon from '../../assets/icons/calendar-03-stroke-rounded 1@2x.svg?react'
 import HidePassword from '../../assets/icons/hide-eye.svg?react'
 import ShowPassword from '../../assets/icons/show-eye.svg?react'
 import {useEffect, useState} from 'react'

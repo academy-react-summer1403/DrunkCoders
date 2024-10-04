@@ -7,17 +7,29 @@ import { useState } from 'react';
 
 export function Register() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [phoneNumber, setPhoneNumber] = useState(""); 
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    console.log('Form Data: ', data);
-    // Handle submission (e.g., API call)
-  };
 
-  // Array of step components
   const stepComponents = [
-    <RegisterForm key={1} register={register} handleSubmit={handleSubmit} setCurrentStep={setCurrentStep} />,
-    <Verification key={2} register={register} handleSubmit={handleSubmit} setCurrentStep={setCurrentStep} nextStep={3}/>,
+    <RegisterForm
+      key={1}
+      register={register}
+      handleSubmit={handleSubmit}
+      setCurrentStep={setCurrentStep}
+      setPhoneNumber={setPhoneNumber}  // Pass setPhoneNumber here
+    />,
+    <Verification
+      key={2}
+      phoneNumber={phoneNumber}  // Pass the phoneNumber to Verification
+      setCurrentStep={setCurrentStep}
+      nextStep={3}
+      message={(
+        <>
+          لطفا کد ارسال شده به شماره <span className='text-primary-blue'>{phoneNumber}</span> را وارد کنید
+        </>
+      )}    
+      />,
     <EnterInfo key={3} register={register} handleSubmit={handleSubmit} setCurrentStep={setCurrentStep} />
   ];
 
@@ -40,7 +52,6 @@ export function Register() {
       <h1 className="text-2xl font-bold">به آکادمی بحر خوش اومدی!😍</h1>
       <br />
       
-      {/* Render current step component */}
       {stepComponents[currentStep - 1]}
     </AuthLayout>
   );

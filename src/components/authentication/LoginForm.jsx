@@ -4,13 +4,16 @@ import { BaseInput, Button } from '..'; // Assuming these are custom components
 import Mail from '../../assets/icons/mail-02-stroke-rounded 1.svg?react';
 import Lock from '../../assets/icons/lock-password-stroke-rounded 1.svg?react';
 import PassRecover from '../../assets/icons/security-password-stroke-rounded 1.svg?react';
+import { infoSchema } from '../../core/validation/validationSchemas';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export function LoginForm({ currentStep, setCurrentStep }) {
-  const { register, handleSubmit, getValues } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(infoSchema),
+  });
 
   const onSubmit = (data) => {
-    console.log(data);  // You will get the form values here
-    // Handle login logic
+    console.log(data); 
     setCurrentStep(2);
   };
 
@@ -30,6 +33,7 @@ export function LoginForm({ currentStep, setCurrentStep }) {
           size="lg"
           type="text"
           starIcon={Mail}
+          error={errors.emailOrPhone} // Show error
           className="mb-16"
         />
         <BaseInput
@@ -41,6 +45,7 @@ export function LoginForm({ currentStep, setCurrentStep }) {
           size="lg"
           type="password"
           starIcon={Lock}
+          error={errors.password} // Show error
         />
         <div className="flex justify-between -mt-5 text-[14px] font-[500]">
           <div className="gap-1 flex items-center">

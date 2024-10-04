@@ -1,12 +1,17 @@
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router-dom';
 import { BaseInput, Button } from '../../components';
 import MobileIcon from '../../assets/icons/smart-phone-01-stroke-rounded 2.svg?react';
+import { registerSchema } from '../../core/validation/validationSchemas';
 
-export function RegisterForm({ currentStep, setCurrentStep }) {
-  const { register, handleSubmit, getValues } = useForm();
+export function RegisterForm({ currentStep, setCurrentStep,setPhoneNumber }) {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(registerSchema),
+  });
 
   const onSubmit = (data) => {
+    setPhoneNumber(data.number);
     console.log(data);
     setCurrentStep(2);
   };
@@ -26,6 +31,7 @@ export function RegisterForm({ currentStep, setCurrentStep }) {
           register={register}
           size="lg"
           starIcon={MobileIcon}
+          error={errors.number} // pass error to BaseInput
         />
         <Button
           type="submit"

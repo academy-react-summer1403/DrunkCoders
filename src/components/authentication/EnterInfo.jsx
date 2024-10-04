@@ -3,21 +3,26 @@ import { useForm } from 'react-hook-form';
 import { BaseInput, Button } from '../../components';
 import Mail from '../../assets/icons/mail-02-stroke-rounded 1.svg?react';
 import Lock from '../../assets/icons/lock-password-stroke-rounded 1.svg?react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { infoSchema } from '../../core/validation/validationSchemas';
 
 export function EnterInfo({ currentStep, setCurrentStep }) {
-    const { register, handleSubmit, getValues } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(infoSchema),
+  });
 
-    const onSubmit = (data) => {
-      console.log(data);
-      setCurrentStep(3);
-    };
+  const onSubmit = (data) => {
+    console.log(data);
+    setCurrentStep(3);
+  };
+
   return (
     <>
-    <p className="text-gray-500">
-    لطفا اطلاعات شخصی حساب کاربری خود را وارد کنید 
-    </p>
+      <p className="text-gray-500">
+        لطفا اطلاعات شخصی حساب کاربری خود را وارد کنید
+      </p>
       <br />
-    <form onSubmit={handleSubmit(onSubmit)} className='mt-14'>
+      <form onSubmit={handleSubmit(onSubmit)} className='mt-14'>
         <BaseInput
           label="ایمیل یا شماره همراه"
           placeholder="ایمیل یا شماره همراه خود را وارد کنید"
@@ -27,6 +32,7 @@ export function EnterInfo({ currentStep, setCurrentStep }) {
           size="lg"
           type="text"
           starIcon={Mail}
+          error={errors.emailOrPhone} // Show error
           className="mb-16"
         />
         <BaseInput
@@ -38,7 +44,8 @@ export function EnterInfo({ currentStep, setCurrentStep }) {
           size="lg"
           type="password"
           starIcon={Lock}
-          />
+          error={errors.password} // Show error
+        />
         <div className="flex justify-between -mt-5 text-[14px] font-[500]">
           <div className="gap-1 flex items-center">
             <input
@@ -46,7 +53,7 @@ export function EnterInfo({ currentStep, setCurrentStep }) {
               id="remember"
               {...register('remember')}
               className="appearance-none bg-[#e4e4e4] rounded-[6px] w-4 h-4 checked:bg-[#3772FF] border-[3px] border-[#e4e4e4]"
-              />
+            />
             <label htmlFor="remember">مرا به خاطر بسپار</label>
           </div>
         </div>
@@ -54,10 +61,10 @@ export function EnterInfo({ currentStep, setCurrentStep }) {
           type="submit"
           className="p-4 bg-primary-blue text-white w-full mt-5"
           disabled={currentStep === 3}
-          >
+        >
           ثبت اطلاعات
         </Button>
       </form>
     </>
-  )
+  );
 }

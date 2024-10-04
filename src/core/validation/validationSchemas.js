@@ -1,0 +1,22 @@
+import { z } from 'zod';
+
+export const registerSchema = z.object({
+  number: z
+    .string()
+    .min(10, { message: 'شماره همراه باید حداقل 10 رقم باشد' })
+    .max(11, { message: 'شماره همراه نباید بیشتر از 11 رقم باشد' })
+    .regex(/^[0-9]+$/, { message: 'شماره همراه فقط باید شامل اعداد باشد' }),
+});
+export const infoSchema = z.object({
+    emailOrPhone: z
+      .string()
+      .min(1, { message: 'ایمیل یا شماره همراه الزامی است' })
+      .regex(
+        /^(\+98|0)?9\d{9}$|^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        { message: 'ایمیل یا شماره همراه وارد شده صحیح نمی‌باشد' }
+      ),
+    password: z
+      .string()
+      .min(8, { message: 'رمز عبور باید حداقل 8 کاراکتر باشد' })
+      .max(32, { message: 'رمز عبور نباید بیش از 32 کاراکتر باشد' }),
+  });
