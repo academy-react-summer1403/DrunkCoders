@@ -5,7 +5,7 @@ export const registerSchema = z.object({
     .string()
     .min(10, { message: 'شماره همراه باید حداقل 10 رقم باشد' })
     .max(11, { message: 'شماره همراه نباید بیشتر از 11 رقم باشد' })
-    .regex(/^[0-9]+$/, { message: 'شماره همراه فقط باید شامل اعداد باشد' }),
+    .regex(/^(\+98|0)?9\d{9}$|^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: 'شماره همراه وارد شده صحیح نمی‌باشد' }),
 });
 export const infoSchema = z.object({
     emailOrPhone: z
