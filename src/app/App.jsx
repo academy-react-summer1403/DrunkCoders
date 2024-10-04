@@ -5,6 +5,7 @@ import {
   NotFound,
   Register,
   RootLayout,
+  ForgetPass,
 } from "@pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
