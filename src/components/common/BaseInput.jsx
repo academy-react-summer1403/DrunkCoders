@@ -22,9 +22,13 @@ export function BaseInput({
     }
   }, []);
 
+<<<<<<< HEAD
   function toggleVisibility() {
     setIsVisible((prevState) => !prevState);
   }
+=======
+    const EndIcon = isVisible ? ShowPassword : HidePassword
+>>>>>>> login
 
   const EndIcon = isVisible ? ShowPassword : HidePassword;
 
