@@ -103,14 +103,14 @@ export function CourseCard({ buttonColor, data: course }) {
           <div className="flex gap-2">
             <ThumbUp
               onClick={() => handleLike("like")}
-              className={`-mt-1 cursor-pointer stroke-black hover:text-primary-blue ${likeState.like ? "text-primary-blue" : "text-transparent"} `}
+              className={`-mt-1 cursor-pointer stroke-black hover:text-primary-blue dark:stroke-white ${likeState.like ? "text-primary-blue" : "text-transparent"} `}
             />
             <span className="">{course.likeCount}</span>
           </div>
           <div className="flex gap-2">
             <ThumbDown
               onClick={() => handleLike("dislike")}
-              className={`cursor-pointer stroke-black hover:text-primary-blue ${likeState.dislike ? "text-primary-blue" : "text-transparent"} `}
+              className={`cursor-pointer stroke-black hover:text-primary-blue dark:stroke-white ${likeState.dislike ? "text-primary-blue" : "text-transparent"} `}
             />
             {course.dissLikeCount}
           </div>
