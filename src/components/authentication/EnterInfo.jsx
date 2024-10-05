@@ -1,10 +1,9 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import { BaseInput, Button } from '../../components';
-import Mail from '../../assets/icons/mail-02-stroke-rounded 1.svg?react';
-import Lock from '../../assets/icons/lock-password-stroke-rounded 1.svg?react';
+import { BaseInput, Button } from "@components";
+import { Mail, Lock } from "@assets"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { infoSchema } from '../../core/validation/validationSchemas';
+import { infoSchema } from '@validation';
 
 export function EnterInfo({ currentStep, setCurrentStep }) {
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -57,9 +56,10 @@ export function EnterInfo({ currentStep, setCurrentStep }) {
         </div>
         <Button
           type="submit"
-          className="p-4 bg-primary-blue text-white w-full mt-5"
+          className="mt-5 w-full bg-primary-blue p-4 text-white"
           disabled={currentStep === 3}
         >
+        
           ثبت اطلاعات
         </Button>
       </form>

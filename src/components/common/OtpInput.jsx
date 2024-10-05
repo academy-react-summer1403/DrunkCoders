@@ -1,7 +1,7 @@
-import { useForm, Controller } from 'react-hook-form';
-import { Input } from '@nextui-org/react';
-import { Button } from '../index';
-import { useRef } from 'react';
+import { useForm, Controller } from "react-hook-form";
+import { Input } from "@nextui-org/react";
+import { Button } from "@components";
+import { useRef } from "react";
 
 export const OtpInput = ({ setCurrentStep, nextStep }) => {
   const { control, handleSubmit, setValue } = useForm();
@@ -17,14 +17,14 @@ export const OtpInput = ({ setCurrentStep, nextStep }) => {
   };
 
   const handleKeyDown = (event, index) => {
-    if (event.key === 'Backspace' && !event.target.value && index > 0) {
+    if (event.key === "Backspace" && !event.target.value && index > 0) {
       inputsRef.current[index - 1].focus();
     }
   };
 
   const onSubmit = (data) => {
-    console.log('OTP Data: ', data);
-    setCurrentStep(nextStep);  // Use the passed nextStep to decide what happens next
+    console.log("OTP Data: ", data);
+    setCurrentStep(nextStep); // Use the passed nextStep to decide what happens next
   };
 
   return (
@@ -40,16 +40,16 @@ export const OtpInput = ({ setCurrentStep, nextStep }) => {
               defaultValue=""
               render={({ field }) => (
                 <Input
-                  className={`${index === 2 ? 'mr-6' : ''}`}
+                  className={`${index === 2 ? "mr-6" : ""}`}
                   radius="lg"
-                  ref={el => (inputsRef.current[index] = el)}
+                  ref={(el) => (inputsRef.current[index] = el)}
                   value={field.value}
-                  onChange={e => handleChange(e.target.value, index)}
-                  onKeyDown={e => handleKeyDown(e, index)}
+                  onChange={(e) => handleChange(e.target.value, index)}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
                   maxLength={1}
                   classNames={{
-                    input: ['text-3xl text-center pt-2'],
-                    inputWrapper: ['w-[70px] h-[72px]'],
+                    input: ["text-3xl text-center pt-2"],
+                    inputWrapper: ["w-[70px] h-[72px]"],
                   }}
                   inputMode="numeric"
                   pattern="[0-9]*"
@@ -61,7 +61,7 @@ export const OtpInput = ({ setCurrentStep, nextStep }) => {
 
         <Button
           type="submit"
-          className="bg-primary-blue text-white text-xl mt-5 w-full py-3"
+          className="mt-5 w-full bg-primary-blue py-3 text-xl text-white"
           size="lg"
         >
           تایید

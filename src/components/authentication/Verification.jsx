@@ -1,5 +1,5 @@
-import React from 'react';
-import { OtpInput, Button } from '..';
+import React from "react";
+import { OtpInput } from "@components";
 
 export function Verification({ setCurrentStep, nextStep, message }) {
   return (
