@@ -11,8 +11,7 @@ import {
   Book,
   Home,
   ShortLine,
-} from "";
-import { Link } from "react-router-dom";
+} from "@assets";
 import {
   Modal,
   ModalContent,
@@ -21,9 +20,18 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { darkModeActions } from "@store";
 
 export function Header() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const dispatch = useDispatch();
+
+  function toggleMode() {
+    console.log("render");
+    dispatch(darkModeActions.toggleMode());
+  }
 
   return (
     <div className="relative top-3.5 flex h-12 justify-around gap-16 max-lg:gap-0">
@@ -44,16 +52,23 @@ export function Header() {
       </div>
 
       <div className="flex w-72 justify-end gap-5 border-black max-lg:gap-3 max-md:block max-md:w-fit max-md:gap-2">
-        <div className="relative top-1.5 flex h-11 w-11 justify-center rounded-full border-1 pt-3 max-md:hidden">
+        <div
+          onClick={toggleMode}
+          className="relative top-1.5 flex h-11 w-11 cursor-pointer justify-center rounded-full border-1 pt-3 max-md:hidden"
+        >
           <MoonIcon className="h-5" />
-        </div>{" "}
+        </div>
+
         <div className="max-md:relative max-md:right-20 max-md:flex max-sm:right-11">
-          <Button
-            color="primary"
-            className="h-12 w-40 rounded-full text-lg max-md:relative"
-          >
-            ورود یا ثبت نام
-          </Button>{" "}
+          <Link to="auth">
+            <Button
+              color="primary"
+              className="h-12 w-40 rounded-full text-lg max-md:relative"
+            >
+              ورود یا ثبت نام
+            </Button>
+          </Link>
+
           <div className="md:relative md:top-4 md:hidden md:h-10">
             <Button
               className="bg-white max-lg:hidden max-md:block lg:hidden"

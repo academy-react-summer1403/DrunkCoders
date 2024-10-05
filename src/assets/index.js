@@ -20,7 +20,6 @@ export { default as QuillWrite } from "./icons/quill-write.svg?react";
 export { default as HidePassword } from "./icons/hide-eye.svg?react";
 export { default as ShowPassword } from "./icons/show-eye.svg?react";
 export { default as MoonIcon } from "./icons/moon.svg?react";
-export { default as BahrLogo } from "./logo/bahrLogo.svg?react";
 export { default as BahrLogo1 } from "./logo/bahrLogo1.svg?react";
 export { default as Menu } from "./icons/menu2.svg?react";
 export { default as ShortLogo } from "./logo/short-logo.svg?react";

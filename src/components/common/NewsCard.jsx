@@ -18,7 +18,7 @@ export function NewsCard({ buttonColor = "#5A7EFF" }) {
     buttonColor === "#5A7EFF" ? "bg-[#5A7EFF]" : "bg-[#DE59FF]";
 
   return (
-    <NextUiCard className="rounded-3xl bg-[#787878] bg-opacity-[0.13] text-[#272727] shadow-none">
+    <NextUiCard className="rounded-3xl bg-[#787878] bg-opacity-[0.13] text-[#272727] shadow-none dark:bg-white/20">
       <CardHeader className="relative h-[225px] overflow-hidden rounded-3xl bg-[#FF9090] p-0">
         <Image
           alt="Card background"
@@ -39,9 +39,9 @@ export function NewsCard({ buttonColor = "#5A7EFF" }) {
         </div>
       </CardHeader>
 
-      <CardBody className="flex flex-col gap-3 text-right text-sm">
+      <CardBody className="flex flex-col gap-3 text-right text-sm dark:text-white">
         <div className="">
-          <h3 className="inline text-xl font-medium">
+          <h3 className="inline text-xl font-medium dark:text-white">
             ری اکت چیست و چرا باید ازش استفاده کنیم؟
           </h3>
           <span className="relative -top-[2px] mr-[2px] text-base">
@@ -49,15 +49,18 @@ export function NewsCard({ buttonColor = "#5A7EFF" }) {
             <StarIcon className="inline" />)
           </span>
         </div>
-        <p className="line-clamp-4 text-ellipsis text-right font-light text-[#787878]">
+
+        <p className="line-clamp-4 text-ellipsis text-right font-light text-[#787878] dark:text-white/60">
           ری اکت (React) یک کتابخانه جاوا اسکریپتی برای ساخت رابط کاربری بوده که
           برای ایجاد برنامه‌های تحت وب با استفاده از کامپوننت‌ها، قابل استفاده
           است.
         </p>
+
         <div className="flex gap-3 font-medium">
           <QuillWrite className="" />
           <p>سعید قربانی</p>
         </div>
+
         <div className="flex gap-3 font-medium">
           <HidePassword />
           <p>225</p>

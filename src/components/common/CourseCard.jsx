@@ -20,7 +20,7 @@ export function CourseCard({ buttonColor = "#1", ongoing = "true" }) {
     buttonColor === "#5A7EFF" ? "bg-[#5A7EFF]" : "bg-[#DE59FF]";
 
   return (
-    <NextUiCard className="rounded-3xl bg-[#787878] bg-opacity-[0.13] text-[#272727] shadow-none">
+    <NextUiCard className="rounded-3xl bg-[#787878] bg-opacity-[0.13] text-[#272727] shadow-none dark:bg-white/20">
       <CardHeader className="relative h-[225px] overflow-hidden rounded-3xl bg-[#FF9090] p-0">
         <Image
           alt="Card background"
@@ -47,7 +47,7 @@ export function CourseCard({ buttonColor = "#1", ongoing = "true" }) {
         )}
       </CardHeader>
 
-      <CardBody className="flex flex-col gap-3 text-right text-sm">
+      <CardBody className="flex flex-col gap-3 text-right text-sm dark:text-white">
         <div className="">
           <h3 className="inline text-xl font-medium">ری‌اکت جی‌اس</h3>
           <span className="relative -top-2 mr-1 text-sm">
@@ -55,7 +55,7 @@ export function CourseCard({ buttonColor = "#1", ongoing = "true" }) {
             <StarIcon className="inline" />)
           </span>
         </div>
-        <p className="line-clamp-2 text-ellipsis text-right font-light text-[#787878]">
+        <p className="line-clamp-2 text-ellipsis text-right font-light text-[#787878] dark:text-white/60">
           آموزش صفر تا صد کتابخانه پرطرفدار جی‌اس یعنی ری‌اکت همراه تسک های
           مبسیار لورم بسیبلممنون عالی کتاب خونه
         </p>
@@ -67,7 +67,9 @@ export function CourseCard({ buttonColor = "#1", ongoing = "true" }) {
           <Calender />
           <p>
             ۳۰ اردیبهشت ۱۴۰۳{" "}
-            <span className="text-sm font-light text-[#787878]">(شروع)</span>
+            <span className="text-sm font-light text-[#787878] dark:text-white/60">
+              (شروع)
+            </span>
           </p>
         </div>
         <div className="flex gap-3 font-medium">
@@ -76,7 +78,7 @@ export function CourseCard({ buttonColor = "#1", ongoing = "true" }) {
         </div>
       </CardBody>
 
-      <CardFooter className="mb-2 flex flex-row items-center justify-between gap-2 lg:flex-col lg:items-start xl:flex-row xl:items-center xl:justify-between">
+      <CardFooter className="mb-2 flex flex-row items-center justify-between gap-2 dark:text-white lg:flex-col lg:items-start xl:flex-row xl:items-center xl:justify-between">
         <div className="flex items-center gap-1 text-xl">
           <span className="font-medium">1,800,000 </span>
           <span className="text-sm text-[#3772FF]">تومان</span>
