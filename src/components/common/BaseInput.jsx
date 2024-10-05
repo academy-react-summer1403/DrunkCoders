@@ -33,8 +33,13 @@ export function BaseInput({
       <Input
         className={`mb-10 ${props.className}`}
         classNames={{
-          input: ["mr-2 text-sm font", "placeholder:text-[#787878]/60"],
+          input: [
+            "mr-2 text-sm bg-transparent",
+            "placeholder:text-[#787878]/60 dark:placeholder:text-stone-700 ",
+          ],
           label: ["font-medium text-lg"],
+          inputWrapper: ["dark:bg-white/60", "dark:focus-within:bg-white/50"],
+          innerWrapper: "bg-transparent",
           ...props.classNames,
         }}
         size={size}

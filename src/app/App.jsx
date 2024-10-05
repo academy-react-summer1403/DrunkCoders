@@ -9,6 +9,7 @@ import {
 } from "@pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
+import { useSelector } from "react-redux";
 
 const router = createBrowserRouter([
   {
@@ -49,5 +50,15 @@ const router = createBrowserRouter([
 ]);
 
 export function App() {
-  return <RouterProvider router={router} />;
+  const darkMode = useSelector((state) => state.darkMode.darkMode);
+
+  console.log(darkMode);
+
+  return (
+    <main
+      className={`bg-background text-foreground ${darkMode ? "dark" : "light"}`}
+    >
+      <RouterProvider router={router} />
+    </main>
+  );
 }

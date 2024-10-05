@@ -60,14 +60,14 @@ export function Header() {
         </div>
 
         <div className="max-md:relative max-md:right-20 max-md:flex max-sm:right-11">
-          <Link to="auth">
-            <Button
-              color="primary"
-              className="h-12 w-40 rounded-full text-lg max-md:relative"
-            >
-              ورود یا ثبت نام
-            </Button>
-          </Link>
+          <Button
+            as={Link}
+            to="/auth"
+            color="primary"
+            className="h-12 w-40 rounded-full text-lg max-md:relative"
+          >
+            ورود یا ثبت نام
+          </Button>
 
           <div className="md:relative md:top-4 md:hidden md:h-10">
             <Button
