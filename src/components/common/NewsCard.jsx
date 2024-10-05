@@ -12,8 +12,19 @@ import {
   QuillWrite,
   HidePassword,
 } from "@assets";
+import { useState } from "react";
 
 export function NewsCard({ buttonColor = "#5A7EFF" }) {
+  const [likeState, setLikeState] = useState({ like: false, dislike: false });
+
+  function handleLike(identifier) {
+    setLikeState((prevState) =>
+      identifier === "like"
+        ? { like: !prevState.like, dislike: false }
+        : { dislike: !prevState.dislike, like: false },
+    );
+  }
+
   const buttonBgClass =
     buttonColor === "#5A7EFF" ? "bg-[#5A7EFF]" : "bg-[#DE59FF]";
 
@@ -40,7 +51,7 @@ export function NewsCard({ buttonColor = "#5A7EFF" }) {
       </CardHeader>
 
       <CardBody className="flex flex-col gap-3 text-right text-sm dark:text-white">
-        <div className="">
+        <div className="line-clamp-2 h-14 text-ellipsis">
           <h3 className="inline text-xl font-medium dark:text-white">
             ری اکت چیست و چرا باید ازش استفاده کنیم؟
           </h3>
@@ -49,8 +60,7 @@ export function NewsCard({ buttonColor = "#5A7EFF" }) {
             <StarIcon className="inline" />)
           </span>
         </div>
-
-        <p className="line-clamp-4 text-ellipsis text-right font-light text-[#787878] dark:text-white/60">
+        <p className="line-clamp-4 h-20 text-ellipsis text-right font-light text-[#787878] dark:text-white/60">
           ری اکت (React) یک کتابخانه جاوا اسکریپتی برای ساخت رابط کاربری بوده که
           برای ایجاد برنامه‌های تحت وب با استفاده از کامپوننت‌ها، قابل استفاده
           است.
@@ -60,8 +70,7 @@ export function NewsCard({ buttonColor = "#5A7EFF" }) {
           <QuillWrite className="" />
           <p>سعید قربانی</p>
         </div>
-
-        <div className="flex gap-3 font-medium">
+        <div className="flex items-center gap-3 font-medium">
           <HidePassword />
           <p>225</p>
         </div>
@@ -69,11 +78,18 @@ export function NewsCard({ buttonColor = "#5A7EFF" }) {
         <div className="-mt-2 mb-1 flex flex-row items-center justify-between gap-2 xl:flex-row xl:items-center xl:justify-between">
           <div className="-mb-1 flex gap-3">
             <div className="flex gap-2">
-              <ThumbUp className="-mt-1" />
+              <ThumbUp
+                onClick={() => handleLike("like")}
+                className={`-mt-1 cursor-pointer stroke-black hover:text-primary-blue ${likeState.like ? "text-primary-blue" : "text-transparent"} `}
+              />
               <span className="">22</span>
             </div>
             <div className="flex gap-2">
-              <ThumbDown />2
+              <ThumbDown
+                onClick={() => handleLike("dislike")}
+                className={`cursor-pointer stroke-black hover:text-primary-blue ${likeState.dislike ? "text-primary-blue" : "text-transparent"} `}
+              />
+              2
             </div>
           </div>
 
@@ -82,10 +98,6 @@ export function NewsCard({ buttonColor = "#5A7EFF" }) {
           </Button>
         </div>
       </CardBody>
-
-      {/* <CardFooter >
-       
-      </CardFooter> */}
     </NextUiCard>
   );
 }

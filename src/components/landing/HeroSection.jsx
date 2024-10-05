@@ -1,5 +1,6 @@
 import { CodeCircle } from "@assets";
 import { Button } from "@components";
+import { Link } from "react-router-dom";
 
 export function HeroSection() {
   return (
@@ -21,7 +22,12 @@ export function HeroSection() {
         آکادمی فوق تخصصی کد‌نویسی و برنامه‌نویسی از سنین کودکی تا بزرگسالی
       </p>
 
-      <Button size="lg" className="px-6 py-[14px] text-xl">
+      <Button
+        as={Link}
+        to="/courses"
+        size="lg"
+        className="px-6 py-[14px] text-xl"
+      >
         شروع یادگیری
       </Button>
     </div>

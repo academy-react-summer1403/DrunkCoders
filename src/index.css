@@ -1,10 +1,11 @@
-@import url('./assets/fonts/iransans/iransans.css');
+@import url("./assets/fonts/iransans/iransans.css");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-    direction: rtl;
-    @apply font-sans;
+  direction: rtl;
+  user-select: none;
+  @apply font-sans;
 }
