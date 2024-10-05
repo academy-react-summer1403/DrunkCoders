@@ -1,4 +1,4 @@
-import { Button } from "@components";
+import { Button } from "../components/index";
 import {
   MoonIcon,
   BahrLogo,
@@ -11,7 +11,7 @@ import {
   Book,
   Home,
   ShortLine,
-} from "@assets";
+} from "../assets/index";
 import { Link } from "react-router-dom";
 import {
   Modal,
