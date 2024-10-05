@@ -10,6 +10,7 @@ import {
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./App.css";
+import { useSelector } from "react-redux";
 
 export const queryClient = new QueryClient();
 
