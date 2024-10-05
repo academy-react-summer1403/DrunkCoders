@@ -1,5 +1,5 @@
 import { NewsCard, GridLayout } from "@components";
-import { getWeekNews } from "@core/services/api/news";
+import { getWeekNews } from "@core";
 import { useQuery } from "@tanstack/react-query";
 
 export function NewAndArticle() {

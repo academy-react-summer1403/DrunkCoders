@@ -1,5 +1,5 @@
 import { Button } from "@components";
-import { getAllTeachers } from "@core/services/api/teacher";
+import { getAllTeachers } from "@core";
 import { Avatar } from "@nextui-org/react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -14,7 +14,6 @@ export function WeekTeacher() {
     sortedTeacherByCourseCount = data.sort(
       (a, b) => b.courseCounts - a.courseCounts,
     );
-    console.log(sortedTeacherByCourseCount.slice(0, 3));
   }
 
   return (

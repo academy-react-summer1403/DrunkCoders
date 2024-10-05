@@ -15,7 +15,7 @@ import {
   Student,
 } from "@assets";
 import { useState } from "react";
-import { pirceFormatter } from "../../core/utils/formatter.js";
+import { pirceFormatter } from "@core";
 
 export function CourseCard({ buttonColor, data: course }) {
   const [likeState, setLikeState] = useState({ like: false, dislike: false });

@@ -1,6 +1,6 @@
 import { CourseCard, GridLayout } from "@components";
 import { useQuery } from "@tanstack/react-query";
-import { getTopCourses } from "@core/services/api/course";
+import { getTopCourses } from "@core";
 
 export function PopularCourses() {
   const { data } = useQuery({

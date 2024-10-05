@@ -1,4 +1,3 @@
-// import PanelImg from '../../assets/icons/landing-panel.svg?react'
 import {
   panelImage,
   CssIcon,
@@ -8,9 +7,16 @@ import {
   UxIcon,
   ArrowUpLeft,
 } from "@assets";
+import { getLandingDetails } from "@core";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
 export function Services() {
+  const { data } = useQuery({
+    queryKey: ["landing-reports"],
+    queryFn: ({ signal }) => getLandingDetails({ signal }),
+  });
+
   return (
     <div className="flex w-full flex-col justify-center gap-4 md:flex-row md:flex-wrap lg:flex-nowrap">
       <div className="relative h-[332px] overflow-hidden rounded-[32px] border-4 pr-4 pt-4 md:basis-[57%] lg:basis-[40%]">
@@ -60,7 +66,7 @@ export function Services() {
         </h2>
         <div>
           <div className="mb-8">
-            <span className="text-3xl">+1000</span>
+            <span className="text-3xl">+{data?.studentCount}</span>
             <p className="text-[15px]">دانشجو آنلاین در دوره</p>
           </div>
           <div>
