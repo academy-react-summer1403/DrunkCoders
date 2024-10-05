@@ -1,21 +1,23 @@
 import {
-    NewAndArticle,
-    Services,
-    PopularCourses,
-    WeekTeacher,
-    HeroSection,
-    Certificates,
-} from '../components/index'
+  NewAndArticle,
+  Services,
+  PopularCourses,
+  WeekTeacher,
+  HeroSection,
+  Certificates,
+  ServicesDivider,
+} from "@components";
 
 export function Home() {
-    return (
-        <>
-            <HeroSection />
-            <Services />
-            <Certificates />
-            <PopularCourses />
-            <WeekTeacher />
-            <NewAndArticle />
-        </>
-    )
+  return (
+    <>
+      <HeroSection />
+      <Services />
+      <ServicesDivider />
+      <Certificates />
+      <PopularCourses />
+      <WeekTeacher />
+      <NewAndArticle />
+    </>
+  );
 }

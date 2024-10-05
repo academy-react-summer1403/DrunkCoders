@@ -1,34 +1,73 @@
-import {Link} from 'react-router-dom'
-import ShortLogo from '../../assets/logo/short-Logo.svg?react'
-import LongLogo from '../../assets/logo/long-Logo.svg?react'
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Code, Entering, Acount } from "@assets";
+import {
+  AuthLayout,
+  Step,
+  RegisterForm,
+  Verification,
+  EnterInfo,
+} from "@components";
 
 export function Register() {
-    return (
-        <main className="flex ">
-            <div className="hidden md:block md:w-1/2 bg-[#E4E4E4] h-screen ">
-                <div className="flex mt-[20%] mx-[5%] items-center">
-                    <ShortLogo className="w-[58px] h-[55px]" />
-                    <LongLogo className="w-[189px] h-[38px]" />
-                </div>
-            </div>
+  const [currentStep, setCurrentStep] = useState(1);
+  const { register, handleSubmit } = useForm();
 
-            <div className="w-full h-screen flex justify-center">
-                <div className="w-fit mt-[10%] sm:mx-5">
-                    <h1 className="text-2xl font-bold">به آکادمی بحر خوش اومدی!😍</h1>
-                    <br />
-                    <p className="text-gray-500">
-                        لطفاً برای ثبت نام، شماره همراه خود را وارد کنید تا برای شما کد تایید ارسال
-                        شود.
-                    </p>
-                    <br />
-                    <p>
-                        حساب کاربری دارید؟{' '}
-                        <Link to="/auth/login" className="text-primary-blue hover:underline">
-                            ورود به حساب کاربری
-                        </Link>
-                    </p>
-                </div>
-            </div>
-        </main>
-    )
+  const onSubmit = (data) => {
+    console.log("Form Data: ", data);
+    // Handle submission (e.g., API call)
+  };
+
+  // Array of step components
+  const stepComponents = [
+    <RegisterForm
+      key={1}
+      register={register}
+      handleSubmit={handleSubmit}
+      setCurrentStep={setCurrentStep}
+    />,
+    <Verification
+      key={2}
+      register={register}
+      handleSubmit={handleSubmit}
+      setCurrentStep={setCurrentStep}
+      nextStep={3}
+    />,
+    <EnterInfo
+      key={3}
+      register={register}
+      handleSubmit={handleSubmit}
+      setCurrentStep={setCurrentStep}
+    />,
+  ];
+
+  const steps = [
+    { stepNumber: 1, label: "وارد کردن شماره همراه", icon: Entering },
+    { stepNumber: 2, label: "تایید کد ارسال شده به شماره همراه", icon: Code },
+    { stepNumber: 3, label: "وارد کردن اطلاعات حساب کاربری", icon: Acount },
+  ];
+
+  return (
+    <AuthLayout
+      sideBar={
+        <>
+          {steps.map(({ stepNumber, label, icon }) => (
+            <Step
+              key={stepNumber}
+              currentStep={currentStep}
+              stepNumber={stepNumber}
+              label={label}
+              icon={icon}
+            />
+          ))}
+        </>
+      }
+    >
+      <h1 className="text-2xl font-bold">به آکادمی بحر خوش اومدی!😍</h1>
+      <br />
+
+      {/* Render current step component */}
+      {stepComponents[currentStep - 1]}
+    </AuthLayout>
+  );
 }
