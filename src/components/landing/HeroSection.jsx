@@ -22,11 +22,14 @@ export function HeroSection() {
         آکادمی فوق تخصصی کد‌نویسی و برنامه‌نویسی از سنین کودکی تا بزرگسالی
       </p>
 
-      <Link to="/courses">
-        <Button size="lg" className="px-6 py-[14px] text-xl">
-          شروع یادگیری
-        </Button>
-      </Link>
+      <Button
+        as={Link}
+        to="/courses"
+        size="lg"
+        className="px-6 py-[14px] text-xl"
+      >
+        شروع یادگیری
+      </Button>
     </div>
   );
 }
