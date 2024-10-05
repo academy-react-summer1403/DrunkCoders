@@ -8,12 +8,6 @@ export function PopularCourses() {
     queryFn: ({ signal }) => getTopCourses({ count: 4, signal }),
   });
 
-  if (data) {
-    console.log(data);
-  }
-
-  console.log(data);
-
   return (
     <>
       {data && (

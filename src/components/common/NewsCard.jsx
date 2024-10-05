@@ -14,7 +14,7 @@ import {
 } from "@assets";
 import { useState } from "react";
 
-export function NewsCard({ buttonColor = "#5A7EFF" }) {
+export function NewsCard({ buttonColor = "#5A7EFF", data: news }) {
   const [likeState, setLikeState] = useState({ like: false, dislike: false });
 
   function handleLike(identifier) {
@@ -37,15 +37,15 @@ export function NewsCard({ buttonColor = "#5A7EFF" }) {
           classNames={{ wrapper: ["w-full h-full"] }}
           width="100%"
           height="100%"
-          src="https://nextui.org/images/card-example-2.jpeg"
+          src={news.currentImageAddressTumb}
           draggable="false"
         />
         <div className="absolute right-3 top-3 z-10 flex items-center justify-center gap-2">
           <Button className={`${buttonBgClass} text-white`} size="sm">
-            مقاله{" "}
+            مقاله
           </Button>
           <Button className={`${buttonBgClass} text-white`} size="sm">
-            برنامه نویسی
+            {news.newsCatregoryName}
           </Button>
         </div>
       </CardHeader>
@@ -53,26 +53,24 @@ export function NewsCard({ buttonColor = "#5A7EFF" }) {
       <CardBody className="flex flex-col gap-3 text-right text-sm dark:text-white">
         <div className="line-clamp-2 h-14 text-ellipsis">
           <h3 className="inline text-xl font-medium dark:text-white">
-            ری اکت چیست و چرا باید ازش استفاده کنیم؟
+            {news.title}
           </h3>
           <span className="relative -top-[2px] mr-[2px] text-base">
-            (4
+            ({news.currentRate}
             <StarIcon className="inline" />)
           </span>
         </div>
         <p className="line-clamp-4 h-20 text-ellipsis text-right font-light text-[#787878] dark:text-white/60">
-          ری اکت (React) یک کتابخانه جاوا اسکریپتی برای ساخت رابط کاربری بوده که
-          برای ایجاد برنامه‌های تحت وب با استفاده از کامپوننت‌ها، قابل استفاده
-          است.
+          {news.miniDescribe}
         </p>
 
         <div className="flex gap-3 font-medium">
           <QuillWrite className="" />
-          <p>سعید قربانی</p>
+          <p>{news.addUserFullName}</p>
         </div>
         <div className="flex items-center gap-3 font-medium">
           <HidePassword />
-          <p>225</p>
+          <p>{news.currentView}</p>
         </div>
 
         <div className="-mt-2 mb-1 flex flex-row items-center justify-between gap-2 xl:flex-row xl:items-center xl:justify-between">
@@ -82,14 +80,14 @@ export function NewsCard({ buttonColor = "#5A7EFF" }) {
                 onClick={() => handleLike("like")}
                 className={`-mt-1 cursor-pointer stroke-black hover:text-primary-blue ${likeState.like ? "text-primary-blue" : "text-transparent"} `}
               />
-              <span className="">22</span>
+              <span className="">{news.currentLikeCount}</span>
             </div>
             <div className="flex gap-2">
               <ThumbDown
                 onClick={() => handleLike("dislike")}
                 className={`cursor-pointer stroke-black hover:text-primary-blue ${likeState.dislike ? "text-primary-blue" : "text-transparent"} `}
               />
-              2
+              {news.currentDissLikeCount}
             </div>
           </div>
 

@@ -43,7 +43,7 @@ export function BaseInput({
           ...props.classNames,
         }}
         size={size}
-        type={isVisible ? (type === "password" ? "text" : type) : "pas  sword"}
+        type={isVisible ? (type === "password" ? "text" : type) : "password"}
         label={label}
         labelPlacement="outside"
         placeholder={placeholder}

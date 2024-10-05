@@ -13,8 +13,6 @@ export function GridLayout({
     window.innerWidth < 640 ? null : "sm",
   );
 
-  // console.log(dataArray);
-
   useEffect(() => {
     window.addEventListener("resize", () => {
       const width = window.innerWidth;
@@ -36,7 +34,7 @@ export function GridLayout({
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
         {windowWidth === null &&
           dataArray.slice(0, 2).map((item, index) => {
-            const buttonColor = item?.courseId
+            const buttonColor = isPopularCourses
               ? index % 2 === 0
                 ? "#5A7EFF"
                 : "#DE59FF"
@@ -52,7 +50,7 @@ export function GridLayout({
           })}
         {windowWidth === "sm" &&
           dataArray.map((item, index) => {
-            const buttonColor = item?.courseId
+            const buttonColor = isPopularCourses
               ? index % 2 === 0
                 ? "#5A7EFF"
                 : "#DE59FF"
