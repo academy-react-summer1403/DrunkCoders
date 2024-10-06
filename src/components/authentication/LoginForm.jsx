@@ -1,35 +1,56 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BaseInput, Button } from "@components";
 import { Mail, Lock, PassRecover } from "@assets";
-import { loginSchema } from '@validation';
-import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  deleteLocalStorage,
+  loginSchema,
+  loginUser,
+  setLocalStorage,
+} from "@core/index";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkbox } from "@nextui-org/react";
-import { useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 export function LoginForm({ currentStep, setCurrentStep }) {
-  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm({
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
     resolver: zodResolver(loginSchema),
   });
-
   const rememberMe = watch("rememberMe", false);
 
-  useEffect(() => {
-    register("rememberMe");
-  }, [register]);
+  const { mutate } = useMutation({
+    mutationFn: loginUser,
+    onSuccess: (data) => {
+      if (!data.success) {
+        deleteLocalStorage("token");
+      }
+
+      if (data.success) {
+        setLocalStorage("token", data.token);
+        navigate("/");
+        alert(data.message);
+      } else {
+        alert(data.message);
+      }
+    },
+  });
 
   const onSubmit = (data) => {
-    console.log("Form Submission Data:", {
-      ...data,
-      rememberMe
-    });
-    setCurrentStep(2);
+    mutate({ ...data, rememberMe });
+    //setCurrentStep(2);
   };
 
   return (
     <>
       <p className="text-gray-500">
-        لطفا برای ورود به پنل خود ایمیل یا شماره همراه و رمز عبور خود را وارد کنید
+        لطفا برای ورود به پنل خود ایمیل یا شماره همراه و رمز عبور خود را وارد
+        کنید
       </p>
       <br />
       <form onSubmit={handleSubmit(onSubmit)} className="mt-14">
@@ -55,11 +76,7 @@ export function LoginForm({ currentStep, setCurrentStep }) {
           error={errors.password}
         />
         <div className="-mt-5 flex justify-between text-[14px] font-[500]">
-          <Checkbox
-            className="gap-1"
-            isSelected={rememberMe}
-            onChange={(e) => setValue("rememberMe", e.target.checked)} // Manually update the form value
-          >
+          <Checkbox className="gap-2" {...register("rememberMe")}>
             مرا به خاطر بسپار
           </Checkbox>
 

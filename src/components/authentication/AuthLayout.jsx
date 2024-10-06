@@ -46,7 +46,6 @@ export function AuthLayout({ children, sideBar }) {
       <div className="flex w-full max-w-7xl justify-center md:h-screen">
         <div className="mx-3 mt-[15%] w-[90%] md:w-[530px]">
           <div className="mb-8 cursor-pointer md:hidden" onClick={handleClick}>
-            {console.log("Rendering ShortLogo")}
             {windowWidth === null && <ShortLogo />}
           </div>
           {children}

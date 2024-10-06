@@ -4,3 +4,6 @@ export function getLocalStroge(key) {
 export function setLocalStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
+export function deleteLocalStorage(key) {
+  localStorage.removeItem(key);
+}

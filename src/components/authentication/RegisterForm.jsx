@@ -1,13 +1,16 @@
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from 'react-router-dom';
-import { registerSchema } from '@validation';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "react-router-dom";
+import { registerSchema, registerApi } from "@core";
 import { BaseInput, Button } from "@components";
 import { MobileIcon } from "@assets";
-import { registerApi } from '@core/services/api/auth'
 
 export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: zodResolver(registerSchema),
   });
 
