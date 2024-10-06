@@ -10,14 +10,21 @@ export function ForgetPass() {
   const { register, handleSubmit, getValues } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Form Data: ", data);
+
+    const dataWithUrl = {
+      ...data,
+      baseUrl: window.location.href,
+    };
+  
+    console.log("Form Data with URL: ", dataWithUrl);
+  
     if (currentStep === 1) {
       setCurrentStep(2);
     } else {
-      console.log("New Password Data:", data);
+      console.log("New Password Data with URL:", dataWithUrl);
     }
   };
-
+  
   const steps = [
     { stepNumber: 1, label: "وارد کردن شماره همراه یا ایمیل", icon: Entering },
     { stepNumber: 2, label: "تایید کد ارسال شده", icon: Code },
