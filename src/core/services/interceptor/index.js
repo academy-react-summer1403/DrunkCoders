@@ -1,3 +1,4 @@
+import { getLocalStroge } from "@core/index";
 import axios from "axios";
 
 export const api = axios.create({
@@ -15,7 +16,7 @@ function onError(error) {
 api.interceptors.response.use(onSuccess, onError);
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = getLocalStroge("token");
 
     if (token) {
       config.headers.Authorization = "Bearer " + token;

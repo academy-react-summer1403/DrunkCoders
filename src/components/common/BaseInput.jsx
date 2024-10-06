@@ -47,7 +47,7 @@ export function BaseInput({
         label={label}
         labelPlacement="outside"
         placeholder={placeholder}
-        startContent={<StartIcons classNames="" />}
+        startContent={<StartIcons />}
         endContent={
           type === "password" && (
             <button type="button" onClick={toggleVisibility}>
