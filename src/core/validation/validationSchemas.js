@@ -9,7 +9,17 @@ export const registerSchema = z.object({
       .regex(/^(\+98|0)?9\d{9}$/, { message: 'شماره همراه وارد شده صحیح نمی‌باشد' })
   });
 export const infoSchema = z.object({
-    emailOrPhone: z
+    gmail: z
+      .string()
+      .email("ایمیل وارد شده صحیح نیست")
+      .nonempty("ایمیل الزامی است"),
+    password: z
+      .string()
+      .min(8, { message: 'رمز عبور باید حداقل 8 کاراکتر باشد' })
+      .max(32, { message: 'رمز عبور نباید بیش از 32 کاراکتر باشد' }),
+  });
+  export const loginSchema = z.object({
+    phoneOrGmail: z
       .string()
       .min(1, { message: 'ایمیل یا شماره همراه الزامی است' })
       .regex(

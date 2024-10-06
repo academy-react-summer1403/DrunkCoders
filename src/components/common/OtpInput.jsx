@@ -3,7 +3,7 @@ import { Input } from "@nextui-org/react";
 import { Button } from "@components";
 import { useRef } from "react";
 
-export const OtpInput = ({ setCurrentStep, nextStep }) => {
+export const OtpInput = ({ setCurrentStep, nextStep, phoneNumber }) => {
   const { control, handleSubmit, setValue } = useForm();
   const inputsRef = useRef([]);
 
@@ -23,7 +23,13 @@ export const OtpInput = ({ setCurrentStep, nextStep }) => {
   };
 
   const onSubmit = (data) => {
-    console.log("OTP Data: ", data);
+    const verifyCode = data.otp.join(""); // Join the OTP array to form a string
+    const submissionData = {
+      phoneNumber,  // Include the phone number
+      verifyCode,   // Include the verification code
+    };
+    
+    console.log("Submission Data: ", submissionData); // Log the combined object
     setCurrentStep(nextStep); // Use the passed nextStep to decide what happens next
   };
 

@@ -1,17 +1,21 @@
-import React from 'react'
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { BaseInput, Button } from "@components";
-import { Mail, Lock } from "@assets"
+import { Mail, Lock } from "@assets";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { infoSchema } from '@validation';
 
-export function EnterInfo({ currentStep, setCurrentStep }) {
+export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(infoSchema),
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    const formData = {
+      ...data,
+      phoneNumber  // Include phoneNumber in form data
+    };
+    console.log(formData);
     setCurrentStep(3);
   };
 
@@ -23,14 +27,14 @@ export function EnterInfo({ currentStep, setCurrentStep }) {
       <br />
       <form onSubmit={handleSubmit(onSubmit)} className='mt-14'>
         <BaseInput
-          label="ایمیل یا شماره همراه"
-          placeholder="ایمیل یا شماره همراه خود را وارد کنید"
-          name="emailOrPhone"
+          label="ایمیل"
+          placeholder="ایمیل خود را وارد کنید"
+          name="gmail"  // Changed to gmail
           register={register}
           size="lg"
           type="text"
           starIcon={Mail}
-          error={errors.emailOrPhone} // Show error
+          error={errors.gmail}  // Changed to gmail for error handling
           className="mb-16"
         />
         <BaseInput
@@ -41,25 +45,13 @@ export function EnterInfo({ currentStep, setCurrentStep }) {
           size="lg"
           type="password"
           starIcon={Lock}
-          error={errors.password} // Show error
+          error={errors.password}  // Show error for password
         />
-        <div className="flex justify-between -mt-5 text-[14px] font-[500]">
-          <div className="gap-1 flex items-center">
-            <input
-              type="checkbox"
-              id="remember"
-              {...register('remember')}
-              className="appearance-none bg-[#e4e4e4] rounded-[6px] w-4 h-4 checked:bg-[#3772FF] border-[3px] border-[#e4e4e4]"
-            />
-            <label htmlFor="remember">مرا به خاطر بسپار</label>
-          </div>
-        </div>
         <Button
           type="submit"
-          className="mt-5 w-full bg-primary-blue p-4 text-white"
+          className=" w-full bg-primary-blue p-4 text-white"
           disabled={currentStep === 3}
         >
-        
           ثبت اطلاعات
         </Button>
       </form>

@@ -7,7 +7,7 @@ export function BaseInput({
   placeholder = "شماره همراه یا ایمیل خود را وارد کنید",
   size = "lg",
   starIcon: StartIcons,
-  type = "password",
+  type = "text", // Change default to "text" for general use
   register = () => {},
   validation,
   name,
@@ -20,7 +20,7 @@ export function BaseInput({
     if (type === "password") {
       setIsVisible(false);
     }
-  }, []);
+  }, [type]);
 
   function toggleVisibility() {
     setIsVisible((prevState) => !prevState);
@@ -30,31 +30,31 @@ export function BaseInput({
 
   return (
     <>
-      <Input
-        className={`mb-10 ${props.className}`}
-        classNames={{
-          input: ["mr-2 text-sm font", "placeholder:text-[#787878]/60"],
-          label: ["font-medium text-lg"],
-          ...props.classNames,
-        }}
-        size={size}
-        type={isVisible ? type : "password"}
-        label={label}
-        labelPlacement="outside"
-        placeholder={placeholder}
-        startContent={<StartIcons classNames="" />}
-        endContent={
-          type === "password" && (
-            <button type="button" onClick={toggleVisibility}>
-              <EndIcon className="" />
-            </button>
-          )
-        }
-        {...register(name, validation)}
-        isInvalid={error}
-        errorMessage={error?.message}
-        {...props}
-      />
+        <Input
+          className={`mb-10 ${props.className}`}
+          classNames={{
+            input: ["mr-2 text-sm font", "placeholder:text-[#787878]/60"],
+            label: ["font-medium text-lg"],
+            ...props.classNames,
+          }}
+          size={size}
+          type={isVisible ? type : "password"}
+          label={label}
+          labelPlacement="outside"
+          placeholder={placeholder}
+          startContent={<StartIcons classNames="" />}
+          endContent={
+            type === "password" && (
+              <button type="button" onClick={toggleVisibility}>
+                <EndIcon className="" />
+              </button>
+            )
+          }
+          {...register(name, validation)}
+          isInvalid={error}
+          errorMessage={error?.message}
+          {...props}
+        />
     </>
   );
 }

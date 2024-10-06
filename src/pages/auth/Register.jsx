@@ -21,11 +21,11 @@ export function Register() {
       register={register}
       handleSubmit={handleSubmit}
       setCurrentStep={setCurrentStep}
-      setPhoneNumber={setPhoneNumber}  // Pass setPhoneNumber here
+      setPhoneNumber={setPhoneNumber}
     />,
     <Verification
       key={2}
-      phoneNumber={phoneNumber}  // Pass the phoneNumber to Verification
+      phoneNumber={phoneNumber}
       setCurrentStep={setCurrentStep}
       nextStep={3}
       message={(
@@ -34,7 +34,12 @@ export function Register() {
         </>
       )}    
       />,
-    <EnterInfo key={3} register={register} handleSubmit={handleSubmit} setCurrentStep={setCurrentStep} />
+    <EnterInfo 
+    key={3} 
+    phoneNumber={phoneNumber}
+    register={register} 
+    handleSubmit={handleSubmit} 
+    setCurrentStep={setCurrentStep} />
   ];
 
   const steps = [
