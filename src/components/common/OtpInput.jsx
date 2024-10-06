@@ -3,7 +3,7 @@ import { Input } from "@nextui-org/react";
 import { Button } from "@components";
 import { useRef } from "react";
 
-export const OtpInput = ({ setCurrentStep, nextStep }) => {
+export const OtpInput = ({ setCurrentStep, nextStep, phoneNumber }) => {
   const { control, handleSubmit, setValue } = useForm();
   const inputsRef = useRef([]);
 
@@ -23,7 +23,13 @@ export const OtpInput = ({ setCurrentStep, nextStep }) => {
   };
 
   const onSubmit = (data) => {
-    console.log("OTP Data: ", data);
+    const verifyCode = data.otp.join(""); // Join the OTP array to form a string
+    const submissionData = {
+      phoneNumber,  // Include the phone number
+      verifyCode,   // Include the verification code
+    };
+    
+    console.log("Submission Data: ", submissionData); // Log the combined object
     setCurrentStep(nextStep); // Use the passed nextStep to decide what happens next
   };
 
@@ -32,7 +38,7 @@ export const OtpInput = ({ setCurrentStep, nextStep }) => {
       <p className="text-xl font-medium">کد تایید</p>
       <form onSubmit={handleSubmit(onSubmit)} className="mb-7 mt-5">
         <div className="flex justify-between gap-5 [direction:ltr]">
-          {Array.from({ length: 6 }).map((_, index) => (
+          {Array.from({ length: 5 }).map((_, index) => (
             <Controller
               key={index}
               name={`otp[${index}]`}
@@ -40,7 +46,7 @@ export const OtpInput = ({ setCurrentStep, nextStep }) => {
               defaultValue=""
               render={({ field }) => (
                 <Input
-                  className={`${index === 2 ? "mr-6" : ""}`}
+                  // className={`${index === 2 ? "mr-6" : ""}`}
                   radius="lg"
                   ref={(el) => (inputsRef.current[index] = el)}
                   value={field.value}

@@ -7,7 +7,7 @@ export function BaseInput({
   placeholder = "شماره همراه یا ایمیل خود را وارد کنید",
   size = "lg",
   starIcon: StartIcons,
-  type = "password",
+  type = "text", // Change default to "text" for general use
   register = () => {},
   validation,
   name,
@@ -20,7 +20,7 @@ export function BaseInput({
     if (type === "password") {
       setIsVisible(false);
     }
-  }, []);
+  }, [type]);
 
   function toggleVisibility() {
     setIsVisible((prevState) => !prevState);
@@ -47,7 +47,7 @@ export function BaseInput({
         label={label}
         labelPlacement="outside"
         placeholder={placeholder}
-        startContent={<StartIcons classNames="" />}
+        startContent={<StartIcons />}
         endContent={
           type === "password" && (
             <button type="button" onClick={toggleVisibility}>

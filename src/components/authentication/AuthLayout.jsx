@@ -1,11 +1,16 @@
-import { ShortLogo, LongLogo } from "@assets";
+import ShortLogo from "../../assets/logo/short-Logo.svg?react";
+import LongLogo from "../../assets/logo/long-Logo.svg?react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function AuthLayout({ children, sideBar }) {
   const [windowWidth, setWindowWidth] = useState(
     window.innerWidth < 768 ? null : "md",
   );
-
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/");
+  };
   useEffect(() => {
     window.addEventListener("resize", () => {
       const width = window.innerWidth;
@@ -18,9 +23,12 @@ export function AuthLayout({ children, sideBar }) {
   }, []);
   return (
     <main className="flex flex-col md:flex-row">
-      <aside className="order-1 hidden flex-col md:order-none md:flex md:h-screen md:w-6/12 md:bg-[#E4E4E4] dark:md:bg-slate-800">
+      <aside className="order-1 hidden max-w-4xl flex-col md:order-none md:flex md:h-screen md:w-6/12 md:bg-[#E4E4E4] dark:md:bg-slate-800">
         <div className="m-auto mt-12 flex w-fit flex-col pb-16 md:mr-[10%] md:mt-[25%]">
-          <div className="hidden items-center md:flex">
+          <div
+            className="hidden cursor-pointer items-center md:flex"
+            onClick={handleClick}
+          >
             {windowWidth === "md" && (
               <ShortLogo className="h-[55px] w-[58px]" />
             )}
@@ -35,11 +43,10 @@ export function AuthLayout({ children, sideBar }) {
         </div>
       </aside>
 
-      <div className="flex w-full justify-center md:h-screen">
+      <div className="flex w-full max-w-7xl justify-center md:h-screen">
         <div className="mx-3 mt-[15%] w-[90%] md:w-[530px]">
-          <div className="mb-8 md:hidden">
+          <div className="mb-8 cursor-pointer md:hidden" onClick={handleClick}>
             {console.log("Rendering ShortLogo")}
-            {/* problem is here */}
             {windowWidth === null && <ShortLogo />}
           </div>
           {children}

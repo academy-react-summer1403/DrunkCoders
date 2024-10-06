@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { OtpInput } from "@components";
 
-export function Verification({ setCurrentStep, nextStep }) {
+export function Verification({ setCurrentStep, nextStep, message, phoneNumber }) {
+  useEffect(() => {
+    console.log('Phone number in Verification:', phoneNumber);
+  }, [phoneNumber]);
   return (
     <>
-      <p className="text-gray-500">لطفا کد ارسال شده را وارد کنید</p>
+      <p className="text-gray-500">
+        {message ? message : 'لطفا کد ارسال شده را وارد کنید'}
+      </p>
       <div className="mt-10">
-        <OtpInput setCurrentStep={setCurrentStep} nextStep={nextStep} />{" "}
-        {/* Pass nextStep to OtpInput */}
+        <OtpInput 
+        setCurrentStep={setCurrentStep} 
+        nextStep={nextStep} 
+        phoneNumber={phoneNumber}/>
       </div>
     </>
   );
