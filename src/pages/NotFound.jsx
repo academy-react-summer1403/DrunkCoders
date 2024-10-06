@@ -13,6 +13,7 @@ export function NotFound() {
           <div className="mr-20 mt-9 h-32 w-40 border-purple-700 pt-6 text-center text-8xl font-semibold text-blue-500">
             404
           </div>
+          
           <span className="text-center text-2xl font-medium text-blue-500">
             ما صفحه ای که دنبالش هستی
           </span>
