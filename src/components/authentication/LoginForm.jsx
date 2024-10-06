@@ -20,7 +20,11 @@ export function LoginForm({ currentStep, setCurrentStep }) {
   }, [register]);
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data); // Logs the checkbox value correctly
+    // Log the form data with checkbox value included
+    console.log("Form Submission Data:", {
+      ...data,
+      rememberMe // Include rememberMe value in the logged object
+    });
     setCurrentStep(2);
   };
 
