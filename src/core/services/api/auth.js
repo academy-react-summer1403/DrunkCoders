@@ -16,3 +16,11 @@ export const verifyApi = async(user) =>{
         return false
     }
 }
+export const registerFinalApi = async(user) =>{
+    try{
+        const response = await api.post("/Sign/Register", user);
+        return response
+    }catch (error) {
+        return false
+    }
+}

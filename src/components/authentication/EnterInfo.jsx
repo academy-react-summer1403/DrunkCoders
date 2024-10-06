@@ -4,19 +4,28 @@ import { BaseInput, Button } from "@components";
 import { Mail, Lock } from "@assets";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { infoSchema } from '@validation';
+import { registerFinalApi } from '@core/services/api/auth'; // Import your registerFinalApi function
 
 export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(infoSchema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const formData = {
       ...data,
-      phoneNumber  // Include phoneNumber in form data
+      phoneNumber
     };
-    console.log(formData);
-    setCurrentStep(3);
+    console.log("Form Data to be sent:", formData);
+
+    const response = await registerFinalApi(formData);
+
+    if (response) {
+      console.log("Registration successful:", response);
+      setCurrentStep(3);
+    } else {
+      console.error("Registration failed");
+    }
   };
 
   return (
@@ -49,7 +58,7 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
         />
         <Button
           type="submit"
-          className=" w-full bg-primary-blue p-4 text-white"
+          className="w-full bg-primary-blue p-4 text-white"
           disabled={currentStep === 3}
         >
           ثبت اطلاعات
