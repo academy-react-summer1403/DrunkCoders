@@ -47,8 +47,8 @@ export function Header() {
       </div>
 
       <div className="flex w-2/5 justify-center gap-10 whitespace-nowrap p-2 text-lg font-normal leading-10 max-lg:mx-5 max-lg:gap-5 max-md:hidden">
-        <Link>خانه</Link> <Link>دوره ها</Link> <Link>اخبار و مقالات </Link>
-        <Link>ارتباط باما</Link>
+        <Link to="/">خانه</Link> <Link to="/courses">دوره ها</Link> <Link  to="/article-news">اخبار و مقالات </Link>
+        <Link to="/">ارتباط باما</Link>
       </div>
 
       <div className="flex w-72 justify-end gap-5 border-black max-lg:gap-3 max-md:block max-md:w-fit max-md:gap-2">
@@ -60,15 +60,12 @@ export function Header() {
         </div>
 
         <div className="max-md:relative max-md:right-20 max-md:flex max-sm:right-11">
-          <Button
-            as={Link}
-            to="/auth"
+          <Button 
             color="primary"
             className="h-12 w-40 rounded-full text-lg max-md:relative"
           >
-            ورود یا ثبت نام
-          </Button>
-
+            <Link to="/auth">ورود یا ثبت نام </Link>
+          </Button>{" "}
           <div className="md:relative md:top-4 md:hidden md:h-10">
             <Button
               className="bg-white max-lg:hidden max-md:block lg:hidden"
@@ -117,9 +114,9 @@ export function Header() {
                             <Phone />
                           </div>
                           <div className="flex h-full w-32 flex-col gap-2 pr-2 pt-1 text-lg leading-10">
-                            <Link>خانه</Link> <Link>دوره ها</Link>{" "}
-                            <Link>اخبار و مقالات </Link>
-                            <Link>ارتباط باما</Link>
+                            <Link to="/">خانه</Link> <Link to="/courses">دوره ها</Link>{" "}
+                            <Link to="/article-news">اخبار و مقالات </Link>
+                            <Link to="/">ارتباط باما</Link>
                           </div>
                         </div>
                         <div className="flex h-full w-44 flex-col gap-2 pt-1 text-base leading-10 text-gray-500">
@@ -133,8 +130,8 @@ export function Header() {
                       <div className="mx-2 flex h-20 w-full border-t-2 border-gray-200">
                         <BahrLogo1 className="mt-3 h-8 w-8" />
                         <img src={BahrLogo} className="mt-4 h-9 w-40" />
-                        <Telegram className="mr-32 mt-3 h-7 w-7" />
-                        <Instagram className="mr-3 mt-3 h-7 w-7" />
+                        <Telegram className="mr-32 mt-3 h-10 w-10" />
+                        <Instagram className="mr-3 mt-3 h-10 w-10" />
                       </div>
                     </ModalFooter>
                   </>
