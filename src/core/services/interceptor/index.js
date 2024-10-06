@@ -40,7 +40,8 @@ const handleError = (error) => {
     switch (error.response.status) {
       case 401:
         alert("Unauthorized! Please log in again.");
-        // Redirect to login or handle logout
+        localStorage.removeItem("token");
+        window.location.pathname = "/auth";
         break;
       case 403:
         alert("Forbidden! You don’t have permission to access this resource.");
