@@ -30,31 +30,36 @@ export function BaseInput({
 
   return (
     <>
-        <Input
-          className={`mb-10 ${props.className}`}
-          classNames={{
-            input: ["mr-2 text-sm font", "placeholder:text-[#787878]/60"],
-            label: ["font-medium text-lg"],
-            ...props.classNames,
-          }}
-          size={size}
-          type={isVisible ? type : "password"}
-          label={label}
-          labelPlacement="outside"
-          placeholder={placeholder}
-          startContent={<StartIcons classNames="" />}
-          endContent={
-            type === "password" && (
-              <button type="button" onClick={toggleVisibility}>
-                <EndIcon className="" />
-              </button>
-            )
-          }
-          {...register(name, validation)}
-          isInvalid={error}
-          errorMessage={error?.message}
-          {...props}
-        />
+      <Input
+        className={`mb-10 ${props.className}`}
+        classNames={{
+          input: [
+            "mr-2 text-sm bg-transparent",
+            "placeholder:text-[#787878]/60 dark:placeholder:text-stone-700 ",
+          ],
+          label: ["font-medium text-lg"],
+          inputWrapper: ["dark:bg-white/60", "dark:focus-within:bg-white/50"],
+          innerWrapper: "bg-transparent",
+          ...props.classNames,
+        }}
+        size={size}
+        type={isVisible ? (type === "password" ? "text" : type) : "password"}
+        label={label}
+        labelPlacement="outside"
+        placeholder={placeholder}
+        startContent={<StartIcons classNames="" />}
+        endContent={
+          type === "password" && (
+            <button type="button" onClick={toggleVisibility}>
+              <EndIcon className="" />
+            </button>
+          )
+        }
+        {...register(name, validation)}
+        isInvalid={error}
+        errorMessage={error?.message}
+        {...props}
+      />
     </>
   );
 }

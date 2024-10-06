@@ -8,7 +8,11 @@ import {
   ForgetPass,
 } from "@pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./App.css";
+import { useSelector } from "react-redux";
+
+export const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -49,5 +53,14 @@ const router = createBrowserRouter([
 ]);
 
 export function App() {
-  return <RouterProvider router={router} />;
+  const darkMode = useSelector((state) => state.darkMode.darkMode);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <main
+        className={`bg-background text-foreground ${darkMode ? "dark" : "light"}`}
+      >
+        <RouterProvider router={router} />
+      </main>
+    </QueryClientProvider>
+  );
 }

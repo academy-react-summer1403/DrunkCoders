@@ -1,13 +1,14 @@
 import { CodeCircle } from "@assets";
 import { Button } from "@components";
+import { Link } from "react-router-dom";
 
 export function HeroSection() {
   return (
     <div className="mb-5 flex flex-col items-center justify-center gap-8 py-20 text-center">
       <h1 className="text-5xl leading-normal lg:leading-none">
         تجربه‌ای بی‌نظیر در یادگیری{" "}
-        <span className="mx-4 hidden h-14 w-14 items-center justify-center rounded-full shadow-md lg:mr-2 lg:inline-flex">
-          <CodeCircle className="inline" />
+        <span className="dark:shadow-white-md mx-4 hidden h-14 w-14 items-center justify-center rounded-full bg-white shadow-md lg:mr-2 lg:inline-flex">
+          <CodeCircle className="inline dark:text-black" />
         </span>
         کدنویسی؛
       </h1>
@@ -21,7 +22,12 @@ export function HeroSection() {
         آکادمی فوق تخصصی کد‌نویسی و برنامه‌نویسی از سنین کودکی تا بزرگسالی
       </p>
 
-      <Button size="lg" className="px-6 py-[14px] text-xl">
+      <Button
+        as={Link}
+        to="/courses"
+        size="lg"
+        className="px-6 py-[14px] text-xl"
+      >
         شروع یادگیری
       </Button>
     </div>

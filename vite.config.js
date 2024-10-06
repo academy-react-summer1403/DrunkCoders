@@ -15,6 +15,7 @@ export default defineConfig({
       "@config": path.resolve(__dirname, "./src/config"),
       "@store": path.resolve(__dirname, "./src/store"),
       "@validation": path.resolve(__dirname, "./src/core/validation/validationSchemas.js"),
+      "@core": path.resolve(__dirname, "./src/core"),
     },
   },
 });

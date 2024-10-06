@@ -21,7 +21,7 @@ function Explain() {
     <div className="explain w-[296] sm:ml-10 sm:w-[315px]">
       <h1 className="text-2xl font-bold">آکادمی کدنویسی بحر</h1>
       <br />
-      <p className="text-justify text-gray-500">
+      <p className="text-justify text-gray-500 dark:text-white/60">
         +13 سال سابقه فعالیت در زمینه آموزش کدنویسی از سنین کودکی تا بزرگسال.
         هدف ما همیشه این بوده که دانشجویان را با مهارت‌های لازم برای موفقیت در
         دنیای فناوری و برنامه نویسی مجهز کنیم.
@@ -33,7 +33,7 @@ function Explain() {
 function Pages() {
   return (
     <div className="pages flex w-[118px] flex-col text-lg">
-      <h1 className="text-gray-500">صفحات</h1>
+      <h1 className="text-gray-500 dark:text-white">صفحات</h1>
       <div className="mt-5 flex flex-col space-y-3 font-[500]">
         <Link to="/">خانه</Link>
         <Link to="/courses">دوره ها</Link>
@@ -46,7 +46,7 @@ function Pages() {
 function Us() {
   return (
     <div className="us flex w-[83px] flex-col text-lg">
-      <h1 className="text-gray-500">ما</h1>
+      <h1 className="text-gray-500 dark:text-white">ما</h1>
       <div className="mt-5 flex flex-col space-y-3 font-[500]">
         <Link to="/teachers">اساتید</Link>
         <Link to="/about-us">درباره ما</Link>
@@ -66,12 +66,12 @@ function Namad() {
 
 export function Footer() {
   return (
-    <footer className="mb-2 rounded-[32px] bg-gray-100 px-5 py-12">
+    <footer className="mb-2 rounded-[32px] bg-gray-100 px-5 py-12 dark:bg-white/20">
       <div className="relative flex flex-wrap justify-between gap-10">
         <div className="logo-contact order-1 flex flex-col lg:-order-1 lg:-mt-6">
           <Logo />
         </div>
-        <div className="footer-lg:absolute order-6 lg:-bottom-[35px] lg:order-2">
+        <div className="order-6 lg:-bottom-[35px] lg:order-2 footer-lg:absolute">
           <SubLogos />
         </div>
 

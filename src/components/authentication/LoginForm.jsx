@@ -12,18 +12,16 @@ export function LoginForm({ currentStep, setCurrentStep }) {
     resolver: zodResolver(loginSchema),
   });
 
-  // Watch the rememberMe value
-  const rememberMe = watch("rememberMe", false); // Default to false
+  const rememberMe = watch("rememberMe", false);
 
   useEffect(() => {
-    register("rememberMe"); // Register the checkbox manually
+    register("rememberMe");
   }, [register]);
 
   const onSubmit = (data) => {
-    // Log the form data with checkbox value included
     console.log("Form Submission Data:", {
       ...data,
-      rememberMe // Include rememberMe value in the logged object
+      rememberMe
     });
     setCurrentStep(2);
   };

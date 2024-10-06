@@ -38,7 +38,7 @@ export const OtpInput = ({ setCurrentStep, nextStep, phoneNumber }) => {
       <p className="text-xl font-medium">کد تایید</p>
       <form onSubmit={handleSubmit(onSubmit)} className="mb-7 mt-5">
         <div className="flex justify-between gap-5 [direction:ltr]">
-          {Array.from({ length: 6 }).map((_, index) => (
+          {Array.from({ length: 5 }).map((_, index) => (
             <Controller
               key={index}
               name={`otp[${index}]`}
@@ -46,7 +46,7 @@ export const OtpInput = ({ setCurrentStep, nextStep, phoneNumber }) => {
               defaultValue=""
               render={({ field }) => (
                 <Input
-                  className={`${index === 2 ? "mr-6" : ""}`}
+                  // className={`${index === 2 ? "mr-6" : ""}`}
                   radius="lg"
                   ref={(el) => (inputsRef.current[index] = el)}
                   value={field.value}

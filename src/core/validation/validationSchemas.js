@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const registerSchema = z.object({
-    number: z
+    phoneNumber: z
       .string()
       .regex(/^\d+$/, { message: 'فقط اعداد مجاز هستند' })
       .min(10, { message: 'شماره همراه باید حداقل 10 رقم باشد' })
