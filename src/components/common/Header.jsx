@@ -1,4 +1,4 @@
-import { Button } from "@components";
+import { Button } from '@components'
 import {
   MoonIcon,
   BahrLogo,
@@ -11,7 +11,7 @@ import {
   Book,
   Home,
   ShortLine,
-} from "@assets";
+} from '@assets'
 import {
   Modal,
   ModalContent,
@@ -19,29 +19,28 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-} from "@nextui-org/react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { darkModeActions } from "@store";
+} from '@nextui-org/react'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { darkModeActions } from '@store'
 
 export function Header() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const dispatch = useDispatch();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const dispatch = useDispatch()
 
   function toggleMode() {
-    console.log("render");
-    dispatch(darkModeActions.toggleMode());
+    dispatch(darkModeActions.toggleMode())
   }
 
   return (
     <div className="relative top-3.5 flex h-12 justify-around gap-16 max-lg:gap-0">
       <div className="flex w-72 justify-start gap-4 max-lg:w-64 max-lg:gap-3">
         <div className="h-12 w-10">
-          {" "}
+          {' '}
           <BahrLogo1 className="relative right-2 top-1 h-9" />
-        </div>{" "}
+        </div>{' '}
         <div className="flex h-12 w-44 justify-center pt-3 max-md:hidden">
-          {" "}
+          {' '}
           <img src={BahrLogo} className="ml-8 h-8 w-40" />
         </div>
       </div>
@@ -87,7 +86,7 @@ export function Header() {
                     opacity: 1,
                     transition: {
                       duration: 0.3,
-                      ease: "easeOut",
+                      ease: 'easeOut',
                     },
                   },
                   exit: {
@@ -95,7 +94,7 @@ export function Header() {
                     opacity: 0,
                     transition: {
                       duration: 0.2,
-                      ease: "easeIn",
+                      ease: 'easeIn',
                     },
                   },
                 },
@@ -117,7 +116,7 @@ export function Header() {
                             <Phone />
                           </div>
                           <div className="flex h-full w-32 flex-col gap-2 pr-2 pt-1 text-lg leading-10">
-                            <Link>خانه</Link> <Link>دوره ها</Link>{" "}
+                            <Link>خانه</Link> <Link>دوره ها</Link>{' '}
                             <Link>اخبار و مقالات </Link>
                             <Link>ارتباط باما</Link>
                           </div>
@@ -145,5 +144,5 @@ export function Header() {
         </div>
       </div>
     </div>
-  );
+  )
 }

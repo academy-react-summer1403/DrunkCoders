@@ -1,19 +1,17 @@
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { BaseInput, Button } from "@components";
-import { Mail, Lock, PassRecover } from "@assets";
-import {
-  deleteLocalStorage,
-  loginSchema,
-  loginUser,
-  setLocalStorage,
-} from "@core/index";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Checkbox } from "@nextui-org/react";
-import { useMutation } from "@tanstack/react-query";
+import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
+import { BaseInput, Button } from '@components'
+import { Mail, Lock, PassRecover } from '@assets'
+import { deleteLocalStorage, loginSchema, loginUser } from '@core/index'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Checkbox } from '@nextui-org/react'
+import { useMutation } from '@tanstack/react-query'
+import { useDispatch } from 'react-redux'
+import { tokenActions } from '@store/token-slice'
 
 export function LoginForm({ currentStep, setCurrentStep }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const dispatch = useDispatch
   const {
     register,
     handleSubmit,
@@ -21,30 +19,26 @@ export function LoginForm({ currentStep, setCurrentStep }) {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(loginSchema),
-  });
-  const rememberMe = watch("rememberMe", false);
+  })
+  const rememberMe = watch('rememberMe', false)
 
   const { mutate } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      if (!data.success) {
-        deleteLocalStorage("token");
-      }
-
+      alert(data.message)
       if (data.success) {
-        setLocalStorage("token", data.token);
-        navigate("/");
-        alert(data.message);
+        dispatch(tokenActions.login(data.token))
+        navigate('/')
       } else {
-        alert(data.message);
+        deleteLocalStorage('token')
       }
     },
-  });
+  })
 
   const onSubmit = (data) => {
-    mutate({ ...data, rememberMe });
+    mutate({ ...data, rememberMe })
     //setCurrentStep(2);
-  };
+  }
 
   return (
     <>
@@ -76,7 +70,7 @@ export function LoginForm({ currentStep, setCurrentStep }) {
           error={errors.password}
         />
         <div className="-mt-5 flex justify-between text-[14px] font-[500]">
-          <Checkbox className="gap-2" {...register("rememberMe")}>
+          <Checkbox className="gap-2" {...register('rememberMe')}>
             مرا به خاطر بسپار
           </Checkbox>
 
@@ -97,11 +91,11 @@ export function LoginForm({ currentStep, setCurrentStep }) {
         </Button>
       </form>
       <p className="m-auto mt-4 w-fit">
-        حساب کاربری ندارید؟{" "}
+        حساب کاربری ندارید؟{' '}
         <Link to="register" className="text-primary-blue hover:underline">
           ایجاد حساب کاربری
         </Link>
       </p>
     </>
-  );
+  )
 }
