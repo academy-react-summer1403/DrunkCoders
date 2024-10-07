@@ -23,7 +23,7 @@ export function AuthLayout({ children, sideBar }) {
   }, [])
   return (
     <main className="flex h-screen flex-col md:flex-row">
-      <aside className="order-1 hidden max-w-4xl flex-col md:order-none md:flex md:h-screen md:w-6/12 md:bg-[#E4E4E4] dark:md:bg-slate-800">
+      <aside className="order-1 max-w-4xl flex-col md:order-none md:flex md:h-screen md:w-6/12 md:bg-[#E4E4E4] dark:md:bg-slate-800">
         <div className="m-auto mt-12 flex w-fit flex-col pb-16 md:mr-[10%] md:mt-[25%]">
           <div
             className="hidden cursor-pointer items-center md:flex"
