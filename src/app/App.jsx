@@ -5,28 +5,29 @@ import {
   NotFound,
   Register,
   RootLayout,
-  ForgetPass,
+  ForgetPassStep1,
+  ForgetPassStep2,
   Courses,
-  CourseD
+  CourseD,
 } from "@pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./App.css";
 import { useSelector } from "react-redux";
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <RootLayout />,
     children: [
       {
-        path: "*",
+        path: '*',
         element: <NotFound />,
       },
       {
-        path: "about-us",
+        path: 'about-us',
       },
       {
         index: true,
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/auth",
+    path: '/auth',
     element: <Authentication />,
     children: [
       {
@@ -53,27 +54,30 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "register",
+        path: 'register',
         element: <Register />,
       },
       {
-        path: "forget-pass",
-        element: <ForgetPass />,
+        path: 'forget-pass',
+        element: <ForgetPassStep1 />,
+      },
+      {
+        path: 'forget-pass/:configValue',
+        element: <ForgetPassStep2 />,
       },
     ],
   },
-
 ]);
 
 export function App() {
-  const darkMode = useSelector((state) => state.darkMode.darkMode);
+  const darkMode = useSelector((state) => state.darkMode.darkMode)
   return (
     <QueryClientProvider client={queryClient}>
       <main
-        className={`bg-background text-foreground ${darkMode ? "dark" : "light"}`}
+        className={`bg-background text-foreground ${darkMode ? 'dark' : 'light'}`}
       >
         <RouterProvider router={router} />
       </main>
     </QueryClientProvider>
-  );
+  )
 }
