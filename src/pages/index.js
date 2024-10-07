@@ -5,3 +5,5 @@ export { Register } from "./auth/Register";
 export { NotFound } from "./NotFound";
 export { Home } from "./Home";
 export { ForgetPass } from "./auth/ForgetPass";
+export { Courses } from "./course/Courses";
+export { CourseD } from "./course/CourseD";

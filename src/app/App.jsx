@@ -6,6 +6,8 @@ import {
   Register,
   RootLayout,
   ForgetPass,
+  Courses,
+  CourseD
 } from "@pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
@@ -30,6 +32,16 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      {
+        path:"courses",
+        element: <Courses/>,
+        children: [
+          {
+            path:'details',
+            element: <CourseD/>
+          }
+        ]
+      }
     ],
   },
   {
@@ -50,6 +62,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+
 ]);
 
 export function App() {
