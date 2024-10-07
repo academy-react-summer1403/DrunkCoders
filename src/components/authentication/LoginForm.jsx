@@ -11,7 +11,7 @@ import { tokenActions } from '@store/token-slice'
 
 export function LoginForm({ currentStep, setCurrentStep }) {
   const navigate = useNavigate()
-  const dispatch = useDispatch
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -27,6 +27,7 @@ export function LoginForm({ currentStep, setCurrentStep }) {
     onSuccess: (data) => {
       alert(data.message)
       if (data.success) {
+        console.log(data.success)
         dispatch(tokenActions.login(data.token))
         navigate('/')
       } else {

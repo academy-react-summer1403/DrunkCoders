@@ -31,7 +31,7 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
       alert(data.message)
       if (data.success) {
         dispatch(tokenActions.login(data.token))
-        navigate('./')
+        navigate('/')
       } else {
         deleteLocalStorage('token')
       }
@@ -42,8 +42,14 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
     mutationFn: registerFinalApi,
     onSuccess: (data, variables) => {
       alert(data.message)
+      console.log('variables: ', variables)
+
       if (data.success) {
-        loginMutate(variables)
+        loginMutate({
+          phoneOrGmail: variables.gmail,
+          password: variables.password,
+          rememberMe: false,
+        })
       }
     },
     onError: () => {
