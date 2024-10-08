@@ -19,4 +19,5 @@ export { EnterInfo } from "./authentication/EnterInfo";
 export { LoginForm } from "./authentication/LoginForm";
 export { RegisterForm } from "./authentication/RegisterForm";
 export { OtpInput } from "./common/OtpInput";
-export { CourseDContainer} from "./course/CourseDContainer"
+export { CourseDContainer} from "./course/CourseDContainer";
+export { Rating } from "./common/Rating";

@@ -38,3 +38,6 @@ export { default as News } from "./icons/news.svg?react";
 export { default as Book } from "./icons/book.svg?react";
 export { default as Home } from "./icons/home.svg?react";
 export { default as ShortLine } from "./icons/shortLine.svg?react";
+export { default as Bookmark } from "./icons/bookmark.svg?react";
+export {default as DetailStar } from "./icons/starSharp.svg?react";
+export { default as StarInCircle } from "./icons/star-circle.svg?react" 
