@@ -36,6 +36,7 @@ export function Header() {
   function toggleMode() {
     dispatch(darkModeActions.toggleMode())
   }
+  
 
   const isToken = useSelector((state) => state.token.token)
 
