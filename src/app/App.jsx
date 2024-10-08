@@ -7,6 +7,7 @@ import {
   RootLayout,
   ForgetPassStep1,
   ForgetPassStep2,
+  Courses,
 } from '@pages/index'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
@@ -21,15 +22,16 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        path: '*',
-        element: <NotFound />,
+        index: true,
+        element: <Home />,
       },
+      { path: 'courses', element: <Courses /> },
       {
         path: 'about-us',
       },
       {
-        index: true,
-        element: <Home />,
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },
