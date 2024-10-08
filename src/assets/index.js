@@ -40,3 +40,4 @@ export { default as Entering } from "./icons/entering.svg?react";
 export { default as Acount } from "./icons/account.svg?react";
 export { default as  Glassy1} from "./images/glassy-abstract.png";
 export { default as Glassy2 } from "./images/glassy-twisted.png";
+export {default as SunIcon} from './icons/sunIcon.svg?react'

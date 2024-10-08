@@ -2,6 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { Input } from "@nextui-org/react";
 import { Button } from "@components";
 import { useRef } from "react";
+import { verifyApi } from '@core/services/api/auth'; // Import your verifyApi function
 
 export const OtpInput = ({ setCurrentStep, nextStep, phoneNumber }) => {
   const { control, handleSubmit, setValue } = useForm();
@@ -22,15 +23,25 @@ export const OtpInput = ({ setCurrentStep, nextStep, phoneNumber }) => {
     }
   };
 
-  const onSubmit = (data) => {
-    const verifyCode = data.otp.join(""); // Join the OTP array to form a string
+  const onSubmit = async (data) => {
+    const verifyCode = data.otp.join("");
     const submissionData = {
-      phoneNumber,  // Include the phone number
-      verifyCode,   // Include the verification code
+      phoneNumber,
+      verifyCode,
     };
-    
-    console.log("Submission Data: ", submissionData); // Log the combined object
-    setCurrentStep(nextStep); // Use the passed nextStep to decide what happens next
+
+    console.log("Submission Data: ", submissionData);
+
+    // Call the verifyApi to check the OTP
+    const response = await verifyApi(submissionData); // Call the verification API
+
+    if (response) {
+      console.log("Verification successful:", response);
+      setCurrentStep(nextStep); // Move to the next step on successful verification
+    } else {
+      console.error("Verification failed"); // Handle failure case
+      // Optionally, display an error message to the user here
+    }
   };
 
   return (
@@ -46,8 +57,6 @@ export const OtpInput = ({ setCurrentStep, nextStep, phoneNumber }) => {
               defaultValue=""
               render={({ field }) => (
                 <Input
-                  // className={`${index === 2 ? "mr-6" : ""}`}
-                  radius="lg"
                   ref={(el) => (inputsRef.current[index] = el)}
                   value={field.value}
                   onChange={(e) => handleChange(e.target.value, index)}
@@ -59,6 +68,7 @@ export const OtpInput = ({ setCurrentStep, nextStep, phoneNumber }) => {
                   }}
                   inputMode="numeric"
                   pattern="[0-9]*"
+                  radius="lg"
                 />
               )}
             />

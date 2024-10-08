@@ -1,27 +1,74 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { BaseInput, Button } from "@components";
-import { Mail, Lock } from "@assets";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { infoSchema } from "@core";
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { BaseInput, Button } from '@components'
+import { Mail, Lock } from '@assets'
+import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  deleteLocalStorage,
+  infoSchema,
+  loginUser,
+  registerFinalApi,
+} from '@core/index'
+import { useMutation } from '@tanstack/react-query'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { tokenActions } from '@store/index'
 
 export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(infoSchema),
-  });
+  })
 
-  const onSubmit = (data) => {
+  const { mutate: loginMutate } = useMutation({
+    mutationFn: loginUser,
+    onSuccess: (data) => {
+      alert(data.message)
+      if (data.success) {
+        dispatch(tokenActions.login(data.token))
+        navigate('./')
+      } else {
+        deleteLocalStorage('token')
+      }
+    },
+  })
+
+  const { mutate: registerMutate } = useMutation({
+    mutationFn: registerFinalApi,
+    onSuccess: (data, variables) => {
+      alert(data.message)
+      if (data.success) {
+        loginMutate(variables)
+      }
+    },
+    onError: () => {
+      alert('Registration failed')
+    },
+  })
+
+  const onSubmit = async (data) => {
     const formData = {
       ...data,
       phoneNumber, // Include phoneNumber in form data
-    };
-    console.log(formData);
-    setCurrentStep(3);
-  };
+    }
+    console.log('Form Data to be sent:', formData)
+
+    // const response = await registerFinalApi(formData)
+
+    registerMutate(formData)
+
+    /* if (response && response.success) {
+      console.log('Registration successful:', response)
+      setCurrentStep(3)
+    } else {
+      console.error('Registration failed')
+    } */
+  }
 
   return (
     <>
@@ -60,5 +107,5 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
         </Button>
       </form>
     </>
-  );
+  )
 }

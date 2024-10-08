@@ -1,35 +1,35 @@
-import ShortLogo from "../../assets/logo/short-Logo.svg?react";
-import LongLogo from "../../assets/logo/long-Logo.svg?react";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import ShortLogo from '../../assets/logo/short-Logo.svg?react'
+import LongLogo from '../../assets/logo/long-Logo.svg?react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export function AuthLayout({ children, sideBar }) {
   const [windowWidth, setWindowWidth] = useState(
-    window.innerWidth < 768 ? null : "md",
-  );
-  const navigate = useNavigate();
+    window.innerWidth < 768 ? null : 'md',
+  )
+  const navigate = useNavigate()
   const handleClick = () => {
-    navigate("/");
-  };
+    navigate('/')
+  }
   useEffect(() => {
-    window.addEventListener("resize", () => {
-      const width = window.innerWidth;
+    window.addEventListener('resize', () => {
+      const width = window.innerWidth
       if (width < 768) {
-        setWindowWidth(null);
+        setWindowWidth(null)
       } else {
-        setWindowWidth("md");
+        setWindowWidth('md')
       }
-    });
-  }, []);
+    })
+  }, [])
   return (
-    <main className="flex flex-col md:flex-row">
+    <main className="flex h-screen flex-col md:flex-row">
       <aside className="order-1 hidden max-w-4xl flex-col md:order-none md:flex md:h-screen md:w-6/12 md:bg-[#E4E4E4] dark:md:bg-slate-800">
         <div className="m-auto mt-12 flex w-fit flex-col pb-16 md:mr-[10%] md:mt-[25%]">
           <div
             className="hidden cursor-pointer items-center md:flex"
             onClick={handleClick}
           >
-            {windowWidth === "md" && (
+            {windowWidth === 'md' && (
               <ShortLogo className="h-[55px] w-[58px]" />
             )}
             <LongLogo className="h-[38px] w-[189px]" />
@@ -52,5 +52,5 @@ export function AuthLayout({ children, sideBar }) {
         </div>
       </div>
     </main>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { Button } from "@components";
+import { Button } from '@components'
 import {
   MoonIcon,
   BahrLogo,
@@ -11,7 +11,7 @@ import {
   Book,
   Home,
   ShortLine,
-} from "@assets";
+} from '@assets'
 import {
   Modal,
   ModalContent,
@@ -19,59 +19,89 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-} from "@nextui-org/react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { darkModeActions } from "@store";
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  User,
+} from '@nextui-org/react'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { darkModeActions } from '@store'
+import { SunIcon } from '@assets/index'
 
 export function Header() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const dispatch = useDispatch();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const dispatch = useDispatch()
 
   function toggleMode() {
-    console.log("render");
-    dispatch(darkModeActions.toggleMode());
+    dispatch(darkModeActions.toggleMode())
   }
+
+  const isToken = useSelector((state) => state.token.token)
 
   return (
     <div className="relative top-3.5 flex h-12 justify-around gap-16 max-lg:gap-0">
       <div className="flex w-72 justify-start gap-4 max-lg:w-64 max-lg:gap-3">
         <div className="h-12 w-10">
-          {" "}
+          {' '}
           <BahrLogo1 className="relative right-2 top-1 h-9" />
-        </div>{" "}
+        </div>{' '}
         <div className="flex h-12 w-44 justify-center pt-3 max-md:hidden">
-          {" "}
+          {' '}
           <img src={BahrLogo} className="ml-8 h-8 w-40" />
         </div>
       </div>
 
       <div className="flex w-2/5 justify-center gap-10 whitespace-nowrap p-2 text-lg font-normal leading-10 max-lg:mx-5 max-lg:gap-5 max-md:hidden">
-        <Link to="/">خانه</Link> <Link to="/courses">دوره ها</Link> <Link  to="/article-news">اخبار و مقالات </Link>
+        <Link to="/">خانه</Link> <Link to="/courses">دوره ها</Link>{' '}
+        <Link to="/article-news">اخبار و مقالات </Link>
         <Link to="/">ارتباط باما</Link>
       </div>
 
       <div className="flex w-72 justify-end gap-5 border-black max-lg:gap-3 max-md:block max-md:w-fit max-md:gap-2">
         <div
           onClick={toggleMode}
-          className="relative top-1.5 flex h-11 w-11 cursor-pointer justify-center rounded-full border-1 pt-3 max-md:hidden"
+          className="relative top-0.5 flex h-12 w-12 cursor-pointer justify-center rounded-full border-1 pt-3 max-md:hidden"
         >
-          <MoonIcon className="h-5" />
+          <MoonIcon className="absolute z-20 dark:hidden" />
+          <SunIcon className="absolute top-2 h-8 w-8" />
         </div>
 
         <div className="max-md:relative max-md:right-20 max-md:flex max-sm:right-11">
-          <Button 
-            color="primary"
-            className="h-12 w-40 rounded-full text-lg max-md:relative"
-          >
-            <Link to="/auth">ورود یا ثبت نام </Link>
-          </Button>{" "}
+          <div className="relative top-1">
+            {isToken ? (
+              <Popover showArrow placement="bottom">
+                <PopoverTrigger>
+                  <User
+                    as="button"
+                    name="Zoe Lang"
+                    description="Product Designer"
+                    className="transition-transform"
+                    avatarProps={{}}
+                  />
+                </PopoverTrigger>
+                <PopoverContent className="p-1">
+                  <div className="flex h-20 w-28 flex-col gap-2">
+                    <Link to="/profile">پروفایل من</Link>
+                    <Link to="/logout">خروج</Link>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            ) : (
+              <Button
+                color="primary"
+                className="h-12 w-40 rounded-full text-lg max-md:relative"
+              >
+                <Link to="/auth">ورود یا ثبت نام </Link>
+              </Button>
+            )}
+          </div>
           <div className="md:relative md:top-4 md:hidden md:h-10">
             <Button
-              className="bg-white max-lg:hidden max-md:block lg:hidden"
+              className="bg-white dark:bg-black max-lg:hidden max-md:block lg:hidden"
               onPress={onOpen}
             >
-              <Menu1 className="relative -top-1 h-10 w-12" />
+              <Menu1 className="relative -top-1 h-10 w-12 stroke-white" />
             </Button>
             <Modal
               backdrop="opaque"
@@ -84,7 +114,7 @@ export function Header() {
                     opacity: 1,
                     transition: {
                       duration: 0.3,
-                      ease: "easeOut",
+                      ease: 'easeOut',
                     },
                   },
                   exit: {
@@ -92,7 +122,7 @@ export function Header() {
                     opacity: 0,
                     transition: {
                       duration: 0.2,
-                      ease: "easeIn",
+                      ease: 'easeIn',
                     },
                   },
                 },
@@ -114,9 +144,9 @@ export function Header() {
                             <Phone />
                           </div>
                           <div className="flex h-full w-32 flex-col gap-2 pr-2 pt-1 text-lg leading-10">
-                            <Link to="/">خانه</Link> <Link to="/courses">دوره ها</Link>{" "}
-                            <Link to="/article-news">اخبار و مقالات </Link>
-                            <Link to="/">ارتباط باما</Link>
+                            <Link>خانه</Link> <Link>دوره ها</Link>{' '}
+                            <Link>اخبار و مقالات </Link>
+                            <Link>ارتباط باما</Link>
                           </div>
                         </div>
                         <div className="flex h-full w-44 flex-col gap-2 pt-1 text-base leading-10 text-gray-500">
@@ -142,5 +172,5 @@ export function Header() {
         </div>
       </div>
     </div>
-  );
+  )
 }
