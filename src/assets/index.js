@@ -40,4 +40,7 @@ export { default as Home } from "./icons/home.svg?react";
 export { default as ShortLine } from "./icons/shortLine.svg?react";
 export { default as Bookmark } from "./icons/bookmark.svg?react";
 export {default as DetailStar } from "./icons/starSharp.svg?react";
-export { default as StarInCircle } from "./icons/star-circle.svg?react" 
+export { default as StarInCircle } from "./icons/star-circle.svg?react";
+export { default as ArrowDot } from "./icons/Arrow.svg?react";
+export { default as UserStory } from "./icons/user-story.svg?react";
+export { default as CoursePro } from "./icons/profile.svg?react";

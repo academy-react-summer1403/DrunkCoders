@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
 import { Button } from '@components'
 import { Student,Calender,ThumbUp, ThumbDown, Bookmark } from '@assets'
-import { StarIcon } from '@assets/index';
+import { ArrowDot, CoursePro, StarIcon, UserStory } from '@assets/index';
+import { Modal, 
+  useDisclosure,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+ } from '@nextui-org/react';
 
 export function OverView() {
     const [likeState, setLikeState] = useState({ like: false, dislike: false });
     const [isBookmarked, setIsBookmarked] = useState(false);
+    const { isOpen, onOpen, onOpenChange } = useDisclosure()
   
   
     function handleLike(identifier) {
@@ -19,7 +27,7 @@ export function OverView() {
       setIsBookmarked((prevState) => !prevState);
     }
   return (
-    <div className='flex flex-col w-[38%] border-3 rounded-3xl p-3 h-fit gap-5'>
+    <>
     <div className='w-fit flex items-center gap-2 rounded-xl bg-[#FFD1CB] px-2 py-1 text-xs text-[#FF5454]'>
       <div className='h-2 w-2 rounded-full bg-[#FF5454]'></div>
       <span> درحال برگزاری </span>
@@ -58,7 +66,8 @@ export function OverView() {
       <span className='text-primary-blue text-base font-medium'>تومان</span>
     </p>
     <div className='flex gap-4 items-center justify-between'>
-      <Button className='text-lg font-bold w-3/5' >رزرو دوره</Button>
+
+      <Button className='text-lg font-bold w-3/5' onPress={onOpen}>رزرو دوره</Button>
       <div className="rounded-full p-2 border-2 cursor-pointer " 
       onClick={() => handleBookmark()}>
         <Bookmark          
@@ -79,9 +88,78 @@ export function OverView() {
         className={`stroke-black dark:stroke-white hover:text-primary-blue
           ${likeState.dislike ? "text-primary-blue stroke-primary-blue" : "text-transparent"} `}
       />
+      <Modal
+        className='w-[400px]'
+        backdrop="opaque"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        motionProps={{
+          variants: {
+            enter: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 0.3,
+                ease: 'easeOut',
+              },
+            },
+            exit: {
+              y: -20,
+              opacity: 0,
+              transition: {
+                duration: 0.2,
+                ease: 'easeIn',
+              },
+            },
+          },
+        }}
+      >
+        <ModalContent>
+          {
+            () => (
+              <>
+              <ModalBody>
+                <div className='flex flex-col rounded-3xl bg-white relative gap-6'>
+                    <div className="flex items-center gap-2">
+                      <ArrowDot/>
+                      <div className='text-center font-bold'>
+                        <div className='p-3 rounded-full bg-primary-blue'>
+                          <UserStory className='w-7 h-7' />
+                        </div>
+                        رزرو من
+                      </div>
+                      <ArrowDot/>
+                      <div className='text-center font-bold'>
+                        <div className='p-3 border rounded-full '>
+                          <CoursePro className='w-7 h-7'/>
+                        </div>
+                        دوره من
+                      </div>
+
+                    </div>
+                    <p className="text-gray-500 text-center px-4">
+                     بعد از تایید ادمین مربوط دوره شما به
+                    <span className='text-black underline mx-1'>دوره من </span> 
+                    اضافه خواهد شد
+                    </p>
+                    <div className="flex justify-between">
+                      <Button className='w-2/3' >
+                      لیست رزرو های من
+                      </Button>
+                      <Button className='bg-white text-black border' >
+                      باشه
+                      </Button>
+                    </div>
+                </div>
+              </ModalBody>
+              </>
+            )
+          }
+        </ModalContent>
+      </Modal>
       </div>
     </div>
 
-</div>
+</>
   )
 }
