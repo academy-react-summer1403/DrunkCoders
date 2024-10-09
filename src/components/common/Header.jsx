@@ -11,6 +11,7 @@ import {
   Book,
   Home,
   ShortLine,
+  Menu2,
 } from '@assets'
 import {
   Modal,
@@ -59,32 +60,32 @@ export function Header() {
         <Link to="/">ارتباط باما</Link>
       </div>
 
-      <div className="flex w-72 justify-end gap-5 border-black max-lg:gap-3 max-md:block max-md:w-fit max-md:gap-2">
+      <div className="flex w-72 justify-end gap-5 border-black max-lg:gap-3 max-md:block max-md:w-fit max-md:gap-2 max-lg:mr-2">
         <div
           onClick={toggleMode}
-          className="relative top-0.5 flex h-12 w-12 cursor-pointer justify-center rounded-full border-1 pt-3 max-md:hidden"
+          className="relative top-0.5 flex h-12 w-12 cursor-pointer justify-center rounded-full border-1 pt-3 max-md:hidden "
         >
           <MoonIcon className="absolute z-20 dark:hidden" />
           <SunIcon className="absolute top-2 h-8 w-8" />
         </div>
 
         <div className="max-md:relative max-md:right-20 max-md:flex max-sm:right-11">
-          <div className="relative top-1">
+          <div className="relative top-1 max-md:w-12">
             {isToken ? (
               <Popover showArrow placement="bottom">
                 <PopoverTrigger>
-                  <User
+                  <User 
                     as="button"
-                    name="Zoe Lang"
-                    description="Product Designer"
-                    className="transition-transform"
+                    // name="Zoe Lang"
+                    // description="Product Designer"
+                    className="transition-transform  w-36 relative left-10 top-0.5"
                     avatarProps={{}}
                   />
                 </PopoverTrigger>
-                <PopoverContent className="p-1">
-                  <div className="flex h-20 w-28 flex-col gap-2">
-                    <Link to="/profile">پروفایل من</Link>
-                    <Link to="/logout">خروج</Link>
+                <PopoverContent className="p-1 border-blue-200 border-1">
+                  <div className="flex h-12 w-28 flex-col gap-2 text-center">
+                    <Link to="/profile" className='hover:bg-slate-200 w-full rounded-lg'>پروفایل من</Link>
+                    <Link to="/logout" className='hover:bg-slate-200 w-full rounded-lg'>خروج</Link>
                   </div>
                 </PopoverContent>
               </Popover>
@@ -102,7 +103,8 @@ export function Header() {
               className="bg-white dark:bg-black max-lg:hidden max-md:block lg:hidden"
               onPress={onOpen}
             >
-              <Menu1 className="relative -top-1 h-10 w-12 stroke-white" />
+              <Menu2 className="border-red-500  "/>
+              <Menu1 className=" top-1 left-7 h-10 w-12 stroke-white dark:hidden absolute" />
             </Button>
             <Modal
               backdrop="opaque"
