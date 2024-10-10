@@ -23,7 +23,7 @@ export function CommentModal({
             closeButton: "hidden",
         }}
         className="w-[400px]"
-        backdrop="opaque"
+        backdrop="transparent"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         motionProps={{
@@ -44,20 +44,25 @@ export function CommentModal({
         <ModalContent>
           <ModalBody>
             <h3>{modalTitle}</h3>
-            <Input
-              label="موضوع"
-              value={modalSubject}
-              onChange={(e) => setModalSubject(e.target.value)}
-              placeholder="موضوع خود را بنویسید"
-              labelPlacement="outside"
-            />
-            <Input
-              label="متن"
-              value={modalInput}
-              onChange={(e) => setModalInput(e.target.value)}
-              placeholder={modalTitle === 'پاسخ شما' ? 'پاسخ خود را بنویسید' : 'نظر خود را بنویسید'}
-              labelPlacement="outside"
-            />
+
+            <div className='border p-2 rounded-3xl'>
+              <input className='p-2'
+                label="موضوع"
+                value={modalSubject}
+                onChange={(e) => setModalSubject(e.target.value)}
+                placeholder="عنوان نظر خود را وارد کنید"
+                labelPlacement="outside"
+              />
+              <hr />
+              <input className='p-2'
+                label="متن"
+                value={modalInput}
+                onChange={(e) => setModalInput(e.target.value)}
+                placeholder={modalTitle === 'پاسخ شما' ? 'پاسخ خود را بنویسید' : 'نظر خود را بنویسید'}
+                labelPlacement="outside"
+              />
+            </div>
+            
             <Button type="submit" onPress={handleSubmit}>
               Submit
             </Button>

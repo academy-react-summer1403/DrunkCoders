@@ -1,4 +1,4 @@
-import { Comment } from "./comment/Comment";
+import { Comment } from "@components";
 import { MainContent } from "./MainContent";
 import { OverView } from "./OverView";
 
