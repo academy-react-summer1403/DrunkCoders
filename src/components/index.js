@@ -21,4 +21,4 @@ export { RegisterForm } from "./authentication/RegisterForm";
 export { OtpInput } from "./common/OtpInput";
 export { CourseDContainer} from "./course/CourseDContainer";
 export { Rating } from "./common/Rating";
-export { Comment } from "./common/comment/Comment";
+export { Comment } from "./course/comment/Comment";

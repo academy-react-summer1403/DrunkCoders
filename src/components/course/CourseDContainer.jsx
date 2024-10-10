@@ -1,6 +1,7 @@
 import { Comment } from "@components";
 import { MainContent } from "./MainContent";
 import { OverView } from "./OverView";
+import { PopularCourses } from "..";
 
 
 export function CourseDContainer() {
@@ -8,18 +9,21 @@ export function CourseDContainer() {
   
   return (
     <>
-    <div className='mt-4 border-3 rounded-3xl h-fit '>
       <div className='mt-12 md:flex md:gap-[5%]'>
-        <div className='flex flex-col md:w-[38%] w-full border-3 rounded-3xl p-3 h-fit gap-5'>
-          <OverView/>
-        </div>
+        <aside className="md:w-[38%] w-full border-2">
+          <div className='flex flex-col  border-3 rounded-3xl p-3 h-fit gap-5 sticky top-0'>
+            <OverView/>
+          </div>
+        </aside>
 
-        <div className='md:w-[57%] w-full border-3 flex flex-col gap-6'>           
+        <main className='md:w-[57%] w-full flex flex-col gap-6'>           
           <MainContent/>
           <Comment/>
-        </div>
+        </main>
       </div>
-    </div>
+      <div className="my-6">
+      <PopularCourses/>
+      </div>
     </>
   )
 }

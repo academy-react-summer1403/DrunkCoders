@@ -28,6 +28,7 @@ export function OverView() {
     }
   return (
     <>
+    
     <div className='w-fit flex items-center gap-2 rounded-xl bg-[#FFD1CB] px-2 py-1 text-xs text-[#FF5454]'>
       <div className='h-2 w-2 rounded-full bg-[#FF5454]'></div>
       <span> درحال برگزاری </span>
@@ -88,6 +89,8 @@ export function OverView() {
         className={`stroke-black dark:stroke-white hover:text-primary-blue
           ${likeState.dislike ? "text-primary-blue stroke-primary-blue" : "text-transparent"} `}
       />
+      </div>
+    </div>
       <Modal
         className='w-[400px]'
         backdrop="opaque"
@@ -157,8 +160,6 @@ export function OverView() {
           }
         </ModalContent>
       </Modal>
-      </div>
-    </div>
 
 </>
   )

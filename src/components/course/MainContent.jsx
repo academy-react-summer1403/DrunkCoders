@@ -6,8 +6,8 @@ export function MainContent() {
     <>
             <img src="" alt="" className='bg-[#FF9090] w-full h-96 rounded-3xl'/>
             <p className='text-gray-400'>مدرس</p>
-            <div className='flex gap-[10%]'>
-              <div className='flex md:flex-row flex-col gap-2 items-center'>
+            <div className='flex md:flex-row flex-col gap-[10%]'>
+              <div className='flex  gap-2 items-center'>
                 <img src="" alt="" className="rounded-full w-10 h-10 bg-gray-300" />
                 <span>
                   محسن اسفندیاری
