@@ -72,19 +72,19 @@ export function Header() {
         <div className="max-md:relative max-md:right-20 max-md:flex max-sm:right-11">
           <div className="relative top-1 max-md:w-12">
             {isToken ? (
-              <Popover showArrow placement="bottom">
-                <PopoverTrigger>
+              <Popover showArrow placement="bottom" >
+                <PopoverTrigger >
                   <User 
                     as="button"
                     // name="Zoe Lang"
                     // description="Product Designer"
-                    className="transition-transform  w-36 relative left-10 top-0.5"
+                    className="transition-transform  w-36 relative left-10 top-0.5 max-md:w-12 max-md:-left-3"
                     avatarProps={{}}
                   />
                 </PopoverTrigger>
                 <PopoverContent className="p-1 border-blue-200 border-1">
                   <div className="flex h-12 w-28 flex-col gap-2 text-center">
-                    <Link to="/profile" className='hover:bg-slate-200 w-full rounded-lg'>پروفایل من</Link>
+                    <Link to="/profile" className='hover:bg-slate-200 w-full rounded-lg '>پروفایل من</Link>
                     <Link to="/logout" className='hover:bg-slate-200 w-full rounded-lg'>خروج</Link>
                   </div>
                 </PopoverContent>
