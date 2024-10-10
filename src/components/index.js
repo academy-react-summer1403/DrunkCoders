@@ -1,5 +1,9 @@
+export { PriceSlider } from './courses/PriceSlider'
+export { IconLabel } from './courses/IconLabel'
+
 export { CourseCardDetails } from './common/card/CourseCardDetails'
 export { NewsCardDetails } from './common/card/NewsCardDetails'
+export { SelectOption } from './common/SelectOption'
 
 export { CardHeader } from './common/card/CardHeader'
 export { LikeAndDislike } from './common/card/LikeAndDislike'

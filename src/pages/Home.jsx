@@ -6,7 +6,7 @@ import {
   HeroSection,
   Certificates,
   ServicesDivider,
-} from "@components";
+} from '@components'
 
 export function Home() {
   return (
@@ -19,5 +19,5 @@ export function Home() {
       <WeekTeacher />
       <NewAndArticle />
     </>
-  );
+  )
 }

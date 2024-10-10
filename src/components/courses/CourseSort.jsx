@@ -39,16 +39,13 @@ export function CourseSort() {
         ])
         await Promise.all([
           animate(scope.current, { opacity: 1 }, { duration: 0 }),
-          //animate2(scope2.current, { opacity: 0 }, { duration: 0 }),
         ])
-
-        //animate2(scope2.current, { left: '-322px' }, { duration: 0 })
       } else {
         await Promise.all([
           animate2(
             scope2.current,
             { left: '-322px', opacity: 0 },
-            { duration: 0.2 },
+            { duration: 0.3 },
           ),
           animate(
             scope.current,
