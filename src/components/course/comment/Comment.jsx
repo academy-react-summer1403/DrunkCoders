@@ -77,7 +77,10 @@ export function Comment() {
         modalSubject={modalSubject}
         setModalSubject={setModalSubject}
         handleSubmit={handleSubmit}
+        comments={comments}  // Make sure this is passed here
+        handleOpenModal={handleOpenModal}
       />
+
 
       <CommentList comments={comments} handleOpenModal={handleOpenModal} />
     </div>
