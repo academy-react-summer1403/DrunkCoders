@@ -15,12 +15,12 @@ export function CardHeader({ data, buttonColor, type, view }) {
         classNames={{ wrapper: ['w-full h-full p-0'] }}
         width="100%"
         height="100%"
-        /* src={
+        src={
           type === 'course'
             ? data?.tumbImageAddress
             : data?.currentImageAddressTumb
-        } */
-        src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+        }
+        // src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
         draggable="false"
       />
 

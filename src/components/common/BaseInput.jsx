@@ -3,7 +3,7 @@ import { HidePassword, ShowPassword } from '@assets'
 import { useEffect, useState } from 'react'
 
 export function BaseInput({
-  label = 'رمز عبور',
+  label,
   placeholder = 'شماره همراه یا ایمیل خود را وارد کنید',
   size = 'lg',
   starIcon: StartIcons,
@@ -13,6 +13,7 @@ export function BaseInput({
   validation,
   name,
   error,
+  classNames,
   ...props
 }) {
   const [isVisible, setIsVisible] = useState(true)
@@ -40,14 +41,10 @@ export function BaseInput({
       <Input
         className={`mb-10 ${props.className}`}
         classNames={{
-          input: [
-            'mr-2 text-sm bg-transparent',
-            'placeholder:text-[#787878]/60 dark:placeholder:text-stone-700 ',
-          ],
-          label: ['font-medium text-lg'],
-          inputWrapper: ['dark:bg-white/60', 'dark:focus-within:bg-white/50 '],
-          innerWrapper: 'bg-transparent ',
-          ...props.classNames,
+          input: `mr-2 text-sm  placeholder:text-basic-gray dark:placeholder:text-stone-400 ${classNames?.input}`,
+          label: `font-medium text-lg ${classNames?.label}`,
+          // inputWrapper: `dark:bg-white/50 dark:focus-within:bg-white/40 ${classNames?.inputWrapper}`,
+          // innerWrapper: `bg-transparent ${classNames?.innerWrapper}`,
         }}
         size={size}
         type={isVisible ? (type === 'password' ? 'text' : type) : 'password'}

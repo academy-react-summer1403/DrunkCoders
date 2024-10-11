@@ -87,7 +87,7 @@ export function CourseSort() {
 
   return (
     <div className="flex w-fit items-center justify-between">
-      <div className="flex gap-3">
+      <div className="hidden gap-3 lg:flex">
         <GridView
           className={`h-6 w-6 cursor-pointer ${view === 'grid' ? 'text-primary-blue' : 'text-basic-gray dark:text-white'}`}
           onClick={() => handleChangeView('grid')}
@@ -100,7 +100,7 @@ export function CourseSort() {
 
       <Divider
         orientation="vertical"
-        className="mx-8 h-8 w-[1px] dark:bg-white"
+        className="mx-8 hidden h-8 w-[1px] dark:bg-white lg:block"
       />
 
       <div className="flex items-center gap-2">
@@ -108,35 +108,16 @@ export function CourseSort() {
 
         <div className="relative">
           <div ref={scope} className="relative z-10">
-            <ButtonComp1 />
+            <ButtonComp1 identifier={'first'}> پرطرفدار ترین</ButtonComp1>
           </div>
 
           <div ref={scope2} className="absolute -left-[321px] top-0 opacity-0">
-            <ButtonComp1 />
+            <ButtonComp1 identifier={'first'}>پرطرفدار ترین</ButtonComp1>
           </div>
         </div>
 
-        <Button
-          className={
-            buttonState.second
-              ? 'border border-transparent'
-              : 'border border-[#E4E4E4] bg-transparent text-black dark:text-white'
-          }
-          onClick={() => handleButtonState('second')}
-        >
-          محبوب ‌ترین
-        </Button>
-
-        <Button
-          onClick={() => handleButtonState('third')}
-          className={
-            buttonState.third
-              ? 'border border-transparent'
-              : 'border border-[#E4E4E4] bg-transparent text-black dark:text-white'
-          }
-        >
-          پرامتیاز ترین
-        </Button>
+        <ButtonComp1 identifier={'second'}>محبوب ‌ترین</ButtonComp1>
+        <ButtonComp1 identifier={'third'}> پرامتیاز ترین</ButtonComp1>
       </div>
 
       <Divider orientation="vertical" className="mx-4 h-[22px] dark:bg-white" />
@@ -172,17 +153,17 @@ export function CourseSort() {
     )
   }
 
-  function ButtonComp1() {
+  function ButtonComp1({ identifier, children }) {
     return (
       <Button
-        onClick={() => handleButtonState('first')}
+        onClick={() => handleButtonState(identifier)}
         className={
-          buttonState.first
+          buttonState[identifier]
             ? 'border border-transparent'
             : 'border border-[#E4E4E4] bg-transparent text-black dark:text-white'
         }
       >
-        پرطرفدار ترین
+        {children}
       </Button>
     )
   }

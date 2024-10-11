@@ -36,9 +36,11 @@ export function CourseCard({ buttonColor, data: course, view = 'grid' }) {
         <CourseCardDetails course={course} />
 
         <div
-          className={`mb-2 flex items-center justify-between gap-2 dark:text-white xl:items-center xl:justify-between ${view === 'list' ? 'flex-row-reverse xl:flex-row-reverse' : 'flex-row lg:flex-col lg:items-start xl:flex-row'}`}
+          className={`mb-2 flex flex-wrap items-center justify-between gap-2 dark:text-white`}
         >
-          <div className="flex items-center gap-1 text-xl">
+          <div
+            className={`flex items-center gap-1 text-xl ${view === 'list' ? 'order-1' : ''}`}
+          >
             <span className="font-medium">
               {pirceFormatter(course?.cost) ?? '1,880,000'}
             </span>
@@ -46,7 +48,7 @@ export function CourseCard({ buttonColor, data: course, view = 'grid' }) {
           </div>
 
           <LikeAndDislike
-            className={`${view === 'list' ? 'mb-0' : ''}`}
+            className={`${view === 'list' ? 'mb-0' : ''} `}
             like={course?.likeCount}
             dislike={course?.dissLikeCount}
             view={view}

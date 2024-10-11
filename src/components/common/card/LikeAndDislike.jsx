@@ -13,7 +13,7 @@ export function LikeAndDislike({ like, dislike, view, className }) {
   }
   return (
     <div
-      className={`-mb-3 flex ${className} ${view === 'list' ? 'gap-9' : 'gap-3'}`}
+      className={`-mb-1 flex ${className} ${view === 'list' ? 'gap-9' : 'gap-3'}`}
     >
       <div className="flex gap-2">
         <ThumbUp

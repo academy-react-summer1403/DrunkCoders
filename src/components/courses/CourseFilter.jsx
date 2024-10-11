@@ -1,25 +1,18 @@
-import { Calendar2, Cells, Layers, Search, Teacher } from '@assets/index'
+import { Cells, Layers, Sorting, Teacher } from '@assets/index'
 import {
-  BaseInput,
   IconLabel,
   PriceSlider,
+  SearchBox,
   SelectOption,
 } from '@components/index'
-//import { JalaliDateRangePicker } from './JalaliDateRangePicker.jsx'
+import { JalaliDateRangePicker } from './JalaliDateRangePicker.jsx'
 
 export function CourseFilter() {
   return (
-    <div className="sticky top-0 flex flex-col gap-8 rounded-3xl bg-[#E4E4E4] px-3 py-5 dark:bg-white/20">
-      <BaseInput
-        label={<IconLabel icon={Search} label="جست‌ جو دوره" />}
-        placeholder="جست جو کنید ..."
-        name="search"
-        size="lg"
-        type="text"
-        endIcon={BlueSearchIcon}
-        className="mb-0"
-        classNames={{ input: 'text-sm' }}
-      />
+    <div className="sticky top-0 flex flex-col gap-8 rounded-3xl px-3 py-5 dark:bg-white/20 md:bg-[#E4E4E4]">
+      <div className="hidden md:block">
+        <SearchBox />
+      </div>
 
       <SelectOption label={<IconLabel icon={Cells} label="دسته‌بندی" />} />
       <SelectOption label={<IconLabel icon={Layers} label="سطح آموزشی" />} />
@@ -27,15 +20,11 @@ export function CourseFilter() {
 
       <PriceSlider />
 
-      <div className="ltr text-center">{/* <JalaliDateRangePicker /> */}</div>
+      <JalaliDateRangePicker />
+
+      <div className="block md:hidden">
+        <SelectOption label={<IconLabel icon={Sorting} label="ترتیب" />} />
+      </div>
     </div>
   )
-
-  function BlueSearchIcon() {
-    return (
-      <div className="relative -left-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-blue">
-        <Search className="text-white" />
-      </div>
-    )
-  }
 }

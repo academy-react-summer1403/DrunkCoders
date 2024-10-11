@@ -20,14 +20,14 @@ export function PriceSlider() {
           <div>
             <span className="text-basic-gray dark:text-white/60">از </span>
             {pirceFormatter(price[0])}
-            <span className="mr-8">
+            <span className="mr-6">
               <span className="text-basic-gray dark:text-white/60">تا </span>
               {pirceFormatter(price[1])}
             </span>
           </div>
         )
       }}
-      className="max-w-md"
+      // className="max-w-md"
       classNames={{
         track: 'bg-basic-gray bg-opacity-20',
         filler: ['bg-transparent'],

@@ -2,7 +2,7 @@ import { ArrowDownDouble, glassyTwisted, Start1, Start2 } from '@assets/index'
 
 export function CoursesHeroSection() {
   return (
-    <div className="mx-auto flex w-[538px] flex-col items-center justify-center gap-8 pb-16 pt-20 text-center">
+    <div className="mx-auto flex w-[350px] flex-col items-center justify-center gap-8 pb-16 pt-20 text-center sm:w-[538px]">
       <div className="relative w-full text-center">
         <h1 className="text-center text-5xl">دوره های متنوع!</h1>
         <Start1 className="absolute -bottom-5 -right-12" />
@@ -18,7 +18,7 @@ export function CoursesHeroSection() {
         <img
           src={glassyTwisted}
           alt="glassy twisted"
-          className="absolute -bottom-2 -left-28"
+          className="absolute -bottom-2 -left-28 hidden md:block"
         />
       </div>
 
