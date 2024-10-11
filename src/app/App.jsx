@@ -9,6 +9,7 @@ import {
   ForgetPassStep2,
   Courses,
   CourseD,
+  UserPanel,
 } from "@pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
@@ -42,7 +43,8 @@ const router = createBrowserRouter([
             element: <CourseD/>
           }
         ]
-      }
+      },
+
     ],
   },
   {
@@ -67,6 +69,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:'/user-panel',
+    element: <UserPanel/>,
+  }
 ]);
 
 export function App() {

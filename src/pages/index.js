@@ -8,3 +8,4 @@ export { ForgetPassStep1 } from './auth/ForgetPassStep1'
 export { ForgetPassStep2 } from './auth/ForgetPassStep2'
 export { Courses } from "./course/Courses";
 export { CourseD } from "./course/CourseD";
+export { UserPanel } from "./Panels/UserPanel";
