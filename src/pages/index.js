@@ -1,3 +1,4 @@
+export { Courses } from './Courses'
 export { Authentication } from './auth/Authentication'
 export { RootLayout } from './RootLayout'
 export { Login } from './auth/Login'
