@@ -44,3 +44,11 @@ export { default as StarInCircle } from "./icons/star-circle.svg?react";
 export { default as ArrowDot } from "./icons/Arrow.svg?react";
 export { default as UserStory } from "./icons/user-story.svg?react";
 export { default as CoursePro } from "./icons/profile.svg?react";
+export { default as Cancel } from "./icons/cancel.svg?react";
+export { default as CommentWhite } from "./icons/comment-white.svg?react";
+export { default as CommentBlack } from "./icons/comment-black.svg?react";
+export { default as CommentGray } from "./icons/comment-gary.svg?react";
+export { default as Sent } from "./icons/sent.svg?react";
+export { default as Smile } from "./icons/smile.svg?react";
+export { default as CommentArrow } from "./icons/comment-arrow.svg?react";
+

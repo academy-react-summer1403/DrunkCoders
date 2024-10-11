@@ -5,7 +5,8 @@ import {
   useDisclosure,
 } from '@nextui-org/react';
 import { CommentModal } from './CommentModal';
-import { CommentList } from './ComentList';
+import { CommentList } from './CommentList';
+import { CommentWhite } from '@assets/index';
 
 export function Comment() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -55,15 +56,16 @@ export function Comment() {
       setModalTitle('پاسخ شما');
     } else {
       setReplyingTo(null);
-      setModalTitle('نظر شما');
+      setModalTitle('نظرات');
     }
     onOpen(true);
   };
 
   return (
     <div className="comment-section rounded-3xl border-3 p-3 flex flex-col">
-      <Button className="w-full" onPress={() => handleOpenModal(false)}>
-        نظر شما
+      <Button className="w-full text-lg" onPress={() => handleOpenModal(false)}>
+         <CommentWhite/>
+         نظر شما
       </Button>
 
       <CommentModal
