@@ -4,14 +4,17 @@ import { useState } from 'react'
 export function Pagination() {
   const [currentPage, setCurrentPage] = useState(1)
 
+  function handleChange(e) {}
+
   return (
     <NextUiPagination
+      size="lg"
       isCompact
       showControls
       total={5}
       initialPage={1}
       page={currentPage}
-      onChange={setCurrentPage}
+      onChange={handleChange}
       siblings={2}
     />
   )

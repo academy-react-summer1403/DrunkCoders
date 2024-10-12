@@ -7,6 +7,7 @@ import {
   LikeAndDislike,
 } from '@components/index'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 // ${view === 'grid' ? 'grid-cols-1' : 'grid-cols-12'}
 // ${view === 'list' ? 'col-span-5' : ''}
@@ -16,8 +17,12 @@ export function CourseCard({ buttonColor, data: course, view = 'grid' }) {
   return (
     <NextUiCard
       className={`grid rounded-3xl bg-[#787878] bg-opacity-[0.13] text-[#272727] shadow-none dark:bg-white/20 ${view === 'grid' ? 'grid-cols-1' : 'grid-cols-12'}`}
+      // onPress={() => console.log('lai')}
+      // isPressable
     >
       <CardHeader
+        as={Link}
+        to={'/courses/' + course.courseId}
         className={`overflow-hidden rounded-3xl bg-[#FF9090] p-0 ${view === 'list' ? 'col-span-5' : ''}`}
       >
         <CardImage

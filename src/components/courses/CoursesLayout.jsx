@@ -62,7 +62,7 @@ export function CoursesLayout() {
               />
             </motion.div>
 
-            <Button className="px-4 py-[9px] text-medium" onPress={onOpen}>
+            <Button className="px-4 py-[9px] text-medium" onClick={onOpen}>
               ترتیب و فیلتر
             </Button>
           </div>
@@ -70,7 +70,7 @@ export function CoursesLayout() {
           <CourseGrid />
         </div>
 
-        <div className="relative -left-[6px] hidden h-screen bg-black md:mt-16 md:block md:w-[42%] lg:mt-0 lg:w-[30%] xl:w-1/4">
+        <div className="relative -left-[6px] hidden h-screen md:mt-16 md:block md:w-[42%] lg:mt-0 lg:w-[30%] xl:w-1/4">
           <CourseFilter />
         </div>
 

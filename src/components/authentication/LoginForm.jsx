@@ -28,7 +28,7 @@ export function LoginForm({ currentStep, setCurrentStep }) {
       alert(data.message)
       if (data.success) {
         console.log(data.success)
-        dispatch(tokenActions.login(data.token))
+        dispatch(tokenActions.login({ token: data.token, userId: data.id }))
         navigate('/')
       } else {
         deleteLocalStorage('token')
