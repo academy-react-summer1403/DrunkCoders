@@ -51,4 +51,4 @@ export { default as CommentGray } from "./icons/comment-gary.svg?react";
 export { default as Sent } from "./icons/sent.svg?react";
 export { default as Smile } from "./icons/smile.svg?react";
 export { default as CommentArrow } from "./icons/comment-arrow.svg?react";
-
+export { default as Notification } from "./icons/notification.svg?react";
