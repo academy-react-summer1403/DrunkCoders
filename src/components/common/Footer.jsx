@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { Telegram, Instagram, eNamad, Logo } from "@assets";
+import { Link } from 'react-router-dom'
+import { Telegram, Instagram, eNamad, Logo } from '@assets'
 
 function SubLogos() {
   return (
@@ -13,7 +13,7 @@ function SubLogos() {
         تلگرام
       </button>
     </div>
-  );
+  )
 }
 
 function Explain() {
@@ -27,7 +27,7 @@ function Explain() {
         دنیای فناوری و برنامه نویسی مجهز کنیم.
       </p>
     </div>
-  );
+  )
 }
 
 function Pages() {
@@ -40,7 +40,7 @@ function Pages() {
         <Link to="/article-news">اخبار و مقالات</Link>
       </div>
     </div>
-  );
+  )
 }
 
 function Us() {
@@ -53,7 +53,7 @@ function Us() {
         <Link to="/contact-us">ارتباط با ما</Link>
       </div>
     </div>
-  );
+  )
 }
 
 function Namad() {
@@ -61,12 +61,12 @@ function Namad() {
     <div className="nama">
       <img src={eNamad} alt="" height="100px" width="100px" />
     </div>
-  );
+  )
 }
 
 export function Footer() {
   return (
-    <footer className="mb-2 rounded-[32px] bg-gray-100 px-5 py-12 dark:bg-white/20">
+    <footer className="mb-2 mt-20 rounded-[32px] bg-gray-100 px-5 py-12 dark:bg-white/20">
       <div className="relative flex flex-wrap justify-between gap-10">
         <div className="logo-contact order-1 flex flex-col lg:-order-1 lg:-mt-6">
           <Logo />
@@ -95,5 +95,5 @@ export function Footer() {
         <hr className="order-6 hidden w-full bg-gray-200 lg:block" />
       </div>
     </footer>
-  );
+  )
 }
