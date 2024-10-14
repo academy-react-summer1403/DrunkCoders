@@ -9,9 +9,6 @@ import {
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-// ${view === 'grid' ? 'grid-cols-1' : 'grid-cols-12'}
-// ${view === 'list' ? 'col-span-5' : ''}
-//${view === 'list' ? 'col-span-7' : ''}
 
 export function CourseCard({ buttonColor, data: course, view = 'grid' }) {
   return (
@@ -22,7 +19,7 @@ export function CourseCard({ buttonColor, data: course, view = 'grid' }) {
     >
       <CardHeader
         as={Link}
-        to={'/courses/' + course.courseId}
+        to={`/courses/${course.courseId}`} 
         className={`overflow-hidden rounded-3xl bg-[#FF9090] p-0 ${view === 'list' ? 'col-span-5' : ''}`}
       >
         <CardImage

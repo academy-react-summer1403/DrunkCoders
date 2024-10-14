@@ -19,7 +19,7 @@ export function CommentModal({
   modalSubject,
   setModalSubject,
   handleSubmit,
-  comments,          // Pass comments as a prop
+  comments,
   handleOpenModal,
 }) {
   return (
@@ -57,7 +57,6 @@ export function CommentModal({
             </ModalHeader>
 
             <ModalBody>
-              {/* Conditionally render comments or a fallback message */}
               {comments.length > 0 ? (
                 <CommentList comments={comments} handleOpenModal={handleOpenModal} />
               ) : (
