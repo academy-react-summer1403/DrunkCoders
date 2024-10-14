@@ -2,6 +2,7 @@ export { getTopCourses } from './services/api/course.api'
 export { getCoursesWithPagination } from './services/api/course.api'
 export { getCourseDetails } from './services/api/course.api'
 export { getCourseComments } from './services/api/course.api'
+export { getCourseCommentReplies } from './services/api/course.api'
 
 export { getWeekNews } from './services/api/news.api'
 export { getAllTeachers } from './services/api/teacher.api'

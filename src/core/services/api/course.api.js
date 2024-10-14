@@ -48,3 +48,12 @@ export async function getCourseComments ({ courseId, signal }) {
   }
 };
 
+export async function getCourseCommentReplies(courseId, commentId, signal) {
+  try {
+    const response = await api.get(`/Course/GetCourseReplyCommnets/${courseId}/${commentId}`, { signal });
+    return response;
+  } catch (error) {
+    console.error('Error fetching comment replies:', error);
+    throw new Error('Could not fetch comment replies');
+  }
+};
