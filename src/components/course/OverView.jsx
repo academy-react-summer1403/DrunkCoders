@@ -26,6 +26,15 @@ export function OverView({course }) {
     function handleBookmark() {
       setIsBookmarked((prevState) => !prevState);
     }
+
+    const farsiDateFormatter = new Intl.DateTimeFormat('fa-IR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    const formattedStartTime = farsiDateFormatter.format(new Date(course.startTime));
+    const formattedEndTime = farsiDateFormatter.format(new Date(course.endTime));
+
   return (
     <>
     
@@ -56,14 +65,14 @@ export function OverView({course }) {
     <div className='flex gap-2'>
       <Calender/>
       <p>
-        {course.startTime}
+        {formattedStartTime}
         <span className='text-xs text-gray-500'>(شروع)</span>
       </p>
     </div>
     <div className='flex gap-2'>
       <Calender/>
       <p>
-        {course.endTime}
+        {formattedEndTime}
         <span className='text-xs text-gray-500'>(پایان)</span>
       </p>
     </div>

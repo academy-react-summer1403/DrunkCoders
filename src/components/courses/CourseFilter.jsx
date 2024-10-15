@@ -5,7 +5,7 @@ import {
   SearchBox,
   SelectOption,
 } from '@components/index'
-import { JalaliDateRangePicker } from './JalaliDateRangePicker.jsx'
+// import { JalaliDateRangePicker } from './JalaliDateRangePicker.jsx'
 
 export function CourseFilter() {
   return (
@@ -20,7 +20,7 @@ export function CourseFilter() {
 
       <PriceSlider />
 
-      <JalaliDateRangePicker />
+      {/* <JalaliDateRangePicker /> */}
 
       <div className="block md:hidden">
         <SelectOption label={<IconLabel icon={Sorting} label="ترتیب" />} />

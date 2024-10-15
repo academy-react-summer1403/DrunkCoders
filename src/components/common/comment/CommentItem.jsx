@@ -6,8 +6,7 @@ import { Accordion, AccordionItem, Avatar } from '@nextui-org/react';
 import { CommentArrow } from '@assets/index';
 
 export function CommentItem({ comment, handleOpenModal }) {
-  const replies = comment.replies || [];
-
+    
   // Fetch replies for the comment
   const { data: repliesData, isLoading: loadingReplies, error: repliesError } = useQuery({
     queryKey: ['commentReplies', comment.courseId, comment.id],
