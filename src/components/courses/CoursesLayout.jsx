@@ -40,12 +40,12 @@ export function CoursesLayout() {
     <>
       <MobileFilterModal isOpen={isOpen} onOpenChange={onOpenChange} />
       <div className="relative flex gap-2 rounded-3xl border-4 p-4 pb-20 lg:-mr-[2.5%] lg:w-[105%]">
-        <div className="w-full md:w-[58%] lg:w-[70%] xl:w-3/4">
-          <div className="hidden md:block">
+        <main className="w-full md:w-[58%] lg:w-[70%] xl:w-3/4">
+          <header className="hidden md:block">
             <CourseSort />
-          </div>
+          </header>
 
-          <div className="relative flex items-center justify-between md:hidden">
+          <header className="relative flex items-center justify-between md:hidden">
             <div onClick={handleAnimation} ref={scope}>
               <Search className="cursor-pointer" />
             </div>
@@ -65,18 +65,18 @@ export function CoursesLayout() {
             <Button className="px-4 py-[9px] text-medium" onClick={onOpen}>
               ترتیب و فیلتر
             </Button>
-          </div>
+          </header>
 
           <CourseGrid />
-        </div>
+        </main>
 
-        <div className="relative -left-[6px] hidden h-screen md:mt-16 md:block md:w-[42%] lg:mt-0 lg:w-[30%] xl:w-1/4">
+        <aside className="relative -left-[6px] hidden h-screen md:mt-16 md:block md:w-[42%] lg:mt-0 lg:w-[30%] xl:w-1/4">
           <CourseFilter />
-        </div>
+        </aside>
 
-        <div className="ltr absolute bottom-0 translate-y-[50%]">
+        <footer className="ltr absolute bottom-0 translate-y-[50%]">
           <Pagination />
-        </div>
+        </footer>
       </div>
     </>
   )

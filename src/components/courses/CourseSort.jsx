@@ -2,28 +2,21 @@ import { Cancel, GridView, ListView } from '@assets/index'
 import { Divider } from '@nextui-org/react'
 import { Button } from '@components/index'
 import { useDispatch, useSelector } from 'react-redux'
-import { courseViewModeActions } from '@store/course-view-mode-slice'
-import { useEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import { AnimatePresence, motion, useAnimate } from 'framer-motion'
+import { courseViewModeActions, sortFilterActions } from '@store/index'
+import { useEffect, useRef } from 'react'
+import { useAnimate } from 'framer-motion'
+import {} from '@store/sort-filter-slice'
 
 export function CourseSort() {
   const firstRender = useRef(true)
   const view = useSelector((state) => state.view.view)
+  const courseOrder = useSelector((state) => state.sort.order)
   const dispatch = useDispatch()
-  const [buttonState, setButtonState] = useState({
-    first: false,
-    second: false,
-    third: false,
-  })
+  // const [buttonState, setButtonState] = useState()
   const [scope, animate] = useAnimate()
   const [scope2, animate2] = useAnimate()
   const [scope3, animate3] = useAnimate()
   const [scope4, animate4] = useAnimate()
-
-  async function handleChangeView(identifier) {
-    dispatch(courseViewModeActions.toggleView(identifier))
-  }
 
   useEffect(() => {
     async function animation() {
@@ -78,11 +71,11 @@ export function CourseSort() {
     }
   }, [view])
 
-  function handleButtonState(btnIdentifier) {
-    setButtonState((prevState) => ({
-      ...prevState,
-      [btnIdentifier]: !prevState[btnIdentifier],
-    }))
+  function handleOrder(orderIdentifier) {
+    dispatch(sortFilterActions.setOrder(orderIdentifier))
+  }
+  async function handleChangeView(identifier) {
+    dispatch(courseViewModeActions.toggleView(identifier))
   }
 
   return (
@@ -108,16 +101,16 @@ export function CourseSort() {
 
         <div className="relative">
           <div ref={scope} className="relative z-10">
-            <ButtonComp1 identifier={'first'}> پرطرفدار ترین</ButtonComp1>
+            <ButtonComp1 identifier={'costDesc'}>بالاترین قیمت </ButtonComp1>
           </div>
 
           <div ref={scope2} className="absolute -left-[321px] top-0 opacity-0">
-            <ButtonComp1 identifier={'first'}>پرطرفدار ترین</ButtonComp1>
+            <ButtonComp1 identifier={'costDesc'}>بالاترین قیمت </ButtonComp1>
           </div>
         </div>
 
-        <ButtonComp1 identifier={'second'}>محبوب ‌ترین</ButtonComp1>
-        <ButtonComp1 identifier={'third'}> پرامتیاز ترین</ButtonComp1>
+        <ButtonComp1 identifier={'costAsc'}> پایین‌ترین قیمت</ButtonComp1>
+        <ButtonComp1 identifier={'InsertDate'}> ‌جدیدترین</ButtonComp1>
       </div>
 
       <Divider orientation="vertical" className="mx-4 h-[22px] dark:bg-white" />
@@ -137,13 +130,7 @@ export function CourseSort() {
   function ButtonComp2() {
     return (
       <Button
-        onClick={() =>
-          setButtonState({
-            first: false,
-            second: false,
-            third: false,
-          })
-        }
+        onClick={() => handleOrder('Active')}
         variant="bordered"
         startContent={<Cancel />}
         className="border border-[#FF5454] bg-transparent text-[#FF5454]"
@@ -156,9 +143,9 @@ export function CourseSort() {
   function ButtonComp1({ identifier, children }) {
     return (
       <Button
-        onClick={() => handleButtonState(identifier)}
+        onClick={() => handleOrder(identifier)}
         className={
-          buttonState[identifier]
+          courseOrder === identifier
             ? 'border border-transparent'
             : 'border border-[#E4E4E4] bg-transparent text-black dark:text-white'
         }

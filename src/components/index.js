@@ -1,5 +1,5 @@
 export { Pagination } from './common/Pagination'
-
+export { JalaliDateRangePicker } from './courses/JalaliDateRangePicker'
 export { SearchBox } from './courses/SearchBox'
 export { MobileFilterModal } from './courses/MobileFilterModal'
 export { PriceSlider } from './courses/PriceSlider'

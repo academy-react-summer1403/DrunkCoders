@@ -2,19 +2,46 @@ import { pirceFormatter } from '@core/index'
 import { Slider } from '@nextui-org/react'
 import { IconLabel } from '@components/index'
 import { Money } from '@assets/index'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { sortFilterActions } from '@store/index'
 
-export function PriceSlider() {
-  const [value, setValue] = useState([100000, 500000])
+export function PriceSlider({ previousValue }) {
+  const [value, setValue] = useState([10 * 1000, 1000 * 1000])
+  const timeout = useRef(null)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (previousValue[0]) setValue(previousValue)
+  }, [])
+
+  function handleChange(e) {
+    setValue(e)
+    // console.log()
+    if (timeout.current) {
+      clearTimeout(timeout.current)
+    }
+
+    timeout.current = setTimeout(() => {
+      dispatch(
+        sortFilterActions.setCost({
+          costDown: e[0].toString(),
+          costUp: e[1].toString(),
+        }),
+      )
+      timeout.current = null
+    }, 1000)
+  }
+
   return (
     <Slider
       label={<IconLabel icon={Money} label="قیمت" />}
       step={5000}
-      minValue={0}
-      maxValue={2000000}
+      minValue={10 * 1000}
+      maxValue={10 * 1000 * 1000}
       //defaultValue={[100000, 500000]}
       value={value}
-      onChange={setValue}
+      onChange={handleChange}
       getValue={(price) => {
         return (
           <div>
@@ -27,7 +54,6 @@ export function PriceSlider() {
           </div>
         )
       }}
-      // className="max-w-md"
       classNames={{
         track: 'bg-basic-gray bg-opacity-20',
         filler: ['bg-transparent'],

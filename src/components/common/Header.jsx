@@ -29,6 +29,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { darkModeActions } from '@store'
 import { SunIcon } from '@assets/index'
+import { isTokenExpired } from '@core/index'
 
 export function Header() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
@@ -37,9 +38,14 @@ export function Header() {
   function toggleMode() {
     dispatch(darkModeActions.toggleMode())
   }
-  
 
-  const isToken = useSelector((state) => state.token.token)
+  /* const { data } = useQuery({
+    queryKey: ['userProfile'],
+    queryFn: getCurrentUserProfile,
+  }) */
+
+  let token = useSelector((state) => state.token.token)
+  token = isTokenExpired(token)
 
   return (
     <div className="relative top-3.5 flex h-12 justify-around gap-16 max-lg:gap-0">
@@ -60,10 +66,10 @@ export function Header() {
         <Link to="/">ارتباط باما</Link>
       </div>
 
-      <div className="flex w-72 justify-end gap-5 border-black max-lg:gap-3 max-md:block max-md:w-fit max-md:gap-2 max-lg:mr-2">
+      <div className="flex w-72 justify-end gap-5 border-black max-lg:mr-2 max-lg:gap-3 max-md:block max-md:w-fit max-md:gap-2">
         <div
           onClick={toggleMode}
-          className="relative top-0.5 flex h-12 w-12 cursor-pointer justify-center rounded-full border-1 pt-3 max-md:hidden "
+          className="relative top-0.5 flex h-12 w-12 cursor-pointer justify-center rounded-full border-1 pt-3 max-md:hidden"
         >
           <MoonIcon className="absolute z-20 dark:hidden" />
           <SunIcon className="absolute top-2 h-8 w-8" />
@@ -71,30 +77,42 @@ export function Header() {
 
         <div className="max-md:relative max-md:right-20 max-md:flex max-sm:right-11">
           <div className="relative top-1 max-md:w-12">
-            {isToken ? (
-              <Popover showArrow placement="bottom" >
-                <PopoverTrigger >
-                  <User 
+            {!token ? (
+              <Popover showArrow placement="bottom">
+                <PopoverTrigger>
+                  <User
                     as="button"
                     // name="Zoe Lang"
                     // description="Product Designer"
-                    className="transition-transform  w-36 relative left-10 top-0.5 max-md:w-12 max-md:-left-3"
+                    className="relative left-10 top-0.5 w-36 transition-transform max-md:-left-3 max-md:w-12"
                     avatarProps={{}}
                   />
                 </PopoverTrigger>
-                <PopoverContent className="p-1 border-blue-200 border-1">
+                <PopoverContent className="border-1 border-blue-200 p-1">
                   <div className="flex h-12 w-28 flex-col gap-2 text-center">
-                    <Link to="/profile" className='hover:bg-slate-200 w-full rounded-lg '>پروفایل من</Link>
-                    <Link to="/logout" className='hover:bg-slate-200 w-full rounded-lg'>خروج</Link>
+                    <Link
+                      to="/profile"
+                      className="w-full rounded-lg hover:bg-slate-200"
+                    >
+                      پروفایل من
+                    </Link>
+                    <Link
+                      to="/logout"
+                      className="w-full rounded-lg hover:bg-slate-200"
+                    >
+                      خروج
+                    </Link>
                   </div>
                 </PopoverContent>
               </Popover>
             ) : (
               <Button
+                as={Link}
+                to="/auth"
                 color="primary"
                 className="h-12 w-40 rounded-full text-lg max-md:relative"
               >
-                <Link to="/auth">ورود یا ثبت نام </Link>
+                ورود یا ثبت نام
               </Button>
             )}
           </div>
@@ -103,8 +121,8 @@ export function Header() {
               className="bg-white dark:bg-black max-lg:hidden max-md:block lg:hidden"
               onPress={onOpen}
             >
-              <Menu2 className="border-red-500  "/>
-              <Menu1 className=" top-1 left-7 h-10 w-12 stroke-white dark:hidden absolute" />
+              <Menu2 className="border-red-500" />
+              <Menu1 className="absolute left-7 top-1 h-10 w-12 stroke-white dark:hidden" />
             </Button>
             <Modal
               backdrop="opaque"

@@ -6,7 +6,7 @@ import {
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  token: getLocalStroge('token') ? true : false,
+  token: getLocalStroge('token') ?? null,
   userId: getLocalStroge('userId') ?? null,
 }
 
@@ -19,7 +19,7 @@ const tokenSlice = createSlice({
       deleteLocalStorage('token')
     },
     login(state, action) {
-      state.token = true
+      state.token = action.payload.token
       setLocalStorage('token', action.payload.token)
       setLocalStorage('userId', action.payload.userId)
     },

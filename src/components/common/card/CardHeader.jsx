@@ -8,13 +8,13 @@ export function CardHeader({ data, buttonColor, type, view }) {
   return (
     <>
       {data && (
-        <div
-          className={`relative w-full ${view === 'list' ? 'h-full' : 'h-[225px]'}`}
-        >
+        <div className={`relative h-full w-full`}>
           <Image
             alt="Card background"
             className="object-cover p-0"
-            classNames={{ wrapper: ['w-full h-full p-0'] }}
+            classNames={{
+              wrapper: ['w-full h-full p-0'],
+            }}
             width="100%"
             height="100%"
             src={

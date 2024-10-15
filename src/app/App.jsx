@@ -14,7 +14,9 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import './App.css'
 import { useSelector } from 'react-redux'
 
-export const queryClient = new QueryClient()
+export const queryClient = new QueryClient({
+  defaultOptions: { queries: { gcTime: 1000 * 60 * 20 } },
+})
 
 const router = createBrowserRouter([
   {

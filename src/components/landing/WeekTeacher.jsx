@@ -1,19 +1,19 @@
-import { Button } from "@components";
-import { getAllTeachers } from "@core";
-import { Avatar } from "@nextui-org/react";
-import { useQuery } from "@tanstack/react-query";
+import { Button } from '@components'
+import { getAllTeachers } from '@core'
+import { Avatar } from '@nextui-org/react'
+import { useQuery } from '@tanstack/react-query'
 
 export function WeekTeacher() {
   const { data } = useQuery({
-    queryKey: ["teachers"],
-    queryFn: ({ signal }) => getAllTeachers({ signal }),
-  });
+    queryKey: ['teachers'],
+    queryFn: getAllTeachers,
+  })
 
-  let sortedTeacherByCourseCount = null;
+  let sortedTeacherByCourseCount = null
   if (data) {
     sortedTeacherByCourseCount = data.sort(
       (a, b) => b.courseCounts - a.courseCounts,
-    );
+    )
   }
 
   return (
@@ -30,10 +30,10 @@ export function WeekTeacher() {
               key={teacher.teacherId}
               className={`relative flex flex-col gap-6 rounded-[32px] border-4 p-4 text-center ${
                 index === 0
-                  ? "relative order-[0] border-primary-blue lg:-top-8 lg:order-[1] lg:scale-[1.20]"
+                  ? 'relative order-[0] border-primary-blue lg:-top-8 lg:order-[1] lg:scale-[1.20]'
                   : index === 1
-                    ? "sm:basis-[45%] lg:order-[0] lg:basis-auto"
-                    : "sm:basis-[45%] lg:order-[2] lg:basis-auto"
+                    ? 'sm:basis-[45%] lg:order-[0] lg:basis-auto'
+                    : 'sm:basis-[45%] lg:order-[2] lg:basis-auto'
               }`}
             >
               <div>
@@ -68,8 +68,8 @@ export function WeekTeacher() {
               <Avatar
                 className={`absolute right-[50%] top-0 h-16 w-16 translate-x-[50%] translate-y-[-50%] ${
                   index === 1
-                    ? "h-[88px] w-[88px] border-4 border-primary-blue"
-                    : ""
+                    ? 'h-[88px] w-[88px] border-4 border-primary-blue'
+                    : ''
                 }`}
                 src={teacher.pictureAddress}
               />
@@ -77,5 +77,5 @@ export function WeekTeacher() {
           ))}
       </div>
     </div>
-  );
+  )
 }

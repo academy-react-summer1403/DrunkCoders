@@ -1,19 +1,31 @@
 import { Select, SelectItem } from '@nextui-org/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-export function SelectOption({ data, label }) {
-  const [value, setValue] = useState()
+export function SelectOption({
+  data,
+  label,
+  identifier,
+  onFilterChange,
+  prevSelectedItem,
+}) {
+  const [value, setValue] = useState('')
 
-  // console.log(value)
+  useEffect(() => {
+    setValue(prevSelectedItem)
+  }, [])
+
+  function handleChange(e) {
+    setValue(e.target.value)
+    onFilterChange(identifier, e.target.value)
+  }
 
   return (
     <div className="">
       <Select
         label={label}
-        // className="max-w-xs"
         labelPlacement="outside"
         placeholder="انتخاب کنید"
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
         selectedKeys={[value]}
         size="lg"
         selectorIcon={<div></div>}
@@ -22,17 +34,11 @@ export function SelectOption({ data, label }) {
           value: 'text-right text-sm',
         }}
       >
-        {animals.map((animal) => (
-          <SelectItem key={animal.key}>{animal.label}</SelectItem>
-        ))}
+        {data?.map(
+          (item) =>
+            item.name && <SelectItem key={item.id}>{item.name}</SelectItem>,
+        )}
       </Select>
     </div>
   )
 }
-
-const animals = [
-  { key: 'cat', label: 'Cat' },
-  { key: 'dog', label: 'Dog' },
-  { key: 'elephant', label: 'Elephant' },
-  { key: 'lion', label: 'Lion' },
-]

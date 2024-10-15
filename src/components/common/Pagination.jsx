@@ -1,17 +1,23 @@
 import { Pagination as NextUiPagination } from '@nextui-org/react'
-import { useState } from 'react'
+import { sortFilterActions } from '@store/sort-filter-slice'
+import { useDispatch, useSelector } from 'react-redux'
 
 export function Pagination() {
-  const [currentPage, setCurrentPage] = useState(1)
+  const dispatch = useDispatch()
+  const { currentPage, totalPageCount } = useSelector(
+    (state) => state.sort.pagination,
+  )
 
-  function handleChange(e) {}
+  function handleChange(pageNumber) {
+    dispatch(sortFilterActions.setCurrentPage(pageNumber))
+  }
 
   return (
     <NextUiPagination
       size="lg"
       isCompact
       showControls
-      total={5}
+      total={totalPageCount}
       initialPage={1}
       page={currentPage}
       onChange={handleChange}

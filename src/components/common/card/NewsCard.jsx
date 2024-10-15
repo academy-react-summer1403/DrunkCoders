@@ -14,6 +14,7 @@ export function NewsCard({ buttonColor = '#5A7EFF', data: news }) {
 
         <div className="-mt-2 mb-1 flex flex-row items-center justify-between gap-2 xl:flex-row xl:items-center xl:justify-between">
           <LikeAndDislike
+            userLikeStatus={{ like: false, dislike: false }}
             like={news?.currentLikeCount}
             dislike={news?.currentDissLikeCount}
           />
