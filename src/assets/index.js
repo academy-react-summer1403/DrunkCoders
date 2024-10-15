@@ -52,3 +52,11 @@ export { default as Sent } from "./icons/sent.svg?react";
 export { default as Smile } from "./icons/smile.svg?react";
 export { default as CommentArrow } from "./icons/comment-arrow.svg?react";
 export { default as Notification } from "./icons/notification.svg?react";
+
+export { default as Dashboard } from "./icons/panel/dashboard.svg?react";
+export { default as ReservePanel} from "./icons/panel/ReservePanel.svg?react";
+export { default as FavBookmark } from "./icons/panel/FavBookmark.svg?react";
+export { default as LogOutPanel } from "./icons/panel/logout-panel.svg?react";
+export { default as PanelPay } from "./icons/panel/payment-panel.svg?react";
+export { default as ProfilePanel} from "./icons/panel/user-edit.svg?react";
+export { default as Accounts } from "./icons/panel/user-settings.svg?react"

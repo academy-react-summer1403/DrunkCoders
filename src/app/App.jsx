@@ -11,6 +11,8 @@ import {
   CourseD,
   UserPanel,
 } from "@pages";
+import { DashboardPage, MyCoursePage, MyReservationPage, ProfilePage } from "@components";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./App.css";
@@ -72,6 +74,24 @@ const router = createBrowserRouter([
   {
     path:'/user-panel',
     element: <UserPanel/>,
+    children:[
+      {
+        path: 'dashboard',
+        element: <DashboardPage />, 
+      },
+      {
+        path: 'profile',
+        element: <ProfilePage />,
+      },
+      {
+        path: 'myCourse',
+        element: <MyCoursePage />,
+      },
+      {
+        path: 'myReservation',
+        element: <MyReservationPage />,
+      },
+    ]
   }
 ]);
 
