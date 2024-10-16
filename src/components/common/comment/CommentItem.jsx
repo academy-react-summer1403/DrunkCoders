@@ -13,34 +13,34 @@ export function CommentItem({ comment, handleOpenModal }) {
     enabled: !!comment.id,
   });
 
-  // const setReply = useMutation({
-  //   mutationFn: sendCourseRaply,
-  //   onSuccess: () => {
-  //     alert('reply sent successfully');
-  //     setModalInput('');
-  //     setModalSubject('');
-  //     onOpen(false);
-  //   },
-  //   onError: (error) => {
-  //     console.error('No response received:', error.message);
-  //   }
-  // });
-  // function addCourseReply() {
-  //   const payload ={
-  //     courseId: comment.courseId,
-  //     title: modalSubject,
-  //     describe: modalIput,
-  //     commntId: comment.id
-  //   };
-  //   console.log(obj);
-  //   const formData = new FormData();
-  //   formData.append('courseId', payload.courseId);
-  //   formData.append('title', payload.title);
-  //   formData.append('describe', payload.describe);
-  //   formData.append('commentId', payload.commntId)
+  const setReply = useMutation({
+    mutationFn: sendCourseRaply,
+    onSuccess: () => {
+      alert('reply sent successfully');
+      setModalInput('');
+      setModalSubject('');
+      onOpen(false);
+    },
+    onError: (error) => {
+      console.error('No response received:', error.message);
+    }
+  });
+  function addCourseReply() {
+    const payload ={
+      courseId: comment.courseId,
+      title: modalSubject,
+      describe: modalIput,
+      commntId: comment.id
+    };
+    console.log(obj);
+    const formData = new FormData();
+    formData.append('courseId', payload.courseId);
+    formData.append('title', payload.title);
+    formData.append('describe', payload.describe);
+    formData.append('commentId', payload.commntId)
 
-  //   setReply.mutate(formData);
-  // }
+    setReply.mutate(formData);
+  }
 
   if (loadingReplies) return <div>Loading replies...</div>;
   if (repliesError) return <div>Error loading replies</div>;
@@ -58,7 +58,7 @@ export function CommentItem({ comment, handleOpenModal }) {
           <p><strong>{comment.title}</strong></p>
           <p className="mt-2">{comment.describe}</p>
           <Button
-            onPress={() => handleOpenModal(true, comment, true, addCourseReply)}
+            onPress={() => handleOpenModal(true, comment, true)}
             className="-mr-1 mt-4 h-9 w-32 bg-blue-200 font-medium text-blue-600"
           >
             <CommentArrow />

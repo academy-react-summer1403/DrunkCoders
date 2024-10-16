@@ -43,12 +43,11 @@ export function Comment({ courseId }) {
     mutation.mutate(formData);
   }
 
-  function handleOpenModal(isOpen, comment = null, reply = false, addCourseReply) {
+  function handleOpenModal(isOpen, comment = null, reply = false) {
     setIsReply(reply);
     setReplyToComment(comment);
     setModalTitle(reply ? 'پاسخ شما' : 'نظر شما');
     onOpen(isOpen);
-    setAddCourseReply(addCourseReply); 
   }
 
   if (isLoading) return <div>Loading comments...</div>;
