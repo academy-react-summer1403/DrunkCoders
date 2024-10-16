@@ -1,12 +1,17 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { getCourseCommentReplies,sendCourseRaply } from '@core';
-import { useEffect } from 'react';
+import { getCourseCommentReplies,sendCourseReply } from '@core';
+import { useEffect, useState } from 'react';
 import { Button } from '@components/index';
-import { Accordion, AccordionItem, Avatar } from '@nextui-org/react';
+import { Accordion, AccordionItem, Avatar, useDisclosure } from '@nextui-org/react';
 import { CommentArrow } from '@assets/index';
 import { CommentModal } from './CommentModal';
 
 export function CommentItem({ comment, handleOpenModal }) {
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [modalInput, setModalInput] = useState('');
+  const [modalSubject, setModalSubject] = useState('');
+
   const { data: repliesData, isLoading: loadingReplies, error: repliesError } = useQuery({
     queryKey: ['commentReplies', comment.courseId, comment.id],
     queryFn: () => getCourseCommentReplies(comment.courseId, comment.id),
@@ -14,7 +19,7 @@ export function CommentItem({ comment, handleOpenModal }) {
   });
 
   const setReply = useMutation({
-    mutationFn: sendCourseRaply,
+    mutationFn: sendCourseReply,
     onSuccess: () => {
       alert('reply sent successfully');
       setModalInput('');
@@ -29,15 +34,15 @@ export function CommentItem({ comment, handleOpenModal }) {
     const payload ={
       courseId: comment.courseId,
       title: modalSubject,
-      describe: modalIput,
-      commntId: comment.id
+      describe: modalInput,
+      commentId: comment.id
     };
-    console.log(obj);
+    console.log(payload);
     const formData = new FormData();
     formData.append('courseId', payload.courseId);
     formData.append('title', payload.title);
     formData.append('describe', payload.describe);
-    formData.append('commentId', payload.commntId)
+    formData.append('commentId', payload.commentId)
 
     setReply.mutate(formData);
   }
@@ -58,7 +63,7 @@ export function CommentItem({ comment, handleOpenModal }) {
           <p><strong>{comment.title}</strong></p>
           <p className="mt-2">{comment.describe}</p>
           <Button
-            onPress={() => handleOpenModal(true, comment, true)}
+            onPress={() => handleOpenModal(true, comment, true, )}
             className="-mr-1 mt-4 h-9 w-32 bg-blue-200 font-medium text-blue-600"
           >
             <CommentArrow />
@@ -87,6 +92,9 @@ export function CommentItem({ comment, handleOpenModal }) {
           </AccordionItem>
         </Accordion>
       )}
+      <CommentModal
+      addCourseReply={addCourseReply}
+      />
     </div>
   );
 }

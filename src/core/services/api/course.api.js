@@ -71,7 +71,7 @@ export async function sendCourseComment(formData) {
   }
 }
 
-export async function sendCourseRaply(formData) {
+export async function sendCourseReply(formData) {
   try {
     const response = await api.post('/Course/AddReplyCourseComment',formData)
     return response

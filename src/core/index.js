@@ -4,7 +4,7 @@ export { getCourseDetails } from './services/api/course.api'
 export { getCourseComments } from './services/api/course.api'
 export { getCourseCommentReplies } from './services/api/course.api'
 export { sendCourseComment } from './services/api/course.api'
-export { sendCourseRaply } from './services/api/course.api'
+export { sendCourseReply } from './services/api/course.api'
 
 export { getWeekNews } from './services/api/news.api'
 export { getAllTeachers } from './services/api/teacher.api'
