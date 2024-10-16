@@ -24,6 +24,8 @@ export async function getCoursesWithPagination({ params, signal }) {
     console.log(error)
   }
 }
+
+
 export async function getCourseDetails(id, { signal }) {
   try {
     const response = await api.get(`/Home/GetCourseDetails?`, {
@@ -57,3 +59,24 @@ export async function getCourseCommentReplies(courseId, commentId, signal) {
     throw new Error('Could not fetch comment replies');
   }
 };
+
+
+export async function sendCourseComment(formData) {
+  try {
+    const response = await api.post('/Course/AddCommentCourse', formData);
+    return response;
+  } catch (error) {
+    console.log('Error sending comment', error);
+    throw error;
+  }
+}
+
+export async function sendCourseRaply(formData) {
+  try {
+    const response = await api.post('/Course/AddReplyCourseComment',formData)
+    return response
+  } catch (error) {
+    console.log('Error sending comment', error);
+    throw error;
+  }
+}

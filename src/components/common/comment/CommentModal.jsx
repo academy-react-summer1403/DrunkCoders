@@ -9,6 +9,7 @@ import {
   ModalFooter,
 } from '@nextui-org/react';
 import { CommentList } from './CommentList';
+import { useState } from 'react';
 
 export function CommentModal({
   isOpen,
@@ -18,17 +19,26 @@ export function CommentModal({
   setModalInput,
   modalSubject,
   setModalSubject,
-  handleSubmit,
+  addCourseComment,
   comments,
   handleOpenModal,
-}) {
+  addCourseReply,
+  isReply,
+  replyToComment,
+})
+
+{
+  const [scrollBehavior, setScrollBehavior] = useState("inside");
+  console.log( 'isReply',isReply);
+  console.log('replyToComment', replyToComment);
   return (
     <Modal
+    scrollBehavior={scrollBehavior}
       classNames={{
         closeButton: 'absolute right-[794px] top-2 h-14 hover:hidden text-red-500  z-20   w-16 ',
       }}
       className="max-w-4xl"
-      backdrop="transparent"
+      backdrop="opaque"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       motionProps={{
@@ -67,31 +77,38 @@ export function CommentModal({
             <ModalFooter className="flex justify-start ">
               <Button
                 type="submit"
-                onPress={handleSubmit}
+                onClick={isReply ? addCourseReply : addCourseComment}
                 className="relative top-5 h-16 p-0"
               >
                 <Sent className="rounded-1xl h-8 w-8" />
               </Button>
-              <div className="w-[700px] rounded-3xl border p-2">
-                <input
-                  className="p-2 outline-none"
-                  label="موضوع"
-                  value={modalSubject}
-                  onChange={(e) => setModalSubject(e.target.value)}
-                  placeholder="عنوان نظر خود را وارد کنید"
-                />
-                <hr />
-                <input
-                  className="w- p-2 outline-none"
-                  label="متن"
-                  value={modalInput}
-                  onChange={(e) => setModalInput(e.target.value)}
-                  placeholder={
-                    modalTitle === 'پاسخ شما'
+              <div>
+                {isReply && replyToComment && (
+                  <div className="p-2 mb-4 bg-gray-100 rounded-md">
+                    پاسخ به {replyToComment.author}
+                  </div>
+                )}
+                <div className="w-[700px] rounded-3xl border p-2">
+                  <input
+                    className="p-2 outline-none"
+                    label="موضوع"
+                    value={modalSubject}
+                    onChange={(e) => setModalSubject(e.target.value)}
+                    placeholder="عنوان نظر خود را وارد کنید"
+                    />
+                  <hr />
+                  <input
+                    className="w- p-2 outline-none"
+                    label="متن"
+                    value={modalInput}
+                    onChange={(e) => setModalInput(e.target.value)}
+                    placeholder={
+                      modalTitle === 'پاسخ شما'
                       ? 'پاسخ خود را بنویسید'
                       : 'نظر خود را بنویسید'
-                  }
-                />
+                    }
+                    />
+                </div>
               </div>
               <div className="relative top-8 flex h-16 w-16 justify-center rounded-full border-1 border-gray-300">
                 <Smile className="relative top-3.5" />
