@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   pagination: { currentPage: 1, totalPageCount: 5 },
-  order: 'costDesc',
+  order: 'Active',
   searchTerm: null,
   descendingOrder: true,
   filterId: { category: null, level: null, teacher: null },

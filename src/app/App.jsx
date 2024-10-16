@@ -24,7 +24,7 @@ import './App.css'
 import { useSelector } from 'react-redux'
 
 export const queryClient = new QueryClient({
-  defaultOptions: { queries: { gcTime: 1000 * 60 * 20 } },
+  defaultOptions: { queries: { gcTime: 1000 * 60 * 30 } },
 })
 
 const router = createBrowserRouter([
@@ -37,6 +37,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       { path: 'courses', element: <Courses /> },
+      { path: 'articles', element: <Articles /> },
+
       {
         path: 'about-us',
       },
@@ -47,12 +49,10 @@ const router = createBrowserRouter([
       {
         path: 'courses',
         element: <Courses />,
-        children: [
-          {
-            path: 'details',
-            element: <CourseD />,
-          },
-        ],
+      },
+      {
+        path: 'details',
+        element: <CourseD />,
       },
     ],
   },

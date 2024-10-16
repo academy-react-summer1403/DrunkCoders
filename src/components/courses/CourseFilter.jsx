@@ -1,4 +1,11 @@
-import { Cells, Layers, Sorting, Teacher } from '@assets/index'
+import {
+  Calendar2,
+  Cells,
+  Layers,
+  Search,
+  Sorting,
+  Teacher,
+} from '@assets/index'
 import {
   IconLabel,
   PriceSlider,
@@ -58,10 +65,29 @@ export function CourseFilter() {
     dispatch(sortFilterActions.setOrder(id))
   }
 
+  function handleSearch(searchTerm) {
+    dispatch(
+      sortFilterActions.setSearchTerm(
+        searchTerm.trim() === '' ? null : searchTerm.trim(),
+      ),
+    )
+  }
+
+  function handleDateChange(startDate, endDate) {
+    dispatch(sortFilterActions.setDateRange({ startDate, endDate }))
+  }
+
+  function handleClearCalender() {
+    dispatch(sortFilterActions.setDateRange({ startDate: null, endDate: null }))
+  }
+
   return (
     <div className="sticky top-0 flex flex-col gap-8 rounded-3xl px-3 py-5 dark:bg-white/20 md:bg-[#E4E4E4]">
       <div className="hidden md:block">
-        <SearchBox />
+        <SearchBox
+          onSearch={handleSearch}
+          label={<IconLabel icon={Search} label="جست‌ جو دوره" />}
+        />
       </div>
 
       <SelectOption
@@ -89,6 +115,9 @@ export function CourseFilter() {
       <PriceSlider previousValue={[cost.costDown, cost.costUp]} />
 
       <JalaliDateRangePicker
+        label={<IconLabel icon={Calendar2} label="تاریخ برگزاری" />}
+        onChange={handleDateChange}
+        onClear={handleClearCalender}
         prevDate={[
           dateRange.startDate && new DateObject(dateRange.startDate),
           dateRange.endDate && new DateObject(dateRange.endDate),

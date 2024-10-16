@@ -65,11 +65,13 @@ export function GridLayout({
           })}
       </div>
 
-      <Link to={isPopularCourses ? '/courses' : '/news-articles'}>
-        <Button className="mx-auto mt-6 block bg-primary-blue text-white sm:hidden">
-          نمایش بیشتر
-        </Button>
-      </Link>
+      <Button
+        as={Link}
+        to={isPopularCourses ? '/courses' : '/articles'}
+        className="mx-auto mt-6 block bg-primary-blue text-white sm:hidden"
+      >
+        نمایش بیشتر
+      </Button>
     </div>
   )
 }

@@ -3,8 +3,9 @@ import {
   courseViewModeReducer,
   darkModeReducer,
   tokenReducer,
+  sortFilterReducer,
+  articleSortFilterReducer,
 } from '@store/index'
-import { sortFilterReducer } from './sort-filter-slice'
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     token: tokenReducer,
     view: courseViewModeReducer,
     sort: sortFilterReducer,
+    articleSort: articleSortFilterReducer,
   },
 })

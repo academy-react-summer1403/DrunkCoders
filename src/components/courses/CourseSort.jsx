@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { courseViewModeActions, sortFilterActions } from '@store/index'
 import { useEffect, useRef } from 'react'
 import { useAnimate } from 'framer-motion'
-import {} from '@store/sort-filter-slice'
+import {} from '@store/course-sort-filter-slice'
 
 export function CourseSort() {
   const firstRender = useRef(true)

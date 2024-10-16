@@ -2,7 +2,7 @@ import { Cancel } from '@assets/index'
 import { Button, CourseFilter } from '@components/index'
 import { Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react'
 
-export function MobileFilterModal({ isOpen, onOpenChange }) {
+export function MobileFilterModal({ isOpen, onOpenChange, children }) {
   return (
     <Modal
       isOpen={isOpen}
@@ -51,7 +51,7 @@ export function MobileFilterModal({ isOpen, onOpenChange }) {
               </Button>
             </ModalHeader>
             <ModalBody>
-              <CourseFilter />
+              {children}
               <Button onPress={onClose} className="py-3 text-lg">
                 اعمال
               </Button>

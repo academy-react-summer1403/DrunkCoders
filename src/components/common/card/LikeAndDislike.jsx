@@ -6,7 +6,6 @@ export function LikeAndDislike({
   like,
   dislike,
   view,
-  className,
   userLikeStatus,
   onLikeAndDislike,
 }) {
@@ -20,9 +19,7 @@ export function LikeAndDislike({
     }
   }
   return (
-    <div
-      className={`-mb-1 flex ${className} ${view === 'list' ? 'gap-9' : 'gap-3'}`}
-    >
+    <div className={`-mb-1 flex gap-3 ${view === 'list' ? 'lg:gap-9' : ''}`}>
       <div className="flex gap-2">
         <ThumbUp
           onClick={() => handleLike('like')}
