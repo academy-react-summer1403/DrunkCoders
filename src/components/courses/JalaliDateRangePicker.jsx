@@ -6,13 +6,12 @@ import persian_en from 'react-date-object/locales/persian_en'
 import gregorian_en from 'react-date-object/locales/gregorian_en'
 import gregorian from 'react-date-object/calendars/gregorian'
 import 'react-multi-date-picker/styles/backgrounds/bg-dark.css'
-import { BaseInput, IconLabel } from '@components/index'
-import { Calendar2, Cancel } from '@assets/index'
+import { BaseInput } from '@components/index'
+import { Cancel } from '@assets/index'
 import { useDispatch, useSelector } from 'react-redux'
 import { sortFilterActions } from '@store/index'
 
-export function JalaliDateRangePicker({ prevDate }) {
-  const dispatch = useDispatch()
+export function JalaliDateRangePicker({ prevDate, label, onChange, onClear }) {
   const firstRender = useRef(true)
   const [values, setValues] = useState(null)
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
@@ -25,21 +24,13 @@ export function JalaliDateRangePicker({ prevDate }) {
   useEffect(() => {
     if (!firstRender.current) {
       if (values && values[0] && values[1]) {
-        dispatch(
-          sortFilterActions.setDateRange({
-            startDate: values[0].convert(gregorian, gregorian_en).format(),
-            endDate: values[1].convert(gregorian, gregorian_en).format(),
-          }),
-        )
+        const startDate = values[0].convert(gregorian, gregorian_en).format()
+        const endDate = values[1].convert(gregorian, gregorian_en).format()
+        onChange(startDate, endDate)
       }
 
       if (!values) {
-        dispatch(
-          sortFilterActions.setDateRange({
-            startDate: null,
-            endDate: null,
-          }),
-        )
+        onClear()
       }
     }
     firstRender.current = false
@@ -57,7 +48,7 @@ export function JalaliDateRangePicker({ prevDate }) {
   return (
     <div className="w-full">
       <BaseInput
-        label={<IconLabel icon={Calendar2} label="تاریخ برگزاری" />}
+        label={label ?? null}
         placeholder={formattedValue}
         size="lg"
         type="text"

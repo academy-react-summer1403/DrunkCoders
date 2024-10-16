@@ -62,7 +62,7 @@ export function Header() {
 
       <div className="flex w-2/5 justify-center gap-10 whitespace-nowrap p-2 text-lg font-normal leading-10 max-lg:mx-5 max-lg:gap-5 max-md:hidden">
         <Link to="/">خانه</Link> <Link to="/courses">دوره ها</Link>{' '}
-        <Link to="/article-news">اخبار و مقالات </Link>
+        <Link to="/articles">اخبار و مقالات </Link>
         <Link to="/">ارتباط باما</Link>
       </div>
 

@@ -43,7 +43,6 @@ export async function getCoursesLevel() {
   }
 }
 export async function addLikeForCourse(courseId) {
-  console.log(courseId)
   try {
     const response = await api.post(
       '/Course/AddCourseLike',
@@ -69,7 +68,7 @@ export async function addDislikeForCourse(courseId) {
     console.log(error)
   }
 }
-export async function removeCourseLikeOrDislike(courseIdFormData) {
+export async function removeCourseLikeOrDislike({ courseIdFormData }) {
   try {
     const response = await api.delete('/Course/DeleteCourseLike', {
       data: courseIdFormData,

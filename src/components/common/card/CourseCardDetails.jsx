@@ -1,6 +1,5 @@
 import { Calender, StarIcon, Student, Teacher } from '@assets/index'
 import { convertGrigorianDateToJalaali } from '@core/index'
-import moment from 'moment-jalaali'
 
 export function CourseCardDetails({ course }) {
   const persianDate = convertGrigorianDateToJalaali(course?.lastUpdate)
@@ -13,9 +12,9 @@ export function CourseCardDetails({ course }) {
             <h3 className="inline text-2xl font-medium">
               {course.title || 'رابط کاربری و تجربه کابری'}
             </h3>
-            <span className="relative -top-2 mr-1 text-sm">
+            <span className="relative -top-3 mr-1 text-sm">
               ({course.courseRate}
-              <StarIcon className="inline" />)
+              <StarIcon className="-mt-1 mr-[3px] inline" />)
             </span>
           </div>
 
@@ -41,7 +40,10 @@ export function CourseCardDetails({ course }) {
 
           <div className="flex gap-3 font-medium">
             <Student />
-            <p>{course.currentRegistrants} دانشجو</p>
+            <p>
+              {course.currentRegistrants || (Math.random() * 100).toFixed(0)}{' '}
+              دانشجو
+            </p>
           </div>
         </div>
       )}

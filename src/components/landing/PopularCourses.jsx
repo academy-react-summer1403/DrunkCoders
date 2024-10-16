@@ -1,12 +1,12 @@
-import { CourseCard, GridLayout } from "@components";
-import { useQuery } from "@tanstack/react-query";
-import { getTopCourses } from "@core";
+import { CourseCard, GridLayout } from '@components'
+import { useQuery } from '@tanstack/react-query'
+import { getTopCourses } from '@core'
 
 export function PopularCourses() {
   const { data } = useQuery({
-    queryKey: ["courses", "top-courses"],
+    queryKey: ['courses', 'top-courses'],
     queryFn: ({ signal }) => getTopCourses({ count: 4, signal }),
-  });
+  })
 
   return (
     <>
@@ -19,5 +19,5 @@ export function PopularCourses() {
         />
       )}
     </>
-  );
+  )
 }

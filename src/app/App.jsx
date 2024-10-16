@@ -8,14 +8,15 @@ import {
   ForgetPassStep1,
   ForgetPassStep2,
   Courses,
-} from '@pages'
+  Articles,
+} from '@pages/index'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import './App.css'
 import { useSelector } from 'react-redux'
 
 export const queryClient = new QueryClient({
-  defaultOptions: { queries: { gcTime: 1000 * 60 * 20 } },
+  defaultOptions: { queries: { gcTime: 1000 * 60 * 30 } },
 })
 
 const router = createBrowserRouter([
@@ -28,6 +29,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       { path: 'courses', element: <Courses /> },
+      { path: 'articles', element: <Articles /> },
+
       {
         path: 'about-us',
       },

@@ -1,24 +1,17 @@
 import { Search } from '@assets/index'
 import { BaseInput, IconLabel } from '@components/index'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { sortFilterActions } from '@store/index'
 
-export function SearchBox({ label, className }) {
+export function SearchBox({ label, className, onSearch }) {
   const [searchTerm, setSearchTerm] = useState('')
-  const dispatch = useDispatch()
 
   function handleSearch() {
-    dispatch(
-      sortFilterActions.setSearchTerm(
-        searchTerm.trim() === '' ? null : searchTerm.trim(),
-      ),
-    )
+    onSearch(searchTerm)
   }
 
   return (
     <BaseInput
-      label={label && <IconLabel icon={Search} label="جست‌ جو دوره" />}
+      label={label ?? null}
       placeholder="جست جو کنید ..."
       name="search"
       size="lg"
@@ -27,7 +20,6 @@ export function SearchBox({ label, className }) {
       type="text"
       endIcon={BlueSearchIcon}
       className={`mb-0 ${className}`}
-      // classNames={{ input: 'text-sm' }}
     />
   )
 

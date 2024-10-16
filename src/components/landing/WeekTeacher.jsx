@@ -67,7 +67,7 @@ export function WeekTeacher() {
 
               <Avatar
                 className={`absolute right-[50%] top-0 h-16 w-16 translate-x-[50%] translate-y-[-50%] ${
-                  index === 1
+                  index === 0
                     ? 'h-[88px] w-[88px] border-4 border-primary-blue'
                     : ''
                 }`}
