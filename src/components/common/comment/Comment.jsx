@@ -5,7 +5,7 @@ import { CommentModal } from './CommentModal';
 import { CommentList } from './CommentList';
 import { CommentWhite } from '@assets/index';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { getCourseComments, sendCourseComment } from '@core';
+import { getCourseComments, sendCourseComment, sendCourseReply } from '@core';
 
 
 export function Comment({ courseId }) {
@@ -42,6 +42,35 @@ export function Comment({ courseId }) {
     formData.append('describe', payload.describe);
     mutation.mutate(formData);
   }
+  const setReply = useMutation({
+    mutationFn: sendCourseReply,
+    onSuccess: () => {
+      alert('reply sent successfully');
+      setModalInput('');
+      setModalSubject('');
+      onOpen(false);
+    },
+    onError: (error) => {
+      console.error('No response received:', error.message);
+    }
+  });
+  function addCourseReply() {
+    const payload ={
+      courseId: replyToComment.courseId,
+      title: modalSubject,
+      describe: modalInput,
+      commentId: replyToComment.id
+    };
+    console.log(payload);
+    const formData = new FormData();
+    formData.append('courseId', payload.courseId);
+    formData.append('title', payload.title);
+    formData.append('describe', payload.describe);
+    formData.append('commentId', payload.commentId)
+
+    setReply.mutate(formData);
+  }
+
 
   function handleOpenModal(isOpen, comment = null, reply = false) {
     setIsReply(reply);
@@ -72,6 +101,7 @@ export function Comment({ courseId }) {
         comments={comments}
         isReply={isReply}
         replyToComment={replyToComment}
+        addCourseReply={addCourseReply}
       />
 
       <CommentList comments={comments} handleOpenModal={handleOpenModal} />

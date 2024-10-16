@@ -22,9 +22,9 @@ export function CommentModal({
   addCourseComment,
   comments,
   handleOpenModal,
-  addCourseReply,
   isReply,
   replyToComment,
+  addCourseReply
 })
 
 {

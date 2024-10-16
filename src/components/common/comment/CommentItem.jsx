@@ -1,16 +1,11 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { getCourseCommentReplies,sendCourseReply } from '@core';
-import { useEffect, useState } from 'react';
 import { Button } from '@components/index';
 import { Accordion, AccordionItem, Avatar, useDisclosure } from '@nextui-org/react';
 import { CommentArrow } from '@assets/index';
-import { CommentModal } from './CommentModal';
 
 export function CommentItem({ comment, handleOpenModal }) {
 
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [modalInput, setModalInput] = useState('');
-  const [modalSubject, setModalSubject] = useState('');
 
   const { data: repliesData, isLoading: loadingReplies, error: repliesError } = useQuery({
     queryKey: ['commentReplies', comment.courseId, comment.id],
@@ -18,34 +13,6 @@ export function CommentItem({ comment, handleOpenModal }) {
     enabled: !!comment.id,
   });
 
-  const setReply = useMutation({
-    mutationFn: sendCourseReply,
-    onSuccess: () => {
-      alert('reply sent successfully');
-      setModalInput('');
-      setModalSubject('');
-      onOpen(false);
-    },
-    onError: (error) => {
-      console.error('No response received:', error.message);
-    }
-  });
-  function addCourseReply() {
-    const payload ={
-      courseId: comment.courseId,
-      title: modalSubject,
-      describe: modalInput,
-      commentId: comment.id
-    };
-    console.log(payload);
-    const formData = new FormData();
-    formData.append('courseId', payload.courseId);
-    formData.append('title', payload.title);
-    formData.append('describe', payload.describe);
-    formData.append('commentId', payload.commentId)
-
-    setReply.mutate(formData);
-  }
 
   if (loadingReplies) return <div>Loading replies...</div>;
   if (repliesError) return <div>Error loading replies</div>;
@@ -92,9 +59,7 @@ export function CommentItem({ comment, handleOpenModal }) {
           </AccordionItem>
         </Accordion>
       )}
-      <CommentModal
-      addCourseReply={addCourseReply}
-      />
+
     </div>
   );
 }

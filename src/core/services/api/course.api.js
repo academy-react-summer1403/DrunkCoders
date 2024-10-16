@@ -80,3 +80,13 @@ export async function sendCourseReply(formData) {
     throw error;
   }
 }
+
+export async function rateCourse (courseId , rating) {
+    try {
+      const response = await api.post(`/Course/SetCourseRating?CourseId=${courseId}&RateNumber=${rating}`)
+      return response;
+    } catch (error) {
+      console.log('Error sending comment', error);
+      throw error;
+    }
+}
