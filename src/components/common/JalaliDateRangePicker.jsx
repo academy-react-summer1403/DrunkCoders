@@ -7,9 +7,8 @@ import gregorian_en from 'react-date-object/locales/gregorian_en'
 import gregorian from 'react-date-object/calendars/gregorian'
 import 'react-multi-date-picker/styles/backgrounds/bg-dark.css'
 import { BaseInput } from '@components/index'
-import { Cancel } from '@assets/index'
-import { useDispatch, useSelector } from 'react-redux'
-import { sortFilterActions } from '@store/index'
+import { Cancel2 } from '@assets/index'
+import { useSelector } from 'react-redux'
 
 export function JalaliDateRangePicker({ prevDate, label, onChange, onClear }) {
   const firstRender = useRef(true)
@@ -90,7 +89,7 @@ export function JalaliDateRangePicker({ prevDate, label, onChange, onClear }) {
         onClick={handleDeleteSelection}
         className="rounded-full transition-all hover:scale-125"
       >
-        <Cancel className="cursor-pointer" />
+        <Cancel2 className="cursor-pointer" />
       </div>
     )
   }

@@ -1,4 +1,4 @@
-import { Cancel, Search } from '@assets/index'
+import { Cancel2, Search } from '@assets/index'
 import {
   ArticleFilter,
   ArticleGrid,
@@ -73,7 +73,7 @@ export function CoursesAndArticlesMainLayout({ article }) {
               className="flex items-center justify-center"
             >
               <SearchBox className="ml-3 w-[200px] sm:w-64" />
-              <Cancel
+              <Cancel2
                 className="cursor-pointer transition-all hover:scale-125"
                 onClick={handleRemoveSearchBox}
               />

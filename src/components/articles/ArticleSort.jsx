@@ -1,4 +1,4 @@
-import { Cancel, GridView, ListView } from '@assets/index'
+import { Cancel2, GridView, ListView } from '@assets/index'
 import { Divider } from '@nextui-org/react'
 import { Button } from '@components/index'
 import { useDispatch, useSelector } from 'react-redux'
@@ -32,7 +32,7 @@ export function ArticleSort() {
         <Button
           onClick={() => handleOrder(null)}
           variant="bordered"
-          startContent={<Cancel />}
+          startContent={<Cancel2 />}
           className="border border-[#FF5454] bg-transparent text-[#FF5454]"
         >
           حذف

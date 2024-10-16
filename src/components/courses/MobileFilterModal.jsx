@@ -1,4 +1,4 @@
-import { Cancel } from '@assets/index'
+import { Cancel2 } from '@assets/index'
 import { Button, CourseFilter } from '@components/index'
 import { Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react'
 
@@ -44,7 +44,7 @@ export function MobileFilterModal({ isOpen, onOpenChange, children }) {
               <Button
                 onClick={onClose}
                 variant="bordered"
-                startContent={<Cancel />}
+                startContent={<Cancel2 />}
                 className="border border-[#FF5454] bg-transparent text-[#FF5454]"
               >
                 بستن
