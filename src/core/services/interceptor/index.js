@@ -31,8 +31,6 @@ api.interceptors.request.use(
 
 const handleError = (error) => {
   if (error.response) {
-    // The request was made and the server responded with a status code
-    // that falls out of the range of 2xx
     console.error('Response Error:', error.response.data)
     console.error('Status:', error.response.status)
     console.error('Headers:', error.response.headers)
@@ -49,6 +47,9 @@ const handleError = (error) => {
         break
       case 404:
         alert('Not Found! The requested resource was not found.')
+        break
+      case 405:
+        alert('Wrong http method provided. Method not allowed.')
         break
       case 500:
         alert('Internal Server Error! Please try again later.')
@@ -70,7 +71,12 @@ const handleError = (error) => {
   } else if (error.request) {
     // The request was made but no response was received
     console.error('Request Error:', error.request)
-    alert('Network error! Please check your internet connection.')
+    alert(
+      'Network error! Please check your internet connection. Are you login??',
+    )
+    if (error.request.status === 0) {
+      console.error('Network error or unauthorized access')
+    }
   } else {
     // Something happened in setting up the request that triggered an Error
     console.error('Error:', error.message)

@@ -1,13 +1,11 @@
-import { api } from "../interceptor";
+import { api } from '../interceptor'
 
-export async function getAllTeachers({ signal }) {
+export async function getAllTeachers() {
   try {
-    const response = await api.get("/Home/GetTeachers", {
-      signal,
-    });
+    const response = await api.get('/Home/GetTeachers')
 
-    return response;
+    return response
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }

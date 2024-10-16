@@ -10,15 +10,22 @@ import {
   Courses,
   CourseD,
   UserPanel,
-} from "@pages";
-import { DashboardPage, MyCoursePage, MyReservationPage, ProfilePage } from "@components";
+} from '@pages'
+import {
+  DashboardPage,
+  MyCoursePage,
+  MyReservationPage,
+  ProfilePage,
+} from '@components'
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import "./App.css";
-import { useSelector } from "react-redux";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import './App.css'
+import { useSelector } from 'react-redux'
 
-export const queryClient = new QueryClient()
+export const queryClient = new QueryClient({
+  defaultOptions: { queries: { gcTime: 1000 * 60 * 20 } },
+})
 
 const router = createBrowserRouter([
   {
@@ -26,27 +33,27 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        path: '*',
-        element: <NotFound />,
+        index: true,
+        element: <Home />,
       },
+      { path: 'courses', element: <Courses /> },
       {
         path: 'about-us',
       },
       {
-        index: true,
-        element: <Home />,
+        path: '*',
+        element: <NotFound />,
       },
       {
-        path:"courses",
-        element: <Courses/>,
+        path: 'courses',
+        element: <Courses />,
         children: [
           {
-            path:'details',
-            element: <CourseD/>
-          }
-        ]
+            path: 'details',
+            element: <CourseD />,
+          },
+        ],
       },
-
     ],
   },
   {
@@ -72,12 +79,12 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:'/user-panel',
-    element: <UserPanel/>,
-    children:[
+    path: '/user-panel',
+    element: <UserPanel />,
+    children: [
       {
         path: 'dashboard',
-        element: <DashboardPage />, 
+        element: <DashboardPage />,
       },
       {
         path: 'profile',
@@ -91,9 +98,9 @@ const router = createBrowserRouter([
         path: 'myReservation',
         element: <MyReservationPage />,
       },
-    ]
-  }
-]);
+    ],
+  },
+])
 
 export function App() {
   const darkMode = useSelector((state) => state.darkMode.darkMode)
