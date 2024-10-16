@@ -6,10 +6,6 @@ export function useLikeAndDislikeUpdate(mutationFn, filterParams, identifier) {
     userIsLiked: identifier === 'like' ? true : false,
     currentUserDissLike: identifier === 'dislike' ? true : false,
   }
-
-  //, filterParams
-  // console.log(identifier)
-
   return useMutation({
     mutationFn,
     onMutate: async (courseId) => {
@@ -22,8 +18,8 @@ export function useLikeAndDislikeUpdate(mutationFn, filterParams, identifier) {
             ? { ...course, ...userLikeStatus }
             : course,
         )
-        console.log(identifier)
-        console.log(updatedCourses)
+        // console.log(identifier)
+        // console.log(updatedCourses)
         return {
           totalCount: oldCourses.totalCount,
           courseFilterDtos: updatedCourses,

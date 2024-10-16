@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query'
 import { getCoursesWithPagination } from '@core/index'
 import { useEffect, useMemo, useRef } from 'react'
 import { sortFilterActions } from '@store/course-sort-filter-slice'
-import { isEqual } from 'lodash'
 
 export function CourseGrid() {
   const dispatch = useDispatch()
@@ -49,14 +48,6 @@ export function CourseGrid() {
     queryKey: ['courses', params],
     queryFn: ({ signal }) => getCoursesWithPagination({ params, signal }),
   })
-
-  /* useEffect(() => {
-    console.log('params changed')
-    if (isEqual(paramsShallow.current, params)) {
-      paramsShallow.current(params)
-      dispatch(sortFilterActions.setParams(params))
-    }
-  }, [params, dispatch]) */
 
   useEffect(() => {
     if (courses) {

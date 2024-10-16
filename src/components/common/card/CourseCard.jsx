@@ -20,8 +20,6 @@ export function CourseCard({
   view = 'grid',
   filterParams,
 }) {
-  // const { params } = useSelector((state) => state.sort)
-
   // optimistic updating using tanstack query to add like
   const { mutate: addLikeMutatte } = useLikeAndDislikeUpdate(
     addLikeForCourse,

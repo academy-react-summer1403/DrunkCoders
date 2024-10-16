@@ -2,24 +2,51 @@ import { Button, CardHeader as CardImage } from '@components'
 import { Card as NextUiCard, CardHeader, CardBody } from '@nextui-org/react'
 import { LikeAndDislike, NewsCardDetails } from '@components/index'
 import { Link } from 'react-router-dom'
+import { useArticleLikeAndDislikeUpdate } from '@hooks/index'
+import {
+  addDislikeForArticle,
+  addLikeForArticle,
+  removeArticleLikeOrDislike,
+} from '@core/index'
 
 export function NewsCard({
   buttonColor = '#5A7EFF',
   data: news,
   view = 'grid',
+  filterParams,
 }) {
+  // optimistic updating using tanstack query to add like
+  const { mutate: addLikeMutatte } = useArticleLikeAndDislikeUpdate(
+    addLikeForArticle,
+    filterParams,
+    'like',
+  )
+  // optimistic updating using tanstack query to add dislike
+  const { mutate: addDislikeMutatte } = useArticleLikeAndDislikeUpdate(
+    addDislikeForArticle,
+    filterParams,
+    'dislike',
+  )
+
+  // optimistic updating using tanstack query to remove like or dislike
+  const { mutate: removeLikeDislikeMutate } = useArticleLikeAndDislikeUpdate(
+    removeArticleLikeOrDislike,
+    filterParams,
+    'remove',
+  )
   function handleLikeAndDislike(identifier) {
-    /* if (identifier === 'like') {
-      console.log(course.courseId)
-      addLikeMutatte(course.courseId)
+    if (identifier === 'like') {
+      addLikeMutatte(news.id)
     } else if (identifier === 'dislike') {
-      addDislikeMutatte(course.courseId)
+      addDislikeMutatte(news.id)
     } else {
-      const fd = new FormData()
-      fd.append('CourseLikeId', course.userLikedId)
-      removeLikeDislikeMutate(fd)
-    }*/
+      removeLikeDislikeMutate({
+        likeId: news.likeId,
+        articleId: news.id,
+      })
+    }
   }
+  // console.log(news)
   return (
     <NextUiCard
       className={`grid rounded-3xl bg-[#787878] bg-opacity-[0.13] text-[#272727] shadow-none dark:bg-white/20 ${view === 'grid' ? 'grid-cols-1' : 'lg:h-[286px] lg:grid-cols-12'}`}
@@ -37,7 +64,10 @@ export function NewsCard({
 
         <div className="-mt- mb-1 flex flex-row items-center justify-between gap-2">
           <LikeAndDislike
-            userLikeStatus={{ like: false, dislike: false }}
+            userLikeStatus={{
+              like: news.currentUserIsLike,
+              dislike: news.currentUserIsDissLike,
+            }}
             like={news.currentLikeCount}
             dislike={news.currentDissLikeCount}
             onLikeAndDislike={handleLikeAndDislike}
