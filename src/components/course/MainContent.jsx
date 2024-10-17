@@ -35,7 +35,9 @@ export function MainContent({course}) {
           {course.describe}
         </p>
 
-        <Rating/>
+        <Rating
+          courseId={course.courseId}
+        />
         
         
       </div>

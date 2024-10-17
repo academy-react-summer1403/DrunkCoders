@@ -1,10 +1,13 @@
 export { getTopCourses } from './services/api/course.api'
 export { getCoursesWithPagination } from './services/api/course.api'
-export { getCourseDetails } from './services/api/course.api'
-export { getCourseComments } from './services/api/course.api'
-export { getCourseCommentReplies } from './services/api/course.api'
-export { sendCourseComment } from './services/api/course.api'
-export { sendCourseReply } from './services/api/course.api'
+
+export { getCourseDetails } from './services/api/courseDetail.api'
+export { getCourseComments } from './services/api/courseDetail.api'
+export { getCourseCommentReplies } from './services/api/courseDetail.api'
+export { sendCourseComment } from './services/api/courseDetail.api'
+export { sendCourseReply } from './services/api/courseDetail.api'
+export { rateCourse } from './services/api/courseDetail.api'
+export { reserveCourse } from './services/api/courseDetail.api'
 
 export { getWeekNews } from './services/api/news.api'
 export { getAllTeachers } from './services/api/teacher.api'
