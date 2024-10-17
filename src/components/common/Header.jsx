@@ -40,7 +40,12 @@ export function Header() {
   }
 
   let token = useSelector((state) => state.token.token)
-  token = isTokenExpired(token)
+  let tokenExpired
+  if (token) {
+    tokenExpired = isTokenExpired(token)
+  } else {
+    tokenExpired = true
+  }
 
   return (
     <div className="relative top-3.5 flex h-12 justify-around gap-16 max-lg:gap-0">
@@ -72,7 +77,7 @@ export function Header() {
 
         <div className="max-md:relative max-md:right-20 max-md:flex max-sm:right-11">
           <div className="relative top-1 max-md:w-12">
-            {!token ? (
+            {!tokenExpired ? (
               <Popover showArrow placement="bottom">
                 <PopoverTrigger>
                   <User
