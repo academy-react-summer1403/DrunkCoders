@@ -6,6 +6,5 @@ function decodeJWT(token) {
 export function isTokenExpired(token) {
   const decoded = decodeJWT(token)
   const currentTime = Math.floor(Date.now() / 1000) // Current time in seconds
-
   return decoded.exp < currentTime // If `exp` is less than the current time, it's expired
 }

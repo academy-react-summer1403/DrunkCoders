@@ -37,11 +37,9 @@ export { EnterInfo } from './authentication/EnterInfo'
 export { LoginForm } from './authentication/LoginForm'
 export { RegisterForm } from './authentication/RegisterForm'
 export { OtpInput } from './common/OtpInput'
-
-export { CourseDContainer } from './course/CourseDContainer'
+export { CourseDContainer } from './course-detail/CourseDContainer'
 export { Rating } from './common/Rating'
-export { Comment } from './course/comment/Comment'
-
+export { Comment } from './course-detail/comment/Comment'
 export { UseLayout } from './UserPanel/UseLayOut'
 export { DashboardPage } from './UserPanel/DashboardPage'
 export { MyReservationPage } from './UserPanel/MyReservationPage'

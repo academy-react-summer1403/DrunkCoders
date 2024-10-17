@@ -22,13 +22,14 @@ export function LoginForm({ currentStep, setCurrentStep }) {
   })
   const rememberMe = watch('rememberMe', false)
 
+  // 1729155397
   const { mutate } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       alert(data.message)
       if (data.success) {
-        console.log(data.success)
-        dispatch(tokenActions.login({ token: data.token, userId: data.id }))
+        console.log(data)
+        dispatch(tokenActions.login({ token: data.token }))
         navigate('/')
       } else {
         deleteLocalStorage('token')
