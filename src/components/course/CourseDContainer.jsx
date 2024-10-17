@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { Comment } from "@components";
 import { MainContent } from "./MainContent";
 import { OverView } from "./OverView";
-import { PopularCourses } from "..";
 import { getCourseDetails } from "@core/index";
 
 export function CourseDContainer() {
@@ -32,7 +31,7 @@ export function CourseDContainer() {
         </main>
       </div>
       <div className="my-6">
-        <PopularCourses />
+
       </div>
     </>
   );

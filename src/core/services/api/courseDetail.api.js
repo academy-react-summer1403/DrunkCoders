@@ -111,3 +111,11 @@ export async function getCourseDetails(id, { signal }) {
     }
   }
   
+  export async function getRelatedCourse(techList){
+    try {
+        const response = await api.get(`/Home/GetCoursesWithPagination?ListTech=${techList}`)
+        return response;
+    } catch (error) {
+        console.log('get related', error);
+    }
+  }
