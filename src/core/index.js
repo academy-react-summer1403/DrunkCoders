@@ -8,6 +8,8 @@ export { sendCourseComment } from './services/api/courseDetail.api'
 export { sendCourseReply } from './services/api/courseDetail.api'
 export { rateCourse } from './services/api/courseDetail.api'
 export { reserveCourse } from './services/api/courseDetail.api'
+export { likeCourseComment } from './services/api/courseDetail.api'
+export { dislikeCourseComment } from './services/api/courseDetail.api'
 
 export { getWeekNews } from './services/api/news.api'
 export { getAllTeachers } from './services/api/teacher.api'

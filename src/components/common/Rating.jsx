@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 
 export function Rating({courseId}) {
   const [rating, setRating] = useState(null);
+  
   const mutation = useMutation({
     mutationFn: (newRating) => rateCourse({courseId, newRating}),
     onSuccess: (response) => {
