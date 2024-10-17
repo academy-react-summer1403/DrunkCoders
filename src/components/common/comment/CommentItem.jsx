@@ -29,13 +29,23 @@ export function CommentItem({ comment, handleOpenModal }) {
         <div className="mr-8 mt-3 pb-12">
           <p><strong>{comment.title}</strong></p>
           <p className="mt-2">{comment.describe}</p>
-          <Button
-            onPress={() => handleOpenModal(true, comment, true, )}
-            className="-mr-1 mt-4 h-9 w-32 bg-blue-200 font-medium text-blue-600"
-          >
-            <CommentArrow />
-            جواب دادن
-          </Button>
+          <div className='flex items-center gap-2'>
+            <Button
+              onPress={() => handleOpenModal(true, comment, true, )}
+              className="-mr-1 mt-4 h-9 w-32 bg-blue-200 font-medium text-blue-600"
+              >
+              <CommentArrow />
+              جواب دادن
+            </Button>
+            <div className='flex gap-2 items-center mt-4'>
+              <div className='flex gap-1 items-center'>
+                {comment.likeCount}
+              </div>
+              <div className='flex gap-1 items-center'>
+                {comment.disslikeCount}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

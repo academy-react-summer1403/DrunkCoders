@@ -74,3 +74,21 @@ export async function getCourseDetails(id, { signal }) {
         console.log(error.ErrorMessage);
     }
   }
+
+  export async function likeCourseComment ( commentId ){
+    try {
+        const response = await api.post(`/Course/AddCourseCommentLike?CourseCommandId=${commentId}`)
+        return response;
+    } catch (error) {
+        console.log('course comment like ', error);
+    }
+  }
+
+  export async function dislikeCourseComment ( commentId ) {
+    try {
+        const response = await api.post(`/Course/AddCourseCommentDissLike?CourseCommandId=${commentId}`)
+        return response;
+    } catch (error) {
+        console.log('course comment dislike ', error);
+    }
+  }
