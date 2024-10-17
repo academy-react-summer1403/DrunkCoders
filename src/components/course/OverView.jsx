@@ -2,15 +2,17 @@ import React, { useState } from 'react'
 import { Button } from '@components'
 import { Student, Calender, ThumbUp, ThumbDown, Bookmark } from '@assets'
 import { StarIcon } from '@assets/index';
-import { reserveCourse } from '@core/index';
-import { useMutation } from '@tanstack/react-query'; // Importing useMutation from Tanstack Query
+import { reserveCourse,addCourseFavorite } from '@core';
+import { useMutation } from '@tanstack/react-query';
 import { useDisclosure } from '@nextui-org/react';
 import { ReserveModal } from './ReserveModal';
+import { removeCourseFavorite } from '@core/index';
 
 export function OverView({ course }) {
   const [likeState, setLikeState] = useState({ like: false, dislike: false });
   const [isBookmarked, setIsBookmarked] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const courseId = course.courseId; 
 
   const farsiDateFormatter = new Intl.DateTimeFormat('fa-IR', {
     year: 'numeric',
@@ -26,11 +28,55 @@ export function OverView({ course }) {
       console.log("Reservation successful:", data);
     },
   });
-
+     
   function handleReserve() {
-    const courseId = course.courseId;    
     mutation.mutate({ courseId });
   }
+
+  const { mutate : addCourseFavoriteMutate, isPending, isError } = 
+  useMutation({
+    mutationFn: () => addCourseFavorite({courseId}),
+    onSuccess: (data) => {
+      alert('added to favoriteCourse');
+    },
+    onError: (err) => {
+      alert('unSeccessful')
+    }
+  });
+
+  
+  const setRemoveFavorite = useMutation({
+    mutationFn:removeCourseFavorite,
+    onSuccess: () => {
+      console.log('remove from favorite');
+    },
+    onError: (error) => {
+      console.log('no remove', error);
+    }
+  });
+  function removeFavoriteCourse(){
+    const payload = {
+      favoriteId: course.userFavoriteId
+    }
+    console.log(payload);
+    const formData = new FormData();
+    formData.append('CourseFavoriteId', payload.favoriteId);
+
+    setRemoveFavorite.mutate(formData)
+  }
+
+  
+  function handleBookmark() {
+    setIsBookmarked((prevState) => !prevState);
+  
+    if (!isBookmarked) {
+      addCourseFavoriteMutate();
+    } 
+    if(isBookmarked){
+      removeFavoriteCourse()
+    }
+  }
+  
 
   function handleLike(identifier) {
     setLikeState((prevState) =>
@@ -38,10 +84,6 @@ export function OverView({ course }) {
         ? { like: !prevState.like, dislike: false }
         : { dislike: !prevState.dislike, like: false },
     );
-  }
-
-  function handleBookmark() {
-    setIsBookmarked((prevState) => !prevState);
   }
 
   return (

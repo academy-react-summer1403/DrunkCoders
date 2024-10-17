@@ -92,3 +92,22 @@ export async function getCourseDetails(id, { signal }) {
         console.log('course comment dislike ', error);
     }
   }
+
+  export async function addCourseFavorite ({ courseId }) {
+    try {
+        const response = await api.post('/Course/AddCourseFavorite', {courseId})
+        return response;
+    } catch (error) {
+        console.log('course favorite', error);
+    }
+  }
+
+  export async function removeCourseFavorite(formData) {
+    try {
+      const response = await api.delete('/Course/DeleteCourseFavorite', {data:formData});
+      return response;
+    } catch (error) {
+      console.log('removeCourseFavorite', error);
+    }
+  }
+  

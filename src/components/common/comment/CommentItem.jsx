@@ -9,14 +9,14 @@ import { useState } from 'react';
 export function CommentItem({ comment, handleOpenModal }) {
   const [likeState, setLikeState] = useState({ like: false, dislike: false });
 
-  const { data: repliesData, isLoading: loadingReplies, error: repliesError } = useQuery({
+  const { data: repliesData, isPending: loadingReplies, error: repliesError } = useQuery({
     queryKey: ['commentReplies', comment.courseId, comment.id],
     queryFn: () => getCourseCommentReplies(comment.courseId, comment.id),
     enabled: !!comment.id,
   });
 
 
-  const { mutate: likeCourseCommentMutate, isLoading: liking, isError: likeError } = 
+  const { mutate: likeCourseCommentMutate, isPending: liking, isError: likeError } = 
   useMutation({
     mutationFn: () => likeCourseComment(comment.id),
     onSuccess: (data) => {
@@ -27,7 +27,7 @@ export function CommentItem({ comment, handleOpenModal }) {
     }
   });
 
-  const { mutate: dislikeCourseCommentMutate, isLoading: dissliking, isError} = 
+  const { mutate: dislikeCourseCommentMutate, isPending: dissliking, isError} = 
   useMutation({
     mutationFn: () => dislikeCourseComment(comment.id),
     onSuccess: (data) => {
