@@ -60,6 +60,7 @@ export { default as LogOutPanel } from './icons/panel/logout-panel.svg?react'
 export { default as PanelPay } from './icons/panel/payment-panel.svg?react'
 export { default as ProfilePanel } from './icons/panel/user-edit.svg?react'
 export { default as Accounts } from './icons/panel/user-settings.svg?react'
+
 export { default as Start2 } from './icons/star-2.svg?react'
 export { default as Start1 } from './icons/star-1.svg?react'
 export { default as glassyTwisted } from './images/3d-glassy-twisted.png'

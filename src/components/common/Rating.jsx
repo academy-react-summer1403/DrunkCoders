@@ -1,9 +1,27 @@
 import { StarInCircle } from '@assets';
 import { DetailStar } from '@assets/index';
+import { rateCourse } from '@core/index';
+import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 
-export function Rating() {
+export function Rating({courseId}) {
   const [rating, setRating] = useState(null);
+  
+  const mutation = useMutation({
+    mutationFn: (newRating) => rateCourse({courseId, newRating}),
+    onSuccess: (response) => {
+      console.log('Rating successfully sent:', response);
+    },
+    onError: (error) => {
+      console.error('Error sending rating:', error);
+    },
+  });
+
+  function handleRatingClick (currentRate) {
+    setRating(currentRate);
+    console.log(`Current rating: ${currentRate}`);
+    mutation.mutate(currentRate);
+  };
 
   return (
     <span className="flex gap-2 items-center">
@@ -18,7 +36,7 @@ export function Rating() {
                 type="radio"
                 name="rating"
                 value={currentRate}
-                onClick={() => setRating(currentRate)}
+                onClick={() => handleRatingClick(currentRate)}
                 className="hidden"
               />
               <DetailStar

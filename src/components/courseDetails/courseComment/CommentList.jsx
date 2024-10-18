@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {CommentItem} from './CommentItem'
 
 export function CommentList({ comments, handleOpenModal }) {

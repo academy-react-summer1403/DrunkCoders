@@ -15,7 +15,7 @@ export const infoSchema = z.object({
       .nonempty("ایمیل الزامی است"),
     password: z
       .string()
-      .min(8, { message: 'رمز عبور باید حداقل 8 کاراکتر باشد' })
+      .min(6, { message: 'رمز عبور باید حداقل 6 کاراکتر باشد' })
       .max(32, { message: 'رمز عبور نباید بیش از 32 کاراکتر باشد' }),
   });
   export const loginSchema = z.object({
@@ -28,6 +28,6 @@ export const infoSchema = z.object({
       ),
     password: z
       .string()
-      .min(8, { message: 'رمز عبور باید حداقل 8 کاراکتر باشد' })
+      .min(6, { message: 'رمز عبور باید حداقل 6 کاراکتر باشد' })
       .max(32, { message: 'رمز عبور نباید بیش از 32 کاراکتر باشد' }),
   });

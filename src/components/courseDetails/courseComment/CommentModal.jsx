@@ -9,6 +9,7 @@ import {
   ModalFooter,
 } from '@nextui-org/react';
 import { CommentList } from './CommentList';
+import { useState } from 'react';
 
 export function CommentModal({
   isOpen,
@@ -18,17 +19,26 @@ export function CommentModal({
   setModalInput,
   modalSubject,
   setModalSubject,
-  handleSubmit,
-  comments,          // Pass comments as a prop
+  addCourseComment,
+  comments,
   handleOpenModal,
-}) {
+  isReply,
+  replyToComment,
+  addCourseReply
+})
+
+{
+  const [scrollBehavior, setScrollBehavior] = useState("inside");
+  console.log( 'isReply',isReply);
+  console.log('replyToComment', replyToComment);
   return (
-    <Modal
+    <Modal 
+    scrollBehavior={scrollBehavior}
       classNames={{
-        closeButton: 'absolute right-[794px] top-2 h-14 hover:hidden text-red-500  z-20   w-16 ',
+        closeButton: 'absolute right-[794px] top-2 h-14 hover:hidden text-red-500 z-20 w-16 ',
       }}
-      className="max-w-4xl"
-      backdrop="transparent"
+      className="max-w-4xl dark:bg-gray-700"
+      backdrop="opaque"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       motionProps={{
@@ -57,7 +67,6 @@ export function CommentModal({
             </ModalHeader>
 
             <ModalBody>
-              {/* Conditionally render comments or a fallback message */}
               {comments.length > 0 ? (
                 <CommentList comments={comments} handleOpenModal={handleOpenModal} />
               ) : (
@@ -68,31 +77,43 @@ export function CommentModal({
             <ModalFooter className="flex justify-start ">
               <Button
                 type="submit"
-                onPress={handleSubmit}
+                onClick={isReply ? addCourseReply : addCourseComment}
                 className="relative top-5 h-16 p-0"
               >
                 <Sent className="rounded-1xl h-8 w-8" />
               </Button>
-              <div className="w-[700px] rounded-3xl border p-2">
-                <input
-                  className="p-2 outline-none"
-                  label="موضوع"
-                  value={modalSubject}
-                  onChange={(e) => setModalSubject(e.target.value)}
-                  placeholder="عنوان نظر خود را وارد کنید"
-                />
-                <hr />
-                <input
-                  className="w- p-2 outline-none"
-                  label="متن"
-                  value={modalInput}
-                  onChange={(e) => setModalInput(e.target.value)}
-                  placeholder={
-                    modalTitle === 'پاسخ شما'
+              <div>
+                {isReply && replyToComment && (
+                  <div className="identify p-4 pb-8 -mb-5 bg-primary-blue text-white rounded-t-3xl flex justify-between">
+                    <span>
+                    پاسخ به {replyToComment.author}
+                    </span>
+                    <span className='cursor-pointer'  onClick={() => { /*isReply(false)*/ }}>
+                      انصراف x
+                    </span>
+                  </div>
+                )}
+                <div className="w-[700px] rounded-3xl border p-2 bg-white">
+                  <input
+                    className="p-2 outline-none w-full"
+                    label="موضوع"
+                    value={modalSubject}
+                    onChange={(e) => setModalSubject(e.target.value)}
+                    placeholder="عنوان نظر خود را وارد کنید"
+                    />
+                  <hr />
+                  <input
+                    className="w- p-2 outline-none w-full"
+                    label="متن"
+                    value={modalInput}
+                    onChange={(e) => setModalInput(e.target.value)}
+                    placeholder={
+                      modalTitle === 'پاسخ شما'
                       ? 'پاسخ خود را بنویسید'
                       : 'نظر خود را بنویسید'
-                  }
-                />
+                    }
+                    />
+                </div>
               </div>
               <div className="relative top-8 flex h-16 w-16 justify-center rounded-full border-1 border-gray-300">
                 <Smile className="relative top-3.5" />
