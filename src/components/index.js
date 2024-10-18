@@ -22,10 +22,10 @@ export { EnterInfo } from "./authentication/EnterInfo";
 export { LoginForm } from "./authentication/LoginForm";
 export { RegisterForm } from "./authentication/RegisterForm";
 export { OtpInput } from "./common/OtpInput";
-export { CourseDContainer} from "./course/CourseDContainer";
+export { CourseDContainer} from "./courseDetails/CourseDContainer";
 
 export { Rating } from "./common/Rating";
-export { Comment } from "./common/comment/Comment";
+export { Comment } from "./courseDetails/courseComment/Comment";
 export { Pagination } from './common/Pagination'
 
 export { SearchBox } from './courses/SearchBox'

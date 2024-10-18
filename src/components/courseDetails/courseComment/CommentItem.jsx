@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getCourseCommentReplies, likeCourseComment, 
   dislikeCourseComment } from '@core';
 import { Button } from '@components/index';
@@ -8,6 +8,8 @@ import { useState } from 'react';
 
 export function CommentItem({ comment, handleOpenModal }) {
   const [likeState, setLikeState] = useState({ like: false, dislike: false });
+  const queryClient = useQueryClient();
+
 
   const { data: repliesData, isPending: loadingReplies, error: repliesError } = useQuery({
     queryKey: ['commentReplies', comment.courseId, comment.id],
@@ -21,6 +23,7 @@ export function CommentItem({ comment, handleOpenModal }) {
     mutationFn: () => likeCourseComment(comment.id),
     onSuccess: (data) => {
       console.log('Liked the comment successfully:', data);
+      queryClient.invalidateQueries(['courseDetails', data])
     },
     onError: (error) => {
       console.error('Error liking the comment:', error);
@@ -32,6 +35,7 @@ export function CommentItem({ comment, handleOpenModal }) {
     mutationFn: () => dislikeCourseComment(comment.id),
     onSuccess: (data) => {
       console.log('Disslike the comment successfully:', data);
+      queryClient.invalidateQueries(['courseDetails', data])
     },
     onError:(error) => {
       console.log('error dissliking the comment', error);
@@ -58,9 +62,9 @@ export function CommentItem({ comment, handleOpenModal }) {
   const finalReplies = repliesData || [];
 
   return (
-    <div className="comment mt-3 p-3">
-      <div className="border-blue-600 border">
-        <div className="flex items-center gap-2">
+    <div className="comment flex flex-col p-7">
+      <div className=" border-r-3 border-b-3 rounded-3xl rounded-t-none rounded-l-none border-gray-400">
+        <div className="flex items-center gap-2 -mr-7">
           <Avatar src={comment.pictureAddress} size="lg" />
           <span>{comment.author}</span>
         </div>
@@ -93,18 +97,25 @@ export function CommentItem({ comment, handleOpenModal }) {
                 {comment.disslikeCount}
               </div>
             </div>
+            
           </div>
         </div>
       </div>
 
       {finalReplies.length > 0 && (
-        <Accordion isCompact>
-          <AccordionItem title="مشاهده جواب‌ها">
-            <div className="replies mr-6 border-l pl-3">
+        <Accordion isCompact
+        className='p-0'
+        >
+          <AccordionItem title="مشاهده جواب‌ها"
+              classNames ={{
+                heading : 'w-fit lg:-mt-24 lg:mr-96 -mt-10 mr-10',
+              }}
+          >
+            <div className="replies mr-6 ">
               {finalReplies.map((reply) => (
-                <div key={reply.id} className="reply p-2">
+                <div key={reply.id} className="reply bg-white mt-5 mr-7 dark:bg-black">
                   <div className="flex items-center gap-2">
-                    <Avatar src={reply.pictureAddress} size="md" />
+                    <Avatar src={reply.pictureAddress} size="lg" />
                     <span>{reply.author}</span>
                   </div>
                   <div className="mr-8">

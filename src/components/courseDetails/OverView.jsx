@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '@components'
 import { Student, Calender, ThumbUp, ThumbDown, Bookmark } from '@assets'
 import { StarIcon } from '@assets/index';
 import { reserveCourse,addCourseFavorite } from '@core';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useDisclosure } from '@nextui-org/react';
 import { ReserveModal } from './ReserveModal';
 import { removeCourseFavorite } from '@core/index';
@@ -13,6 +13,7 @@ export function OverView({ course }) {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const courseId = course.courseId; 
+  const queryClient = useQueryClient();
 
   const farsiDateFormatter = new Intl.DateTimeFormat('fa-IR', {
     year: 'numeric',
@@ -38,9 +39,10 @@ export function OverView({ course }) {
     mutationFn: () => addCourseFavorite({courseId}),
     onSuccess: (data) => {
       alert('added to favoriteCourse');
+      queryClient.invalidateQueries(['courseDetails', data])
     },
     onError: (err) => {
-      alert('unSeccessful')
+      alert('unseccessful')
     }
   });
 
@@ -48,7 +50,7 @@ export function OverView({ course }) {
   const setRemoveFavorite = useMutation({
     mutationFn:removeCourseFavorite,
     onSuccess: () => {
-      console.log('remove from favorite');
+      alert('remove from favorite');
     },
     onError: (error) => {
       console.log('no remove', error);
@@ -65,16 +67,21 @@ export function OverView({ course }) {
     setRemoveFavorite.mutate(formData)
   }
 
-  
-  function handleBookmark() {
-    setIsBookmarked((prevState) => !prevState);
-  
-    if (!isBookmarked) {
-      addCourseFavoriteMutate();
-    } 
-    if(isBookmarked){
-      removeFavoriteCourse()
+  useEffect(() => {
+    if (course.isUserFavorite) {
+      setIsBookmarked(true);
     }
+  }, [course.isUserFavorite]);
+
+  function handleBookmark() {
+    setIsBookmarked((prevState) => {
+      if (prevState) {
+        removeFavoriteCourse();
+      } else {
+        addCourseFavoriteMutate();
+      }
+      return !prevState;
+    });
   }
   
 

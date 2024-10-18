@@ -4,7 +4,7 @@ import { useDisclosure } from '@nextui-org/react';
 import { CommentModal } from './CommentModal';
 import { CommentList } from './CommentList';
 import { CommentWhite } from '@assets/index';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCourseComments, sendCourseComment, sendCourseReply } from '@core';
 
 
@@ -16,6 +16,9 @@ export function Comment({ courseId }) {
   const [isReply, setIsReply] = useState(false);
   const [replyToComment, setReplyToComment] = useState(null);
 
+  const queryClient = useQueryClient();
+
+
   const { data: comments, isLoading, error } = useQuery({
     queryKey: ['courseComments', courseId],
     queryFn: () => getCourseComments({ courseId }),
@@ -23,10 +26,11 @@ export function Comment({ courseId }) {
 
   const mutation = useMutation({
     mutationFn: sendCourseComment,
-    onSuccess: () => {
+    onSuccess: (data) => {
       setModalInput('');
       setModalSubject('');
       onOpen(false);
+      queryClient.invalidateQueries(['courseDetails', data])
     },
   });
 
@@ -44,11 +48,12 @@ export function Comment({ courseId }) {
   }
   const setReply = useMutation({
     mutationFn: sendCourseReply,
-    onSuccess: () => {
+    onSuccess: (data) => {
       alert('reply sent successfully');
       setModalInput('');
       setModalSubject('');
       onOpen(false);
+      queryClient.invalidateQueries(['courseDetails', data])
     },
     onError: (error) => {
       console.error('No response received:', error.message);

@@ -32,12 +32,12 @@ export function CommentModal({
   console.log( 'isReply',isReply);
   console.log('replyToComment', replyToComment);
   return (
-    <Modal
+    <Modal 
     scrollBehavior={scrollBehavior}
       classNames={{
-        closeButton: 'absolute right-[794px] top-2 h-14 hover:hidden text-red-500  z-20   w-16 ',
+        closeButton: 'absolute right-[794px] top-2 h-14 hover:hidden text-red-500 z-20 w-16 ',
       }}
-      className="max-w-4xl"
+      className="max-w-4xl dark:bg-gray-700"
       backdrop="opaque"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
@@ -84,13 +84,18 @@ export function CommentModal({
               </Button>
               <div>
                 {isReply && replyToComment && (
-                  <div className="p-2 mb-4 bg-gray-100 rounded-md">
+                  <div className="identify p-4 pb-8 -mb-5 bg-primary-blue text-white rounded-t-3xl flex justify-between">
+                    <span>
                     پاسخ به {replyToComment.author}
+                    </span>
+                    <span className='cursor-pointer'  onClick={() => { /*isReply(false)*/ }}>
+                      انصراف x
+                    </span>
                   </div>
                 )}
-                <div className="w-[700px] rounded-3xl border p-2">
+                <div className="w-[700px] rounded-3xl border p-2 bg-white">
                   <input
-                    className="p-2 outline-none"
+                    className="p-2 outline-none w-full"
                     label="موضوع"
                     value={modalSubject}
                     onChange={(e) => setModalSubject(e.target.value)}
@@ -98,7 +103,7 @@ export function CommentModal({
                     />
                   <hr />
                   <input
-                    className="w- p-2 outline-none"
+                    className="w- p-2 outline-none w-full"
                     label="متن"
                     value={modalInput}
                     onChange={(e) => setModalInput(e.target.value)}

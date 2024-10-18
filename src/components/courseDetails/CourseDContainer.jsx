@@ -3,18 +3,40 @@ import { useQuery } from "@tanstack/react-query";
 import { Comment } from "@components";
 import { MainContent } from "./MainContent";
 import { OverView } from "./OverView";
-import { getCourseDetails } from "@core/index";
+import { getCategory, getCourseDetails } from "@core/index";
+import { RelatedCourse } from "./RelatedCourse";
+
 
 export function CourseDContainer() {
+  
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["courseDetails", id],
-    queryFn: ({ signal }) => getCourseDetails(id, { signal }), // Pass id here
+    queryFn: ({ signal }) => getCourseDetails(id, { signal }),
   });
 
+  const { data:category }= useQuery({
+  queryKey: ["allCategories"],
+  queryFn: ()=> getCategory()
+  })
+
+  
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading course details</div>;
+
+  const getMatchingCategoryIds = () => {
+    if (!data || !category) return [];
+
+    return data.techs.map((tech) => {
+      const matchingCategory = category.find((cat) => cat.techName === tech);
+      return matchingCategory ? matchingCategory.id : null;
+    }).filter(Boolean); 
+  };
+
+  const matchingCategoryIds = getMatchingCategoryIds();
+
+  
 
   return (
     <>
@@ -31,7 +53,9 @@ export function CourseDContainer() {
         </main>
       </div>
       <div className="my-6">
-
+        <RelatedCourse
+          techId = {matchingCategoryIds[0]}
+        />
       </div>
     </>
   );

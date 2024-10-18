@@ -12,6 +12,8 @@ export { likeCourseComment } from './services/api/courseDetail.api'
 export { dislikeCourseComment } from './services/api/courseDetail.api'
 export { addCourseFavorite } from './services/api/courseDetail.api'
 export { removeCourseFavorite } from './services/api/courseDetail.api'
+export { getRelatedCourse } from './services/api/courseDetail.api'
+export { getCategory } from './services/api/courseDetail.api'
 
 export { getWeekNews } from './services/api/news.api'
 export { getAllTeachers } from './services/api/teacher.api'

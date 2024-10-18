@@ -111,11 +111,20 @@ export async function getCourseDetails(id, { signal }) {
     }
   }
   
-  export async function getRelatedCourse(techList){
+  export async function getRelatedCourse(techId){
     try {
-        const response = await api.get(`/Home/GetCoursesWithPagination?ListTech=${techList}`)
+        const response = await api.get(`/Home/GetCoursesWithPagination?TechCount=1&ListTech=${techId}`)
         return response;
     } catch (error) {
         console.log('get related', error);
+    }
+  }
+
+  export async function getCategory(){
+    try {
+        const response = await api.get('/Home/GetTechnologies')
+        return response;
+    } catch (error) {
+        console.log('get category', error);
     }
   }
