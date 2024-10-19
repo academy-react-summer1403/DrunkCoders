@@ -110,7 +110,7 @@ export function Header() {
                 as={Link}
                 to="/auth"
                 color="primary"
-                className="h-12 w-40 rounded-full text-lg max-md:relative"
+                className="h-12 w-40 rounded-full text-lg max-md:relative max-md:left-28"
               >
                 ورود یا ثبت نام
               </Button>
