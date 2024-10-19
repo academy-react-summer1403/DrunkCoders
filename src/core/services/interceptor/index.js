@@ -71,11 +71,9 @@ const handleError = (error) => {
   } else if (error.request) {
     // The request was made but no response was received
     console.error('Request Error:', error.request)
-    alert(
-      'Network error! Please check your internet connection. Are you login??',
-    )
+    // alert('Network error! Please check your internet connection.')
     if (error.request.status === 0) {
-      console.error('Network error or unauthorized access')
+      console.error('Network error or unauthorized access. Are you login??')
     }
   } else {
     // Something happened in setting up the request that triggered an Error

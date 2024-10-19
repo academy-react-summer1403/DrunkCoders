@@ -18,35 +18,38 @@ export function CourseGrid() {
     dateRange,
     params: reduxParams,
   } = useSelector((state) => state.sort)
-  const paramsShallow = useRef(reduxParams)
 
-  const params = useMemo(
-    () => ({
-      PageNumber: pagination.currentPage,
-      RowsOfPage: 9,
-      SortingCol:
-        order === 'costAsc' || order === 'costDesc'
-          ? 'cost'
-          : order === ''
-            ? null
-            : order,
-      SortType: descendingOrder ? 'DESC' : 'ASC',
-      Query: searchTerm,
-      TechCount: filterId.category ? 1 : 0,
-      ListTech: filterId.category === '' ? null : filterId.category,
-      courseLevelId: filterId.level,
-      TeacherId: filterId.teacher,
-      CostDown: cost.costDown,
-      CostUp: cost.costUp,
-      StartDate: dateRange.startDate,
-      EndDate: dateRange.endDate,
-    }),
+  const queryKey = useMemo(
+    () => [
+      'courses',
+      {
+        PageNumber: pagination.currentPage,
+        RowsOfPage: 9,
+        SortingCol:
+          order === 'costAsc' || order === 'costDesc'
+            ? 'cost'
+            : order === ''
+              ? null
+              : order,
+        SortType: descendingOrder ? 'DESC' : 'ASC',
+        Query: searchTerm,
+        TechCount: filterId.category ? 1 : 0,
+        ListTech: filterId.category === '' ? null : filterId.category,
+        courseLevelId: filterId.level,
+        TeacherId: filterId.teacher,
+        CostDown: cost.costDown,
+        CostUp: cost.costUp,
+        StartDate: dateRange.startDate,
+        EndDate: dateRange.endDate,
+      },
+    ],
     [pagination, order, descendingOrder, searchTerm, filterId, cost, dateRange],
   )
 
   const { data: courses } = useQuery({
-    queryKey: ['courses', params],
-    queryFn: ({ signal }) => getCoursesWithPagination({ params, signal }),
+    queryKey,
+    queryFn: ({ signal }) =>
+      getCoursesWithPagination({ params: queryKey[1], signal }),
   })
 
   useEffect(() => {
@@ -54,6 +57,7 @@ export function CourseGrid() {
       dispatch(
         sortFilterActions.setTotalPageCount(Math.ceil(courses.totalCount / 9)),
       )
+      dispatch(sortFilterActions.setAllCoursesQueryKey(queryKey))
     }
   }, [courses, dispatch])
 
@@ -69,7 +73,7 @@ export function CourseGrid() {
               data={course}
               buttonColor={index % 3 === 1 ? '#DE59FF' : '#5A7EFF'}
               view={view}
-              filterParams={params}
+              queryKey={queryKey}
             />
           ))}
           {courses.courseFilterDtos.length === 0 && (
