@@ -63,7 +63,7 @@ export function CommentItem({ comment, handleOpenModal }) {
 
   return (
     <div className="comment flex flex-col p-7">
-      <div className=" border-r-3 border-b-3 rounded-3xl rounded-t-none rounded-l-none border-gray-400">
+      <div className={`${finalReplies.length > 0 ? 'border-r-3 border-b-3' : ''} rounded-3xl rounded-t-none rounded-l-none border-gray-400`}>
         <div className="flex items-center gap-2 -mr-7">
           <Avatar src={comment.pictureAddress} size="lg" />
           <span>{comment.author}</span>
