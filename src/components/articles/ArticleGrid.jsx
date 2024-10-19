@@ -2,30 +2,57 @@ import { NewsCard } from '@components/index'
 import { getWeekNews } from '@core/index'
 import { articleSortFilterActions } from '@store/article-sort-filter-slice'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export function ArticleGrid() {
   const dispatch = useDispatch()
-  const { pagination, order, searchTerm, descendingOrder, category } =
-    useSelector((state) => state.articleSort)
+  const articleSaver = useRef()
+  const {
+    pagination,
+    order,
+    searchTerm,
+    descendingOrder,
+    category,
+    dateRange,
+  } = useSelector((state) => state.articleSort)
 
-  const params = useMemo(
-    () => ({
-      PageNumber: pagination.currentPage,
-      RowsOfPage: 9,
-      SortingCol: order === '' ? null : order,
-      SortType: descendingOrder ? 'DESC' : 'ASC',
-      Query: searchTerm,
-      NewsCategoryId: category,
-    }),
-    [pagination, order, descendingOrder, searchTerm, category],
+  const queryKey = useMemo(
+    () => [
+      'news',
+      {
+        PageNumber: pagination.currentPage,
+        RowsOfPage: 9,
+        SortingCol: order === '' ? null : order,
+        SortType: descendingOrder ? 'DESC' : 'ASC',
+        Query: searchTerm,
+        NewsCategoryId: category,
+        StartDate: dateRange.startDate,
+        EndDate: dateRange.endDate,
+      },
+    ],
+    [pagination, order, descendingOrder, searchTerm, category, dateRange],
   )
 
-  const { data: news } = useQuery({
-    queryKey: ['news', params],
-    queryFn: ({ signal }) => getWeekNews({ params, signal }),
+  let { data: news } = useQuery({
+    queryKey,
+    queryFn: ({ signal }) => getWeekNews({ params: queryKey[1], signal }),
   })
+
+  if (news && dateRange.startDate) {
+    const startDate = new Date(dateRange.startDate)
+    const endDate = new Date(dateRange.endDate)
+
+    const dateFilteredNews = news.news.filter((article) => {
+      const articleDate = new Date(article.insertDate)
+
+      if (articleDate <= endDate && articleDate >= startDate) return true
+      else return false
+    })
+
+    news.news = dateFilteredNews
+    news.totalCount = dateFilteredNews.length
+  }
 
   useEffect(() => {
     if (news) {
@@ -41,13 +68,13 @@ export function ArticleGrid() {
     <>
       {news && (
         <div className={`mt-7 grid grid-cols-1 gap-4`}>
-          {news.news.map((news, index) => (
+          {news.news.map((news) => (
             <NewsCard
               key={news.id}
               data={news}
               buttonColor={'#5A7EFF'}
               view="list"
-              filterParams={params}
+              queryKey={queryKey}
             />
           ))}
           {news.totalCount === 0 && (

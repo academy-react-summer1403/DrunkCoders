@@ -7,6 +7,7 @@ const initialState = {
   descendingOrder: true,
   category: null,
   params: null,
+  dateRange: { startDate: null, endDate: null },
 }
 
 const articleSortFilterSlice = createSlice({
@@ -30,6 +31,10 @@ const articleSortFilterSlice = createSlice({
     },
     setParams(state, action) {
       state.params = action.payload
+    },
+    setDateRange(state, action) {
+      state.dateRange.startDate = action.payload.startDate
+      state.dateRange.endDate = action.payload.endDate
     },
   },
 })

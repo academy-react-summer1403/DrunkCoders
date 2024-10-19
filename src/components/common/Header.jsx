@@ -12,6 +12,7 @@ import {
   Home,
   ShortLine,
   Menu2,
+  SunIcon,
 } from '@assets'
 import {
   Modal,
@@ -28,7 +29,6 @@ import {
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { darkModeActions } from '@store'
-import { SunIcon } from '@assets/index'
 import { isTokenExpired } from '@core/index'
 
 export function Header() {

@@ -40,10 +40,7 @@ export function CourseCardDetails({ course }) {
 
           <div className="flex gap-3 font-medium">
             <Student />
-            <p>
-              {course.currentRegistrants || (Math.random() * 100).toFixed(0)}{' '}
-              دانشجو
-            </p>
+            <p>{course.currentRegistrants || 22} دانشجو</p>
           </div>
         </div>
       )}

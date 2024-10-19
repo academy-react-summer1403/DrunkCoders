@@ -13,25 +13,25 @@ export function NewsCard({
   buttonColor = '#5A7EFF',
   data: news,
   view = 'grid',
-  filterParams,
+  queryKey,
 }) {
   // optimistic updating using tanstack query to add like
   const { mutate: addLikeMutatte } = useArticleLikeAndDislikeUpdate(
     addLikeForArticle,
-    filterParams,
+    queryKey,
     'like',
   )
   // optimistic updating using tanstack query to add dislike
   const { mutate: addDislikeMutatte } = useArticleLikeAndDislikeUpdate(
     addDislikeForArticle,
-    filterParams,
+    queryKey,
     'dislike',
   )
 
   // optimistic updating using tanstack query to remove like or dislike
   const { mutate: removeLikeDislikeMutate } = useArticleLikeAndDislikeUpdate(
     removeArticleLikeOrDislike,
-    filterParams,
+    queryKey,
     'remove',
   )
   function handleLikeAndDislike(identifier) {

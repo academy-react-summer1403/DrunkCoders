@@ -3,7 +3,7 @@ import { queryClient } from '../app/App'
 
 export function useArticleLikeAndDislikeUpdate(
   mutationFn,
-  filterParams,
+  queryKey,
   identifier,
 ) {
   const userLikeStatus = {
@@ -13,16 +13,16 @@ export function useArticleLikeAndDislikeUpdate(
   return useMutation({
     mutationFn,
     onMutate: async (articleId) => {
-      await queryClient.cancelQueries(['news', filterParams]) // canceling outgoing refetch
-      const prevArticles = queryClient.getQueryData(['news', filterParams]) // copy prev course data
-      queryClient.setQueryData(['news', filterParams], (oldArticles) => {
+      await queryClient.cancelQueries(queryKey) // canceling outgoing refetch
+      const prevArticles = queryClient.getQueryData(queryKey) // copy prev course data
+      queryClient.setQueryData(queryKey, (oldArticles) => {
         const updatedArticles = oldArticles?.news.map((article) =>
           article.id ===
           (identifier === 'remove' ? articleId.articleId : articleId)
             ? { ...article, ...userLikeStatus }
             : article,
         )
-        console.log(updatedArticles)
+        // console.log(updatedArticles)
         return {
           totalCount: oldArticles.totalCount,
           news: updatedArticles,
@@ -32,10 +32,10 @@ export function useArticleLikeAndDislikeUpdate(
     },
     onError: (err, articleId, context) => {
       console.log(err)
-      queryClient.setQueryData(['news', filterParams], context.prevArticles)
+      queryClient.setQueryData(queryKey, context.prevArticles)
     },
     onSettled: () => {
-      queryClient.invalidateQueries(['news', filterParams])
+      queryClient.invalidateQueries(queryKey)
     },
   })
 }

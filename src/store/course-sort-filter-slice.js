@@ -8,7 +8,8 @@ const initialState = {
   filterId: { category: null, level: null, teacher: null },
   cost: { costUp: null, costDown: null },
   dateRange: { startDate: null, endDate: null },
-  params: null,
+  popularCoursesQueryKey: null,
+  allCoursesQueryKey: null,
 }
 
 const sortFilterSlice = createSlice({
@@ -44,6 +45,12 @@ const sortFilterSlice = createSlice({
     },
     setParams(state, action) {
       state.params = action.payload
+    },
+    setPopularCoursesQueryKey(state, action) {
+      state.popularCoursesQueryKey = action.payload
+    },
+    setAllCoursesQueryKey(state, action) {
+      state.allCoursesQueryKey = action.payload
     },
   },
 })

@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getNewsCategories } from '@core/index.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { articleSortFilterActions } from '@store/index'
+import { DateObject } from 'react-multi-date-picker'
 
 export function ArticleFilter() {
   const dispatch = useDispatch()
@@ -41,6 +42,16 @@ export function ArticleFilter() {
     )
   }
 
+  function handleDateChange(startDate, endDate) {
+    dispatch(articleSortFilterActions.setDateRange({ startDate, endDate }))
+  }
+
+  function handleClearCalender() {
+    dispatch(
+      articleSortFilterActions.setDateRange({ startDate: null, endDate: null }),
+    )
+  }
+
   return (
     <div className="sticky top-0 flex flex-col gap-8 rounded-3xl px-3 py-5 dark:bg-white/20 md:bg-[#E4E4E4]">
       <div className="hidden md:block">
@@ -60,12 +71,12 @@ export function ArticleFilter() {
 
       <JalaliDateRangePicker
         label={<IconLabel icon={Calendar2} label="تاریخ انتشار " />}
-        prevDate={
-          [
-            /* dateRange.startDate && new DateObject(dateRange.startDate),
-          dateRange.endDate && new DateObject(dateRange.endDate), */
-          ]
-        }
+        prevDate={[
+          dateRange.startDate && new DateObject(dateRange.startDate),
+          dateRange.endDate && new DateObject(dateRange.endDate),
+        ]}
+        onChange={handleDateChange}
+        onClear={handleClearCalender}
       />
 
       <div className="block md:hidden">

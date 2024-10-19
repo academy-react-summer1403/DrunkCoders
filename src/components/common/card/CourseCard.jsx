@@ -12,31 +12,30 @@ import {
   removeCourseLikeOrDislike,
 } from '@core/index'
 import { useLikeAndDislikeUpdate } from '@hooks/index'
-import { useSelector } from 'react-redux'
 
 export function CourseCard({
   buttonColor,
   data: course,
   view = 'grid',
-  filterParams,
+  queryKey,
 }) {
   // optimistic updating using tanstack query to add like
   const { mutate: addLikeMutatte } = useLikeAndDislikeUpdate(
     addLikeForCourse,
-    filterParams,
+    queryKey,
     'like',
   )
   // optimistic updating using tanstack query to add dislike
   const { mutate: addDislikeMutatte } = useLikeAndDislikeUpdate(
     addDislikeForCourse,
-    filterParams,
+    queryKey,
     'dislike',
   )
 
   // optimistic updating using tanstack query to remove like or dislike
   const { mutate: removeLikeDislikeMutate } = useLikeAndDislikeUpdate(
     removeCourseLikeOrDislike,
-    filterParams,
+    queryKey,
     'remove',
   )
 
@@ -47,7 +46,7 @@ export function CourseCard({
       addDislikeMutatte(course.courseId)
     } else {
       const fd = new FormData()
-      fd.append('CourseLikeId', course.userLikedId)
+      fd.append('CourseLikeId', course.userLikedId || course.userLikeId)
       removeLikeDislikeMutate({
         courseIdFormData: fd,
         courseId: course.courseId,
@@ -94,7 +93,7 @@ export function CourseCard({
               <LikeAndDislike
                 userLikeStatus={{
                   like: course.userIsLiked,
-                  dislike: course.currentUserDissLike,
+                  dislike: course.currentUserDissLike || course.userIsDissLiked,
                 }}
                 onLikeAndDislike={handleLikeAndDislike}
                 like={course.likeCount}

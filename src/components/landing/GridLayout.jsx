@@ -8,6 +8,7 @@ export function GridLayout({
   dataArray,
   card: Card,
   className,
+  queryKey,
 }) {
   const [windowWidth, setWindowWidth] = useState(
     window.innerWidth < 640 ? null : 'sm',
@@ -45,6 +46,7 @@ export function GridLayout({
                 key={item?.id ?? index}
                 data={item}
                 buttonColor={buttonColor}
+                queryKey={queryKey}
               />
             )
           })}
@@ -60,6 +62,7 @@ export function GridLayout({
                 key={item?.id ?? index}
                 data={item}
                 buttonColor={buttonColor}
+                queryKey={queryKey}
               />
             )
           })}

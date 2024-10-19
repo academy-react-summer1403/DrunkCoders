@@ -16,15 +16,15 @@ import {
   MyCoursePage,
   MyReservationPage,
   ProfilePage,
-} from '@components'
-
+} from '@pages'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import './App.css'
 import { useSelector } from 'react-redux'
 import { Articles } from '@pages/Articles'
-  
-import "./App.css";
+import { UserPanelLayout } from '@pages/index'
+
+import './App.css'
 
 export const queryClient = new QueryClient({
   defaultOptions: { queries: { gcTime: 1000 * 60 * 30 } },
@@ -55,8 +55,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'courses/:id',
-        element: <CourseDetail/>,
-      }
+        element: <CourseDetail />,
+      },
     ],
   },
   {
@@ -83,7 +83,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/user-panel',
-    element: <UserPanel />,
+    element: <UserPanelLayout />,
     children: [
       {
         path: 'dashboard',
