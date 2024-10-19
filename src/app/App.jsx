@@ -8,7 +8,6 @@ import {
   ForgetPassStep1,
   ForgetPassStep2,
   Courses,
-  UserPanel,
   CourseDetail,
 } from '@pages'
 import {
@@ -23,7 +22,6 @@ import './App.css'
 import { useSelector } from 'react-redux'
 import { Articles } from '@pages/Articles'
 import { UserPanelLayout } from '@pages/index'
-
 import './App.css'
 
 export const queryClient = new QueryClient({
@@ -48,10 +46,6 @@ const router = createBrowserRouter([
       {
         path: '*',
         element: <NotFound />,
-      },
-      {
-        path: 'courses',
-        element: <Courses />,
       },
       {
         path: 'courses/:id',
