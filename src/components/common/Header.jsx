@@ -1,4 +1,6 @@
 import { Button } from '@components'
+import { NavLink } from 'react-router-dom'
+
 import {
   MoonIcon,
   BahrLogo,
@@ -48,8 +50,8 @@ export function Header() {
   }
 
   return (
-    <div className="relative top-3.5 flex h-12 justify-around gap-16 max-lg:gap-0">
-      <div className="flex w-72 justify-start gap-4 max-lg:w-64 max-lg:gap-3">
+    <div className=" pt-2  mb-2 z-50 fixed left-0 pl-10 pr-8 bg-white dark:bg-black  flex h-16 w-full justify-around gap-16 max-lg:gap-0">
+      <div className="flex w-72 relative top-1.5 justify-start gap-4 max-lg:w-64 max-lg:gap-3">
         <div className="h-12 w-10">
           {' '}
           <BahrLogo1 className="relative right-2 top-1 h-9" />
@@ -60,16 +62,46 @@ export function Header() {
         </div>
       </div>
 
-      <div className="flex w-2/5 justify-center gap-10 whitespace-nowrap p-2 text-lg font-normal leading-10 max-lg:mx-5 max-lg:gap-5 max-md:hidden">
-        <Link to="/">خانه</Link> <Link to="/courses">دوره ها</Link>{' '}
-        <Link to="/articles">اخبار و مقالات </Link>
-        <Link to="/">ارتباط باما</Link>
-      </div>
+        <nav  className="space-x-4 flex w-2/5 justify-center text-black dark:text-white gap-10 mt-1 whitespace-nowrap p-2 text-lg font-normal leading-10 max-lg:mx-5 max-lg:gap-5 max-md:hidden">
+          <NavLink
+            exact
+            to="/"
+            className={({ isActive }) =>
+              isActive ? 'text-blue-500' : 'text'
+            }
+          >
+            خانه
+          </NavLink>
+          <NavLink
+            to="/courses"
+            className={({ isActive }) =>
+              isActive ? 'text-blue-500' : 'text'
+            }
+          >
+            دوره‌ها
+          </NavLink>
+          <NavLink
+            to="/articles"
+            className={({ isActive }) =>
+              isActive ? 'text-blue-500' : 'text'
+            }
+          >
+            اخبار و مقالات
+          </NavLink>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              isActive ? 'text-blue-500' : 'text'
+            }
+          >
+            ارتباط باما
+          </NavLink>
+        </nav>
 
       <div className="flex w-72 justify-end gap-5 border-black max-lg:mr-2 max-lg:gap-3 max-md:block max-md:w-fit max-md:gap-2">
         <div
           onClick={toggleMode}
-          className="relative top-0.5 flex h-12 w-12 cursor-pointer justify-center rounded-full border-1 pt-3 max-md:hidden"
+          className="relative top-1.5 flex h-12 w-12 cursor-pointer justify-center rounded-full border-1 pt-3 max-md:hidden"
         >
           <MoonIcon className="absolute z-20 dark:hidden" />
           <SunIcon className="absolute top-2 h-8 w-8" />
@@ -149,7 +181,7 @@ export function Header() {
                 },
               }}
             >
-              <ModalContent className="relative bottom-36">
+              <ModalContent className="relative bottom-36 " >
                 {() => (
                   <>
                     <ModalHeader className="flex flex-col gap-1">
@@ -165,9 +197,10 @@ export function Header() {
                             <Phone />
                           </div>
                           <div className="flex h-full w-32 flex-col gap-2 pr-2 pt-1 text-lg leading-10">
-                            <Link>خانه</Link> <Link>دوره ها</Link>{' '}
-                            <Link>اخبار و مقالات </Link>
-                            <Link>ارتباط باما</Link>
+                            <Link to="/">خانه</Link>{' '}
+                            <Link to="/courses">دوره ها</Link>{' '}
+                            <Link to="/articles">اخبار و مقالات </Link>
+                            <Link to="/">ارتباط باما</Link>
                           </div>
                         </div>
                         <div className="flex h-full w-44 flex-col gap-2 pt-1 text-base leading-10 text-gray-500">
