@@ -79,7 +79,7 @@ export function CommentItem({ comment, handleOpenModal }) {
               <CommentArrow />
               جواب دادن
             </Button>
-            <div className='flex gap-8 items-center mt-4'>
+            <div className='flex gap-8 items-center mt-4 z-50'>
               <div className='flex gap-1 items-center' 
               onClick={() => handleLike("like")}>
                 <ThumbUp
