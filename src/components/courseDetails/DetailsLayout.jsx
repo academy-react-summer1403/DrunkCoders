@@ -4,7 +4,7 @@ export function DetailsLayout({ children, asideContent, relatedCourse }) {
   return (
     <>
         <div className='mt-12 md:flex md:gap-[5%]'>
-            <aside className="md:w-[38%] w-full border-2">
+            <aside className="md:w-[38%] w-full">
                 <div className='flex flex-col border-3 rounded-3xl p-3 h-fit gap-5 sticky top-0'>
                     {asideContent}
                 </div>
