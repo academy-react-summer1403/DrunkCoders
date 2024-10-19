@@ -5,6 +5,7 @@ import { MainContent } from "./MainContent";
 import { OverView } from "./OverView";
 import { getCategory, getCourseDetails } from "@core/index";
 import { RelatedCourse } from "./RelatedCourse";
+import { DetailsLayout } from "./DetailsLayout";
 
 
 export function CourseDContainer() {
@@ -36,11 +37,21 @@ export function CourseDContainer() {
 
   const matchingCategoryIds = getMatchingCategoryIds();
 
-  
-
   return (
     <>
-      <div className='mt-12 md:flex md:gap-[5%]'>
+      <DetailsLayout
+          asideContent={<OverView course={data} />}
+          relatedCourse={<RelatedCourse techId={matchingCategoryIds[0]} />}
+      >
+          <MainContent course={data} />
+          <Comment courseId={id} />
+      </DetailsLayout>
+
+    </>
+  );
+}
+
+      {/* <div className='mt-12 md:flex md:gap-[5%]'>
         <aside className="md:w-[38%] w-full border-2">
           <div className='flex flex-col border-3 rounded-3xl p-3 h-fit gap-5 sticky top-0'>
             <OverView course={data} />
@@ -56,7 +67,4 @@ export function CourseDContainer() {
         <RelatedCourse
           techId = {matchingCategoryIds[0]}
         />
-      </div>
-    </>
-  );
-}
+      </div> */}

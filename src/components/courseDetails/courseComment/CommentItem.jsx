@@ -30,7 +30,7 @@ export function CommentItem({ comment, handleOpenModal }) {
     }
   });
 
-  const { mutate: dislikeCourseCommentMutate, isPending: dissliking, isError} = 
+  const { mutate: dislikeCourseCommentMutate, isPending: disliking, isError} =
   useMutation({
     mutationFn: () => dislikeCourseComment(comment.id),
     onSuccess: (data) => {

@@ -20,6 +20,8 @@ export { removeCourseFavorite } from './services/api/courseDetail.api'
 export { getRelatedCourse } from './services/api/courseDetail.api'
 export { getCategory } from './services/api/courseDetail.api'
 
+export { getNewsById } from './services/api/newsDetails.api'
+
 export { getWeekNews } from './services/api/news.api'
 export { getNewsCategories } from './services/api/news.api'
 export { getAllTeachers } from './services/api/teacher.api'

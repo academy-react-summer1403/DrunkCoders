@@ -42,3 +42,11 @@ export { ArticleSort } from './articles/ArticleSort'
 export { CourseCard } from './common/card/CourseCard'
 export { SideMenu } from './UserPanel/SideMenu'
 export { PanelHeader } from './UserPanel/PanelHeader'
+// export { UseLayout } from './UserPanel/UseLayOut'
+// export { DashboardPage } from './UserPanel/DashboardPage'
+// export { MyReservationPage } from './UserPanel/MyReservationPage'
+// export { MyCoursePage } from './UserPanel/MyCoursePage'
+// export { ProfilePage } from './UserPanel/ProfilePage'
+
+export { ArticlDetailsContainer } from './articleDetails/ArticlDetailsContainer'
+

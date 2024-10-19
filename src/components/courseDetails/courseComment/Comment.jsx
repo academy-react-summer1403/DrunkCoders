@@ -3,10 +3,9 @@ import { Button } from '@components';
 import { useDisclosure } from '@nextui-org/react';
 import { CommentModal } from './CommentModal';
 import { CommentList } from './CommentList';
-import { CommentWhite } from '@assets/index';
+import { CommentBlack, CommentWhite } from '@assets/index';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCourseComments, sendCourseComment, sendCourseReply } from '@core';
-
 
 export function Comment({ courseId }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -15,9 +14,11 @@ export function Comment({ courseId }) {
   const [modalTitle, setModalTitle] = useState('نظر شما');
   const [isReply, setIsReply] = useState(false);
   const [replyToComment, setReplyToComment] = useState(null);
+  
+  // State to manage showing all comments
+  const [showAllComments, setShowAllComments] = useState(false);
 
   const queryClient = useQueryClient();
-
 
   const { data: comments, isLoading, error } = useQuery({
     queryKey: ['courseComments', courseId],
@@ -30,7 +31,7 @@ export function Comment({ courseId }) {
       setModalInput('');
       setModalSubject('');
       onOpen(false);
-      queryClient.invalidateQueries(['courseDetails', data])
+      queryClient.invalidateQueries(['courseDetails', data]);
     },
   });
 
@@ -46,6 +47,7 @@ export function Comment({ courseId }) {
     formData.append('describe', payload.describe);
     mutation.mutate(formData);
   }
+
   const setReply = useMutation({
     mutationFn: sendCourseReply,
     onSuccess: (data) => {
@@ -53,29 +55,28 @@ export function Comment({ courseId }) {
       setModalInput('');
       setModalSubject('');
       onOpen(false);
-      queryClient.invalidateQueries(['courseDetails', data])
+      queryClient.invalidateQueries(['courseDetails', data]);
     },
     onError: (error) => {
       console.error('No response received:', error.message);
-    }
+    },
   });
+
   function addCourseReply() {
-    const payload ={
+    const payload = {
       courseId: replyToComment.courseId,
       title: modalSubject,
       describe: modalInput,
-      commentId: replyToComment.id
+      commentId: replyToComment.id,
     };
-    console.log(payload);
     const formData = new FormData();
     formData.append('courseId', payload.courseId);
     formData.append('title', payload.title);
     formData.append('describe', payload.describe);
-    formData.append('commentId', payload.commentId)
+    formData.append('commentId', payload.commentId);
 
     setReply.mutate(formData);
   }
-
 
   function handleOpenModal(isOpen, comment = null, reply = false) {
     setIsReply(reply);
@@ -109,8 +110,35 @@ export function Comment({ courseId }) {
         addCourseReply={addCourseReply}
       />
 
-      <CommentList comments={comments} handleOpenModal={handleOpenModal} />
+      {/* Conditional rendering for comments */}
+      {comments.length === 0 ? (
+        <p className='text-gray-400 text-2xl'>
+          کامنتی وجود ندارد
+        </p>
+      ) : (
+        <div>
+          <CommentList comments={showAllComments ? comments : comments.slice(0, 2)} handleOpenModal={handleOpenModal} />
+          
+          {comments.length > 2 && !showAllComments && (
+            <button
+              className="w-full bg-gray-200 text-black p-2 rounded-3xl flex justify-center gap-2"
+              onClick={() => setShowAllComments(true)}
+            >
+              <CommentBlack/>
+              نمایش بیشتر
+            </button>
+          )}
+          
+          {showAllComments && (
+            <Button
+              className="w-full bg-gray-200 text-black p-2"
+              onClick={() => setShowAllComments(false)}
+            >
+              نمایش کمتر
+            </Button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
-
