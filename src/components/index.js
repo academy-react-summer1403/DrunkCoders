@@ -53,3 +53,5 @@ export { MyReservationPage } from './UserPanel/MyReservationPage'
 export { MyCoursePage } from './UserPanel/MyCoursePage'
 export { ProfilePage } from './UserPanel/ProfilePage'
 
+export { ArticlDetailsContainer } from './articleDetails/ArticlDetailsContainer'
+

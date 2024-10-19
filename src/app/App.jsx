@@ -10,6 +10,7 @@ import {
   Courses,
   UserPanel,
   CourseDetail,
+  ArticlesDetail,
 } from '@pages'
 import {
   DashboardPage,
@@ -41,7 +42,9 @@ const router = createBrowserRouter([
       },
       { path: 'courses', element: <Courses /> },
       { path: 'articles', element: <Articles /> },
-
+      { path: 'articles/:id',
+        element: <ArticlesDetail />
+      },
       {
         path: 'about-us',
       },

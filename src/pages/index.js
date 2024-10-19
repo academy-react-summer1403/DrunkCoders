@@ -20,3 +20,4 @@ export { Articles } from './articles'
 // export { ForgetPassStep1 } from './auth/ForgetPassStep1'
 // export { ForgetPassStep2 } from './auth/ForgetPassStep2'
 export { CourseDetail } from "./CourseDetail";
+export { ArticlesDetail } from "./ArticlesDetail";
