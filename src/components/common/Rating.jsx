@@ -1,16 +1,27 @@
 import { StarInCircle } from '@assets';
 import { DetailStar } from '@assets/index';
 import { rateCourse } from '@core/index';
+import { rateNews } from '@core/index';
 import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 
-export function Rating({courseId}) {
+export function Rating({courseId,newsId}) {
+  console.log('news',newsId);
+  console.log('course',courseId);
   const [rating, setRating] = useState(null);
-  
+
   const mutation = useMutation({
-    mutationFn: (newRating) => rateCourse({courseId, newRating}),
+    mutationFn: (newRating) => {
+      if (courseId) {
+        return rateCourse({ courseId, newRating });
+      } else if (newsId) {
+        return rateNews({ newsId, newRating });
+      } else {
+        return Promise.reject('No target to rate'); // Fallback for no courseId or newsId
+      }
+    },
     onSuccess: (response) => {
-      console.log('Rating successfully sent:', response);
+      alert('Rating successfully sent:', response);
     },
     onError: (error) => {
       console.error('Error sending rating:', error);

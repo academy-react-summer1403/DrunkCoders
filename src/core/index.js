@@ -45,3 +45,7 @@ export { isTokenExpired } from './utils/jwtDecode.utils'
 export { addLikeForArticle } from './services/api/news.api'
 export { addDislikeForArticle } from './services/api/news.api'
 export { removeArticleLikeOrDislike } from './services/api/news.api'
+
+export { addNewsFavorite } from './services/api/newsDetails.api'
+export { delNewsFavorite } from './services/api/newsDetails.api'
+export { rateNews } from './services/api/newsDetails.api'

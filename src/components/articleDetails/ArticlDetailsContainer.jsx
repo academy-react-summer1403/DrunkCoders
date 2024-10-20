@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import { ArticleSide } from './ArticleSide';
+import { ArticleMain } from './ArticleMain';
 
 export function ArticlDetailsContainer() {
     const { id } = useParams();
@@ -23,7 +24,7 @@ export function ArticlDetailsContainer() {
         <DetailsLayout
         asideContent={<ArticleSide data={newsInfo} />}
         >
-
+          <ArticleMain data={newsInfo}/>
         </DetailsLayout>
       </div>
     );
