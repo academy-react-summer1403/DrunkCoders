@@ -87,7 +87,7 @@ export function CoursesAndArticlesMainLayout({ article }) {
           {article ? <ArticleGrid /> : <CourseGrid />}
         </main>
 
-        <aside className="relative -left-[6px] hidden h-screen md:mt-16 md:block md:w-[42%] lg:mt-0 lg:w-[30%] xl:w-1/4">
+        <aside className="relative -left-[6px] hidden min-h-max md:mt-16 md:block md:w-[42%] lg:mt-0 lg:w-[30%] xl:w-1/4">
           {article ? <ArticleFilter /> : <CourseFilter />}
         </aside>
 

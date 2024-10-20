@@ -20,4 +20,7 @@ body {
   .rtl {
     direction: rtl;
   }
+  .flexC {
+    @apply flex items-center justify-center;
+  }
 }

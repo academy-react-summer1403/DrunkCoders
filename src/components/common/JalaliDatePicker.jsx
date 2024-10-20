@@ -1,0 +1,87 @@
+import { BaseInput } from '@components/index'
+import { useSelector } from 'react-redux'
+import React, { useEffect, useRef, useState } from 'react'
+import { Calendar } from 'react-multi-date-picker'
+import persian from 'react-date-object/calendars/persian'
+import persian_fa from 'react-date-object/locales/persian_fa'
+import persian_en from 'react-date-object/locales/persian_en'
+import gregorian_en from 'react-date-object/locales/gregorian_en'
+import gregorian from 'react-date-object/calendars/gregorian'
+import 'react-multi-date-picker/styles/backgrounds/bg-dark.css'
+import { Cancel, Calender as Ccalendar } from '@assets/index'
+
+export function JalaliDatePicker({ prevDate, label, onChange, onClear }) {
+  //   const firstRender = useRef(true)
+  const [value, setValue] = useState(null)
+  //   const [inputValue, setInputValue] = useState('')
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+  const darkMode = useSelector((state) => state.darkMode.darkMode)
+
+  const formattedValue = `${value ? value.convert(persian, persian_en).format() : ''}`
+
+  function handleDeleteSelection() {
+    setValue(null)
+    setIsCalendarOpen(false)
+  }
+  function handleClose() {
+    setIsCalendarOpen((prevState) => !prevState)
+  }
+
+  return (
+    <div className="relative w-full">
+      <BaseInput
+        label={label ?? null}
+        placeholder="انتخاب کنید"
+        value={formattedValue}
+        size="lg"
+        type="text"
+        // onChange={(e) => setInputValue(e.target.value)}
+        className="mb-0"
+        classNames={{ label: 'text-base' }}
+        onFocus={() => setIsCalendarOpen(true)}
+        // isReadOnly
+        endIcon={DeleteSelection}
+      />
+      {isCalendarOpen && (
+        <div className="absolute -right-[310px] -top-32 z-30">
+          <Calendar
+            value={value}
+            onChange={(value) => {
+              setValue(value)
+              if (value) {
+                setIsCalendarOpen(false)
+              }
+            }}
+            calendar={persian}
+            locale={persian_fa}
+            calendarPosition="bottom"
+            monthYearSeparator="،"
+            className={`mx-auto mt-3 ${darkMode ? 'bg-dark' : ''}`}
+          />
+        </div>
+      )}
+    </div>
+  )
+
+  function DeleteSelection() {
+    return (
+      <div
+        // onClick={handleDeleteSelection}
+        className="rounded-full transition-all"
+      >
+        {value && (
+          <Cancel
+            className="h-5 w-5 cursor-pointer hover:scale-105"
+            onClick={handleDeleteSelection}
+          />
+        )}
+        {!value && (
+          <Ccalendar
+            className="cursor-pointer hover:scale-105"
+            onClick={handleClose}
+          />
+        )}
+      </div>
+    )
+  }
+}

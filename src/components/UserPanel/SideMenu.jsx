@@ -2,23 +2,25 @@ import { useState } from 'react'
 import { userPanelMenuBottom, userPanelMenuGlobal } from '@core/index'
 import { LongLogo, PanelPay, ShortLogo } from '@assets/index'
 import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export function SideMenu() {
+  const navigate = useNavigate()
   const [selectedKeys, setSelectedKeys] = useState('dashboard')
   const handleSelect = (key) => {
     setSelectedKeys(key)
-    console.log(key)
+    navigate('/user-panel/' + key)
   }
 
   return (
-    <aside className="w-64 rounded-2xl bg-white p-4 pb-1 dark:bg-black">
+    <aside className="h-fit w-64 rounded-2xl bg-white p-4 pb-1 dark:bg-black">
       <Link to="/">
         <div className="mb-4 flex items-center gap-2">
           <ShortLogo />
           <LongLogo />
         </div>
       </Link>
+
       <Listbox
         color="none"
         className="h-[90%]"
@@ -57,12 +59,12 @@ export function SideMenu() {
           </ListboxItem>
         </ListboxSection>
 
-        <ListboxSection className="mt-auto">
+        <ListboxSection className="mt-36">
           {userPanelMenuBottom.map((menuItem) => (
             <ListboxItem
               key={menuItem.key}
               color={menuItem.key === 'logout' ? 'danger' : 'none'}
-              className={`mt-2 rounded-[38px] border px-4 py-3 ${selectedKeys === menuItem.key && selectedKeys !== 'logout' ? 'bg-primary-blue text-white hover:text-white' : ''} ${menuItem.key === 'logout' ? 'text-danger' : 'hover:bg-[#006FEE]'}`}
+              className={`mt-2 rounded-[38px] border px-4 py-3 hover:text-white ${selectedKeys === menuItem.key && selectedKeys !== 'logout' ? 'bg-primary-blue text-white' : ''} ${menuItem.key === 'logout' ? 'text-danger' : 'hover:bg-[#006FEE]'}`}
               classNames={{
                 title: 'text-base',
               }}

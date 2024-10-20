@@ -42,3 +42,5 @@ export { Rating } from './common/Rating'
 export { Comment } from './course/comment/Comment'
 export { SideMenu } from './UserPanel/SideMenu'
 export { PanelHeader } from './UserPanel/PanelHeader'
+
+export { JalaliDatePicker } from './common/JalaliDatePicker'
