@@ -35,15 +35,13 @@ export function JalaliDatePicker({ prevDate, label, onChange, onClear }) {
         value={formattedValue}
         size="lg"
         type="text"
-        // onChange={(e) => setInputValue(e.target.value)}
         className="mb-0"
         classNames={{ label: 'text-base' }}
         onFocus={() => setIsCalendarOpen(true)}
-        // isReadOnly
         endIcon={DeleteSelection}
       />
       {isCalendarOpen && (
-        <div className="absolute -right-[310px] -top-32 z-30">
+        <div className="-rright-[310px absolute -top-[285px] z-30">
           <Calendar
             value={value}
             onChange={(value) => {
@@ -65,10 +63,7 @@ export function JalaliDatePicker({ prevDate, label, onChange, onClear }) {
 
   function DeleteSelection() {
     return (
-      <div
-        // onClick={handleDeleteSelection}
-        className="rounded-full transition-all"
-      >
+      <div className="rounded-full transition-all">
         {value && (
           <Cancel
             className="h-5 w-5 cursor-pointer hover:scale-105"

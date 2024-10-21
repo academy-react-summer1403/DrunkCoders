@@ -52,7 +52,7 @@ export function BaseInput({
           EndIcon && (
             <button
               type="button"
-              onClick={type === 'password' ? toggleVisibility : ''}
+              onClick={type === 'password' ? toggleVisibility : null}
             >
               <EndIcon />
             </button>
