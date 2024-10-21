@@ -5,6 +5,7 @@ import { Button } from '@components/index';
 import { Accordion, AccordionItem, Avatar, useDisclosure } from '@nextui-org/react';
 import { CommentArrow, ThumbDown, ThumbUp } from '@assets/index';
 import { useState } from 'react';
+import { delCourseCommentLike } from '@core/index';
 
 export function CommentItem({ comment, handleOpenModal }) {
   const [likeState, setLikeState] = useState({ like: false, dislike: false });
@@ -42,19 +43,35 @@ export function CommentItem({ comment, handleOpenModal }) {
     }
   })
 
+  const userLikeId = comment.currentUserLikeId
+  const remCourseCommentLike = useMutation({
+    mutationFn : () => delCourseCommentLike(userLikeId),
+    onSuccess:() => {
+        alert('comment like removed')
+    },
+    onError: (error) => {
+        console.log('Error remove comment like ',error);
+    }
+  })
+
   function handleLike(identifier) {
     if (identifier === "like") {
-      likeCourseCommentMutate(); 
-    }else {
+      if (likeState.like) {
+        remCourseCommentLike.mutate(); 
+      } else {
+        likeCourseCommentMutate(); 
+      }
+    } else {
       dislikeCourseCommentMutate();
     }
-
+  
     setLikeState((prevState) =>
       identifier === "like"
         ? { like: !prevState.like, dislike: false }
         : { dislike: !prevState.dislike, like: false }
     );
   }
+  
 
   if (loadingReplies) return <div>Loading replies...</div>;
   if (repliesError) return <div>Error loading replies</div>;

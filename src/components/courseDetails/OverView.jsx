@@ -102,7 +102,7 @@ export function OverView({ course }) {
 
       <h1 className='text-2xl font-bold flex'>
         {course.title}
-        <sup className='text-sm font-medium flex'>(4<StarIcon />)</sup>
+        <sup className='text-sm font-medium flex'>({course.currentRate}<StarIcon />)</sup>
       </h1>
 
       <div className='flex gap-2 w-fit'>

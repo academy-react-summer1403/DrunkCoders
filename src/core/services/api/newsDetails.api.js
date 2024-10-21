@@ -40,3 +40,21 @@ export async function rateNews ({newsId , newRating}) {
       throw error;
     }
 }
+
+export async function getNewsComment(newsId) {
+    try {
+        const response = await api.get(`/News/GetNewsComments?NewsId=${newsId}`);
+        return response;
+    } catch (error) {
+        console.log('Error get comment', error);
+    }
+}
+
+export async function getNewsReply (commentId) {
+    try {
+        const response = await api.get(`/News/GetRepliesComments?Id=${commentId}`)
+        return response;
+    } catch (error) {
+        console.log('error get replies', error);
+    }
+}

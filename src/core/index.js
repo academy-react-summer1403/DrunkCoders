@@ -19,6 +19,7 @@ export { addCourseFavorite } from './services/api/courseDetail.api'
 export { removeCourseFavorite } from './services/api/courseDetail.api'
 export { getRelatedCourse } from './services/api/courseDetail.api'
 export { getCategory } from './services/api/courseDetail.api'
+export { delCourseCommentLike } from './services/api/courseDetail.api'
 
 export { getNewsById } from './services/api/newsDetails.api'
 
@@ -49,3 +50,4 @@ export { removeArticleLikeOrDislike } from './services/api/news.api'
 export { addNewsFavorite } from './services/api/newsDetails.api'
 export { delNewsFavorite } from './services/api/newsDetails.api'
 export { rateNews } from './services/api/newsDetails.api'
+export { getNewsComment } from './services/api/newsDetails.api'

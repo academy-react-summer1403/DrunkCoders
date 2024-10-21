@@ -5,6 +5,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import { ArticleSide } from './ArticleSide';
 import { ArticleMain } from './ArticleMain';
+import { ArticleComments } from './articleComments/ArticleComments';
 
 export function ArticlDetailsContainer() {
     const { id } = useParams();
@@ -17,14 +18,15 @@ export function ArticlDetailsContainer() {
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
     const newsInfo = data.detailsNewsDto
-    console.log(newsInfo.newsCatregoryName);
-  
+    console.log(newsInfo.id);
+    
     return (
       <div>
         <DetailsLayout
         asideContent={<ArticleSide data={newsInfo} />}
         >
           <ArticleMain data={newsInfo}/>
+          <ArticleComments newsId={newsInfo.id}/>
         </DetailsLayout>
       </div>
     );

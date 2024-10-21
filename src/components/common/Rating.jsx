@@ -6,8 +6,8 @@ import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 
 export function Rating({courseId,newsId}) {
-  console.log('news',newsId);
-  console.log('course',courseId);
+  // console.log('news',newsId);
+  // console.log('course',courseId);
   const [rating, setRating] = useState(null);
 
   const mutation = useMutation({
