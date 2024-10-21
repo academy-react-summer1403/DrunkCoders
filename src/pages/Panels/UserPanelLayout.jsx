@@ -9,7 +9,7 @@ export function UserPanelLayout() {
       <div className="flex flex-1 flex-col gap-3">
         <PanelHeader />
 
-        <main className="flex-1 rounded-2xl bg-white p-6 dark:bg-black">
+        <main className="flex-1 ">
           <Outlet />
         </main>
       </div>

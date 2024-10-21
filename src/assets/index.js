@@ -80,3 +80,5 @@ export { default as Menu2 } from './icons/menu3.svg?react'
 export { default as glassyGradient } from './images/3d-glassy-gradient-crisscross.png'
 export { default as FileBookmark } from './icons/file-bookmark.svg?react'
 export { default as PencilEdit } from './icons/pencil-edit.svg?react'
+
+export { default as Clock } from './icons/Clock.svg?react'
