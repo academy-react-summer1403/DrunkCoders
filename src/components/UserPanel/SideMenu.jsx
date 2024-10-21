@@ -18,7 +18,9 @@ export function SideMenu() {
   function handleSelect(key) {
     setSelectedKeys(key)
     navigate('/user-panel/' + key)
-    dispatch(darkModeActions.toggleUserPanelSideBar())
+    if (isMenuOpen) {
+      dispatch(darkModeActions.toggleUserPanelSideBar())
+    }
   }
 
   function handleCloseMenu() {

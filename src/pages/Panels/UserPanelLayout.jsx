@@ -9,7 +9,7 @@ export function UserPanelLayout() {
         <SideMenu />
       </AnimatePresence>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-1 flex-col gap-3">
         <PanelHeader />
 
         <main className="rounded-2xl bg-white pb-4 dark:bg-black">
