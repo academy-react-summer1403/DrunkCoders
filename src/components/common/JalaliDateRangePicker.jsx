@@ -43,7 +43,7 @@ export function JalaliDateRangePicker({ prevDate, label, onChange, onClear }) {
   }
 
   return (
-    <div className="w-full">
+    <div className={`${isCalendarOpen ? 'mb-14' : ''} w-full`}>
       <BaseInput
         label={label ?? null}
         placeholder={formattedValue}
@@ -51,15 +51,14 @@ export function JalaliDateRangePicker({ prevDate, label, onChange, onClear }) {
         type="text"
         className="mb-0"
         classNames={{
-          input: 'ltr ',
+          input: 'ltr',
         }}
-        // value={formattedValue}
         onFocus={() => setIsCalendarOpen(true)}
         isReadOnly
         starIcon={DeleteSelection}
       />
       {isCalendarOpen && (
-        <div>
+        <div className="relative z-20 -mt-[338px]">
           <Calendar
             value={values}
             onChange={(values) => {
@@ -70,7 +69,6 @@ export function JalaliDateRangePicker({ prevDate, label, onChange, onClear }) {
             }}
             calendar={persian}
             locale={persian_fa}
-            calendarPosition="bottom"
             monthYearSeparator="،"
             className={`mx-auto mt-4 ${darkMode ? 'bg-dark' : ''}`}
             range

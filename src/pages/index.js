@@ -14,5 +14,6 @@ export { MyCoursePage } from './Panels/MyCoursePage'
 export { ProfilePage } from './Panels/ProfilePage'
 export { UserPanelLayout } from './Panels/UserPanelLayout'
 export { CourseDetail } from './CourseDetail'
-
-export { ArticlesDetail } from "./ArticlesDetail";
+export { ArticlesDetail } from './ArticlesDetail'
+export { FavoriteArticles } from './Panels/FavoriteArticles'
+export { FavoriteCourses } from './Panels/FavoriteCourses'

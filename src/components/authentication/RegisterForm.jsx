@@ -1,9 +1,9 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router-dom";
-import { registerSchema, registerApi } from "@core";
-import { BaseInput, Button } from "@components";
-import { MobileIcon } from "@assets";
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Link } from 'react-router-dom'
+import { registerSchema, registerApi } from '@core'
+import { BaseInput, Button } from '@components'
+import { MobileIcon } from '@assets'
 
 export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
   const {
@@ -12,22 +12,22 @@ export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(registerSchema),
-  });
+  })
 
   const onSubmit = async (data) => {
-    setPhoneNumber(data.phoneNumber); // Set the phone number for later use
+    setPhoneNumber(data.phoneNumber) // Set the phone number for later use
 
-    const response = await registerApi({ phoneNumber: data.phoneNumber }); // Send phone number to API
+    const response = await registerApi({ phoneNumber: data.phoneNumber }) // Send phone number to API
 
     if (response) {
       // Check if response is valid
-      console.log("API Response:", response);
-      setCurrentStep(2); // Move to the next step if the API call is successful
+      console.log('API Response:', response)
+      setCurrentStep(2) // Move to the next step if the API call is successful
     } else {
-      console.error("Error sending verification code"); // Handle API error
+      console.error('Error sending verification code') // Handle API error
       // Optionally, display an error message to the user here
     }
-  };
+  }
 
   return (
     <>
@@ -56,11 +56,11 @@ export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
         </Button>
       </form>
       <p className="m-auto mt-4 w-fit">
-        حساب کاربری دارید؟{" "}
+        حساب کاربری دارید؟{' '}
         <Link to="/auth" className="text-primary-blue hover:underline">
           ورود به حساب کاربری
         </Link>
       </p>
     </>
-  );
+  )
 }

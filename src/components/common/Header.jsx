@@ -123,7 +123,7 @@ export function Header() {
                 <PopoverContent className="border-1 border-blue-200 p-1">
                   <div className="flex h-12 w-28 flex-col gap-2 text-center">
                     <Link
-                      to="/user-panel"
+                      to="/user-panel/dashboard"
                       className="w-full rounded-lg hover:bg-slate-200"
                     >
                       پروفایل من

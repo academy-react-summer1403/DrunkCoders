@@ -82,7 +82,7 @@ export function CourseFilter() {
   }
 
   return (
-    <div className="sticky top-0 flex flex-col gap-8 rounded-3xl px-3 py-5 dark:bg-white/20 md:bg-[#E4E4E4]">
+    <div className="top- sticky top-10 flex h-fit flex-col gap-8 rounded-3xl px-3 py-5 dark:bg-white/20 md:bg-[#E4E4E4]">
       <div className="hidden md:block">
         <SearchBox
           onSearch={handleSearch}

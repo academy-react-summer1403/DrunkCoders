@@ -1,17 +1,22 @@
-import { PanelHeader, SideMenu } from '@components/index'
+import { MobileMenu, PanelHeader, SideMenu } from '@components/index'
+import { AnimatePresence } from 'framer-motion'
 import { Outlet } from 'react-router-dom'
 
 export function UserPanelLayout() {
   return (
-    <div className="flex h-screen gap-3 bg-gray-200 p-3 dark:bg-gray-900">
-      <SideMenu />
+    <div className="relative flex h-full gap-3 bg-gray-100 p-3 pb-32 dark:bg-gray-900 sm:pb-3">
+      <AnimatePresence>
+        <SideMenu />
+      </AnimatePresence>
 
-      <div className="flex flex-1 flex-col gap-3">
+      <div className="flex flex-col gap-3">
         <PanelHeader />
 
-        <main className="flex-1 rounded-2xl bg-white p-6 dark:bg-black">
+        <main className="rounded-2xl bg-white pb-4 dark:bg-black">
           <Outlet />
         </main>
+
+        <MobileMenu />
       </div>
     </div>
   )

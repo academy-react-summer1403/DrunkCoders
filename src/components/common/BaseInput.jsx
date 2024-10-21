@@ -28,10 +28,6 @@ export function BaseInput({
     setIsVisible((prevState) => !prevState)
   }
 
-  function handleSearch() {
-    // search logic
-  }
-
   if (!EndIcon && type === 'password') {
     EndIcon = isVisible ? ShowPassword : HidePassword
   }
@@ -56,7 +52,7 @@ export function BaseInput({
           EndIcon && (
             <button
               type="button"
-              onClick={type === 'password' ? toggleVisibility : handleSearch}
+              onClick={type === 'password' ? toggleVisibility : null}
             >
               <EndIcon />
             </button>
