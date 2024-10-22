@@ -50,3 +50,4 @@ export { PanelHeader } from './UserPanel/PanelHeader'
 
 export { ArticlDetailsContainer } from './articleDetails/ArticlDetailsContainer'
 
+export { Dashboard } from './UserPanel/Dashboard/Dashboard'
