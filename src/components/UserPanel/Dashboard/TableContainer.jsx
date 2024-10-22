@@ -7,7 +7,7 @@ export function TableContainer() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <div className='bg-white p-2 rounded-2xl dark:bg-black overflow-scroll h-[35vh]'>
+    <div className='bg-white p-2 rounded-2xl dark:bg-black overflow-scroll h-[51vh]'>
       <header className='flex justify-between p-2'>
         <h1 className='font-medium'>جدیدترین دوره ها</h1>
         <span className='text-sm text-primary' onClick={onOpen}>

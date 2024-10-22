@@ -1,9 +1,9 @@
-import React from 'react'
+import { ProfileLayout } from '@components/index'
 
 export function ProfilePage() {
   return (
-    <div>
-      profil
-    </div>
+    <>
+      <ProfileLayout />
+    </>
   )
 }

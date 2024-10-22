@@ -49,3 +49,4 @@ export { userPanelMenuGlobal } from './utils/constants.utils'
 export { userPanelMenuBottom } from './utils/constants.utils'
 
 export {getLatestCourses} from './services/api/user.api'
+export { moblieMenu } from './utils/constants.utils'
