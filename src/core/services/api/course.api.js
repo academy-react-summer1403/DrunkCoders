@@ -4,7 +4,7 @@ export async function getTopCourses({ count, signal }) {
   try {
     const response = await api.get('/Home/GetCoursesTop', {
       params: { count },
-      signal,
+      //signal,
     })
 
     return response
@@ -16,7 +16,7 @@ export async function getCoursesWithPagination({ params, signal }) {
   try {
     const response = await api.get('/Home/GetCoursesWithPagination', {
       params,
-      signal,
+      //signal,
     })
 
     return response

@@ -6,7 +6,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { darkModeActions } from '@store/dark-mode-slice'
 import { AnimatePresence, motion, useAnimate } from 'framer-motion'
-import { duration } from 'moment-jalaali'
 
 export function SideMenu() {
   const dispatch = useDispatch()
