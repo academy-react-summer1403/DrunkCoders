@@ -1,8 +1,13 @@
-import { Cancel } from '@assets/index'
-import { Button, CourseFilter } from '@components/index'
+import { Button, ModalCloseBtn } from '@components/index'
 import { Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react'
 
-export function MobileFilterModal({ isOpen, onOpenChange, children }) {
+export function MobileModal({
+  isOpen,
+  onOpenChange,
+  title,
+  children,
+  confirmButton,
+}) {
   return (
     <Modal
       isOpen={isOpen}
@@ -26,7 +31,6 @@ export function MobileFilterModal({ isOpen, onOpenChange, children }) {
           },
           exit: {
             y: 1000,
-            // opacity: 0,
             transition: {
               duration: 0.4,
               ease: 'easeIn',
@@ -39,22 +43,19 @@ export function MobileFilterModal({ isOpen, onOpenChange, children }) {
         {(onClose) => (
           <>
             <ModalHeader className="flex items-center justify-between gap-1">
-              <p className="text-xl font-medium">ترتیب و فیلتر</p>
+              <p className="text-xl font-medium">ترتیب و فیلتر {title}</p>
 
-              <Button
-                onClick={onClose}
-                variant="bordered"
-                startContent={<Cancel />}
-                className="border border-[#FF5454] bg-transparent text-[#FF5454]"
-              >
-                بستن
-              </Button>
+              <ModalCloseBtn onClose={onClose} />
             </ModalHeader>
+
             <ModalBody>
               {children}
-              <Button onPress={onClose} className="py-3 text-lg">
-                اعمال
-              </Button>
+
+              {confirmButton && (
+                <Button onPress={onClose} className="py-3 text-lg">
+                  اعمال
+                </Button>
+              )}
             </ModalBody>
           </>
         )}

@@ -5,7 +5,7 @@ export async function getWeekNews({ params, signal }) {
   try {
     const response = await api.get('/News', {
       params: params,
-      signal,
+      //signal,
     })
 
     return response
