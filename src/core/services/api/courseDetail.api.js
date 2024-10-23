@@ -93,6 +93,15 @@ export async function getCourseDetails(id, { signal }) {
     }
   }
 
+  export async function delCourseCommentLike ( likeId ){
+    try {
+        const response = await api.delete(`/Course/DeleteCourseCommentLike?CourseCommandId=${likeId}`)
+        return response;
+    } catch (error) {
+        console.log('course comment del like',error);
+    }
+  }
+
   export async function addCourseFavorite ({ courseId }) {
     try {
         const response = await api.post('/Course/AddCourseFavorite', {courseId})
