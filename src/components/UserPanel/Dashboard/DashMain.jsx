@@ -8,8 +8,8 @@ import { CircularProgress } from '@nextui-org/react'
 export function DashMain({data}) {
       const profileCompletion = data.profileCompletionPercentage ;
   return (
-    <main className='flex h-[266px] gap-8' >
-    <div className='w-[45%] h-full rounded-2xl bg-white p-3 dark:bg-black'> 
+    <main className='flex gap-8 flex-wrap' >
+    <div className='lg:w-[45%] md:w-[65%] w-full h-full rounded-2xl bg-white p-3 dark:bg-black'> 
       <header className='flex justify-between'>
         <div>نظرات‌ شما</div>
         <div className='text-primary-500 cursor-pointer'>
@@ -17,15 +17,15 @@ export function DashMain({data}) {
         </div>
       </header>
     </div>
-    <div>
+    <div className='-order-1 md:order-none'>
       <Calendar
         className='dark:bg-gray-400'
         calendar={persian}
         locale={persian_fa}
      />
     </div>
-    <div className='flex flex-col bg-white dark:bg-black flex-1 rounded-2xl p-2 justify-center items-center'>
-      <header className='self-start justify-self-start flex gap-40'>
+    <div className='lg:flex flex-col bg-white dark:bg-black flex-1 rounded-2xl p-2 justify-center items-center hidden'>
+      <header className='self-start justify-self-start flex justify-between'>
         <p>وضعیت اطلاعات حساب </p>
         <div className='text-primary'>
           <PencilEdit/>

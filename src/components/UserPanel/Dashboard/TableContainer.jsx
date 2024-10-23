@@ -15,7 +15,7 @@ export function TableContainer() {
         </span>
       </header>
       <DashTable />
-      <DashModal isOpen={isOpen} onClose={onOpenChange} /> {/* Properly pass onClose */}
+      <DashModal isOpen={isOpen} onClose={onOpenChange} />
     </div>
   );
 }

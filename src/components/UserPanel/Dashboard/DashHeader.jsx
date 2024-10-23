@@ -20,10 +20,10 @@ export function DashHeader({data}) {
     
 
   return (
-    <header className="flex justify-between">
+    <header className="flex">
     <p className='text-2xl font-bold'>سلام، صبح‌ بخیر {data.fName}</p>
 
-    <section className='flex justify-between w-[30%]'>
+    <section className='flex justify-between w-[30%] mx-auto'>
       <div className='flex items-center gap-2'>
         <div className='p-3 bg-white rounded-full dark:bg-black'>
           <Clock/>
@@ -44,8 +44,6 @@ export function DashHeader({data}) {
         </div>
       </div>
     </section>
-
-    <div></div>
   </header>
   )
 }
