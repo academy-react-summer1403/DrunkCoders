@@ -3,7 +3,7 @@ import { getCourseCommentReplies, likeCourseComment,
   dislikeCourseComment } from '@core';
 import { useState } from 'react';
 import { delCourseCommentLike } from '@core/index';
-import { DesignComment } from './DesignComment';
+import { DesignComment } from '../../common/comments/DesignComment';
 
 export function CommentItem({ comment, handleOpenModal }) {
   const [likeState, setLikeState] = useState({ like: false, dislike: false });

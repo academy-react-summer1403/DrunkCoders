@@ -18,7 +18,7 @@ export function ArticleComments({ newsId }) {
     queryKey: ['articleComments', newsId],
     queryFn: () => getNewsComment(newsId),
   });
-
+  console.log(comments);
   if (isLoading) {
     return <p>Loading comments...</p>;
   }
@@ -33,7 +33,7 @@ export function ArticleComments({ newsId }) {
         <CommentGray />
         نظر شما
       </Button>
-      <ArticleCommentList comments={comments} /> {/* Pass comments to the list */}
+      <ArticleCommentList comments={comments} />
     </div>
   );
 }

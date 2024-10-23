@@ -1,5 +1,5 @@
 // CommentList.jsx
-import { DesignComment } from '@components/courseDetails/courseComment/DesignComment';
+import { DesignComment } from '@components/common/comments/DesignComment';
 import React from 'react';
 
 export function ArticleCommentList({ comments }) {
