@@ -7,7 +7,7 @@ import {
   CourseFilter,
   CourseGrid,
   CourseSort,
-  MobileFilterModal,
+  MobileModal,
   Pagination,
   SearchBox,
 } from '@components/index'
@@ -52,9 +52,9 @@ export function CoursesAndArticlesMainLayout({ article }) {
 
   return (
     <>
-      <MobileFilterModal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <MobileModal confirmButton isOpen={isOpen} onOpenChange={onOpenChange}>
         {article ? <ArticleFilter /> : <CourseFilter />}
-      </MobileFilterModal>
+      </MobileModal>
 
       <div className="relative flex gap-2 rounded-3xl border-4 p-4 pb-20 lg:-mr-[2.5%] lg:w-[105%]">
         <main className="w-full md:w-[58%] lg:w-[70%] xl:w-3/4">
