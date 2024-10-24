@@ -75,6 +75,7 @@ export function CommentItem({ comment, handleOpenModal }) {
   if (repliesError) return <div>Error loading replies</div>;
 
   const finalReplies = repliesData || [];
+  console.log(comment);
 
   return (
     <DesignComment
@@ -85,7 +86,7 @@ export function CommentItem({ comment, handleOpenModal }) {
     describe={comment.describe}
     comment={comment}
     likeCount={comment.likeCount}
-    dislikeCount={comment.disslike}
+    dislikeCount={comment.disslikeCount}
     handleOpenModal={handleOpenModal}
     handleLike={handleLike}
     likeState={likeState}
