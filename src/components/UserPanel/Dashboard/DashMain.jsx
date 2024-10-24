@@ -1,5 +1,5 @@
 import React from 'react'
-import {PencilEdit } from '@assets/index'
+import {PanelIndicator, PencilEdit } from '@assets/index'
 import { Calendar } from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
@@ -15,8 +15,9 @@ export function DashMain({data}) {
     <div className='lg:w-[45%] md:w-[65%] w-full h-full rounded-2xl bg-white p-3 dark:bg-black'> 
       <header className='flex justify-between'>
         <div>نظرات‌ شما</div>
-        <div className='text-primary-500 cursor-pointer'>
-          مشاهده همه
+        <div className='text-primary-500 cursor-pointer flex items-center'>
+           مشاهده همه
+           <PanelIndicator/>
         </div>
       </header>
     </div>
