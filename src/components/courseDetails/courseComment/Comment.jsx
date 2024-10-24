@@ -110,7 +110,6 @@ export function Comment({ courseId }) {
         addCourseReply={addCourseReply}
       />
 
-      {/* Conditional rendering for comments */}
       {comments.length === 0 ? (
         <p className='text-gray-400 text-2xl'>
           کامنتی وجود ندارد

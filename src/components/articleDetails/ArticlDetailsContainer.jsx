@@ -14,6 +14,7 @@ export function ArticlDetailsContainer() {
       queryKey: ["newsDetails", id],
       queryFn: () => getNewsById(id),
     });
+    
   
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;

@@ -56,5 +56,16 @@ export async function getNewsReply (commentId) {
         return response;
     } catch (error) {
         console.log('error get replies', error);
+        throw error;
+    }
+}
+
+export async function postArticleCommentLike(commentId){
+    try {
+        const response = await api.post(`/News/CommentLike/${commentId}?LikeType=true`)
+        return response;
+    } catch (error) {
+        console.log('error like article comment like', error.message);
+        throw error
     }
 }
