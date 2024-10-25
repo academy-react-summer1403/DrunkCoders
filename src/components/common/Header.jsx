@@ -30,7 +30,7 @@ import {
 } from '@nextui-org/react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { darkModeActions } from '@store'
+import { darkModeActions, tokenActions } from '@store/index'
 import { isTokenExpired } from '@core/index'
 
 export function Header() {
@@ -39,6 +39,10 @@ export function Header() {
 
   function toggleMode() {
     dispatch(darkModeActions.toggleMode())
+  }
+
+  function handleLogout() {
+    dispatch(tokenActions.logout())
   }
 
   let token = useSelector((state) => state.token.token)
@@ -50,8 +54,8 @@ export function Header() {
   }
 
   return (
-    <div className=" pt-2  mb-2 z-50 fixed left-0 pl-10 pr-8 bg-white dark:bg-black  flex h-16 w-full justify-around gap-16 max-lg:gap-0">
-      <div className="flex w-72 relative top-1.5 justify-start gap-4 max-lg:w-64 max-lg:gap-3">
+    <div className="fixed left-0 z-50 mb-2 flex h-16 w-full justify-around gap-16 bg-white pl-10 pr-8 pt-2 dark:bg-black max-lg:gap-0">
+      <div className="relative top-1.5 flex w-72 justify-start gap-4 max-lg:w-64 max-lg:gap-3">
         <div className="h-12 w-10">
           {' '}
           <BahrLogo1 className="relative right-2 top-1 h-9" />
@@ -62,41 +66,33 @@ export function Header() {
         </div>
       </div>
 
-        <nav  className="space-x-4 flex w-2/5 justify-center text-black dark:text-white gap-10 mt-1 whitespace-nowrap p-2 text-lg font-normal leading-10 max-lg:mx-5 max-lg:gap-5 max-md:hidden">
-          <NavLink
-            exact
-            to="/"
-            className={({ isActive }) =>
-              isActive ? 'text-blue-500' : 'text'
-            }
-          >
-            خانه
-          </NavLink>
-          <NavLink
-            to="/courses"
-            className={({ isActive }) =>
-              isActive ? 'text-blue-500' : 'text'
-            }
-          >
-            دوره‌ها
-          </NavLink>
-          <NavLink
-            to="/articles"
-            className={({ isActive }) =>
-              isActive ? 'text-blue-500' : 'text'
-            }
-          >
-            اخبار و مقالات
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              isActive ? 'text-blue-500' : 'text'
-            }
-          >
-            ارتباط باما
-          </NavLink>
-        </nav>
+      <nav className="mt-1 flex w-2/5 justify-center gap-10 space-x-4 whitespace-nowrap p-2 text-lg font-normal leading-10 text-black dark:text-white max-lg:mx-5 max-lg:gap-5 max-md:hidden">
+        <NavLink
+          exact
+          to="/"
+          className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
+        >
+          خانه
+        </NavLink>
+        <NavLink
+          to="/courses"
+          className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
+        >
+          دوره‌ها
+        </NavLink>
+        <NavLink
+          to="/articles"
+          className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
+        >
+          اخبار و مقالات
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
+        >
+          ارتباط باما
+        </NavLink>
+      </nav>
 
       <div className="flex w-72 justify-end gap-5 border-black max-lg:mr-2 max-lg:gap-3 max-md:block max-md:w-fit max-md:gap-2">
         <div
@@ -129,7 +125,7 @@ export function Header() {
                       پروفایل من
                     </Link>
                     <Link
-                      to="/logout"
+                      onClick={handleLogout}
                       className="w-full rounded-lg hover:bg-slate-200"
                     >
                       خروج
@@ -181,7 +177,7 @@ export function Header() {
                 },
               }}
             >
-              <ModalContent className="relative bottom-36 " >
+              <ModalContent className="relative bottom-36">
                 {() => (
                   <>
                     <ModalHeader className="flex flex-col gap-1">

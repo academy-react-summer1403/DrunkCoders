@@ -4,15 +4,31 @@ import {
   MoonIcon,
   Notification,
   PencilEdit,
-  ShortLogo,
   SunIcon,
   bahrLogoImg,
 } from '@assets/index'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { darkModeActions } from '@store'
+import { Link, useNavigate } from 'react-router-dom'
+import { profilePics } from '@core/index'
+import { UseIcon } from '@components/index'
 
-export function PanelHeader() {
+export function PanelHeader({ userInfo }) {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  let defaultProfilePic = useSelector(
+    (state) => state.darkMode.defaultProfilePic,
+  )
+  defaultProfilePic = profilePics.find((pic) => pic.key === defaultProfilePic)
+
+  let avatarImg = {}
+  if (defaultProfilePic) {
+    avatarImg = {
+      icon: <UseIcon icon={defaultProfilePic.icon} className="h-12 w-12" />,
+    }
+  } else {
+    avatarImg = { src: userInfo?.currentPictureAddress }
+  }
 
   function toggleMode() {
     dispatch(darkModeActions.toggleMode())
@@ -25,14 +41,14 @@ export function PanelHeader() {
   return (
     <header className="bgg-white rounded-2xl p-2 sm:bg-white sm:p-4 sm:dark:bg-black">
       <div className="flex justify-between">
-        <div className="flexC sm:hidden">
+        <Link to="/" className="flexC sm:hidden">
           <img src={bahrLogoImg} />
-        </div>
+        </Link>
 
         <div className="hidden items-center sm:flex">
           <span
             onClick={handleOpenMenu}
-            className="ml-10 cursor-pointer rounded-lg p-1 transition-all hover:bg-primary-blue xl:hidden"
+            className="ml-5 cursor-pointer rounded-lg p-1 transition-all hover:bg-primary-blue xl:hidden"
           >
             <Dashboard className="h-9 w-9" />
           </span>
@@ -42,14 +58,22 @@ export function PanelHeader() {
             color="primary"
             placement="bottom-right"
             showOutline={false}
-            className="p-[2px]"
+            className="cursor-pointer p-[2px]"
             shape="circle"
+            onClick={() => navigate('/user-panel/profile')}
           >
             <User
-              name="پارسا آقایی"
+              key={defaultProfilePic?.key}
+              onClick={() => navigate('/user-panel/profile')}
+              className="cursor-pointer"
+              name={
+                (userInfo?.fName || 'نام') +
+                ' ' +
+                (userInfo?.lName || 'نام خانوادگی')
+              }
               description="ادمین ، دانشجو"
               avatarProps={{
-                src: 'https://i.pravatar.cc/150?u=a04258114e29026702d',
+                ...avatarImg,
                 size: 'lg',
               }}
               classNames={{
@@ -59,6 +83,7 @@ export function PanelHeader() {
             />
           </Badge>
         </div>
+
         <div className="flex items-center gap-2">
           <Badge
             content="5"

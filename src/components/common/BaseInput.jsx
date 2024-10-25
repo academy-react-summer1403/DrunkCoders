@@ -37,6 +37,7 @@ export function BaseInput({
       <Input
         className={`mb-10 ${props.className}`}
         classNames={{
+          ...classNames,
           input: `mr-2 text-sm  placeholder:text-basic-gray dark:placeholder:text-stone-400 ${classNames?.input}`,
           label: `font-medium text-lg ${classNames?.label}`,
           // inputWrapper: `dark:bg-white/50 dark:focus-within:bg-white/40 ${classNames?.inputWrapper}`,

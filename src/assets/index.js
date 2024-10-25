@@ -94,3 +94,8 @@ export { default as Hand } from './icons/Hand.svg?react'
 export { default as Froge } from './icons/Froge.svg?react'
 export { default as bahrLogoImg } from './images/bahr-logo-image.png'
 export { default as Hark } from './icons/Hark.svg?react'
+
+/* export { default as smeed } from './images/Smeed.jpg'
+export { default as lady } from './images/Lady.jpg'
+export { default as hand } from './images/Hand.jpg'
+export { default as froge } from './images/Froge.jpg' */
