@@ -10,7 +10,7 @@ import { getAllTeachers } from '@core/index';
 import { DateObject } from 'react-multi-date-picker'
 
 
-export function DashModal({ isOpen, onClose }) {
+export function DashDeskModal({ isOpen, onClose }) {
   const { filterId, dateRange, cost, order } = useSelector(
     (state) => state.sort,
   )
@@ -94,6 +94,7 @@ export function DashModal({ isOpen, onClose }) {
           </ModalHeader>
           <ModalBody>
             <DashTable />
+            
           </ModalBody>
           <ModalFooter>
             <div className='m-auto ltr'>

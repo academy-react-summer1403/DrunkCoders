@@ -3,7 +3,7 @@ import { DashHeader } from './DashHeader'
 import { DashMain } from './DashMain'
 import { useQuery } from '@tanstack/react-query';
 import { getCurrentUserProfile } from '@core/index';
-import { TableContainer } from './TableContainer';
+import { ModalContainer } from './ModalContainer';
 
 export function Dashboard() {
   const { data, isLoading, error } = useQuery({
@@ -21,9 +21,7 @@ export function Dashboard() {
     <div className='flex flex-col gap-5'>
     <DashHeader data={data} />
     <DashMain data={data} />
-    <div className='md:block hidden'>
-      <TableContainer />
-    </div>
+    <ModalContainer className='hidden' data={data}/>
     </div>
   )
 }
