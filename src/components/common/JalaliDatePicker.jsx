@@ -9,15 +9,29 @@ import gregorian_en from 'react-date-object/locales/gregorian_en'
 import gregorian from 'react-date-object/calendars/gregorian'
 import 'react-multi-date-picker/styles/backgrounds/bg-dark.css'
 import { Cancel, Calender as Ccalendar } from '@assets/index'
+import { convertGrigorianDateToJalaali2 } from '@core/index'
 
-export function JalaliDatePicker({ prevDate, label, onChange, onClear }) {
+export function JalaliDatePicker({
+  prevDate,
+  label,
+  onChange,
+  onClear,
+  defaultValue,
+  register,
+  name,
+  error,
+}) {
   //   const firstRender = useRef(true)
   const [value, setValue] = useState(null)
-  //   const [inputValue, setInputValue] = useState('')
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const darkMode = useSelector((state) => state.darkMode.darkMode)
 
-  const formattedValue = `${value ? value.convert(persian, persian_en).format() : ''}`
+  const persianDate =
+    defaultValue !== '0001-01-01T00:00:00'
+      ? convertGrigorianDateToJalaali2(defaultValue)
+      : ''
+
+  const formattedValue = `${value ? value.convert(persian, persian_en).format() : persianDate}`
 
   function handleDeleteSelection() {
     setValue(null)
@@ -39,6 +53,9 @@ export function JalaliDatePicker({ prevDate, label, onChange, onClear }) {
         classNames={{ label: 'text-base' }}
         onFocus={() => setIsCalendarOpen(true)}
         endIcon={DeleteSelection}
+        register={register}
+        name={name}
+        error={error}
       />
       {isCalendarOpen && (
         <div className="-rright-[310px absolute -top-[285px] z-30">

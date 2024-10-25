@@ -11,8 +11,12 @@
 body {
   direction: rtl;
   user-select: none;
-  @apply font-sans;
+  @apply m-0 h-full p-0 font-sans;
 }
+#root {
+  @apply h-full;
+}
+
 @layer utilities {
   .ltr {
     direction: ltr;

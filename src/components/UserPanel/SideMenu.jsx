@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { darkModeActions } from '@store/dark-mode-slice'
 import { AnimatePresence, motion, useAnimate } from 'framer-motion'
+import { tokenActions } from '@store/token-slice'
 
 export function SideMenu() {
   const dispatch = useDispatch()
@@ -16,14 +17,33 @@ export function SideMenu() {
 
   function handleSelect(key) {
     setSelectedKeys(key)
-    navigate('/user-panel/' + key)
+
+    if (key !== 'accounts' && key !== 'logout') {
+      navigate('/user-panel/' + key)
+    } else if (key === 'logout') {
+      handleLogout()
+    } else {
+      //
+    }
+
+    handleCloseMenu()
+  }
+
+  function handleCloseMenu() {
     if (isMenuOpen) {
       dispatch(darkModeActions.toggleUserPanelSideBar())
     }
   }
 
-  function handleCloseMenu() {
-    dispatch(darkModeActions.toggleUserPanelSideBar())
+  function handleGoToHome() {
+    handleCloseMenu()
+    navigate('/')
+  }
+
+  function handleLogout() {
+    dispatch(tokenActions.logout())
+    handleCloseMenu()
+    navigate('/')
   }
   //
   return (
@@ -37,7 +57,7 @@ export function SideMenu() {
         // exit={{ right: -300 }}
         // ref={scope}
         key="aside"
-        className={`absolute right-0 top-0 z-40 h-fit w-64 bg-white p-4 pb-1 shadow shadow-white dark:bg-black xl:static xl:block xl:rounded-2xl xl:shadow-none ${isMenuOpen ? 'block' : 'hidden'}`}
+        className={`absolute right-0 top-0 z-40 h-fit w-64 rounded-2xl bg-white p-4 pb-1 shadow-[0_0_35px_0px_rgba(255,255,255,0.1)] dark:bg-black xl:static xl:block xl:shadow-none ${isMenuOpen ? 'block' : 'hidden'}`}
         /* style={{
           display: isMenuOpen ? 'block' : 'none',
           right: -300,
@@ -46,13 +66,16 @@ export function SideMenu() {
         }} */
       >
         <div className="relative">
-          <Link to="/" className="mb-4 flex w-fit items-center gap-2">
+          <Link
+            onClick={handleGoToHome}
+            className="mb-4 flex w-fit items-center gap-2"
+          >
             <ShortLogo className="h-10" />
             <LongLogo className="-mb-4 -mr-4 hidden xl:block" />
           </Link>
 
           <Cancel
-            className="absolute left-1 top-3 mr-32 block cursor-pointer transition-all hover:scale-125 xl:hidden"
+            className="absolute left-1 top-2 mr-32 block cursor-pointer transition-all hover:scale-125 xl:hidden"
             onClick={handleCloseMenu}
           />
         </div>
