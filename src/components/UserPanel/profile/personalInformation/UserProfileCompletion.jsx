@@ -8,7 +8,7 @@ export function UserProfileCompletion({ userInfo }) {
         <CircularProgress
           label={
             userInfo.profileCompletionPercentage === 100 ? (
-              <span className="text-green-700">
+              <span className="text-primary-blue">
                 اطلاعات حساب‌ کاربری شما تکمیل است
               </span>
             ) : (
@@ -20,8 +20,8 @@ export function UserProfileCompletion({ userInfo }) {
           className="mx-auto mt-14"
           showValueLabel={true}
           classNames={{
-            svg: `w-36 h-36 ${userInfo.profileCompletionPercentage === 100 ? 'text-green-700' : 'text-[#FFC619]'}`,
-            value: `text-3xl font-thin ${userInfo.profileCompletionPercentage === 100 ? 'text-green-700' : 'text-[#FFC619]'}`,
+            svg: `w-36 h-36 ${userInfo.profileCompletionPercentage === 100 ? 'text-primary-blue' : 'text-[#FFC619]'}`,
+            value: `text-3xl font-thin ${userInfo.profileCompletionPercentage === 100 ? 'text-primary-blue' : 'text-[#FFC619]'}`,
             label: 'text-sm text-[#FFC619] mt-4 text-center',
           }}
         />
