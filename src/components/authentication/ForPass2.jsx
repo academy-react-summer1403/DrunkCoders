@@ -16,7 +16,7 @@ export function ForPass2() {
       forgetPassStep2Api({ signal, configValue: params.configValue }),
   })
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: forgetPassStep3Api,
     onSuccess: (data) => {
       if (data.onSuccess) {
@@ -100,6 +100,7 @@ export function ForPass2() {
             starIcon={Lock}
           />
           <Button
+            isLoading= {isPending}
             type="submit"
             className="-mt-4 w-full bg-primary-blue p-4 text-white"
           >

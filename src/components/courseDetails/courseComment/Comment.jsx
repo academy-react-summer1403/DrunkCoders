@@ -6,6 +6,7 @@ import { CommentList } from './CommentList';
 import { CommentBlack, CommentWhite } from '@assets/index';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCourseComments, sendCourseComment, sendCourseReply } from '@core';
+import toast from 'react-hot-toast';
 
 export function Comment({ courseId }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -28,6 +29,7 @@ export function Comment({ courseId }) {
   const mutation = useMutation({
     mutationFn: sendCourseComment,
     onSuccess: (data) => {
+      toast.success(' کامنت ارسال شد ')
       setModalInput('');
       setModalSubject('');
       onOpen(false);
@@ -51,7 +53,7 @@ export function Comment({ courseId }) {
   const setReply = useMutation({
     mutationFn: sendCourseReply,
     onSuccess: (data) => {
-      alert('reply sent successfully');
+      toast.success(' پاسخ ارسال شد ');
       setModalInput('');
       setModalSubject('');
       onOpen(false);

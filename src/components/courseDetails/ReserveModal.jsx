@@ -6,6 +6,7 @@ import { Button } from '@components';
 export function ReserveModal({ isOpen, onOpenChange }) {
   return (
     <Modal
+      hideCloseButton
       className='w-[400px]'
       backdrop="opaque"
       isOpen={isOpen}
@@ -33,7 +34,7 @@ export function ReserveModal({ isOpen, onOpenChange }) {
     >
       <ModalContent>
         {
-          () => (
+          (onClose) => (
             <>
               <ModalBody>
                 <div className='flex flex-col rounded-3xl bg-white relative gap-6'>
@@ -62,7 +63,8 @@ export function ReserveModal({ isOpen, onOpenChange }) {
                     <Button className='w-2/3'>
                       لیست رزرو های من
                     </Button>
-                    <Button className='bg-white text-black border'>
+                    <Button className='bg-white text-black border'
+                    onPress={onClose}>
                       باشه
                     </Button>
                   </div>

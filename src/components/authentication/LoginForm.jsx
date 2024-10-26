@@ -8,6 +8,7 @@ import { Checkbox } from '@nextui-org/react'
 import { useMutation } from '@tanstack/react-query'
 import { useDispatch } from 'react-redux'
 import { tokenActions } from '@store/token-slice'
+import toast from 'react-hot-toast'
 
 export function LoginForm({ currentStep, setCurrentStep }) {
   const navigate = useNavigate()
@@ -23,10 +24,10 @@ export function LoginForm({ currentStep, setCurrentStep }) {
   const rememberMe = watch('rememberMe', false)
 
   // 1729155397
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      alert(data.message)
+      toast.success(' ورود با موفقیت انجام شد. ')
       if (data.success) {
         console.log(data)
         dispatch(tokenActions.login({ token: data.token }))
@@ -85,6 +86,7 @@ export function LoginForm({ currentStep, setCurrentStep }) {
           </Link>
         </div>
         <Button
+          isLoading={isPending}
           type="submit"
           className="mt-5 w-full bg-primary-blue p-4 text-white"
           disabled={currentStep === 2}

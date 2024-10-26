@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useDisclosure } from '@nextui-org/react';
 import { ReserveModal } from './ReserveModal';
 import { removeCourseFavorite } from '@core/index';
+import toast from 'react-hot-toast';
 
 export function OverView({ course }) {
   const [likeState, setLikeState] = useState({ like: false, dislike: false });
@@ -26,8 +27,11 @@ export function OverView({ course }) {
   const mutation = useMutation({
     mutationFn: reserveCourse,
     onSuccess: (data) => {
-      console.log("Reservation successful:", data);
+      toast.success(' به لیست رزرو اضافه شد ')
     },
+    onError:() =>{
+      toast.error(' متاسفیم به لیست رزرو اضافه نشد  ')
+    }
   });
      
   function handleReserve() {
@@ -38,11 +42,11 @@ export function OverView({ course }) {
   useMutation({
     mutationFn: () => addCourseFavorite({courseId}),
     onSuccess: (data) => {
-      alert('added to favoriteCourse');
+      toast.success('به موارد دلخواه اضافه شد')
       queryClient.invalidateQueries(['courseDetails', data])
     },
     onError: (err) => {
-      alert('unseccessful')
+      toast.error('به موارد دلخواه اضافه نشد')
     }
   });
 
@@ -50,9 +54,10 @@ export function OverView({ course }) {
   const setRemoveFavorite = useMutation({
     mutationFn:removeCourseFavorite,
     onSuccess: () => {
-      alert('remove from favorite');
+      toast.success(' از موارد دلخواه پاک شد')
     },
     onError: (error) => {
+      toast.error('از موارد دلخواه پاک نشد')
       console.log('no remove', error);
     }
   });
