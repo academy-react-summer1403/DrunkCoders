@@ -3,6 +3,7 @@ import { deleteProfilePic, selectProfilePic } from '@core/index'
 import { Divider } from '@nextui-org/react'
 import { darkModeActions } from '@store/dark-mode-slice'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 
 export function SelectAndDeletePic({ data, onSelect, selectedImg }) {
@@ -17,7 +18,7 @@ export function SelectAndDeletePic({ data, onSelect, selectedImg }) {
         queryClient.invalidateQueries(['userProfileInfo'])
         console.log('success')
       } else {
-        alert(data.message)
+        toast.error(data.message)
       }
     },
   })
@@ -30,9 +31,9 @@ export function SelectAndDeletePic({ data, onSelect, selectedImg }) {
           dispatch(darkModeActions.setDefaultProfilePic('hand'))
         }
         queryClient.invalidateQueries(['userProfileInfo'])
-        console.log('success deletition')
+        toast.success(' با موفقیت پاک شد ')
       } else {
-        alert(data.message)
+        toast.error(data.message)
       }
     },
   })

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useMutation } from '@tanstack/react-query'
 import { EditUserProfile } from '@core/index'
 import { tokenActions } from '@store/index'
+import toast from 'react-hot-toast'
 
 export function Address({ userInfo }) {
   const [latlng, setLatlng] = useState()
@@ -13,7 +14,7 @@ export function Address({ userInfo }) {
   const { mutate } = useMutation({
     mutationFn: EditUserProfile,
     onSuccess: (data) => {
-      alert(data.message)
+      toast.success( ' اطلاعات موقعیت مکانی شما ثبت شد ' )
       if (data.success) {
         if (data.newToken) {
           dispatch(tokenActions.login({ token: data.token }))

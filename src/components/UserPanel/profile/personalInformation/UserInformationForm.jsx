@@ -10,6 +10,7 @@ import { tokenActions } from '@store/index'
 import { useMutation } from '@tanstack/react-query'
 import moment from 'moment-jalaali'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 
 export function UserInformationForm({ userInfo }) {
@@ -24,13 +25,16 @@ export function UserInformationForm({ userInfo }) {
   const { mutate } = useMutation({
     mutationFn: EditUserProfile,
     onSuccess: (data) => {
-      alert(data.message)
+      toast.success( ' پروفایل با موفقیت ذخیره شد ' )
       if (data.success) {
         if (data.newToken) {
           dispatch(tokenActions.login({ token: data.token }))
         }
       }
     },
+    onError : () => {
+      toast.error( ' مشکلی پیش آمد ' )
+    }
   })
 
   function onSubmit(data) {

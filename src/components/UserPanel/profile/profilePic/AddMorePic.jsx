@@ -1,21 +1,29 @@
 import { ImagePicker, UseIcon } from '@components/index'
 import { addProfilePic } from '@core/index'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
 
 export function AddMorePic({ data, handleImagePicker }) {
   const queryClient = useQueryClient()
+  let toastId;
 
   const { mutate } = useMutation({
     mutationFn: addProfilePic,
+    onMutate : () => {
+      toastId = toast.loading('در حال بارگذاری');
+    },
     onSuccess: (data) => {
+      toast.dismiss(toastId);
       if (data.success) {
         queryClient.invalidateQueries(['userProfileInfo'])
-        console.log('successfull adding')
+        toast.success(' عکس با موفقیت ذخیره شد ')
       } else {
-        alert(data.message)
+        toast.error(data.message || 'خطا در ذخیره‌سازی عکس');
       }
     },
+
   })
+  
 
   function handleAddProfilePic(imageFile) {
     const fd = new FormData()

@@ -6,6 +6,7 @@ import { tokenActions } from '@store/index'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import toast from 'react-hot-toast'
 
 export function Links({ userInfo }) {
   const dispatch = useDispatch()
@@ -18,7 +19,7 @@ export function Links({ userInfo }) {
   const { mutate } = useMutation({
     mutationFn: EditUserProfile,
     onSuccess: (data) => {
-      alert(data.message)
+      toast.success(data.message)
       if (data.success) {
         if (data.newToken) {
           dispatch(tokenActions.login({ token: data.token }))
@@ -30,7 +31,7 @@ export function Links({ userInfo }) {
   function onSubmit(data) {
     // console.log(data)
     if (!userInfo.fName) {
-      alert('لطفا ابتدا اطلاعات شخصی را کامل بفرمایید')
+      toast.error('لطفا ابتدا اطلاعات شخصی را کامل بفرمایید')
       return
     }
 
