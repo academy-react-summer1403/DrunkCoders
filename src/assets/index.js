@@ -81,6 +81,7 @@ export { default as glassyGradient } from './images/3d-glassy-gradient-crisscros
 export { default as FileBookmark } from './icons/file-bookmark.svg?react'
 export { default as PencilEdit } from './icons/pencil-edit.svg?react'
 
+export { default as Clock } from './icons/Clock.svg?react'
 export { default as AccountSetting } from './icons/account-setting.svg?react'
 export { default as CheckmarkCircle } from './icons/checkmark-circle.svg?react'
 export { default as Tick } from './icons/tick.svg?react'
@@ -99,3 +100,4 @@ export { default as Hark } from './icons/Hark.svg?react'
 export { default as lady } from './images/Lady.jpg'
 export { default as hand } from './images/Hand.jpg'
 export { default as froge } from './images/Froge.jpg' */
+export { default as PanelIndicator } from './icons/panel/arrow-left.svg?react'

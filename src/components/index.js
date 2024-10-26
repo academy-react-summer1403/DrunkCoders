@@ -43,6 +43,8 @@ export { CourseCard } from './common/card/CourseCard'
 export { SideMenu } from './UserPanel/SideMenu'
 export { PanelHeader } from './UserPanel/PanelHeader'
 export { ArticlDetailsContainer } from './articleDetails/ArticlDetailsContainer'
+
+export { Dashboard } from './UserPanel/Dashboard/Dashboard'
 export { JalaliDatePicker } from './common/JalaliDatePicker'
 export { PersonalInformations } from './UserPanel/profile/personalInformation/PersonalInformations'
 export { ProfilePic } from './UserPanel/profile/profilePic/ProfilePic'
