@@ -40,7 +40,7 @@ export function DashHeader({data}) {
         </div>
         <div>
           <p className='text-gray-500'>تاریخ</p>
-          <p>{formatedDate}</p> 
+          <p className='whitespace-nowrap'>{formatedDate}</p> 
         </div>
       </div>
     </section>
