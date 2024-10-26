@@ -9,7 +9,6 @@ export function ArticleSide({data}) {
     const queryClient = useQueryClient();
     const [likeState, setLikeState] = useState({ like: false, dislike: false });
     const [isBookmarked, setIsBookmarked] = useState(false);
-    console.log('side data',data);
 
     const { mutate: addFavNews, isPending, isError } =
     useMutation({
@@ -40,7 +39,11 @@ export function ArticleSide({data}) {
         }
         return !prevState;
       });
-    }
+    };
+
+    const delUserLike = useMutation({
+      
+    })
 
     const farsiDateFormatter = new Intl.DateTimeFormat('fa-IR', {
       year: 'numeric',

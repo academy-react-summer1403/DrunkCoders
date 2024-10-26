@@ -32,6 +32,9 @@ export function Comment({ courseId }) {
       onOpen(false);
       queryClient.invalidateQueries(['courseDetails', data]);
     },
+    onError:(err) => {
+      console.log('error', err);
+    }
   });
 
   function addCourseComment() {

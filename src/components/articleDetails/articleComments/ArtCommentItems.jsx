@@ -1,5 +1,6 @@
 import { DesignComment } from '@components/common/comments/DesignComment'
-import { getNewsReply, postArticleCommentLike } from '@core/index'
+import { deleteArticleCommentLike, getNewsReply, postArticleCommentLike } from '@core/index'
+import { postNewsComment } from '@core/services/api/newsDetails.api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { useState } from 'react'
 
@@ -23,10 +24,23 @@ export function ArtCommentItems({comment,handleOpenModal}) {
         }
     })
 
+    const delCommentLike = useMutation({
+      mutationFn: (deleteEntityId) => deleteArticleCommentLike(deleteEntityId),
+      onSuccess: (data) => {
+        alert('deleted Comment Like')
+        queryClient.invalidateQueries(['newsDetails',data])
+      },
+      onError: (err) => {
+        console.log('error delet like', err);
+      }
+    })
+
     function handleLike(identifier) {
-        if (identifier === 'like'){
-            addArtCommentLike()
-        }
+        if (likeState.like) {
+          delCommentLike.mutate(userLikeId);
+      } else {
+          addArtCommentLike();
+      }
       
         setLikeState((prevState) =>
           identifier === "like"
@@ -34,10 +48,12 @@ export function ArtCommentItems({comment,handleOpenModal}) {
             : { dislike: !prevState.dislike, like: false }
         );
       }
+
     if(isLoading)return <div>Loading replies...</div>
     const finalReplies = repliesData || [];
-    console.log(comment);
 
+    const userLikeId = comment.currentUserLikeId;
+    console.log('userLikeId', userLikeId);      
   return (
     <>
         <DesignComment

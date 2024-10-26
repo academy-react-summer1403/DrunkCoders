@@ -69,3 +69,35 @@ export async function postArticleCommentLike(commentId){
         throw error
     }
 }
+
+export async function deleteArticleCommentLike (deleteEntityId) {
+    try {
+        const response = await api.delete(`/News/DeleteCommentLikeNews`,{
+            data: {deleteEntityId}
+        })
+        return response;
+    } catch (error) {
+        console.log('error delete comment like', error);
+        throw error;
+    }
+}
+
+export async function postNewsComment(commentData) {
+    try {
+        const response = await api.post(`/News/CreateNewsComment`,commentData)
+        return response; 
+    } catch (error) {
+        console.log('error post comment', error);
+        throw error;
+    }
+}
+
+export async function postNewsReply(replyData) {
+    try {
+        const response = await api.post(`/News/CreateNewsComment`,replyData);
+        return response; 
+    } catch (error) {
+        console.log('error post reply', error);
+        throw error;
+    }
+}
