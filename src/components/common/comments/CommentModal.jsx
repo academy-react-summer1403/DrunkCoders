@@ -1,8 +1,4 @@
-import { Button } from '@components';
-import { Cancel, Sent, Smile } from '@assets';
-import { Modal, ModalContent, ModalBody, Input, ModalHeader, ModalFooter } from '@nextui-org/react';
-import { CommentList } from './CommentList';
-import { ReplySection } from './ReplySection';
+import { Modal, ModalContent, ModalBody } from '@nextui-org/react';
 import { useState } from 'react';
 import { CommentModalFooter } from './CommentModalFooter';
 import { CommentModalHeader } from './CommentModalHeader';
@@ -15,12 +11,11 @@ export function CommentModal({
   setModalInput,
   modalSubject,
   setModalSubject,
-  addCourseComment,
-  comments,
-  handleOpenModal,
+  addComment,
   isReply,
   replyToComment,
-  addCourseReply
+  addReply,
+  children
 }) {
   const [scrollBehavior, setScrollBehavior] = useState("inside");
 
@@ -38,16 +33,13 @@ export function CommentModal({
           <>
             <CommentModalHeader modalTitle={modalTitle} onClose={onClose} />
             <ModalBody>
-              {comments.length > 0 ? (
-                <CommentList comments={comments} handleOpenModal={handleOpenModal} />
-              ) : (
-                <p className="text-center text-gray-500">هیچ نظری وجود ندارد.</p>
-              )}
+                {children}
+
             </ModalBody>
             <CommentModalFooter
               isReply={isReply}
-              addCourseComment={addCourseComment}
-              addCourseReply={addCourseReply}
+              addComment={addComment}
+              addReply={addReply}
               modalInput={modalInput}
               setModalInput={setModalInput}
               modalSubject={modalSubject}

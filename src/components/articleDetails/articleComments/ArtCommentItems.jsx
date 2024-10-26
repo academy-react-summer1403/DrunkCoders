@@ -1,9 +1,10 @@
 import { DesignComment } from '@components/common/comments/DesignComment'
-import { getNewsReply, postArticleCommentLike } from '@core/index'
+import { deleteArticleCommentLike, getNewsReply, postArticleCommentLike } from '@core/index'
+import { postNewsComment } from '@core/services/api/newsDetails.api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { useState } from 'react'
 
-export function ArtCommentItems({comment}) {
+export function ArtCommentItems({comment,handleOpenModal}) {
     const [likeState, setLikeState] = useState({ like: false, dislike: false });
     const queryClient = useQueryClient();
 
@@ -23,10 +24,23 @@ export function ArtCommentItems({comment}) {
         }
     })
 
+    const delCommentLike = useMutation({
+      mutationFn: (deleteEntityId) => deleteArticleCommentLike(deleteEntityId),
+      onSuccess: (data) => {
+        alert('deleted Comment Like')
+        queryClient.invalidateQueries(['newsDetails',data])
+      },
+      onError: (err) => {
+        console.log('error delet like', err);
+      }
+    })
+
     function handleLike(identifier) {
-        if (identifier === 'like'){
-            addArtCommentLike()
-        }
+        if (likeState.like) {
+          delCommentLike.mutate(userLikeId);
+      } else {
+          addArtCommentLike();
+      }
       
         setLikeState((prevState) =>
           identifier === "like"
@@ -34,10 +48,12 @@ export function ArtCommentItems({comment}) {
             : { dislike: !prevState.dislike, like: false }
         );
       }
+
     if(isLoading)return <div>Loading replies...</div>
     const finalReplies = repliesData || [];
-    console.log(comment);
 
+    const userLikeId = comment.currentUserLikeId;
+    console.log('userLikeId', userLikeId);      
   return (
     <>
         <DesignComment
@@ -50,6 +66,7 @@ export function ArtCommentItems({comment}) {
         likeCount={comment.likeCount}
         dislikeCount={comment.dissLikeCount}
         handleLike={handleLike}
+        handleOpenModal={handleOpenModal}
         />
     </>
   )

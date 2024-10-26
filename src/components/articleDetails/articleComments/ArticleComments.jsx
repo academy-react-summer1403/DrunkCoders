@@ -1,12 +1,11 @@
 import { CommentGray } from '@assets/index';
 import { Button } from '@components/index';
-import { getNewsComment } from '@core/index';
+import { getNewsComment, postNewsComment, postNewsReply } from '@core/index';
 import { useDisclosure } from '@nextui-org/react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { ArticleCommentList } from './ArticleCommentList'; // Adjust the import based on your folder structure
-import { CommentBlack } from '@assets/index'; // Ensure this is imported correctly
-import { CommentModal } from '@components/courseDetails/courseComment/CommentModal';
+import { ArticleCommentList } from './ArticleCommentList'; // Adjust this import as needed
+import { CommentModal } from '@components/common/comments/CommentModal';
 
 export function ArticleComments({ newsId }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -22,29 +21,73 @@ export function ArticleComments({ newsId }) {
     queryFn: () => getNewsComment(newsId),
   });
 
-  console.log(comments);
-
-  if (isLoading) {
-    return <p>Loading comments...</p>;
-  }
-
-  if (isError || !comments) {
-    return <p>Error loading comments.</p>;
-  }
-  function handleOpenModal(isOpen, comment = null, reply = false) {
+  const handleOpenModal = (isOpen, comment = null, reply = false) => {
     setIsReply(reply);
     setReplyToComment(comment);
     setModalTitle(reply ? 'پاسخ شما' : 'نظر شما');
     onOpen(isOpen);
+  };
+  
+  const mutation = useMutation({
+    mutationFn: postNewsComment,
+    onSuccess: () => {
+      alert('Comment posted successfully!');
+    },
+    onError: (error) => {
+      console.error('Error posting comment:', error);
+    },
+  });
+  const commentData ={
+    newsId:newsId,
+    userIpAddress: '192.168.1.1',
+    title:modalSubject,
+    describe:modalInput,
+    userId: '12345'
   }
+
+  const handleCommentSubmit = (commentData) => {
+    mutation.mutate(commentData);
+    setModalInput(''); // Reset input field
+    setModalSubject('');
+  };
+
+  const replyMutation = useMutation ({
+    mutationFn: postNewsReply,
+    onSuccess: () => {
+      alert('Reply posted successfully!');
+    },
+    onError: (err) => {
+      console.log('err', err);
+    }
+  })
+  const replyData = {
+    newsId:newsId,
+    userIpAddress: "<string>",
+    title:modalSubject,
+    describe:modalInput,
+    userId: "<long>",
+    parentId: "<uuid>"
+  }
+  function handleReply (replyData){
+    replyMutation.mutate(replyData)
+    setModalInput('');
+    setModalSubject('');
+  }
+
+  if (isLoading) return <p>Loading comments...</p>;
+  if (isError || !comments) return <p>Error loading comments.</p>;
+  console.log('reply to', replyToComment);
 
   return (
     <div className="comment-section rounded-3xl border-3 p-3 flex flex-col">
+      {/* Button to open the modal for adding a new comment */}
       <Button className="w-full text-lg bg-gray-200 text-gray-500" onPress={() => handleOpenModal(true)}>
         <CommentGray />
         نظر شما
       </Button>
-      {/* <CommentModal
+
+      {/* Modal for adding or replying to a comment */}
+      <CommentModal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         modalTitle={modalTitle}
@@ -52,38 +95,36 @@ export function ArticleComments({ newsId }) {
         setModalInput={setModalInput}
         modalSubject={modalSubject}
         setModalSubject={setModalSubject}
-        addCourseComment
-        comments={comments}
+        addComment = {handleCommentSubmit}
         isReply={isReply}
         replyToComment={replyToComment}
-        addCourseReply
-      /> */}
+        addReply={handleReply}
+      >
+        {comments.length > 0 ? (
+          <ArticleCommentList comments={comments} handleOpenModal={handleOpenModal} />
+        ) : (
+          <p className="text-center text-gray-500">هیچ نظری وجود ندارد.</p>
+        )}
+      </CommentModal>
 
-      {comments.length === 0 ? (
-        <p className='text-gray-400 text-2xl'>کامنتی وجود ندارد</p>
-      ) : (
+      {/* Display comments if they exist */}
+      {comments.length > 0 ? (
         <>
-          <ArticleCommentList comments={showAllComments ? comments : comments.slice(0, 2)} />
+          <ArticleCommentList comments={showAllComments ? comments : comments.slice(0, 2)} handleOpenModal={handleOpenModal} />
 
-          {comments.length > 2 && !showAllComments && (
+          {/* "Show more" and "Show less" buttons */}
+          {comments.length > 2 && (
             <button
               className="w-full bg-gray-200 text-gray-500 p-2 rounded-3xl flex justify-center gap-2"
-              onClick={() => setShowAllComments(true)}
+              onClick={() => setShowAllComments(!showAllComments)}
             >
               <CommentGray />
-              نمایش بیشتر
+              {showAllComments ? 'نمایش کمتر' : 'نمایش بیشتر'}
             </button>
           )}
-
-          {showAllComments && (
-            <Button
-              className="w-full bg-gray-200 text-black p-2"
-              onClick={() => setShowAllComments(false)}
-            >
-              نمایش کمتر
-            </Button>
-          )}
         </>
+      ) : (
+        <p className="text-gray-400 text-2xl">کامنتی وجود ندارد</p>
       )}
     </div>
   );
