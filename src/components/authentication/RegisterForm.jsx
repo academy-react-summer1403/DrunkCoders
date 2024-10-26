@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { registerSchema, registerApi } from '@core'
 import { BaseInput, Button } from '@components'
 import { MobileIcon } from '@assets'
+import { useMutation } from '@tanstack/react-query'
 
 export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
   const {
@@ -14,18 +15,26 @@ export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
     resolver: zodResolver(registerSchema),
   })
 
-  const onSubmit = async (data) => {
-    setPhoneNumber(data.phoneNumber) // Set the phone number for later use
-
-    const response = await registerApi({ phoneNumber: data.phoneNumber }) // Send phone number to API
-
-    if (response) {
-      // Check if response is valid
+  const { mutateAsync, isPending, error } = useMutation({
+    mutationFn: registerApi,
+    onSuccess: (response) => {
       console.log('API Response:', response)
-      setCurrentStep(2) // Move to the next step if the API call is successful
-    } else {
-      console.error('Error sending verification code') // Handle API error
-      // Optionally, display an error message to the user here
+      setCurrentStep(2)
+    },
+    onError: () => {
+      console.error('Error sending verification code')
+    },
+  })
+  
+  const onSubmit = async (data) => {
+    try {
+      setPhoneNumber(data.phoneNumber)
+      const response = await mutateAsync({ phoneNumber: data.phoneNumber })
+      if (response) {
+        setCurrentStep(2)
+      }
+    } catch (err) {
+      console.error('Error sending verification code', err)
     }
   }
 
@@ -48,6 +57,7 @@ export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
           error={errors.phoneNumber} // Pass the correct error to BaseInput
         />
         <Button
+          isLoading= {isPending}
           type="submit"
           className="-mt-5 w-full bg-primary-blue p-4 text-white"
           disabled={currentStep === 2}

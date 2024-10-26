@@ -39,7 +39,7 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
     },
   })
 
-  const { mutate: registerMutate } = useMutation({
+  const { mutate: registerMutate, isPending } = useMutation({
     mutationFn: registerFinalApi,
     onSuccess: (data, variables) => {
       alert(data.message)
@@ -108,6 +108,7 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
           error={errors.password} // Show error for password
         />
         <Button
+          isLoading={isPending}
           type="submit"
           className="w-full bg-primary-blue p-4 text-white"
           disabled={currentStep === 3}

@@ -4,6 +4,7 @@ import { Button } from '..';
 import { Avatar, Image } from '@nextui-org/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addNewsFavorite, delNewsFavorite } from '@core/index';
+import toast from 'react-hot-toast';
 
 export function ArticleSide({data}) {
     const queryClient = useQueryClient();
@@ -15,20 +16,20 @@ export function ArticleSide({data}) {
     useMutation({
       mutationFn: () => addNewsFavorite(data.id),
       onSuccess: (result) => {
-        alert('added to fav');
+        toast.success(' به لیست دلخواه اضافه شد ');
         queryClient.invalidateQueries(['newsDetails', result])  
       },
       onError:(error) => {
-        console.log('error add to fav', error);
+        console.log(' متاسفیم به لست دلخواه اضافه نشد', error);
       }
     })
     const delFavNews = useMutation({
       mutationFn: (deleteEntityId) => delNewsFavorite(deleteEntityId),
       onSuccess: () => {
-          alert('Deleted from favorites');
+          toast.success(' از لیست دلخواه پاک شد ')
       },
       onError: (error) => {
-          console.error('Error deleting favorite', error);
+          console.error(' از لیست دلخواه پاک شد  ', error);
       }
   });
     function handleBookmark() {

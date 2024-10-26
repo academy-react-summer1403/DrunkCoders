@@ -24,6 +24,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import './App.css'
 import { useSelector } from 'react-redux'
+import toast, { Toaster } from 'react-hot-toast';
 
 export const queryClient = new QueryClient({
   defaultOptions: { queries: { gcTime: 1000 * 60 * 30 } },
@@ -120,6 +121,20 @@ export function App() {
         className={`h-full bg-background text-foreground ${darkMode ? 'dark' : 'light'}`}
       >
         <RouterProvider router={router} />
+        <Toaster 
+         toastOptions={{
+          success: {
+            style: {
+              background: '#CAFFB9',
+            },
+          },
+          error: {
+            style: {
+              background: '#FF7474',
+            },
+          },
+        }}
+        />
       </main>
     </QueryClientProvider>
   )

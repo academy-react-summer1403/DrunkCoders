@@ -8,7 +8,7 @@ import { forgetPassStep1Api } from '@core/index'
 export function ForPass1() {
   const { register, handleSubmit } = useForm()
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: forgetPassStep1Api,
     onSuccess: (data) => {
       if (data.success) alert('ایمیل تغییر رمز عبور ارسال شد.')
@@ -68,6 +68,7 @@ export function ForPass1() {
             starIcon={Mail}
           />
           <Button
+            isLoading= {isPending}
             type="submit"
             className="-mt-5 w-full bg-primary-blue p-4 text-white"
             // disabled={currentStep === 2}
