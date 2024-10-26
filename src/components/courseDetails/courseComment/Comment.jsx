@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@components';
 import { useDisclosure } from '@nextui-org/react';
-import { CommentModal } from './CommentModal';
+import { CommentModal } from '../../common/comments/CommentModal';
 import { CommentList } from './CommentList';
 import { CommentBlack, CommentWhite } from '@assets/index';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -15,7 +15,6 @@ export function Comment({ courseId }) {
   const [isReply, setIsReply] = useState(false);
   const [replyToComment, setReplyToComment] = useState(null);
   
-  // State to manage showing all comments
   const [showAllComments, setShowAllComments] = useState(false);
 
   const queryClient = useQueryClient();
@@ -103,12 +102,18 @@ export function Comment({ courseId }) {
         setModalInput={setModalInput}
         modalSubject={modalSubject}
         setModalSubject={setModalSubject}
-        addCourseComment={addCourseComment}
-        comments={comments}
+        addComment={addCourseComment}
         isReply={isReply}
         replyToComment={replyToComment}
-        addCourseReply={addCourseReply}
-      />
+        addReply={addCourseReply}
+      >
+          {comments.length > 0 ? (
+            <CommentList comments={comments} handleOpenModal={handleOpenModal} />
+          ) : (
+            <p className="text-center text-gray-500">هیچ نظری وجود ندارد.</p>
+          )}
+      </CommentModal>
+      
 
       {comments.length === 0 ? (
         <p className='text-gray-400 text-2xl'>

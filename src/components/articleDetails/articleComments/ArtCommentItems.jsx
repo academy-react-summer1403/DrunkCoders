@@ -3,7 +3,7 @@ import { getNewsReply, postArticleCommentLike } from '@core/index'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { useState } from 'react'
 
-export function ArtCommentItems({comment}) {
+export function ArtCommentItems({comment,handleOpenModal}) {
     const [likeState, setLikeState] = useState({ like: false, dislike: false });
     const queryClient = useQueryClient();
 
@@ -50,6 +50,7 @@ export function ArtCommentItems({comment}) {
         likeCount={comment.likeCount}
         dislikeCount={comment.dissLikeCount}
         handleLike={handleLike}
+        handleOpenModal={handleOpenModal}
         />
     </>
   )

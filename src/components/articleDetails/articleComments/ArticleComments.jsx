@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { ArticleCommentList } from './ArticleCommentList'; // Adjust the import based on your folder structure
 import { CommentBlack } from '@assets/index'; // Ensure this is imported correctly
-import { CommentModal } from '@components/courseDetails/courseComment/CommentModal';
+import { CommentModal } from '@components/common/comments/CommentModal';
 
 export function ArticleComments({ newsId }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -44,7 +44,7 @@ export function ArticleComments({ newsId }) {
         <CommentGray />
         نظر شما
       </Button>
-      {/* <CommentModal
+      <CommentModal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         modalTitle={modalTitle}
@@ -52,12 +52,17 @@ export function ArticleComments({ newsId }) {
         setModalInput={setModalInput}
         modalSubject={modalSubject}
         setModalSubject={setModalSubject}
-        addCourseComment
-        comments={comments}
+        addComment
         isReply={isReply}
         replyToComment={replyToComment}
-        addCourseReply
-      /> */}
+        addReply
+      >
+        { comments.length > 0 ?(
+          <ArticleCommentList comments={comments} handleOpenModal={handleOpenModal} />
+        ) : (
+          <p className="text-center text-gray-500">هیچ نظری وجود ندارد.</p>
+        )}
+      </CommentModal>
 
       {comments.length === 0 ? (
         <p className='text-gray-400 text-2xl'>کامنتی وجود ندارد</p>
