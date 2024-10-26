@@ -50,6 +50,8 @@ export { addDislikeForArticle } from './services/api/news.api'
 export { removeArticleLikeOrDislike } from './services/api/news.api'
 export { userPanelMenuGlobal } from './utils/constants.utils'
 export { userPanelMenuBottom } from './utils/constants.utils'
+
+export {getLatestCourses} from './services/api/user.api'
 export { moblieMenu } from './utils/constants.utils'
 
 export { addNewsFavorite } from './services/api/newsDetails.api'

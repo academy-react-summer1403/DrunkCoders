@@ -1,9 +1,13 @@
-import React from 'react'
+import { Dashboard } from '@components/index'
+import React, { useState } from 'react'
+
 
 export function DashboardPage() {
+ 
   return (
     <div>
-      Dash
+        <Dashboard/>
     </div>
+    
   )
 }

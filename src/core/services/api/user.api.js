@@ -5,7 +5,8 @@ export async function getCurrentUserProfile() {
     const response = await api.get('/SharePanel/GetProfileInfo')
     return response
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    throw error;
   }
 }
 
@@ -48,5 +49,14 @@ export async function deleteProfilePic(picIdFormData) {
     return response
   } catch (error) {
     console.log(error)
+  }
+}
+export async function getLatestCourses() {
+  try {
+      const response = await api.get('/Home/GetCoursesWithPagination?RowsOfPage=20&SortingCol=InsertDate&SortType=DESC')
+      return response
+  } catch (error) {
+      console.log(error);
+      throw error;
   }
 }

@@ -19,7 +19,7 @@ export function UserPanelLayout() {
       <div className="flex h-full flex-1 flex-col gap-3">
         <PanelHeader userInfo={userInfo} />
 
-        <main className="h-full rounded-2xl bg-white pb-4 dark:bg-black">
+        <main className="h-full rounded-2xl pb-4">
           <Outlet context={userInfo} />
         </main>
 
