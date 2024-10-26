@@ -8,6 +8,7 @@ import {
   infoSchema,
   loginUser,
   registerFinalApi,
+  setLocalStorage,
 } from '@core/index'
 import { useMutation } from '@tanstack/react-query'
 import { useDispatch } from 'react-redux'
@@ -45,6 +46,8 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
       console.log('variables: ', variables)
 
       if (data.success) {
+        setLocalStorage('defaultProfilePic', 'hand')
+
         loginMutate({
           phoneOrGmail: variables.gmail,
           password: variables.password,

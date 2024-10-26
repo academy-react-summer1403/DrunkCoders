@@ -10,8 +10,8 @@ import {
   Courses,
   CourseDetail,
   ArticlesDetail,
-} from '@pages'
-import {
+  Financials,
+  Articles,
   DashboardPage,
   MyCoursePage,
   MyReservationPage,
@@ -24,7 +24,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import './App.css'
 import { useSelector } from 'react-redux'
-import { Articles } from '@pages/Articles'
 
 export const queryClient = new QueryClient({
   defaultOptions: { queries: { gcTime: 1000 * 60 * 30 } },
@@ -102,6 +101,10 @@ const router = createBrowserRouter([
         element: <FavoriteCourses />,
       },
       {
+        path: 'Financials',
+        element: <Financials />,
+      },
+      {
         path: 'MyFavoriteArticles',
         element: <FavoriteArticles />,
       },
@@ -114,7 +117,7 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <main
-        className={`bg-background text-foreground ${darkMode ? 'dark' : 'light'}`}
+        className={`h-full bg-background text-foreground ${darkMode ? 'dark' : 'light'}`}
       >
         <RouterProvider router={router} />
       </main>
