@@ -45,7 +45,7 @@ export function SelectAndDeletePic({ data, onSelect, selectedImg }) {
       fd.append('ImageId', data.id)
       mutate(fd)
     }
-    console.log(data.id)
+
     onSelect(data.key)
   }
 
