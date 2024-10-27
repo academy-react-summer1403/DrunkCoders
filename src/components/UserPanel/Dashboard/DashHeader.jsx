@@ -18,11 +18,11 @@ export function DashHeader({ data }) {
   })
 
   return (
-    <header className="flex">
+    <header className="flex justify-between flex-wrap gap-2">
       <p className="text-2xl font-bold">سلام، صبح‌ بخیر {data.fName}</p>
 
-      <section className="mx-auto flex w-[30%] justify-between">
-        <div className="flex items-center gap-2">
+      <section className="mx-auto flex flex-1 md:justify-center gap-[10%] min-w-[300px]">
+        <div className="time flex items-center gap-2">
           <div className="rounded-full bg-white p-3 dark:bg-black">
             <Clock />
           </div>
@@ -32,7 +32,8 @@ export function DashHeader({ data }) {
             <p>{formattedTime}</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+
+        <div className="date flex items-center gap-2">
           <div className="rounded-full bg-white p-3 dark:bg-black">
             <Calendar2 />
           </div>
@@ -42,6 +43,7 @@ export function DashHeader({ data }) {
           </div>
         </div>
       </section>
+
     </header>
   )
 }

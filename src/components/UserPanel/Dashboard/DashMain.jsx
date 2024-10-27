@@ -11,8 +11,8 @@ export function DashMain({data}) {
       const darkMode = useSelector((state) => state.darkMode.darkMode)
 
   return (
-    <main className='grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8' >
-    <div className=' w-full h-full rounded-2xl bg-white p-3 dark:bg-black'> 
+    <main className='flex flex-wrap gap-6 justify-evenly items-center' >
+    <div className=' w-[45%] h-[266px] rounded-2xl bg-white p-3 dark:bg-black'> 
       <header className='flex justify-between'>
         <div>نظرات‌ شما</div>
         <div className='text-primary-500 cursor-pointer flex items-center'>
@@ -29,7 +29,7 @@ export function DashMain({data}) {
         className={`mx-auto mt-3 ${darkMode ? 'bg-dark' : ''}`}
      />
     </div>
-    <div className='md:flex flex-col bg-white dark:bg-black flex-1 rounded-2xl p-2 justify-center items-center hidden'>
+    <div className='md:flex flex-col h-[266px] bg-white dark:bg-black flex-1 rounded-2xl p-2 justify-center items-center hidden'>
       <header className='self-start justify-self-start flex justify-between'>
         <p>وضعیت اطلاعات حساب </p>
         <div className='text-primary'>
