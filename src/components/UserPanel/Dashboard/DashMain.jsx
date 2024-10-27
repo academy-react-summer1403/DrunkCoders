@@ -12,7 +12,7 @@ export function DashMain({data}) {
 
   return (
     <main className='flex flex-wrap gap-6 justify-evenly items-center' >
-    <div className=' w-[45%] h-[266px] rounded-2xl bg-white p-3 dark:bg-black'> 
+    <div className=' sm:w-[45%] w-full h-[266px] rounded-2xl bg-white p-3 dark:bg-black'> 
       <header className='flex justify-between'>
         <div>نظرات‌ شما</div>
         <div className='text-primary-500 cursor-pointer flex items-center'>
