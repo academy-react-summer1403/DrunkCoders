@@ -59,7 +59,7 @@ export function ProfileLayout({ userInfo }) {
             </div>
           </header>
 
-          <main className="mt-12 p-10 pb-0">
+          <main className="rounded-b-2xl bg-white p-10 pt-[88px] dark:bg-black">
             <section className="flex flex-col items-start justify-between gap-12 sm:flex-row">
               <div className="flex min-w-full flex-col gap-6 sm:min-w-fit">
                 <div>
@@ -113,7 +113,7 @@ export function ProfileLayout({ userInfo }) {
                 onSelectionChange={setSelected}
                 className={``}
                 classNames={{
-                  tab: 'text-sm xs:text-base sm:text-lg md:text-xl px-0 h-12 max-w-fit pb-4 ',
+                  tab: 'text-xl px-0 h-12 max-w-fit pb-4 ',
                   tabList:
                     'w-full relative rounded-none border-b border-divider overflow-y-hidden gap-8',
                   cursor: 'bg-primary-blue h-2 rounded-lg -mb-2',

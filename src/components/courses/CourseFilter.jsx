@@ -81,8 +81,16 @@ export function CourseFilter() {
     dispatch(sortFilterActions.setDateRange({ startDate: null, endDate: null }))
   }
 
+  function handlePriceChange(costUp, costDown) {
+    dispatch(sortFilterActions.setCost({ costDown, costUp }))
+  }
+
+  function handleClearPrice() {
+    dispatch(sortFilterActions.setCost({ costDown: null, costUp: null }))
+  }
+
   return (
-    <div className="top- sticky top-10 flex h-fit flex-col gap-8 rounded-3xl px-3 py-5 dark:bg-white/20 md:bg-[#E4E4E4]">
+    <div className="top- sticky top-20 flex h-fit flex-col gap-8 rounded-3xl px-3 py-5 dark:bg-white/20 md:bg-[#E4E4E4]">
       <div className="hidden md:block">
         <SearchBox
           onSearch={handleSearch}
@@ -112,7 +120,11 @@ export function CourseFilter() {
         prevSelectedItem={filterId.teacher}
       />
 
-      <PriceSlider previousValue={[cost.costDown, cost.costUp]} />
+      <PriceSlider
+        previousValue={[cost.costDown, cost.costUp]}
+        onChange={handlePriceChange}
+        onClear={handleClearPrice}
+      />
 
       <JalaliDateRangePicker
         label={<IconLabel icon={Calendar2} label="تاریخ برگزاری" />}
@@ -122,6 +134,7 @@ export function CourseFilter() {
           dateRange.startDate && new DateObject(dateRange.startDate),
           dateRange.endDate && new DateObject(dateRange.endDate),
         ]}
+        placement="up"
       />
 
       <div className="block md:hidden">

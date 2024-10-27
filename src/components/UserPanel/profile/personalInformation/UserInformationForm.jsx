@@ -7,7 +7,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@nextui-org/react'
 import { tokenActions } from '@store/index'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import moment from 'moment-jalaali'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux'
 
 export function UserInformationForm({ userInfo }) {
   const dispatch = useDispatch()
+  const queryClient = useQueryClient()
   moment.loadPersian()
   const {
     register,
@@ -30,6 +31,7 @@ export function UserInformationForm({ userInfo }) {
         if (data.newToken) {
           dispatch(tokenActions.login({ token: data.token }))
         }
+        queryClient.invalidateQueries(['userProfileInfo'])
       }
     },
     onError : () => {
@@ -110,6 +112,7 @@ export function UserInformationForm({ userInfo }) {
           className="mb-0 sm:w-[45%]"
           isReadOnly
           defaultValue={userInfo.phoneNumber}
+          isDisabled
         />
         <BaseInput
           label="کد ملی"
@@ -177,6 +180,7 @@ export function UserInformationForm({ userInfo }) {
         className="mb-0"
         isReadOnly
         defaultValue={userInfo.email}
+        isDisabled
       />
 
       <Textarea

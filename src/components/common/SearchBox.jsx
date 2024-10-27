@@ -2,9 +2,8 @@ import { Search } from '@assets/index'
 import { BaseInput, IconLabel } from '@components/index'
 import { useState } from 'react'
 
-export function SearchBox({ label, className, onSearch }) {
-  const [searchTerm, setSearchTerm] = useState('')
-
+export function SearchBox({ label, className, onSearch, prevSearchTerm }) {
+  const [searchTerm, setSearchTerm] = useState(prevSearchTerm ?? '')
   function handleSearch() {
     onSearch(searchTerm)
   }
@@ -20,6 +19,7 @@ export function SearchBox({ label, className, onSearch }) {
       type="text"
       endIcon={BlueSearchIcon}
       className={`mb-0 ${className}`}
+      // defaultValue={prevSearchTerm ?? ''}
     />
   )
 

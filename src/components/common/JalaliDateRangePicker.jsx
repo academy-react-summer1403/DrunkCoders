@@ -10,7 +10,13 @@ import { BaseInput } from '@components/index'
 import { Cancel } from '@assets/index'
 import { useSelector } from 'react-redux'
 
-export function JalaliDateRangePicker({ prevDate, label, onChange, onClear }) {
+export function JalaliDateRangePicker({
+  prevDate,
+  label,
+  onChange,
+  onClear,
+  placement,
+}) {
   const firstRender = useRef(true)
   const [values, setValues] = useState(null)
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
@@ -43,7 +49,7 @@ export function JalaliDateRangePicker({ prevDate, label, onChange, onClear }) {
   }
 
   return (
-    <div className={`${isCalendarOpen ? 'mb-14' : ''} w-full`}>
+    <div className={`relative w-full`}>
       <BaseInput
         label={label ?? null}
         placeholder={formattedValue}
@@ -58,7 +64,9 @@ export function JalaliDateRangePicker({ prevDate, label, onChange, onClear }) {
         starIcon={DeleteSelection}
       />
       {isCalendarOpen && (
-        <div className="relative z-20 -mt-[338px]">
+        <div
+          className={`absolute left-[50%] z-20 -translate-x-[50%] ${placement === 'up' ? '-mt-[338px]' : '-mt-1'}`}
+        >
           <Calendar
             value={values}
             onChange={(values) => {
@@ -90,8 +98,3 @@ export function JalaliDateRangePicker({ prevDate, label, onChange, onClear }) {
     )
   }
 }
-
-/* const [values, setValues] = useState([
-    new DateObject().subtract(4, 'days'),
-    new DateObject().add(4, 'days'),
-  ]) */

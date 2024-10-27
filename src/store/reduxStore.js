@@ -5,6 +5,7 @@ import {
   tokenReducer,
   sortFilterReducer,
   articleSortFilterReducer,
+  dashSortFilterReducer,
 } from '@store/index'
 
 export const store = configureStore({
@@ -14,5 +15,6 @@ export const store = configureStore({
     view: courseViewModeReducer,
     sort: sortFilterReducer,
     articleSort: articleSortFilterReducer,
+    dashSort: dashSortFilterReducer,
   },
 })

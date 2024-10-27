@@ -50,20 +50,25 @@ export function ProfilePic({ userInfo }) {
       <main className="flex flex-wrap gap-5">
         {profilePics.map((img) => (
           <div
-            className={`flexC relative h-40 w-40 overflow-hidden rounded-2xl md:h-[235px] md:w-[236px] ${img.key !== 'morePic' ? img.bgColor : 'order-1 border-4'}`}
+            className={`flexC relative h-40 w-40 rounded-2xl md:h-[235px] md:w-[236px] ${img.key !== 'morePic' ? img.bgColor : 'order-1 border-4'}`}
             key={img.key}
           >
             {img.key !== 'morePic' && (
               <>
                 {img.bgColor && (
-                  <UseIcon
-                    icon={img.icon}
-                    className={`w-28 md:h-auto md:w-auto ${img.key === 'lady' || img.key === 'smeed' ? '-mb-6' : ''}`}
-                  />
+                  <div className="flexC h-full w-full overflow-hidden">
+                    <UseIcon
+                      icon={img.icon}
+                      className={`w-28 md:h-auto md:w-auto ${img.key === 'lady' || img.key === 'smeed' ? 'md:-mb-6' : ''}`}
+                    />
+                  </div>
                 )}
 
                 {!img.bgColor && (
-                  <img src={img.icon} className="h-full w-full object-cover" />
+                  <img
+                    src={img.icon}
+                    className="h-full w-full rounded-2xl object-cover"
+                  />
                 )}
 
                 <SelectedPicAndThreeDot

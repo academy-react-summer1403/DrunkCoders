@@ -3,13 +3,10 @@ import { Slider } from '@nextui-org/react'
 import { IconLabel } from '@components/index'
 import { Cancel, Money } from '@assets/index'
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { sortFilterActions } from '@store/index'
 
-export function PriceSlider({ previousValue }) {
+export function PriceSlider({ previousValue, onClear, onChange }) {
   const [value, setValue] = useState([10 * 1000, 1000 * 1000])
   const timeout = useRef(null)
-  const dispatch = useDispatch()
 
   useEffect(() => {
     if (previousValue[0]) setValue(previousValue)
@@ -22,29 +19,20 @@ export function PriceSlider({ previousValue }) {
     }
 
     timeout.current = setTimeout(() => {
-      dispatch(
-        sortFilterActions.setCost({
-          costDown: e[0].toString(),
-          costUp: e[1].toString(),
-        }),
-      )
+      onChange(e[1].toString(), e[0].toString())
       timeout.current = null
     }, 1000)
   }
 
   function clearPrice() {
-    dispatch(
-      sortFilterActions.setCost({
-        costDown: null,
-        costUp: null,
-      }),
-    )
+    setValue([10 * 1000, 1000 * 1000])
+    onClear()
   }
 
   return (
     <div className="flex">
       <Slider
-        label={<IconLabel icon={Money} label="قیمت" />}
+        label={<IconLabel icon={Money} label="قیمت" className="mb-3" />}
         step={5000}
         minValue={10 * 1000}
         maxValue={10 * 1000 * 1000}
@@ -80,7 +68,7 @@ export function PriceSlider({ previousValue }) {
         onClick={clearPrice}
         className="relative -left-2 flex items-center justify-center"
       >
-        <Cancel className="relative -bottom-[13px] h-5 w-5 cursor-pointer transition-all hover:scale-125" />
+        <Cancel className="relative -bottom-[19px] h-5 w-5 cursor-pointer transition-all hover:scale-125" />
       </div>
     </div>
   )

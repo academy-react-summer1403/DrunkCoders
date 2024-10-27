@@ -14,11 +14,10 @@ export function MobileModal({
       onOpenChange={onOpenChange}
       hideCloseButton
       isDismissable={false}
-      size="2xl"
-      className="relative w-[110vw] rounded-b-none rounded-t-[32px]"
+      size="3xl"
+      className={`rounded-bb-none sm: relative rounded-t-[32px] sm:m-0`}
       classNames={{
-        base: 'w-[100vw]',
-        wrapper: 'w-[100vw]  p-0 m-0',
+        wrapper: '',
       }}
       motionProps={{
         variants: {
