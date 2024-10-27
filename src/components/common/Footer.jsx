@@ -18,7 +18,7 @@ function SubLogos() {
 
 function Explain() {
   return (
-    <div className="explain w-[296] sm:ml-10 sm:w-[315px]">
+    <div className="explain ">
       <h1 className="text-2xl font-bold">آکادمی کدنویسی بحر</h1>
       <br />
       <p className="text-justify text-gray-500 dark:text-white/60">
@@ -32,7 +32,7 @@ function Explain() {
 
 function Pages() {
   return (
-    <div className="pages flex w-[118px] flex-col text-lg">
+    <div className="pages flex flex-col text-lg">
       <h1 className="text-gray-500 dark:text-white">صفحات</h1>
       <div className="mt-5 flex flex-col space-y-3 font-[500]">
         <Link to="/">خانه</Link>
@@ -45,7 +45,7 @@ function Pages() {
 
 function Us() {
   return (
-    <div className="us flex w-[83px] flex-col text-lg">
+    <div className="us flexflex-col text-lg">
       <h1 className="text-gray-500 dark:text-white">ما</h1>
       <div className="mt-5 flex flex-col space-y-3 font-[500]">
         <Link to="/teachers">اساتید</Link>
@@ -59,7 +59,7 @@ function Us() {
 function Namad() {
   return (
     <div className="nama">
-      <img src={eNamad} alt="" height="100px" width="100px" />
+      <img src={eNamad} alt="" height="100px" width="100px"  className='float-left'/>
     </div>
   )
 }
@@ -67,29 +67,32 @@ function Namad() {
 export function Footer() {
   return (
     <footer className="mb-2 mt-20 rounded-[32px] bg-gray-100 px-5 py-12 dark:bg-white/20">
-      <div className="relative flex flex-wrap justify-between gap-10">
-        <div className="logo-contact order-1 flex flex-col lg:-order-1 lg:-mt-6">
+      <div className=" flex flex-wrap justify-between gap-y-4">
+        <div className=" lg:w-fit md:w-[30%] ">
           <Logo />
         </div>
-        <div className="order-6 lg:-bottom-[35px] lg:order-2 footer-lg:absolute">
-          <SubLogos />
-        </div>
 
-        <div className="order-2 ml-16 lg:order-5">
-          <Namad />
-        </div>
-
-        <div className="explain order-3 lg:order-2">
+        <div className="xl:w-[25%] lg:w-[30%] md:w-[50%] sm:w-[50%] sm:order-none order-2">
           <Explain />
         </div>
 
-        <div className="pages order-4 lg:order-3">
-          <Pages />
+        <div className='flex lg:w-[30%] md:w-[60%] sm:w-[60%] sm:order-none w-full justify-between order-1'>
+          <div className="xl:w-fit">
+            <Pages />
+          </div>
+
+          <div className="xl:w-fit">
+            <Us />
+          </div>
         </div>
 
-        <div className="us order-5 lg:order-4">
-          <Us />
+        <div className=" lg:w-fit md:w-[30%] justify-self-end">
+          <Namad />
         </div>
+
+      </div>
+      <div className=" w-fit mt-4 ">
+          <SubLogos />
       </div>
       <div className="mb-8 mt-14">
         <hr className="order-6 hidden w-full bg-gray-200 lg:block" />
