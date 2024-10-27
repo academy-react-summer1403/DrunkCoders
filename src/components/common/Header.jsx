@@ -117,16 +117,16 @@ export function Header() {
                   />
                 </PopoverTrigger>
                 <PopoverContent className="border-1 border-blue-200 p-1">
-                  <div className="flex h-12 w-28 flex-col gap-2 text-center">
+                  <div className="flex flex-col gap-2 px-2 text-center">
                     <Link
                       to="/user-panel/dashboard"
-                      className="w-full rounded-lg hover:bg-slate-200"
+                      className="w-full rounded-lg p-2 hover:bg-slate-200 dark:hover:text-black"
                     >
-                      پروفایل من
+                      پنل کاربری
                     </Link>
                     <Link
                       onClick={handleLogout}
-                      className="w-full rounded-lg hover:bg-slate-200"
+                      className="w-full rounded-lg p-2 hover:bg-slate-200 dark:hover:text-black"
                     >
                       خروج
                     </Link>

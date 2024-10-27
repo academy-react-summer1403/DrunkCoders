@@ -39,6 +39,7 @@ export const GoogleMapComponent = ({ onSelectLocation, latlng }) => {
         style={{
           height: '100%',
           width: '100%',
+          zIndex: 1,
           backgroundColor: darkMode ? '#000' : '#fff',
         }}
       >

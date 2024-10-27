@@ -8,22 +8,22 @@ export function UserPanelLayout() {
   const { data: userInfo } = useQuery({
     queryKey: ['userProfileInfo'],
     queryFn: getCurrentUserProfile,
+    staleTime: 0,
   })
 
   return (
     <div className="relative flex h-full gap-3 bg-gray-100 p-3 pb-32 dark:bg-gray-900 sm:pb-3">
-      <AnimatePresence>
-        <SideMenu />
-      </AnimatePresence>
+      <SideMenu />
 
-      <div className="flex h-full flex-1 flex-col gap-3">
+      {/* <div className="flex h-full flex-1 flex-col gap-3"> */}
+      <div className="flex h-full w-full flex-col gap-3">
         <PanelHeader userInfo={userInfo} />
 
         <main className="h-full rounded-2xl pb-4">
           <Outlet context={userInfo} />
         </main>
 
-        <MobileMenu />
+        <MobileMenu userInfo={userInfo} />
       </div>
     </div>
   )

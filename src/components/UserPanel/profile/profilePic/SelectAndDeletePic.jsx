@@ -58,7 +58,7 @@ export function SelectAndDeletePic({ data, onSelect, selectedImg }) {
 
   return (
     <div
-      className={`absolute top-20 w-56 rounded-2xl bg-white p-1 dark:bg-black ${data.isMoreOpen ? '' : 'hidden'}`}
+      className={`absolute top-20 z-10 w-56 rounded-2xl bg-slate-100 p-1 dark:bg-neutral-900 ${data.isMoreOpen ? '' : 'hidden'}`}
     >
       <div
         className="flex cursor-pointer items-center gap-3 p-3 transition-all hover:scale-105"

@@ -1,50 +1,51 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState ={
-    pagination: { currentPage: 1, totalPageCount: 5 },
-    order: 'insertDate',
-    searchTerm: null,
-    descendingOrder: true,
-    filterId: { teacher: null },
-    cost: { costUp: null, costDown: null },
-    dateRange: { startDate: null, endDate: null },
+const initialState = {
+  totalPageCount: null,
+  params: {
+    PageNumber: 1,
+    RowsOfPage: 10,
+    SortingCol: 'InsertDate',
+    SortType: 'DESC',
+    Query: null,
+    TeacherId: null,
+    CostDown: null,
+    CostUp: null,
+    StartDate: null,
+    EndDate: null,
+  },
+  userPanelCurrentpage: 'dashboard',
 }
 
 const dashSortFilterSlice = createSlice({
-    name: 'dashSort',
-    initialState,
-    reducers:{
-        setTotalPageCount(state, action) {
-            state.pagination.totalPageCount = action.payload
-          },
-          setCurrentPage(state, action) {
-            state.pagination.currentPage = action.payload
-          },
-          setOrder(state, action) {
-            state.order = action.payload
-            if (action.payload === 'Action') state.descendingOrder = true
-            else if (action.payload === 'costAsc') state.descendingOrder = false
-            else if (action.payload === 'costDesc') state.descendingOrder = true
-            else if (action.payload === 'InsertDate') state.descendingOrder = true
-          },
-          setSearchTerm(state, action) {
-            state.searchTerm = action.payload
-          },
-          setFilterId(state, action) {
-            state.filterId[action.payload.filterIdentifier] = action.payload.id
-          },
-          setCost(state, action) {
-            state.cost.costUp = action.payload.costUp
-            state.cost.costDown = action.payload.costDown
-          },
-          setDateRange(state, action) {
-            state.dateRange.startDate = action.payload.startDate
-            state.dateRange.endDate = action.payload.endDate
-          },
-          setParams(state, action) {
-            state.params = action.payload
-          },
-    }
+  name: 'dashSort',
+  initialState,
+  reducers: {
+    setUserPanelCurrentpage(state, action) {
+      state.userPanelCurrentpage = action.payload
+    },
+    setTotalPageCount(state, action) {
+      state.totalPageCount = action.payload
+    },
+    setPageNumber(state, action) {
+      state.params.PageNumber = action.payload
+    },
+    setSearchTerm(state, action) {
+      state.params.Query = action.payload
+    },
+    setTeacherId(state, action) {
+      state.params.TeacherId = action.payload
+    },
+
+    setCost(state, action) {
+      state.params.CostUp = action.payload.costUp
+      state.params.CostDown = action.payload.costDown
+    },
+    setDateRange(state, action) {
+      state.params.StartDate = action.payload.startDate
+      state.params.EndDate = action.payload.endDate
+    },
+  },
 })
 
 export const dashSortFilterActions = dashSortFilterSlice.actions

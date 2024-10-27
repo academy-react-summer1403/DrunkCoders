@@ -10,7 +10,7 @@ export function Pagination({ currentPage, totalPageCount, onChange }) {
       initialPage={1}
       page={currentPage}
       onChange={onChange}
-      siblings={2}
+      siblings={1}
     />
   )
 }

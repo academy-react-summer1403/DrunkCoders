@@ -114,13 +114,17 @@ const router = createBrowserRouter([
 
 export function App() {
   const darkMode = useSelector((state) => state.darkMode.darkMode)
+
+  if (darkMode) {
+    document.body.classList.add('dark')
+  } else {
+    if (document.body.classList.contains('dark'))
+      document.body.classList.toggle('dark')
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
-      <main
-        className={`h-full bg-background text-foreground ${darkMode ? 'dark' : 'light'}`}
-      >
-        <RouterProvider router={router} />
-      </main>
+      <RouterProvider router={router} />
     </QueryClientProvider>
   )
 }
