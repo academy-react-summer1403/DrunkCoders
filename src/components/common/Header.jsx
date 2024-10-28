@@ -1,6 +1,7 @@
 import { Button } from '@components'
 import { NavLink } from 'react-router-dom'
-
+import { useQuery } from '@tanstack/react-query'; // ایمپورت useQuery
+import { getCurrentUserProfile } from '@core'
 import {
   MoonIcon,
   BahrLogo,
@@ -52,7 +53,14 @@ export function Header() {
   } else {
     tokenExpired = true
   }
+  const { data: userProfile, isLoading, error } = useQuery({
+    queryKey: ['userProfile'], // کلید کوئری به عنوان آرایه
+    queryFn: getCurrentUserProfile, // تابع API برای دریافت اطلاعات
+    enabled: !tokenExpired, // تنها وقتی توکن معتبر است، درخواست بفرست
+  });
 
+  if (isLoading) return <div>در حال بارگذاری...</div>; // نمایش لودینگ هنگام بارگذاری
+  if (error) return <div>خطا در بارگذاری اطلاعات کاربر</div>; // نمایش خطا در صورت وجود
   return (
     <div className="fixed left-0 z-50 mb-2 flex h-16 w-full justify-around gap-16 bg-white pl-10 pr-8 pt-2 dark:bg-black max-lg:gap-0">
       <div className="relative top-1.5 flex w-72 justify-start gap-4 max-lg:w-64 max-lg:gap-3">
@@ -105,14 +113,14 @@ export function Header() {
 
         <div className="max-md:relative max-md:right-20 max-md:flex max-sm:right-11">
           <div className="relative top-1 max-md:w-12">
-            {!tokenExpired ? (
+          {!tokenExpired && userProfile ? (
               <Popover showArrow placement="bottom">
                 <PopoverTrigger>
                   <User
                     as="button"
-                    // name="Zoe Lang"
-                    // description="Product Designer"
-                    className="relative left-10 top-0.5 w-36 transition-transform max-md:-left-3 max-md:w-12"
+                    name={` ${userProfile?.lName || 'نام‌خانوادگی'}${userProfile?.fName || 'نام'}`}
+                    description={userProfile.phoneNumber}
+                    className="relative -left-0 top-1.5 w-44 whitespace-normal transition-transform max-md:left-28 max-md:w-44 max-md"
                     avatarProps={{}}
                   />
                 </PopoverTrigger>
