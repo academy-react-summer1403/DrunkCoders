@@ -1,7 +1,6 @@
 import { Button } from '@components'
 import { NavLink } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query' // ایمپورت useQuery
-import { getCurrentUserProfile } from '@core'
+
 import {
   MoonIcon,
   BahrLogo,
