@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react'
 import { ThumbUp, ThumbDown } from '@assets'
-import { addLikeForCourse } from '@core/index'
 
 export function LikeAndDislike({
   like,
