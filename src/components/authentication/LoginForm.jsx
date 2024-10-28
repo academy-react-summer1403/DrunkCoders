@@ -23,12 +23,11 @@ export function LoginForm({ currentStep, setCurrentStep }) {
   })
   const rememberMe = watch('rememberMe', false)
 
-  // 1729155397
   const { mutate, isPending } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      toast.success(' ورود با موفقیت انجام شد. ')
       if (data.success) {
+        toast.success(' ورود با موفقیت انجام شد. ')
         dispatch(
           tokenActions.login({
             token: data.token,
@@ -38,7 +37,7 @@ export function LoginForm({ currentStep, setCurrentStep }) {
         )
         navigate('/')
       } else {
-        alert('یه تست مناسب نشان داده شود')
+        toast.error('رمز‌عبور یا نام کاربری نادرست است')
       }
     },
   })

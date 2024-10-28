@@ -74,6 +74,10 @@ export const userPanelProfileTabs = [
     key: 'links',
     title: 'لینک ها',
   },
+  {
+    key: 'changePass',
+    title: 'تغییر رمز‌عبور',
+  },
 ]
 export const moblieMenu = [
   { key: 'dashboard', icon: Dashboard },

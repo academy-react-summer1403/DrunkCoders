@@ -26,17 +26,17 @@ export function UserInformationForm({ userInfo }) {
   const { mutate } = useMutation({
     mutationFn: EditUserProfile,
     onSuccess: (data) => {
-      toast.success( ' پروفایل با موفقیت ذخیره شد ' )
+      toast.success(' پروفایل با موفقیت ذخیره شد ')
       if (data.success) {
         if (data.newToken) {
-          dispatch(tokenActions.login({ token: data.token }))
+          dispatch(tokenActions.login({ token: data.token, id: data.id }))
         }
         queryClient.invalidateQueries(['userProfileInfo'])
       }
     },
-    onError : () => {
-      toast.error( ' مشکلی پیش آمد ' )
-    }
+    onError: () => {
+      toast.error(' مشکلی پیش آمد ')
+    },
   })
 
   function onSubmit(data) {

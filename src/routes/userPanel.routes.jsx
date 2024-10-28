@@ -8,11 +8,12 @@ import {
   FavoriteCourses,
   FavoriteArticles,
 } from '@pages/index'
+import { UserPanelRoutesProtector } from './ProtectedRoute'
 
 export const userPanelRoutes = [
   {
     path: '/user-panel',
-    element: <UserPanelLayout />,
+    element: <UserPanelRoutesProtector route={<UserPanelLayout />} />,
     children: [
       {
         path: 'dashboard',

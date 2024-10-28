@@ -33,7 +33,7 @@ export const LoginModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
       <div className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
         {/* دکمه بستن مودال */}
         <button

@@ -5,11 +5,12 @@ import {
   ForgetPassStep1,
   ForgetPassStep2,
 } from '@pages/index'
+import { AuthRoutesProtector } from './ProtectedRoute'
 
 export const authRoutes = [
   {
     path: '/auth',
-    element: <Authentication />,
+    element: <AuthRoutesProtector route={<Authentication />} />,
     children: [
       {
         index: true,

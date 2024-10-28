@@ -8,13 +8,17 @@
   background-color: #000;
 }
 
+html {
+  @apply min-h-screen;
+}
+
 body {
   direction: rtl;
   user-select: none;
-  @apply m-0 h-full bg-background p-0 font-sans text-foreground;
+  @apply m-0 min-h-screen bg-background p-0 font-sans text-foreground;
 }
 #root {
-  @apply h-full;
+  @apply min-h-screen;
 }
 
 @layer utilities {
