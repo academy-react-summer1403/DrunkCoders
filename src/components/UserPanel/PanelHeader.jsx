@@ -10,25 +10,16 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { darkModeActions } from '@store'
 import { Link, useNavigate } from 'react-router-dom'
-import { profilePics } from '@core/index'
-import { UseIcon } from '@components/index'
+import { profilePics, roleMapper, userImgCreator } from '@core/index'
 
 export function PanelHeader({ userInfo }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  let defaultProfilePic = useSelector(
-    (state) => state.darkMode.defaultProfilePic,
-  )
-  defaultProfilePic = profilePics.find((pic) => pic.key === defaultProfilePic)
+  let { defaultProfilePic, roles } = useSelector(
+    (state) => state.token.users,
+  ).find((user) => user.isOnline)
 
-  let avatarImg = {}
-  if (defaultProfilePic) {
-    avatarImg = {
-      icon: <UseIcon icon={defaultProfilePic.icon} className="h-12 w-12" />,
-    }
-  } else {
-    avatarImg = { src: userInfo?.currentPictureAddress }
-  }
+  const avatarImg = userImgCreator(defaultProfilePic, userInfo)
 
   function toggleMode() {
     dispatch(darkModeActions.toggleMode())
@@ -50,7 +41,7 @@ export function PanelHeader({ userInfo }) {
             onClick={handleOpenMenu}
             className="ml-5 cursor-pointer rounded-lg p-1 transition-all hover:bg-primary-blue xl:hidden"
           >
-            <Dashboard className="h-9 w-9" />
+            <Dashboard className="h-9 w-9 transition-all hover:text-white" />
           </span>
 
           <Badge
@@ -71,7 +62,7 @@ export function PanelHeader({ userInfo }) {
                 ' ' +
                 (userInfo?.lName || 'نام خانوادگی')
               }
-              description="ادمین ، دانشجو"
+              description={roleMapper(roles).join(',')}
               avatarProps={{
                 ...avatarImg,
                 size: 'lg',

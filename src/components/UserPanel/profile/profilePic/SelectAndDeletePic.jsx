@@ -2,6 +2,7 @@ import { CheckmarkCircle, Delete } from '@assets/index'
 import { deleteProfilePic, selectProfilePic } from '@core/index'
 import { Divider } from '@nextui-org/react'
 import { darkModeActions } from '@store/dark-mode-slice'
+import { tokenActions } from '@store/token-slice'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
@@ -14,9 +15,8 @@ export function SelectAndDeletePic({ data, onSelect, selectedImg }) {
     mutationFn: selectProfilePic,
     onSuccess: (data) => {
       if (data.success) {
-        dispatch(darkModeActions.setDefaultProfilePic(null))
+        dispatch(tokenActions.setDefaultProfilePic(null))
         queryClient.invalidateQueries(['userProfileInfo'])
-        console.log('success')
       } else {
         toast.error(data.message)
       }
@@ -28,7 +28,7 @@ export function SelectAndDeletePic({ data, onSelect, selectedImg }) {
     onSuccess: (data) => {
       if (data.success) {
         if (selectedImg) {
-          dispatch(darkModeActions.setDefaultProfilePic('hand'))
+          dispatch(tokenActions.setDefaultProfilePic('hand'))
         }
         queryClient.invalidateQueries(['userProfileInfo'])
         toast.success(' با موفقیت پاک شد ')
@@ -40,7 +40,7 @@ export function SelectAndDeletePic({ data, onSelect, selectedImg }) {
 
   function handleSelect() {
     if (data.bgColor) {
-      dispatch(darkModeActions.setDefaultProfilePic(data.key))
+      dispatch(tokenActions.setDefaultProfilePic(data.key))
     } else {
       const fd = new FormData()
       fd.append('ImageId', data.id)

@@ -31,10 +31,17 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
     onSuccess: (data) => {
       alert(data.message)
       if (data.success) {
-        dispatch(tokenActions.login(data.token))
+        dispatch(
+          tokenActions.login({
+            token: data.token,
+            id: data.id,
+            roles: data.roles,
+            defaultProfilePic: 'hand',
+          }),
+        )
         navigate('/')
       } else {
-        deleteLocalStorage('token')
+        alert('یه تست مناسب نشان داده شود')
       }
     },
   })
@@ -44,10 +51,8 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
     onSuccess: (data, variables) => {
       alert(data.message)
       console.log('variables: ', variables)
-
       if (data.success) {
-        setLocalStorage('defaultProfilePic', 'hand')
-
+        alert('ثبت نام با موفقیت انجام شد در حال ورد به حساب کاربریتان هستید')
         loginMutate({
           phoneOrGmail: variables.gmail,
           password: variables.password,

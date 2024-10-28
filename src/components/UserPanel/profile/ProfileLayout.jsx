@@ -15,14 +15,16 @@ import {
   ProfilePic,
   UseIcon,
 } from '@components/index'
-import { profilePics } from '@core/index'
+import { profilePics, roleMapper } from '@core/index'
 import { useSelector } from 'react-redux'
 
 export function ProfileLayout({ userInfo }) {
   const [selected, setSelected] = useState('personalData')
-  let defaultProfilePic = useSelector(
-    (state) => state.darkMode.defaultProfilePic,
-  )
+
+  let { defaultProfilePic, roles } = useSelector(
+    (state) => state.token.users,
+  ).find((user) => user.isOnline)
+
   defaultProfilePic = profilePics.find((pic) => pic.key === defaultProfilePic)
 
   return (
@@ -66,7 +68,9 @@ export function ProfileLayout({ userInfo }) {
                   <span className="ml-2 text-3xl font-medium">
                     {userInfo.fName || 'نام'} {userInfo.lName || 'نام‌خانوادگی'}
                   </span>
-                  <span className="text-basic-gray">( ادمین ، دانشجو ) </span>
+                  <span className="text-basic-gray">
+                    ( {roleMapper(roles).join(',')} )
+                  </span>
                 </div>
 
                 <div className="flex flex-col items-start gap-2 text-basic-gray lg:flex-row lg:items-center">

@@ -6,7 +6,7 @@ import {
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  token: getLocalStroge('token') ?? null,
+  users: getLocalStroge('users') ?? [],
 }
 
 const tokenSlice = createSlice({
@@ -14,12 +14,29 @@ const tokenSlice = createSlice({
   initialState,
   reducers: {
     logout(state) {
-      state.token = false
-      deleteLocalStorage('token')
+      state.users.forEach((user) =>
+        user.isOnline ? (user.isOnline = false) : null,
+      )
+      setLocalStorage('users', state.users)
     },
     login(state, action) {
-      state.token = action.payload.token
-      setLocalStorage('token', action.payload.token)
+      const user = state.users?.find((user) => user.id === action.payload.id)
+      if (user) {
+        state.users = state.users.map((user) =>
+          user.id === action.payload.id
+            ? { ...user, ...action.payload, isOnline: true }
+            : user,
+        )
+      } else {
+        state.users.push({ ...action.payload, isOnline: true })
+      }
+
+      setLocalStorage('users', state.users)
+    },
+    setDefaultProfilePic(state, action) {
+      state.users.find((user) => user.isOnline).defaultProfilePic =
+        action.payload
+      setLocalStorage('users', state.users)
     },
   },
 })

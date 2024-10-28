@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { BaseInput, Button } from '@components'
 import { Mail, Lock, PassRecover } from '@assets'
-import { deleteLocalStorage, loginSchema, loginUser } from '@core/index'
+import { loginSchema, loginUser } from '@core/index'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Checkbox } from '@nextui-org/react'
 import { useMutation } from '@tanstack/react-query'
@@ -29,11 +29,16 @@ export function LoginForm({ currentStep, setCurrentStep }) {
     onSuccess: (data) => {
       toast.success(' ورود با موفقیت انجام شد. ')
       if (data.success) {
-        //console.log(data)
-        dispatch(tokenActions.login({ token: data.token }))
+        dispatch(
+          tokenActions.login({
+            token: data.token,
+            id: data.id,
+            roles: data.roles,
+          }),
+        )
         navigate('/')
       } else {
-        deleteLocalStorage('token')
+        alert('یه تست مناسب نشان داده شود')
       }
     },
   })

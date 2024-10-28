@@ -51,7 +51,7 @@ export { removeArticleLikeOrDislike } from './services/api/news.api'
 export { userPanelMenuGlobal } from './utils/constants.utils'
 export { userPanelMenuBottom } from './utils/constants.utils'
 
-export {getLatestCourses} from './services/api/user.api'
+export { getLatestCourses } from './services/api/user.api'
 export { moblieMenu } from './utils/constants.utils'
 
 export { addNewsFavorite } from './services/api/newsDetails.api'
@@ -72,3 +72,6 @@ export { userProfileLinksSchema } from './validation/validationSchemas'
 export { deleteArticleCommentLike } from './services/api/newsDetails.api'
 export { postNewsComment } from './services/api/newsDetails.api'
 export { postNewsReply } from './services/api/newsDetails.api'
+
+export { roleMapper } from './utils/practicalFunctions.util'
+export { userImgCreator } from './utils/nextUiUserImgCreator'

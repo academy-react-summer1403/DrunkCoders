@@ -5,7 +5,6 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   darkMode: getLocalStroge('darkMode') ?? false,
   userPanelSidebar: false,
-  defaultProfilePic: getLocalStroge('defaultProfilePic'),
 }
 
 const darkModeSlice = createSlice({
@@ -18,10 +17,6 @@ const darkModeSlice = createSlice({
     },
     toggleUserPanelSideBar(state) {
       state.userPanelSidebar = !state.userPanelSidebar
-    },
-    setDefaultProfilePic(state, action) {
-      state.defaultProfilePic = action.payload
-      setLocalStorage('defaultProfilePic', action.payload)
     },
   },
 })
