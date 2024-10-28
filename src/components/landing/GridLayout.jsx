@@ -71,7 +71,7 @@ export function GridLayout({
       <Button
         as={Link}
         to={isPopularCourses ? '/courses' : '/articles'}
-        className="mx-auto mt-6 block bg-primary-blue text-white sm:hidden"
+        className="mx-auto mt-6 block w-fit bg-primary-blue px-4 py-2 text-medium text-white sm:hidden"
       >
         نمایش بیشتر
       </Button>
