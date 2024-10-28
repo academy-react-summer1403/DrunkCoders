@@ -62,7 +62,7 @@ export function PanelHeader({ userInfo }) {
                 ' ' +
                 (userInfo?.lName || 'نام خانوادگی')
               }
-              description={roleMapper(roles).join(',')}
+              description={roleMapper(roles).join(' ، ')}
               avatarProps={{
                 ...avatarImg,
                 size: 'lg',

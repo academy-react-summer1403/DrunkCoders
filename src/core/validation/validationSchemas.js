@@ -75,3 +75,14 @@ export const userProfileLinksSchema = z.object({
     message: "لینگ لینکداین میبایستی با  'https://www.linkedin.com'  آغاز شود",
   }),
 })
+export const changePass = z.object({
+  prevPass: z
+    .string()
+    .min(6, { message: 'رمز عبور باید حداقل 6 کاراکتر باشد' })
+    .max(32, { message: 'رمز عبور نباید بیش از 32 کاراکتر باشد' }),
+
+  newPass: z
+    .string()
+    .min(6, { message: 'رمز عبور باید حداقل 6 کاراکتر باشد' })
+    .max(32, { message: 'رمز عبور نباید بیش از 32 کاراکتر باشد' }),
+})

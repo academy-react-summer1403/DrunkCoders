@@ -22,14 +22,13 @@ export function Links({ userInfo }) {
       toast.success(data.message)
       if (data.success) {
         if (data.newToken) {
-          dispatch(tokenActions.login({ token: data.token }))
+          dispatch(tokenActions.login({ token: data.token, id: data.id }))
         }
       }
     },
   })
 
   function onSubmit(data) {
-    // console.log(data)
     if (!userInfo.fName) {
       toast.error('لطفا ابتدا اطلاعات شخصی را کامل بفرمایید')
       return

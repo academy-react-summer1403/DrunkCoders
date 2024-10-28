@@ -67,20 +67,11 @@ export function Header() {
   } else {
     tokenExpired = true
   }
-  const {
-    data: userProfile,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['userProfile'], // کلید کوئری به عنوان آرایه
-    queryFn: getCurrentUserProfile, // تابع API برای دریافت اطلاعات
-    enabled: !tokenExpired, // تنها وقتی توکن معتبر است، درخواست بفرست
-  })
 
-  if (isLoading) return <div>در حال بارگذاری...</div> // نمایش لودینگ هنگام بارگذاری
-  if (error) return <div>خطا در بارگذاری اطلاعات کاربر</div> // نمایش خطا در صورت وجود
+  /*   if (isLoading) return <div>در حال بارگذاری...</div> // نمایش لودینگ هنگام بارگذاری
+  if (error) return <div>خطا در بارگذاری اطلاعات کاربر</div> // نمایش خطا در صورت وجود */
   return (
-    <div className="fixed left-0 z-50 flex w-full items-center justify-between gap-16 bg-white/60 px-5 py-3 backdrop-blur-md dark:bg-black/60 max-lg:gap-0 lg:px-8">
+    <div className="fixed left-0 z-50 flex w-full items-center justify-between gap-16 bg-white/60 px-5 py-6 backdrop-blur-md dark:bg-black/60 max-lg:gap-0 lg:px-8">
       <div className="flexC">
         <div className="-mt-3">
           <BahrLogo1 className="h-10 w-10 cursor-pointer" />

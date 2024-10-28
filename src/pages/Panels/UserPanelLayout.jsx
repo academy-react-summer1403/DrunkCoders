@@ -11,14 +11,14 @@ export function UserPanelLayout() {
   })
 
   return (
-    <div className="relative flex h-full gap-3 bg-gray-100 p-3 pb-32 dark:bg-gray-900 sm:pb-3">
+    <div className="relative flex min-h-screen gap-3 bg-gray-100 p-3 pb-32 dark:bg-gray-900 sm:pb-3">
       <SideMenu />
 
       {/* <div className="flex h-full flex-1 flex-col gap-3"> */}
-      <div className="flex h-full w-full flex-col gap-3">
+      <div className="flex min-h-full w-full flex-col gap-3">
         <PanelHeader userInfo={userInfo} />
 
-        <main className="h-full rounded-2xl pb-4">
+        <main className="flex h-full flex-col rounded-2xl">
           <Outlet context={userInfo} />
         </main>
 

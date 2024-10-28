@@ -10,16 +10,17 @@ function onSuccess(response) {
 }
 
 function onError(error) {
-  return handleError(error)
+  handleError(error)
+  return error
 }
 
 api.interceptors.response.use(onSuccess, onError)
 api.interceptors.request.use(
   (config) => {
-    const token = getLocalStroge('users')?.find((user) => user.isOnline)?.token
+    const user = getLocalStroge('users')?.find((user) => user.isOnline)
 
-    if (token) {
-      config.headers.Authorization = 'Bearer ' + token
+    if (user && user.token && user.isOnline) {
+      config.headers.Authorization = 'Bearer ' + user.token
     }
 
     return config
@@ -58,7 +59,7 @@ const handleError = (error) => {
       default:
         if (error.response.status >= 400 && error.response.status < 500) {
           // Handle all other 4xx errors
-          alert('A client error occurred! Status: ' + error.response.status)
+          //alert('A client error occurred! Status: ' + error.response.status)
         } else if (
           error.response.status >= 500 &&
           error.response.status < 600
