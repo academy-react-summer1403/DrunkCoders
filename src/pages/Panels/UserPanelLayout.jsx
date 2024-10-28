@@ -8,7 +8,6 @@ export function UserPanelLayout() {
   const { data: userInfo } = useQuery({
     queryKey: ['userProfileInfo'],
     queryFn: getCurrentUserProfile,
-    staleTime: 0,
   })
 
   return (

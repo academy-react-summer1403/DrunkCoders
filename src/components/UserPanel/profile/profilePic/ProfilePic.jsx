@@ -6,8 +6,12 @@ import {
 } from '@components/index'
 import { profilePics as constantProfilePics, getLocalStroge } from '@core/index'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 export function ProfilePic({ userInfo }) {
+  let { defaultProfilePic } = useSelector((state) => state.token.users).find(
+    (user) => user.isOnline,
+  )
   let newPicArray = userInfo.userImage.map((pic) => ({
     key: pic.puctureAddress,
     icon: pic.puctureAddress,
@@ -30,8 +34,7 @@ export function ProfilePic({ userInfo }) {
     }
   }, [image])
 
-  const selectedImg =
-    getLocalStroge('defaultProfilePic') ?? userInfo.currentPictureAddress
+  const selectedImg = defaultProfilePic ?? userInfo.currentPictureAddress
 
   function handleImagePicker(img) {
     setImage(img)

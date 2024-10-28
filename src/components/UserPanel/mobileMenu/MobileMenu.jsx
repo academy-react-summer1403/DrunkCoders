@@ -11,9 +11,10 @@ export function MobileMenu({ userInfo }) {
   const { userPanelCurrentpage } = useSelector((state) => state.dashSort)
   const [selectedItem, setSelectedItem] = useState(userPanelCurrentpage)
   const navigate = useNavigate()
-  let defaultProfilePic = useSelector(
-    (state) => state.darkMode.defaultProfilePic,
+  let { defaultProfilePic } = useSelector((state) => state.token.users).find(
+    (user) => user.isOnline,
   )
+
   defaultProfilePic = profilePics.find((pic) => pic.key === defaultProfilePic)
 
   useEffect(() => {
@@ -60,7 +61,6 @@ export function MobileMenu({ userInfo }) {
             {index === 3 && (
               <div className="overflow-hidden">{defaultProfilePic}</div>
             )}
-            {/* {index === 3 && defaultProfilePic} */}
           </div>
         ))}
 

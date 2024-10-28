@@ -14,7 +14,10 @@ const initialState = {
     StartDate: null,
     EndDate: null,
   },
-  userPanelCurrentpage: 'dashboard',
+  userPanelCurrentpage:
+    window.location.pathname.split('/')[1] === 'user-panel'
+      ? window.location.pathname.split('/').pop()
+      : 'dashboard',
 }
 
 const dashSortFilterSlice = createSlice({

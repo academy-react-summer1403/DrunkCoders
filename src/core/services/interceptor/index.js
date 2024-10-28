@@ -16,7 +16,7 @@ function onError(error) {
 api.interceptors.response.use(onSuccess, onError)
 api.interceptors.request.use(
   (config) => {
-    const token = getLocalStroge('token')
+    const token = getLocalStroge('users')?.find((user) => user.isOnline)?.token
 
     if (token) {
       config.headers.Authorization = 'Bearer ' + token
