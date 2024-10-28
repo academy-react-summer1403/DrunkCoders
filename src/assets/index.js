@@ -101,3 +101,4 @@ export { default as lady } from './images/Lady.jpg'
 export { default as hand } from './images/Hand.jpg'
 export { default as froge } from './images/Froge.jpg' */
 export { default as PanelIndicator } from './icons/panel/arrow-left.svg?react'
+export { default as View } from './icons/view.svg?react'

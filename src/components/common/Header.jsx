@@ -74,33 +74,35 @@ export function Header() {
         </div>
       </div>
 
-      <nav className="mt-1 flex w-2/5 justify-center gap-10 space-x-4 whitespace-nowrap p-2 text-lg font-normal leading-10 text-black dark:text-white max-lg:mx-5 max-lg:gap-5 max-md:hidden">
-        <NavLink
-          exact
-          to="/"
-          className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
-        >
-          خانه
-        </NavLink>
-        <NavLink
-          to="/courses"
-          className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
-        >
-          دوره‌ها
-        </NavLink>
-        <NavLink
-          to="/articles"
-          className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
-        >
-          اخبار و مقالات
-        </NavLink>
-        <NavLink
-          to="/contact"
-          className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
-        >
-          ارتباط باما
-        </NavLink>
-      </nav>
+       <nav  className="space-x-4 flex w-2/5 justify-center text-black dark:text-white gap-10 mt-1 whitespace-nowrap p-2 text-lg font-normal leading-10 max-lg:mx-5 max-lg:gap-5 max-md:hidden">
+  <NavLink
+    to="/"
+    className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
+  >
+    خانه
+  </NavLink>
+
+  <NavLink
+    to="/courses"
+    className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
+  >
+    دوره‌ها
+  </NavLink>
+
+  <NavLink
+    to="/articles"
+    className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
+  >
+    اخبار و مقالات
+  </NavLink>
+
+  <NavLink
+    to="/contact"
+    className={({ isActive }) => (isActive ? 'text-blue-500' : 'text')}
+  >
+    ارتباط باما
+  </NavLink>
+        </nav> 
 
       <div className="flex w-72 justify-end gap-5 border-black max-lg:mr-2 max-lg:gap-3 max-md:block max-md:w-fit max-md:gap-2">
         <div
