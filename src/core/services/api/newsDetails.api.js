@@ -3,7 +3,6 @@ import { api } from '../interceptor'
 export async function getNewsById (id){
     try {
         const response = await api.get(`/news/${id}`)
-        console.log(' Api Response', response);
         return response
     } catch (error) {
         console.log('Error fetching news details:', error);
@@ -84,20 +83,20 @@ export async function deleteArticleCommentLike (deleteEntityId) {
 
 export async function postNewsComment(commentData) {
     try {
-        const response = await api.post(`/News/CreateNewsComment`,commentData)
+        const response = await api.post(`/News/CreateNewsComment`, commentData);
         return response; 
     } catch (error) {
-        console.log('error post comment', error);
+        console.log('Error posting comment:', error);
         throw error;
     }
 }
 
 export async function postNewsReply(replyData) {
     try {
-        const response = await api.post(`/News/CreateNewsComment`,replyData);
+        const response = await api.post(`/News/CreateNewsComment`, replyData);
         return response; 
     } catch (error) {
-        console.log('error post reply', error);
+        console.log('Error posting reply:', error);
         throw error;
     }
 }

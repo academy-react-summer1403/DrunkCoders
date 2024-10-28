@@ -3,13 +3,17 @@ import React, { useState } from 'react'
 import { Button } from '..';
 import { Avatar, Image } from '@nextui-org/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addNewsFavorite, delNewsFavorite } from '@core/index';
 import toast from 'react-hot-toast';
+import { addDislikeForArticle, addLikeForArticle, addNewsFavorite, delNewsFavorite, removeArticleLikeOrDislike } from '@core/index';
 
 export function ArticleSide({data}) {
     const queryClient = useQueryClient();
     const [likeState, setLikeState] = useState({ like: false, dislike: false });
     const [isBookmarked, setIsBookmarked] = useState(false);
+    const articleId = data.id
+    let likeId = data.likeId
+
+    console.log(data);
 
     const { mutate: addFavNews, isPending, isError } =
     useMutation({
@@ -42,9 +46,46 @@ export function ArticleSide({data}) {
       });
     };
 
-    const delUserLike = useMutation({
-      
+    const { mutate: addArticleLike} = useMutation ({
+      mutationFn: (articleId) => addLikeForArticle(articleId),
+      onSuccess: () =>{
+        queryClient.invalidateQueries(['newsDetails']);
+      }
     })
+    const { mutate: addArticleDislike} = useMutation ({
+      mutationFn: (articleId) => addDislikeForArticle(articleId),
+      onSuccess: () =>{
+        queryClient.invalidateQueries(['newsDetails']);
+      }
+    })
+    const { mutate: removeArticleLikeOrDislikeMutation } = useMutation({
+      mutationFn: ({ likeId }) => removeArticleLikeOrDislike({ likeId }),
+      onSuccess: () => {
+        queryClient.invalidateQueries(['newsDetails']);
+      },
+      onError: (error) => {
+        console.log("Error removing like or dislike:", error);
+      },
+    });
+    function handleLike(identifier) {
+      if (identifier === "like") {
+        if (likeState.like) {
+          removeArticleLikeOrDislikeMutation({ likeId });
+        } else {
+          addArticleLike(articleId);
+          if (likeState.dislike) removeArticleLikeOrDislikeMutation({ likeId });
+        }
+        setLikeState({ like: !likeState.like, dislike: false });
+      } else if (identifier === "dislike") {
+        if (likeState.dislike) {
+          removeArticleLikeOrDislikeMutation({ likeId });
+        } else {
+          addArticleDislike(articleId);
+          if (likeState.like) removeArticleLikeOrDislikeMutation({ likeId });
+        }
+        setLikeState({ like: false, dislike: !likeState.dislike });
+      }
+    }
 
     const farsiDateFormatter = new Intl.DateTimeFormat('fa-IR', {
       year: 'numeric',
@@ -88,26 +129,28 @@ export function ArticleSide({data}) {
           <div className="rounded-full p-2 border-2 cursor-pointer" onClick={() => handleBookmark()}>
             <Bookmark
               className={`stroke-black dark:stroke-white hover:text-primary-blue
-              ${isBookmarked ? "text-primary-blue stroke-primary-blue" : "text-transparent"}`}
+              ${isBookmarked ? "text-primary-blue " : "text-transparent"}`}
             />
           </div>
 
           <div className='flex items-center gap-1'>
-            <div className="rounded-full p-2 border-2 cursor-pointer" >
+            <div className="rounded-full p-2 border-2 cursor-pointer" onClick={() => handleLike("like")}>
               <ThumbUp
                 className={`-mt-1 stroke-black dark:stroke-white hover:text-primary-blue
-                ${likeState.like ? "text-primary-blue stroke-primary-blue" : "text-transparent"}`}
+                ${likeState.like ? "text-primary-blue" : "text-transparent"}`}
               />
             </div>
+            {data.currentLikeCount}
           </div>
 
           <div className='flex gap-1 items-center'>
-            <div className="rounded-full p-2 border-2 cursor-pointer" >
+            <div className="rounded-full p-2 border-2 cursor-pointer" onClick={() => handleLike("dislike")}>
               <ThumbDown
                 className={`stroke-black dark:stroke-white hover:text-primary-blue
-                ${likeState.dislike ? "text-primary-blue stroke-primary-blue" : "text-transparent"}`}
+                ${likeState.dislike ? "text-primary-blue" : "text-transparent"}`}
               />
             </div>
+            {data.currentDissLikeCount}
           </div>
         </div>
       </div>

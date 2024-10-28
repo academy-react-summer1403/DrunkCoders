@@ -6,8 +6,9 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { ArticleCommentList } from './ArticleCommentList'; // Adjust this import as needed
 import { CommentModal } from '@components/common/comments/CommentModal';
+import toast from 'react-hot-toast';
 
-export function ArticleComments({ newsId }) {
+export function ArticleComments({ data}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [modalInput, setModalInput] = useState('');
   const [modalSubject, setModalSubject] = useState('');
@@ -15,6 +16,8 @@ export function ArticleComments({ newsId }) {
   const [isReply, setIsReply] = useState(false);
   const [replyToComment, setReplyToComment] = useState(null);
   const [showAllComments, setShowAllComments] = useState(false);
+
+  const newsId = data.id
 
   const { data: comments, isLoading, isError } = useQuery({
     queryKey: ['articleComments', newsId],
@@ -31,45 +34,48 @@ export function ArticleComments({ newsId }) {
   const mutation = useMutation({
     mutationFn: postNewsComment,
     onSuccess: () => {
-      alert('Comment posted successfully!');
+      toast.success('کامنت ارسال شد');
     },
     onError: (error) => {
       console.error('Error posting comment:', error);
     },
   });
-  const commentData ={
-    newsId:newsId,
-    userIpAddress: '192.168.1.1',
-    title:modalSubject,
-    describe:modalInput,
-    userId: '12345'
-  }
 
-  const handleCommentSubmit = (commentData) => {
+  const handleCommentSubmit = () => {
+    const commentData = {
+      newsId: newsId,
+      userIpAddress: "192.168.1.1",
+      title: modalSubject,
+      describe: modalInput,
+      userId: data.userId,
+    };
     mutation.mutate(commentData);
-    setModalInput(''); // Reset input field
-    setModalSubject('');
+    resetModalFields();
   };
 
   const replyMutation = useMutation ({
     mutationFn: postNewsReply,
     onSuccess: () => {
-      alert('Reply posted successfully!');
+      toast.success('پاسخ شما ارسال شد');
     },
     onError: (err) => {
       console.log('err', err);
     }
   })
-  const replyData = {
-    newsId:newsId,
-    userIpAddress: "<string>",
-    title:modalSubject,
-    describe:modalInput,
-    userId: "<long>",
-    parentId: "<uuid>"
-  }
-  function handleReply (replyData){
-    replyMutation.mutate(replyData)
+
+  const handleReply = () => {
+    const replyData = {
+      newsId: newsId,
+      userIpAddress: "192.168.1.1",
+      title: modalSubject,
+      describe: modalInput,
+      userId: data.userId,  
+      parentId: replyToComment?.parentId,
+    };
+    replyMutation.mutate(replyData);
+    resetModalFields();
+  };
+  function resetModalFields() {
     setModalInput('');
     setModalSubject('');
   }

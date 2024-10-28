@@ -75,7 +75,7 @@ export function CommentItem({ comment, handleOpenModal }) {
   if (repliesError) return <div>Error loading replies</div>;
 
   const finalReplies = repliesData || [];
-  console.log(comment);
+  // console.log(comment);
 
   return (
     <DesignComment
