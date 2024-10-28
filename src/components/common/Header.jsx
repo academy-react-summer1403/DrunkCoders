@@ -121,15 +121,24 @@ export function Header() {
             {!tokenExpired ? (
               <Popover
                 showArrow
-                placement="bottom-end"
+                placement="bottom"
                 classNames={{ trigger: 'gap-0' }}
+                backdrop="opaque"
               >
                 <PopoverTrigger>
                   <User
-                    //as="button"
-                    // name="Zoe Lang"
-                    // description="Product Designer"
+                    name={
+                      (userInfo?.fName || 'نام') +
+                      ' ' +
+                      (userInfo?.lName || 'نام خانوادگی')
+                    }
+                    description={userInfo?.phoneNumber}
                     className="cursor-pointer"
+                    classNames={{
+                      wrapper: 'mr-3',
+                      name: 'mb-2',
+                      description: 'text-primary-blue',
+                    }}
                     avatarProps={{ size: 'lg', ...avatarImg }}
                   />
                 </PopoverTrigger>
