@@ -1,5 +1,5 @@
 import { Calendar2, Search, Teacher } from '@assets/index';
-import { Button, IconLabel, JalaliDateRangePicker, ModalCloseBtn, PriceSlider, SearchBox, SelectOption } from '@components/index'
+import { Button, IconLabel, JalaliDateRangePicker, MobileModal, ModalCloseBtn, PriceSlider, SearchBox, SelectOption } from '@components/index'
 import { getAllTeachers } from '@core/index';
 import { Image, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react'
 import { dashSortFilterActions } from '@store/dashPanel-filter';
@@ -45,33 +45,13 @@ export function DashMobileModal({isOpen,onClose}) {
       }
   return (
     <>
-    <Modal 
-        hideCloseButton
-        isOpen={isOpen} 
-        onOpenChange={onClose}
-        scrollBehavior="inside"
-        size='5xl'
-        classNames={{
-            base:'rounded-t-[35px] h-screen rounded-b-none'
-        }}
-        >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-8">
-                <header className='flex justify-between'>
-                    <p>
-                    جدیدترین دوره ها
-                    </p>
-                    <ModalCloseBtn onClose={onClose}/>
-                </header>
-                
-                <Button className='w-fit text-lg' onPress={onOpen}>
-                فیلتر
-                </Button>
-              </ModalHeader>
-              <ModalBody>
-                <div className='border-b-2 flex gap-4 p-2'>
+      <MobileModal
+            isOpen={isOpen}
+            onOpenChange={onClose}
+            dash = {true}
+            onOpen = {onOpen}
+      >
+        <div className='border-b-2 flex gap-4 p-2'>
                     <Image
                     height={80}
                     width={110}
@@ -88,15 +68,10 @@ export function DashMobileModal({isOpen,onClose}) {
                         </p>
                     </div>
                 </div>
-              </ModalBody>
-              <ModalFooter>
-
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+      </MobileModal>
+      
       <Modal
+        placement='bottom'
         hideCloseButton
         isOpen={isFilterOpen}
         onOpenChange={closeFilterModal}

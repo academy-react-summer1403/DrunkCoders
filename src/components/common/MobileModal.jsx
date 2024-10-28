@@ -7,6 +7,8 @@ export function MobileModal({
   title,
   children,
   confirmButton,
+  dash,
+  onOpen
 }) {
   return (
     <Modal
@@ -42,9 +44,27 @@ export function MobileModal({
         {(onClose) => (
           <>
             <ModalHeader className="flex items-center justify-between gap-1">
-              <p className="text-xl font-medium">ترتیب و فیلتر {title}</p>
+              {dash ? (
+                <div className='flex flex-col w-full'>
+                  <header className='flex justify-between '>
+                      <p>
+                      جدیدترین دوره ها
+                      </p>
+                      <ModalCloseBtn onClose={onClose}/>
+                  </header>
+                  
+                  <Button className='w-fit text-lg' onPress={onOpen}>
+                  فیلتر
+                  </Button>
+                </div>   
+              ):(
+                <>
+                  <p className="text-xl font-medium">ترتیب و فیلتر {title}</p>
 
-              <ModalCloseBtn onClose={onClose} />
+                  <ModalCloseBtn onClose={onClose} />
+                </>
+              )}
+
             </ModalHeader>
 
             <ModalBody>
