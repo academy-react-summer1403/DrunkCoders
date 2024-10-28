@@ -22,10 +22,10 @@ export const userPanelRoutes = [
         path: 'profile',
         element: <ProfilePage />,
       },
-      // {
-      //   path: 'myCourses',
-      //   element: <MyCoursePage />,
-      // },
+      {
+        path: 'myCourses',
+        element: <MyCoursePage />,
+      },
       {
         path: 'myReservations',
         element: <MyReservationPage />,
