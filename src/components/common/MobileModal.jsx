@@ -15,6 +15,7 @@ export function MobileModal({
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       hideCloseButton
+      scrollBehavior="inside"
       isDismissable={false}
       size="3xl"
       className={`rounded-bb-none sm: relative rounded-t-[32px] sm:m-0`}

@@ -71,7 +71,7 @@ export function DashMobileModal({isOpen,onClose}) {
               <Image
               height={80}
               width={110}
-              src="https://nextui.org/images/album-cover.png"
+              src={course.tumbImageAddress}
               alt="NextUI Album Cover"
               />
               <div>
