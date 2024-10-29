@@ -1,3 +1,3 @@
 export function Certificates() {
-    return <div>Certificates</div>
+    // return <div>Certificates</div>
 }
