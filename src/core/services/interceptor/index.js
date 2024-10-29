@@ -1,3 +1,4 @@
+import { store, tokenActions } from '@store/index'
 import { deleteLocalStorage, getLocalStroge } from '@core/index'
 import axios from 'axios'
 
@@ -75,6 +76,7 @@ const handleError = (error) => {
     // alert('Network error! Please check your internet connection.')
     if (error.request.status === 0) {
       console.error('Network error or unauthorized access. Are you login??')
+      store.dispatch(tokenActions.logout())
     }
   } else {
     // Something happened in setting up the request that triggered an Error

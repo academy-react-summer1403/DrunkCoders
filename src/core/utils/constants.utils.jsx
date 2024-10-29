@@ -17,6 +17,7 @@ import {
 
 export const userPanelMenuGlobal = [
   { key: 'dashboard', startIcon: <Dashboard />, title: 'داشبرد' },
+  { key: 'profile', startIcon: <ProfilePanel />, title: 'پروفایل' },
   { key: 'myCourses', startIcon: <Book />, title: 'دوره من' },
   { key: 'myReservations', startIcon: <ReservePanel />, title: 'رزرو من' },
   {
@@ -29,7 +30,6 @@ export const userPanelMenuGlobal = [
     startIcon: <FileBookmark />,
     title: 'علاقه‌مندی مقالات',
   },
-  { key: 'profile', startIcon: <ProfilePanel />, title: 'پروفایل' },
 ]
 
 export const userPanelMenuBottom = [
