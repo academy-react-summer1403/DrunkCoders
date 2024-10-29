@@ -21,7 +21,7 @@ export function Dashboard() {
     <div className='flex flex-col gap-5'>
     <DashHeader data={data} />
     <DashMain data={data} />
-    <ModalContainer className='hidden' data={data}/>
+    <ModalContainer className='hidden'/>
     </div>
   )
 }
