@@ -24,9 +24,9 @@ export function MyCoursePage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [dateRange, setDateRange] = useState({ startDate: null, endDate: null })
 
-  let token = useSelector((state) => state.token.users).find(
+  let { token, roles } = useSelector((state) => state.token.users).find(
     (user) => user.isOnline === true,
-  ).token
+  )
 
   // استفاده از useQuery برای گرفتن داده‌های دوره‌ها
   const {
@@ -45,17 +45,17 @@ export function MyCoursePage() {
       const decodedToken = jwtDecode(token)
       console.log('Decoded Token:', decodedToken) // لاگ کردن توکن دیکد شده
 
-      const role =
+      /*  const role =
         decodedToken[
           'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
         ]
       console.log('User Role:', role) // لاگ کردن نقش کاربر
-
+ */
       // بررسی نقش کاربر
-      if (!role || role !== 'Student') {
+      /* if (!roles.fin)) {
         throw new Error('Access denied: student role is required.')
       }
-
+ */
       // فراخوانی API با توکن و پارامترهای جستجو و صفحه‌بندی
       return getAllMyCourses(token, searchTerm, page, rowsPerPage).then(
         (data) => {
@@ -103,7 +103,7 @@ export function MyCoursePage() {
     <>
       <h1 className="relative -top-0 mb-4 text-2xl font-medium">
         {' '}
-        علاقه مندی مقالات
+        علاقه مندی دوره
       </h1>
       <div className="relative top-1 flex gap-6">
         <SearchBox
