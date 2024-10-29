@@ -1,6 +1,6 @@
 import { Calendar2, Search, Teacher } from '@assets/index';
 import { Button, IconLabel, JalaliDateRangePicker, MobileModal, ModalCloseBtn, PriceSlider, SearchBox, SelectOption } from '@components/index'
-import { getAllTeachers } from '@core/index';
+import { getAllTeachers, getLatestCourses } from '@core/index';
 import { Image, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react'
 import { dashSortFilterActions } from '@store/dashPanel-filter';
 import { useQuery } from '@tanstack/react-query';
@@ -13,7 +13,12 @@ export function DashMobileModal({isOpen,onClose}) {
     const { filterId, dateRange, cost, order } = useSelector(
         (state) => state.sort,
       )
-    
+    const { params } = useSelector((state) => state.dashSort)
+
+    const { data, isLoading, error } = useQuery({
+      queryKey: ['dashTable', params],
+      queryFn: getLatestCourses,
+    })
       const dispatch = useDispatch()
     
       let { data: teachers } = useQuery({
@@ -43,6 +48,8 @@ export function DashMobileModal({isOpen,onClose}) {
       function handleClearCalender() {
         dispatch(dashSortFilterActions.setDateRange({ startDate: null, endDate: null }))
       }
+      const courses = data?.courseFilterDtos ?? []
+      console.log(courses);
   return (
     <>
       <MobileModal
@@ -51,23 +58,35 @@ export function DashMobileModal({isOpen,onClose}) {
             dash = {true}
             onOpen = {onOpen}
       >
-        <div className='border-b-2 flex gap-4 p-2'>
-                    <Image
-                    height={80}
-                    width={110}
-                    src="https://nextui.org/images/album-cover.png"
-                    alt="NextUI Album Cover"
-                    />
-                    <div>
-                        <h1 className='text-medium font-medium'>ری‌اکت جی‌اس</h1>
-                        <p className='text-gray-500'>
-                        محسن اسفندیاری ، مهدی اصغری
-                        </p>
-                        <p className='text-gray-500'>
-                        25 اردیبهشت 1403
-                        </p>
-                    </div>
-                </div>
+        {courses.map((course) => {
+          const formattedDate = new Date(
+            course.lastUpdate,
+          ).toLocaleDateString('fa-IR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+          return (
+            <div className='border-b-2 flex gap-4 p-2' key={course.courseId}>
+              <Image
+              height={80}
+              width={110}
+              src="https://nextui.org/images/album-cover.png"
+              alt="NextUI Album Cover"
+              />
+              <div>
+                  <h1 className='text-medium font-medium'>{course.title}</h1>
+                  <p className='text-gray-500'>
+                  {course.teacherName}                  
+                  </p>
+                  <p className='text-gray-500'>
+                  {formattedDate}
+                  </p>
+              </div>
+          </div>
+          )
+        })}
+
       </MobileModal>
       
       <Modal

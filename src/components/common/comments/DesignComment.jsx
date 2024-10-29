@@ -1,14 +1,17 @@
-import { CommentArrow, ThumbDown, ThumbUp } from '@assets/index'
-import { Accordion, AccordionItem, Avatar } from '@nextui-org/react'
+import { CommentArrow, ThumbDown, ThumbUp } from '@assets/index';
+import { Accordion, AccordionItem, Avatar } from '@nextui-org/react';
 import { Button } from '@components/index';
-import React from 'react'
+import React, { useState } from 'react';
 
-export function DesignComment({finalReplies,pictureAddress,
-  author,title,describe,likeCount,dislikeCount,comment,handleOpenModal,
-  handleLike,likeState}) {
+export function DesignComment({
+  finalReplies, pictureAddress, author, title, describe, likeCount, dislikeCount, comment, handleOpenModal, handleLike, likeState
+}) {
+  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+
+
   return (
     <div className="comment flex flex-col p-7">
-      <div className={`${finalReplies.length > 0 ? 'border-r-3 border-b-3' : ''} rounded-3xl rounded-t-none rounded-l-none border-gray-400`}>
+      <div className={`${isAccordionOpen ? 'border-r-3 border-b-3' : ''} rounded-3xl rounded-t-none rounded-l-none border-gray-400`}>
         <div className="flex items-center gap-2 -mr-7">
           <Avatar src={pictureAddress} size="lg" />
           <span>{author}</span>
@@ -25,16 +28,14 @@ export function DesignComment({finalReplies,pictureAddress,
               جواب دادن
             </Button>
             <div className='flex gap-8 items-center mt-4 z-50'>
-              <div className='flex gap-1 items-center' 
-              onClick={() => handleLike("like")}>
+              <div className='flex gap-1 items-center' onClick={() => handleLike("like")}>
                 <ThumbUp
                   className={`-mt-1 stroke-black dark:stroke-white hover:text-primary-blue
                     ${likeState.like ? "text-primary-blue stroke-primary-blue" : "text-transparent"}`}
                 />
                 {likeCount}
               </div>
-              <div className='flex gap-1 items-center'
-              onClick={() => handleLike("dislike")}>
+              <div className='flex gap-1 items-center' onClick={() => handleLike("dislike")}>
                 <ThumbDown
                   className={`stroke-black dark:stroke-white hover:text-primary-blue
                     ${likeState.dislike ? "text-primary-blue stroke-primary-blue" : "text-transparent"}`}
@@ -42,21 +43,26 @@ export function DesignComment({finalReplies,pictureAddress,
                 {dislikeCount}
               </div>
             </div>
-            
           </div>
         </div>
       </div>
 
       {finalReplies.length > 0 && (
-        <Accordion isCompact
-        className='p-0'
+        <Accordion
+          isCompact
+          className="p-0"
         >
-          <AccordionItem title="مشاهده جواب‌ها"
-              classNames ={{
-                heading : 'w-fit lg:-mt-24 lg:mr-96 -mt-10 mr-10',
-              }}
+          <AccordionItem
+            title={` مشاهده جواب‌ها (${finalReplies.length})` }
+            classNames={{
+              heading: 'w-fit lg:-mt-24 lg:mr-96 -mt-10 mr-10',
+            }}
+            indicator={({ isOpen }) => {
+              setIsAccordionOpen(isOpen)
+              console.log(`Accordion item is ${isAccordionOpen ? 'open' : 'closed'}`);
+            }}
           >
-            <div className="replies mr-6 ">
+            <div className="replies mr-6">
               {finalReplies.map((reply) => (
                 <div key={reply.id} className="reply bg-white mt-5 mr-7 dark:bg-black">
                   <div className="flex items-center gap-2">
@@ -74,5 +80,5 @@ export function DesignComment({finalReplies,pictureAddress,
         </Accordion>
       )}
     </div>
-  )
+  );
 }
