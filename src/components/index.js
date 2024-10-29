@@ -62,3 +62,9 @@ export { MobileDropDown } from './UserPanel/mobileMenu/MobileDropDown'
 
 export { UserInformationForm } from './UserPanel/profile/personalInformation/UserInformationForm'
 export { UserProfileCompletion } from './UserPanel/profile/personalInformation/UserProfileCompletion'
+export { LoginModal } from './authentication/ModalLogin'
+
+export { OveralUserInfo } from './UserPanel/profile/OveralUserInfo'
+export { ProfileTabs } from './UserPanel/profile/ProfileTabs'
+export { ProfileHeader } from './UserPanel/profile/ProfileHeader'
+export { ChangePass } from './UserPanel/profile/ChangePass'

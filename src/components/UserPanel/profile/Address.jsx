@@ -14,10 +14,10 @@ export function Address({ userInfo }) {
   const { mutate } = useMutation({
     mutationFn: EditUserProfile,
     onSuccess: (data) => {
-      toast.success( ' اطلاعات موقعیت مکانی شما ثبت شد ' )
+      toast.success(' اطلاعات موقعیت مکانی شما ثبت شد ')
       if (data.success) {
         if (data.newToken) {
-          dispatch(tokenActions.login({ token: data.token }))
+          dispatch(tokenActions.login({ token: data.token, id: data.id }))
         }
       }
     },

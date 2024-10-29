@@ -8,7 +8,7 @@ import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <NextUIProvider className="h-full">
+    <NextUIProvider className="min-h-screen">
       <App />
     </NextUIProvider>
   </Provider>,
