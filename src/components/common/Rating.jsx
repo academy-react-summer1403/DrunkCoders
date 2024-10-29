@@ -1,15 +1,13 @@
 import { StarInCircle } from '@assets';
 import { DetailStar } from '@assets/index';
-import { rateCourse } from '@core/index';
-import { rateNews } from '@core/index';
+import { rateCourse, rateNews } from '@core/index';
 import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
-export function Rating({courseId,newsId}) {
-  // console.log('news',newsId);
-  // console.log('course',courseId);
+export function Rating({ courseId, newsId, isDisabled }) {
   const [rating, setRating] = useState(null);
-
+  console.log('dis',isDisabled);
   const mutation = useMutation({
     mutationFn: (newRating) => {
       if (courseId) {
@@ -21,21 +19,27 @@ export function Rating({courseId,newsId}) {
       }
     },
     onSuccess: (response) => {
-      alert('Rating successfully sent:', response);
+      if (response.success) {
+        toast.success(response.message);
+      } else {
+        toast.error(response.message);
+      }
     },
     onError: (error) => {
       console.error('Error sending rating:', error);
     },
   });
 
-  function handleRatingClick (currentRate) {
+  function handleRatingClick(currentRate) {
+    if (isDisabled) return; // Prevent any rating actions if disabled
+    
     setRating(currentRate);
-    console.log(`Current rating: ${currentRate}`);
     mutation.mutate(currentRate);
-  };
+  }
+  
 
   return (
-    <span className="flex gap-2 items-center">
+    <span className={`flex gap-2 items-center ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
       <StarInCircle className="w-6 h-6" />
       <span>امتیاز بدید</span>
       <div className="flex space-x-1">
@@ -49,6 +53,7 @@ export function Rating({courseId,newsId}) {
                 value={currentRate}
                 onClick={() => handleRatingClick(currentRate)}
                 className="hidden"
+                disabled={isDisabled} // Disable input if isDisabled is true
               />
               <DetailStar
                 color={currentRate <= rating ? '#E5EA19' : 'transparent'}

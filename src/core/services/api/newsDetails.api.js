@@ -6,7 +6,7 @@ export async function getNewsById (id){
         return response
     } catch (error) {
         console.log('Error fetching news details:', error);
-        throw new Error("Could not fetch news details")
+        // throw new Error("Could not fetch news details")
     }
 }
 
@@ -36,7 +36,7 @@ export async function rateNews ({newsId , newRating}) {
       return response;
     } catch (error) {
       console.log('Error sending comment', error.message);
-      throw error;
+    //   throw error;
     }
 }
 
@@ -55,7 +55,7 @@ export async function getNewsReply (commentId) {
         return response;
     } catch (error) {
         console.log('error get replies', error);
-        throw error;
+        // throw error;
     }
 }
 
@@ -65,7 +65,7 @@ export async function postArticleCommentLike(commentId){
         return response;
     } catch (error) {
         console.log('error like article comment like', error.message);
-        throw error
+        // throw error
     }
 }
 
@@ -77,7 +77,7 @@ export async function deleteArticleCommentLike (deleteEntityId) {
         return response;
     } catch (error) {
         console.log('error delete comment like', error);
-        throw error;
+        // throw error;
     }
 }
 
@@ -87,7 +87,7 @@ export async function postNewsComment(commentData) {
         return response; 
     } catch (error) {
         console.log('Error posting comment:', error);
-        throw error;
+        // throw error;
     }
 }
 
@@ -97,6 +97,6 @@ export async function postNewsReply(replyData) {
         return response; 
     } catch (error) {
         console.log('Error posting reply:', error);
-        throw error;
+        // throw error;
     }
 }

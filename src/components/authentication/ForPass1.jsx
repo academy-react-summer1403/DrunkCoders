@@ -4,6 +4,7 @@ import { BaseInput, Button, Step, AuthLayout } from '@components'
 import { Link } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { forgetPassStep1Api } from '@core/index'
+import toast from 'react-hot-toast'
 
 export function ForPass1() {
   const { register, handleSubmit } = useForm()
@@ -11,7 +12,7 @@ export function ForPass1() {
   const { mutate, isPending } = useMutation({
     mutationFn: forgetPassStep1Api,
     onSuccess: (data) => {
-      if (data.success) alert('ایمیل تغییر رمز عبور ارسال شد.')
+      if (data.success) toast.success('ایمیل تغییر رمز عبور ارسال شد.')
       else {
         throw new Error('Something went wrong please try again later.')
       }

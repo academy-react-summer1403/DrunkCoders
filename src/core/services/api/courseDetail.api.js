@@ -11,7 +11,7 @@ export async function getCourseDetails(id, { signal }) {
       return response; // Ensure you're returning the data
     } catch (error) {
       console.error("Error fetching course details:", error);
-      throw new Error("Could not fetch course details");
+      // throw new Error("Could not fetch course details");
     }
   }
   
@@ -21,7 +21,7 @@ export async function getCourseDetails(id, { signal }) {
       return response;
     } catch (error) {
       console.error('Error fetching course comments:', error);
-      throw new Error('Could not fetch course comments');
+      // throw new Error('Could not fetch course comments');
     }
   };
   
@@ -31,7 +31,7 @@ export async function getCourseDetails(id, { signal }) {
       return response;
     } catch (error) {
       console.error('Error fetching comment replies:', error);
-      throw new Error('Could not fetch comment replies');
+      // throw new Error('Could not fetch comment replies');
     }
   };
   
@@ -42,7 +42,7 @@ export async function getCourseDetails(id, { signal }) {
       return response;
     } catch (error) {
       console.log('Error sending comment', error);
-      throw error;
+      // throw error;
     }
   }
   
@@ -52,7 +52,7 @@ export async function getCourseDetails(id, { signal }) {
       return response
     } catch (error) {
       console.log('Error sending comment', error);
-      throw error;
+      // throw error;
     }
   }
   
@@ -62,7 +62,7 @@ export async function getCourseDetails(id, { signal }) {
         return response;
       } catch (error) {
         console.log('Error sending comment', error.message);
-        throw error;
+        // throw error;
       }
   }
 

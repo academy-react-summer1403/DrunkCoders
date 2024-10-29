@@ -5,6 +5,7 @@ import { registerSchema, registerApi } from '@core'
 import { BaseInput, Button } from '@components'
 import { MobileIcon } from '@assets'
 import { useMutation } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
 
 export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
   const {
@@ -18,7 +19,7 @@ export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
   const { mutateAsync, isPending, error } = useMutation({
     mutationFn: registerApi,
     onSuccess: (response) => {
-      console.log('API Response:', response)
+      toast.success( ' کد تایید ارسال شد ' )
       setCurrentStep(2)
     },
     onError: () => {

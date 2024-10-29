@@ -1,7 +1,7 @@
 import React from 'react';
 import { Rating } from "@components";
 
-export function DetailsContentLayout({ imageSrc, teacherName, title, description, pageId }) {
+export function DetailsContentLayout({ currentUserSetRate,imageSrc, teacherName, title, description, pageId }) {
   return (
     <>
       <img src={imageSrc} alt="" className='bg-[#FF9090] w-full h-96 rounded-3xl' />
@@ -17,7 +17,7 @@ export function DetailsContentLayout({ imageSrc, teacherName, title, description
         <h1 className="font-bold text-xl">{title}</h1>
         <p>{description}</p>
 
-        <Rating courseId={pageId} />
+        <Rating courseId={pageId} isDisabled={currentUserSetRate} />
       </div>
     </>
   );

@@ -26,7 +26,7 @@ export function ArticlDetailsContainer() {
         <DetailsLayout
         asideContent={<ArticleSide data={newsInfo} />}
         >
-          <ArticleMain data={newsInfo}/>
+          <ArticleMain data={newsInfo} isDisabled={data.currentUserSetRate}/>
           <ArticleComments newsId={newsInfo.id} data={newsInfo} />
         </DetailsLayout>
       </div>

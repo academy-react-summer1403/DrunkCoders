@@ -11,6 +11,7 @@ export function MainContent({course}) {
       title={course.title}
       description={course.describe}
       pageId={course.courseId}
+      currentUserSetRate = {course.currentUserSetRate}
       />
     </>
   )

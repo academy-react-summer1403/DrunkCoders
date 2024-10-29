@@ -14,6 +14,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { tokenActions } from '@store/index'
+import toast from 'react-hot-toast'
 
 export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
   const dispatch = useDispatch()
@@ -39,9 +40,10 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
             defaultProfilePic: 'hand',
           }),
         )
+        toast.success(' ثبت نام موفق ')
         navigate('/')
       } else {
-        alert('یه تست مناسب نشان داده شود')
+        toast.error('ثبت نام نا موفق ')
       }
     },
   })
