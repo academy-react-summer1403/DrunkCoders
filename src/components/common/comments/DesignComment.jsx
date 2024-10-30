@@ -31,14 +31,14 @@ export function DesignComment({
               <div className='flex gap-1 items-center' onClick={() => handleLike("like")}>
                 <ThumbUp
                   className={`-mt-1 stroke-black dark:stroke-white hover:text-primary-blue
-                    ${likeState.like ? "text-primary-blue stroke-primary-blue" : "text-transparent"}`}
+                    ${likeState.like ? "text-primary-blue " : "text-transparent"}`}
                 />
                 {likeCount}
               </div>
               <div className='flex gap-1 items-center' onClick={() => handleLike("dislike")}>
                 <ThumbDown
                   className={`stroke-black dark:stroke-white hover:text-primary-blue
-                    ${likeState.dislike ? "text-primary-blue stroke-primary-blue" : "text-transparent"}`}
+                    ${likeState.dislike ? "text-primary-blue " : "text-transparent"}`}
                 />
                 {dislikeCount}
               </div>

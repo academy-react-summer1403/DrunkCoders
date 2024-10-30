@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { useState } from 'react'
 
 export function ArtCommentItems({comment,handleOpenModal}) {
-    const [likeState, setLikeState] = useState({ like: false, dislike: false });
+    const [likeState, setLikeState] = useState({ like: comment.currentUserIsLike, dislike: comment.currentUserIsDissLike });
     const queryClient = useQueryClient();
 
     const { data:repliesData, isLoading, isError} = useQuery({
@@ -50,7 +50,6 @@ export function ArtCommentItems({comment,handleOpenModal}) {
 
     if(isLoading)return <div>Loading replies...</div>
     const finalReplies = repliesData || [];
-
     const userLikeId = comment.currentUserLikeId;
   return (
     <>

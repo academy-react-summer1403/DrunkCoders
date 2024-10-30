@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Comment } from "@components";
 import { MainContent } from "./MainContent";
-import { OverView } from "./OverView";
+import { OverView } from "./CourseSide";
 import { getCategory, getCourseDetails } from "@core/index";
 import { RelatedCourse } from "./RelatedCourse";
 import { DetailsLayout } from "../common/detail/DetailsLayout";

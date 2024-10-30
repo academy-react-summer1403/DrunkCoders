@@ -6,16 +6,18 @@ import { delCourseCommentLike } from '@core/index';
 import { DesignComment } from '../../common/comments/DesignComment';
 
 export function CommentItem({ comment, handleOpenModal }) {
-  const [likeState, setLikeState] = useState({ like: false, dislike: false });
+  const [likeState, setLikeState] = useState({
+    like: comment.currentUserEmotion === 'LIKED',
+    dislike: comment.currentUserEmotion === 'DISSLIKED'
+  });
   const queryClient = useQueryClient();
 
-
+console.log(comment);
   const { data: repliesData, isPending: loadingReplies, error: repliesError } = useQuery({
     queryKey: ['commentReplies', comment.courseId, comment.id],
     queryFn: () => getCourseCommentReplies(comment.courseId, comment.id),
     enabled: !!comment.id,
   });
-
 
   const { mutate: likeCourseCommentMutate, isPending: liking, isError: likeError } = 
   useMutation({
