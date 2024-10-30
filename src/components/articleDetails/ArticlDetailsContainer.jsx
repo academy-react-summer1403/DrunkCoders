@@ -1,4 +1,4 @@
-import { DetailsLayout } from '@components/courseDetails/DetailsLayout';
+import { DetailsLayout } from '@components/common/detail/DetailsLayout';
 import { getNewsById } from '@core/index';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
@@ -18,7 +18,7 @@ export function ArticlDetailsContainer() {
   
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
-    const newsInfo = data.detailsNewsDto
+    const newsInfo = data.detailsNewsDto || [];
     console.log(newsInfo.id);
     
     return (

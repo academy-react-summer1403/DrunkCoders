@@ -5,7 +5,7 @@ import { MainContent } from "./MainContent";
 import { OverView } from "./OverView";
 import { getCategory, getCourseDetails } from "@core/index";
 import { RelatedCourse } from "./RelatedCourse";
-import { DetailsLayout } from "./DetailsLayout";
+import { DetailsLayout } from "../common/detail/DetailsLayout";
 
 
 export function CourseDContainer() {

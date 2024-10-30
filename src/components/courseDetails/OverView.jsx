@@ -89,6 +89,13 @@ export function OverView({ course }) {
       return !prevState;
     });
   }
+  useEffect(() => {
+    // Set initial like and dislike state based on `currentUserLike` and `currentUserDissLike`
+    setLikeState({
+      like: course.currentUserLike === "1",
+      dislike: course.currentUserDissLike === "1"
+    });
+  }, [course.currentUserLike, course.currentUserDissLike]);
   
   const { mutate: addCourseLike } = useMutation( {
     mutationFn: (courseId) => addLikeForCourse(courseId),

@@ -1,5 +1,5 @@
 import { Bookmark, Calender, HidePassword, ShowPassword, ThumbDown, ThumbUp } from '@assets/index';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '..';
 import { Avatar, Image } from '@nextui-org/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -13,7 +13,19 @@ export function ArticleSide({data}) {
     const articleId = data.id
     let likeId = data.likeId
 
-    console.log(data);
+    console.log('data',data);
+    useEffect(() => {
+      if (data.isCurrentUserFavorite) {
+        setIsBookmarked(true);
+      }
+    }, [data.isCurrentUserFavorite]);
+    useEffect(() => {
+      // Set initial like and dislike state based on `currentUserLike` and `currentUserDissLike`
+      setLikeState({
+        like: data.currentUserIsLike ,
+        dislike: data.currentUserIsDissLike
+      });
+    }, [data.currentUserLike, data.currentUserDissLike]);
 
     const { mutate: addFavNews, isPending, isError } =
     useMutation({
@@ -22,8 +34,8 @@ export function ArticleSide({data}) {
         toast.success(' به لیست دلخواه اضافه شد ');
         queryClient.invalidateQueries(['newsDetails', result])  
       },
-      onError:(error) => {
-        console.log(' متاسفیم به لست دلخواه اضافه نشد', error);
+      onError:() => {
+        toast.error(' متاسفیم به لست دلخواه اضافه نشد');
       }
     })
     const delFavNews = useMutation({

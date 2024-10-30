@@ -40,6 +40,9 @@ export function LoginForm({ currentStep, setCurrentStep }) {
         toast.error('رمز‌عبور یا نام کاربری نادرست است')
       }
     },
+    onError:(err) => {
+      toast.error(err.message)
+    }
   })
 
   const onSubmit = (data) => {

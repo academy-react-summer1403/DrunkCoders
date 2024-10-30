@@ -1,6 +1,6 @@
 import React from 'react'
 import { Rating } from "@components";
-import { DetailsContentLayout } from './DetailsContentLayout';
+import { DetailsContentLayout } from '../common/detail/DetailsContentLayout';
 
 export function MainContent({course}) {
   return (
@@ -12,6 +12,7 @@ export function MainContent({course}) {
       description={course.describe}
       pageId={course.courseId}
       currentUserSetRate = {course.currentUserSetRate}
+      userRate={course.currentUserRateNumber}
       />
     </>
   )

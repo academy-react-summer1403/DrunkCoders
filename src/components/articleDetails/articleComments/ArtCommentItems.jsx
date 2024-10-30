@@ -27,7 +27,6 @@ export function ArtCommentItems({comment,handleOpenModal}) {
     const delCommentLike = useMutation({
       mutationFn: (deleteEntityId) => deleteArticleCommentLike(deleteEntityId),
       onSuccess: (data) => {
-        alert('deleted Comment Like')
         queryClient.invalidateQueries(['newsDetails',data])
       },
       onError: (err) => {
@@ -53,7 +52,6 @@ export function ArtCommentItems({comment,handleOpenModal}) {
     const finalReplies = repliesData || [];
 
     const userLikeId = comment.currentUserLikeId;
-    console.log('userLikeId', userLikeId);      
   return (
     <>
         <DesignComment

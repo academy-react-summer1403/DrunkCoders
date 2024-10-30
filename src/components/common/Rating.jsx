@@ -5,9 +5,8 @@ import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
-export function Rating({ courseId, newsId, isDisabled }) {
-  const [rating, setRating] = useState(null);
-  console.log('dis',isDisabled);
+export function Rating({ courseId, newsId, isDisabled, userRate }) {
+  const [rating, setRating] = useState(userRate);
   const mutation = useMutation({
     mutationFn: (newRating) => {
       if (courseId) {
