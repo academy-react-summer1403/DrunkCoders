@@ -16,11 +16,15 @@ export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
     resolver: zodResolver(registerSchema),
   })
 
-  const { mutateAsync, isPending, error } = useMutation({
+  const { mutate:mutateAsync, isPending, error } = useMutation({
     mutationFn: registerApi,
     onSuccess: (response) => {
-      toast.success( ' کد تایید ارسال شد ' )
-      setCurrentStep(2)
+      if(response.message === "درخواست نامعتبر") {
+        toast.error( response.message )
+      } else {
+        toast.success( ' کد تایید ارسال شد ' )
+        setCurrentStep(2)
+      }
     },
     onError: () => {
       console.error('Error sending verification code')
@@ -28,7 +32,7 @@ export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
   })
   
   const onSubmit = async (data) => {
-    try {
+   /*  try {
       setPhoneNumber(data.phoneNumber)
       const response = await mutateAsync({ phoneNumber: data.phoneNumber })
       if (response) {
@@ -36,7 +40,9 @@ export function RegisterForm({ currentStep, setCurrentStep, setPhoneNumber }) {
       }
     } catch (err) {
       console.error('Error sending verification code', err)
-    }
+    } */
+
+      mutateAsync({ phoneNumber: data.phoneNumber })
   }
 
   return (
