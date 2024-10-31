@@ -4,6 +4,7 @@ import { getCourseCommentReplies, likeCourseComment,
 import { useState } from 'react';
 import { delCourseCommentLike } from '@core/index';
 import { DesignComment } from '../../common/comments/DesignComment';
+import toast from 'react-hot-toast';
 
 export function CommentItem({ comment, handleOpenModal }) {
   const [likeState, setLikeState] = useState({
@@ -23,11 +24,10 @@ console.log(comment);
   useMutation({
     mutationFn: () => likeCourseComment(comment.id),
     onSuccess: (data) => {
-      console.log('Liked the comment successfully:', data);
-      queryClient.invalidateQueries(['courseDetails', data])
+      queryClient.invalidateQueries(['courseComments'])
     },
-    onError: (error) => {
-      console.error('Error liking the comment:', error);
+    onError: () => {
+      toast.error(' کامنت شما ارسال نشد ')
     }
   });
 
@@ -36,7 +36,7 @@ console.log(comment);
     mutationFn: () => dislikeCourseComment(comment.id),
     onSuccess: (data) => {
       console.log('Disslike the comment successfully:', data);
-      queryClient.invalidateQueries(['courseDetails', data])
+      queryClient.invalidateQueries(['courseComments'])
     },
     onError:(error) => {
       console.log('error dissliking the comment', error);
@@ -47,10 +47,10 @@ console.log(comment);
   const remCourseCommentLike = useMutation({
     mutationFn : () => delCourseCommentLike(userLikeId),
     onSuccess:() => {
-        alert('comment like removed')
+      queryClient.invalidateQueries(['courseComments'])
     },
     onError: (error) => {
-        console.log('Error remove comment like ',error);
+      toast.error(error.message)
     }
   })
 

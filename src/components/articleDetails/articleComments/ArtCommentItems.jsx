@@ -3,6 +3,7 @@ import { deleteArticleCommentLike, getNewsReply, postArticleCommentLike } from '
 import { postNewsComment } from '@core/services/api/newsDetails.api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 
 export function ArtCommentItems({comment,handleOpenModal}) {
     const [likeState, setLikeState] = useState({ like: comment.currentUserIsLike, dislike: comment.currentUserIsDissLike });
@@ -17,20 +18,20 @@ export function ArtCommentItems({comment,handleOpenModal}) {
         mutationFn: () => postArticleCommentLike(comment.id),
         onSuccess: (data) =>{
             alert('liked comment');
-            queryClient.invalidateQueries(['newsDetails',data])
+            queryClient.invalidateQueries(['articleComments',data])
         },
         onError:(err) =>{
-            console.log('error like comment',err);
+          toast.error(' کامنت لایک نشد ')
         }
     })
 
     const delCommentLike = useMutation({
       mutationFn: (deleteEntityId) => deleteArticleCommentLike(deleteEntityId),
       onSuccess: (data) => {
-        queryClient.invalidateQueries(['newsDetails',data])
+        queryClient.invalidateQueries(['articleComments',data])
       },
       onError: (err) => {
-        console.log('error delet like', err);
+        toast.error(' کامنت دیسلایک نشد ')
       }
     })
 
