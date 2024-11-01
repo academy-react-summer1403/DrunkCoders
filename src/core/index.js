@@ -74,6 +74,8 @@ export { postNewsComment } from './services/api/newsDetails.api'
 export { postNewsReply } from './services/api/newsDetails.api'
 export { getMyFavoriteNews } from './services/api/user.api'
 export { getAllMyCourses } from './services/api/user.api'
+export { getMyCoursesComments } from './services/api/user.api'
+export { getMyNewsComments } from './services/api/user.api'
 
 export { roleMapper } from './utils/practicalFunctions.util'
 export { userImgCreator } from './utils/nextUiUserImgCreator'

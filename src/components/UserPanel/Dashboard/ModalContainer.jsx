@@ -4,7 +4,7 @@ import { Button, useDisclosure } from '@nextui-org/react';
 import { DashDeskModal } from './DashDeskModal';
 import { PanelIndicator } from '@assets/index';
 import { DashMobileModal } from './DashMobileModal';
-import { useMediaQuery } from './useMediaQuery'; // Import the media query hook
+import { useMediaQuery } from '../../../hooks/useMediaQuery'; // Import the media query hook
 
 export function ModalContainer() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

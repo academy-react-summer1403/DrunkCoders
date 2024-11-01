@@ -160,3 +160,21 @@ export async function getMyFavoriteCourses({ params }) {
   } catch (error) {
     console.log(error)
   }}
+
+  export async function getMyCoursesComments(){
+    try {
+      const response = await api.get('/SharePanel/GetMyCoursesComments');
+      return response.myCommentsDtos
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  export async function getMyNewsComments(){
+    try {
+      const response = await api.get('/SharePanel/GetMyNewsComments') 
+      return response.myNewsCommetDtos
+    } catch (error) {
+      console.log(error);
+    }
+  }

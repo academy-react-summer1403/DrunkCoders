@@ -5,6 +5,7 @@ import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import { CircularProgress } from '@nextui-org/react'
 import { useSelector } from 'react-redux'
+import { ContainerMyComments } from './myComments/ContainerMyComments'
 
 export function DashMain({data}) {
       const profileCompletion = data.profileCompletionPercentage ;
@@ -12,16 +13,8 @@ export function DashMain({data}) {
 
   return (
     <main className='flex flex-wrap gap-6 justify-evenly items-center' >
-    <div className=' sm:w-[45%] w-full h-[266px] rounded-2xl bg-white p-3 dark:bg-black'> 
-      <header className='flex justify-between'>
-        <div>نظرات‌ شما</div>
-        <div className='text-primary-500 cursor-pointer flex items-center'>
-           مشاهده همه
-           <PanelIndicator/>
-        </div>
-      </header>
-    </div>
-    <div className='-order-1 md:order-none'>
+    <ContainerMyComments/>
+    <div className='-order-1 md:order-none md:-mt-3'>
       <Calendar
         calendar={persian}
         locale={persian_fa}
