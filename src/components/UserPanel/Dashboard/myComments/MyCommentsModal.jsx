@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { MyCourseComments } from './MyCourseComments';
 import { MyBlogComments } from './MyBlogComments';
 
-export function MyCommentsModal({ isOpen, onOpenChange }) {
+export function MyCommentsModal({ isOpen, onOpenChange, data }) {
   const [selectedTab, setSelectedTab] = useState("courses");
 
   return (
@@ -42,7 +42,7 @@ export function MyCommentsModal({ isOpen, onOpenChange }) {
         {(onClose) => (
           <>
             <ModalHeader className="flex justify-between">
-              <div className="flex gap-5 items-center">
+              <div className="flex gap-5 items-center md:flex-row flex-col">
                 <p className="text-3xl">نظرات شما</p>
                 <div className="ltr">
                   <Tabs
@@ -56,11 +56,13 @@ export function MyCommentsModal({ isOpen, onOpenChange }) {
                   </Tabs>
                 </div>
               </div>
+              <div>
               <ModalCloseBtn onClose={onClose} />
+              </div>
             </ModalHeader>
             <ModalBody>
-              {selectedTab === "courses" && <MyCourseComments/> }
-              {selectedTab === "blogs" && <MyBlogComments/> }
+              {selectedTab === "courses" && <MyCourseComments userData={data}/> }
+              {selectedTab === "blogs" && <MyBlogComments userData={data}/> }
             </ModalBody>
           </>
         )}

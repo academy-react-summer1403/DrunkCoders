@@ -13,7 +13,7 @@ export function DashMain({data}) {
 
   return (
     <main className='flex flex-wrap gap-6 justify-evenly items-center' >
-    <ContainerMyComments/>
+    <ContainerMyComments data={data}/>
     <div className='-order-1 md:order-none md:-mt-3'>
       <Calendar
         calendar={persian}

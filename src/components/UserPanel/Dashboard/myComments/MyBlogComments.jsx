@@ -4,8 +4,9 @@ import { Spinner } from '@nextui-org/react';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import toast from 'react-hot-toast';
+import { DashBlogComments } from './DashBlogComments';
 
-export function MyBlogComments() {
+export function MyBlogComments({userData}) {
   const { data:comments, error, isLoading, isError } = useQuery({
     queryKey: ['MyBlogComments'],
     queryFn: getMyNewsComments,
@@ -15,25 +16,15 @@ export function MyBlogComments() {
   console.log(comments);
   return (
     <div className = 'flex flex-col'>
-      <p>اخبار و مقالات</p>
+      <p className='text-gray-500'>اخبار و مقالات</p>
       {comments.length === 0 ? (
-        <p>کامنتی وجود ندارد</p>
+        <p className='text-gray-500'>کامنتی وجود ندارد</p>
       ) : (
         comments.map((comment) => (
-          <div key={comment.id}>
-            <DesignComment
-              finalReplies
-              pictureAddress
-              author='شما'
-              title={comment.title}
-              describe={comment.describe}
-              comment
-              likeCount={comment.likeCount}
-              dislikeCount={comment.dislikeCount}
-              handleLike
-              likeState
+            <DashBlogComments key={comment.id}
+            comment={comment}
+            userData={userData}
             />
-          </div>
         ))
       )}
     </div>
