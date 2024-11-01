@@ -81,6 +81,7 @@ console.log(comment);
 
   return (
     <DesignComment
+    insertDate={comment.insertDate}
     finalReplies={finalReplies}
     pictureAddress={comment.pictureAddress}
     author={comment.author}

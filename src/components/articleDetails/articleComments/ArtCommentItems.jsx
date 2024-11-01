@@ -55,6 +55,7 @@ export function ArtCommentItems({comment,handleOpenModal}) {
   return (
     <>
         <DesignComment
+        insertDate={comment.insertDate}
         finalReplies={finalReplies}
         likeState={likeState}
         pictureAddress={comment.pictureAddress}
