@@ -10,7 +10,7 @@ export function ContainerMyComments({data}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
-      <div className="sm:w-[45%] w-full h-[266px] rounded-2xl bg-white p-3 dark:bg-black"> 
+      <div className="sm:w-[45%] w-full h-[266px] rounded-2xl bg-white p-3 dark:bg-black overflow-hidden"> 
         <header className="flex justify-between">
           <div>نظرات‌ شما</div>
           <div className="text-primary-500 cursor-pointer flex items-center" onClick={onOpen}>

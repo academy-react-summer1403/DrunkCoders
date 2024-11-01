@@ -13,7 +13,6 @@ export function CommentItem({ comment, handleOpenModal }) {
   });
   const queryClient = useQueryClient();
 
-console.log(comment);
   const { data: repliesData, isPending: loadingReplies, error: repliesError } = useQuery({
     queryKey: ['commentReplies', comment.courseId, comment.id],
     queryFn: () => getCourseCommentReplies(comment.courseId, comment.id),
@@ -35,7 +34,6 @@ console.log(comment);
   useMutation({
     mutationFn: () => dislikeCourseComment(comment.id),
     onSuccess: (data) => {
-      console.log('Disslike the comment successfully:', data);
       queryClient.invalidateQueries(['courseComments'])
     },
     onError:(error) => {

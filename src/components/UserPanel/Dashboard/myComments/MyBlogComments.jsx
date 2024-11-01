@@ -16,9 +16,9 @@ export function MyBlogComments({userData}) {
   console.log(comments);
   return (
     <div className = 'flex flex-col'>
-      <p className='text-gray-500'>اخبار و مقالات</p>
+      <p className='text-basic-gray'>اخبار و مقالات</p>
       {comments.length === 0 ? (
-        <p className='text-gray-500'>کامنتی وجود ندارد</p>
+        <p className='text-basic-gray'>کامنتی وجود ندارد</p>
       ) : (
         comments.map((comment) => (
             <DashBlogComments key={comment.id}

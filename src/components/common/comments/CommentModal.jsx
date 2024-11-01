@@ -22,7 +22,7 @@ export function CommentModal({
   return (
     <Modal
       scrollBehavior={scrollBehavior}
-      className="max-w-4xl dark:bg-gray-700"
+      className="max-w-4xl "
       backdrop="opaque"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
