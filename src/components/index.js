@@ -68,3 +68,5 @@ export { OveralUserInfo } from './UserPanel/profile/OveralUserInfo'
 export { ProfileTabs } from './UserPanel/profile/ProfileTabs'
 export { ProfileHeader } from './UserPanel/profile/ProfileHeader'
 export { ChangePass } from './UserPanel/profile/ChangePass'
+
+export { HeaderProgressBar } from '@components/HeaderProgressBar'
