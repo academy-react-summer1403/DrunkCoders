@@ -4,6 +4,7 @@ import {
   CardHeader as CardImage,
   CourseCardDetails,
   LikeAndDislike,
+  PriceAndTomanLabel,
 } from '@components/index'
 import { Link } from 'react-router-dom'
 import {
@@ -81,14 +82,11 @@ export function CourseCard({
             <div
               className={`mb- flex flex-wrap items-center justify-between gap-2 dark:text-white`}
             >
-              <div
-                className={`flex items-center gap-1 text-xl ${view === 'list' ? 'order-1' : ''}`}
-              >
-                <span className="font-medium">
-                  {pirceFormatter(course.cost) ?? '1,880,000'}
-                </span>
-                <span className="text-sm text-[#3772FF]">تومان</span>
-              </div>
+              <PriceAndTomanLabel
+                price1={course.cost}
+                className={view === 'list' ? 'order-1' : ''}
+                tomanColor
+              />
 
               <LikeAndDislike
                 userLikeStatus={{

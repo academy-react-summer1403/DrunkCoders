@@ -1,6 +1,5 @@
 import { api } from '../interceptor'
 
-//get all news with pagination
 export async function getWeekNews({ params, signal }) {
   try {
     const response = await api.get('/News', {

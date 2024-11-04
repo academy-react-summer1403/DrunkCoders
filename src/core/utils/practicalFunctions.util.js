@@ -10,5 +10,31 @@ export function roleMapper(roles) {
   })
 }
 export function getLatestState() {
-  return store.getState()
+  let latestState = store.getState()
+
+  store.subscribe(() => {
+    latestState = store.getState()
+  })
+  return latestState
+}
+
+export function filterDataByDateRange(dateRange, data, dateName) {
+  const startDate = new Date(dateRange.startDate)
+  const endDate = new Date(dateRange.endDate)
+
+  return data.filter((item) => {
+    const itemDate = new Date(item[dateName])
+
+    if (itemDate <= endDate && itemDate >= startDate) return true
+    else return false
+  })
+}
+
+export function isValidUrl(string) {
+  try {
+    const url = new URL(string) // This will throw an error if it's not a valid URL
+    return url.protocol === 'http:' || url.protocol === 'https:' // Checks for HTTP/HTTPS
+  } catch (_) {
+    return false
+  }
 }

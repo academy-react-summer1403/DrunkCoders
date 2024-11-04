@@ -1,14 +1,14 @@
 import moment from 'moment-jalaali'
 
 export function pirceFormatter(price) {
-  return Number(price).toLocaleString('en-US')
+  return Number(price).toLocaleString('fa-IR')
 }
 export function convertGrigorianDateToJalaali(grigorianDate) {
-  moment.loadPersian()
+  moment.loadPersian({ usePersianDigits: true })
   return moment(grigorianDate).format('jD jMMMM jYYYY')
 }
 export function convertGrigorianDateToJalaali2(grigorianDate) {
-  moment.loadPersian()
+  moment.loadPersian({ usePersianDigits: true })
   return moment(grigorianDate).format('jYYYY/jMM/jDD')
 }
 export function convertPersianDateToGerigorian(persianDate) {

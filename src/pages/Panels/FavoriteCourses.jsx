@@ -1,3 +1,5 @@
+import { MyFavCoursesMain } from '@components/index'
+
 export function FavoriteCourses() {
-  return <div>FavoriteCourses</div>
+  return <MyFavCoursesMain />
 }

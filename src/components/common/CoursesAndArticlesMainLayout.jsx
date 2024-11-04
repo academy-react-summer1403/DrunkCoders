@@ -52,7 +52,12 @@ export function CoursesAndArticlesMainLayout({ article }) {
 
   return (
     <>
-      <MobileModal confirmButton isOpen={isOpen} onOpenChange={onOpenChange}>
+      <MobileModal
+        confirmButton
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        title="ترتیب و فیلتر "
+      >
         {article ? <ArticleFilter /> : <CourseFilter />}
       </MobileModal>
 
@@ -88,7 +93,15 @@ export function CoursesAndArticlesMainLayout({ article }) {
         </main>
 
         <aside className="relative -left-[6px] hidden min-h-max md:mt-16 md:block md:w-[42%] lg:mt-0 lg:w-[30%] xl:w-1/4">
-          {article ? <ArticleFilter /> : <CourseFilter />}
+          {article ? (
+            <div className="sticky top-28">
+              <ArticleFilter />
+            </div>
+          ) : (
+            <div className="sticky top-28">
+              <CourseFilter />
+            </div>
+          )}
         </aside>
 
         <footer className="ltr absolute bottom-0 translate-y-[50%]">

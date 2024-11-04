@@ -9,3 +9,14 @@ export async function getAllTeachers() {
     console.log(error)
   }
 }
+export async function getTeacherById(TeacherId) {
+  try {
+    const response = await api.get('/Home/GetTeacherDetails', {
+      params: { TeacherId },
+    })
+
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}

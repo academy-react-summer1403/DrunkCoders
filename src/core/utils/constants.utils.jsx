@@ -115,3 +115,51 @@ export const profilePics = [
   },
   { key: 'morePic', icon: ImageAdd, isConstant: true, isMoreOpen: false },
 ]
+export const myCoursesColumns = [
+  { name: '#', uid: 'tumbImageAddress' },
+
+  { name: 'نام دوره', uid: 'courseTitle' },
+
+  { name: 'استاد دوره', uid: 'fullName' },
+
+  { name: 'شروع دوره', uid: 'lastUpdate' },
+  { name: 'قیمت دوره', uid: 'cost' },
+  { name: 'وضعیت پراختی', uid: 'paymentStatus' },
+  { name: '', uid: 'actions' },
+]
+export const myReservationsColumns = [
+  { name: ' #', uid: 'tumbImageAddress' },
+
+  { name: ' نام دوره', uid: 'courseName' },
+
+  { name: ' استاد دوره', uid: 'teacherName' },
+
+  { name: 'شروع دوره', uid: 'lastUpdate' },
+  { name: 'قیمت دوره', uid: 'cost' },
+  { name: 'وضعیت ثبت‌نام', uid: 'accept' },
+  { name: '', uid: 'actions' },
+]
+export const myFavCoursesColumns = [
+  { name: ' #', uid: 'tumbImageAddress' },
+
+  { name: ' نام دوره', uid: 'title' },
+
+  { name: ' استاد دوره', uid: 'teacherName' },
+
+  { name: 'شروع دوره', uid: 'startTime' },
+  { name: 'قیمت دوره', uid: 'cost' },
+
+  { name: '', uid: 'actions' },
+]
+export const myFavArticlesColumns = [
+  { name: ' #', uid: 'tumbImageAddress' },
+
+  { name: 'عنوان', uid: 'title' },
+
+  { name: 'درباره مقاله', uid: 'about' },
+
+  { name: 'منتشرکننده', uid: 'userName' },
+  { name: 'تاریخ انتشار', uid: 'insertDate' },
+
+  { name: '', uid: 'actions' },
+]

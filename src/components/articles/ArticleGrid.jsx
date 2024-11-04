@@ -1,5 +1,5 @@
 import { NewsCard } from '@components/index'
-import { getWeekNews } from '@core/index'
+import { filterDataByDateRange, getWeekNews } from '@core/index'
 import { articleSortFilterActions } from '@store/article-sort-filter-slice'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useMemo, useRef } from 'react'
@@ -40,15 +40,11 @@ export function ArticleGrid() {
   })
 
   if (news && dateRange.startDate) {
-    const startDate = new Date(dateRange.startDate)
-    const endDate = new Date(dateRange.endDate)
-
-    const dateFilteredNews = news.news.filter((article) => {
-      const articleDate = new Date(article.insertDate)
-
-      if (articleDate <= endDate && articleDate >= startDate) return true
-      else return false
-    })
+    const dateFilteredNews = filterDataByDateRange(
+      dateRange,
+      news.news,
+      'insertDate',
+    )
 
     news.news = dateFilteredNews
     news.totalCount = dateFilteredNews.length

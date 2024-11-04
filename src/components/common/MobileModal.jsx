@@ -1,5 +1,11 @@
 import { Button, ModalCloseBtn } from '@components/index'
-import { Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react'
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from '@nextui-org/react'
 
 export function MobileModal({
   isOpen,
@@ -8,7 +14,7 @@ export function MobileModal({
   children,
   confirmButton,
   dash,
-  onOpen
+  onOpen,
 }) {
   return (
     <Modal
@@ -17,66 +23,68 @@ export function MobileModal({
       hideCloseButton
       scrollBehavior="inside"
       isDismissable={false}
-      size="3xl"
-      className={`rounded-bb-none sm: relative rounded-t-[32px] sm:m-0`}
+      size="5xl"
+      className={`relative rounded-t-[32px] sm:m-0`}
       classNames={{
         wrapper: '',
       }}
-      motionProps={{
-        variants: {
-          enter: {
-            y: 0,
-            transition: {
-              duration: 0.6,
-              ease: 'easeOut',
+      motionProps={
+        true && {
+          variants: {
+            enter: {
+              y: 0,
+              transition: {
+                duration: 0.6,
+                ease: 'easeOut',
+              },
+            },
+            exit: {
+              y: 1000,
+              transition: {
+                duration: 0.4,
+                ease: 'easeIn',
+              },
             },
           },
-          exit: {
-            y: 1000,
-            transition: {
-              duration: 0.4,
-              ease: 'easeIn',
-            },
-          },
-        },
-      }}
+        }
+      }
     >
       <ModalContent>
         {(onClose) => (
           <>
             <ModalHeader className="flex items-center justify-between gap-1">
               {dash ? (
-                <div className='flex flex-col w-full'>
-                  <header className='flex justify-between '>
-                      <p>
-                      جدیدترین دوره ها
-                      </p>
-                      <ModalCloseBtn onClose={onClose}/>
+                <div className="flex w-full flex-col">
+                  <header className="flex justify-between">
+                    <p>جدیدترین دوره ها</p>
+                    <ModalCloseBtn onClose={onClose} />
                   </header>
-                  
-                  <Button className='w-fit text-lg' onPress={onOpen}>
-                  فیلتر
+
+                  <Button className="w-fit text-lg" onPress={onOpen}>
+                    فیلتر
                   </Button>
-                </div>   
-              ):(
+                </div>
+              ) : (
                 <>
-                  <p className="text-xl font-medium">ترتیب و فیلتر {title}</p>
+                  <p className="text-xl font-medium">{title}</p>
 
                   <ModalCloseBtn onClose={onClose} />
                 </>
               )}
-
             </ModalHeader>
 
-            <ModalBody>
-              {children}
+            <ModalBody>{children}</ModalBody>
 
+            <ModalFooter className="pb-5">
               {confirmButton && (
-                <Button onPress={onClose} className="py-3 text-lg">
+                <Button
+                  onPress={onClose}
+                  className="w-full py-3 text-xl font-medium"
+                >
                   اعمال
                 </Button>
               )}
-            </ModalBody>
+            </ModalFooter>
           </>
         )}
       </ModalContent>
