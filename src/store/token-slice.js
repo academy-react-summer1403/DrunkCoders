@@ -17,6 +17,7 @@ const tokenSlice = createSlice({
       state.users.forEach((user) =>
         user.isOnline ? (user.isOnline = false) : null,
       )
+
       setLocalStorage('users', state.users)
     },
     login(state, action) {

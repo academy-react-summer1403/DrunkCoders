@@ -1,4 +1,6 @@
+import { articleFallback, coursesFallback } from '@assets/index'
 import { Button } from '@components/index'
+import { isValidUrl } from '@core/index'
 import { Image } from '@nextui-org/react'
 
 export function CardHeader({ data, buttonColor, type, view }) {
@@ -19,10 +21,13 @@ export function CardHeader({ data, buttonColor, type, view }) {
             height="100%"
             src={
               type === 'course'
-                ? data.tumbImageAddress
-                : data.currentImageAddressTumb
+                ? isValidUrl(data.tumbImageAddress)
+                  ? data.tumbImageAddress
+                  : coursesFallback
+                : isValidUrl(data.currentImageAddressTumb)
+                  ? data.currentImageAddressTumb
+                  : articleFallback
             }
-            // src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
             draggable="false"
           />
 
@@ -32,7 +37,10 @@ export function CardHeader({ data, buttonColor, type, view }) {
                 ? data.typeName || data.technologyList
                 : 'مقاله'}
             </Button>
-            <Button className={`${buttonBgClass} text-white`} size="sm">
+            <Button
+              className={`${buttonBgClass} max-w-32 text-white`}
+              size="sm"
+            >
               {type === 'course' ? data.levelName : data.newsCatregoryName}
             </Button>
           </div>

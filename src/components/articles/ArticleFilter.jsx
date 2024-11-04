@@ -53,7 +53,7 @@ export function ArticleFilter() {
   }
 
   return (
-    <div className="sticky top-28 flex flex-col gap-8 rounded-3xl px-3 py-5 dark:bg-white/20 md:bg-[#E4E4E4]">
+    <div className="flex flex-col gap-8 rounded-3xl px-3 py-5 dark:bg-white/20 md:bg-[#E4E4E4]">
       <div className="hidden md:block">
         <SearchBox
           onSearch={handleSearch}

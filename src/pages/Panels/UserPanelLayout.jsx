@@ -11,7 +11,7 @@ export function UserPanelLayout() {
   })
 
   return (
-    <div className="relative flex min-h-screen gap-3 bg-gray-100 p-3 pb-32 dark:bg-gray-900 sm:pb-3">
+    <div className="relative flex min-h-screen gap-3 bg-[#E8E8E8] p-3 pb-32 dark:bg-gray-950 sm:pb-3">
       <SideMenu />
 
       {/* <div className="flex h-full flex-1 flex-col gap-3"> */}

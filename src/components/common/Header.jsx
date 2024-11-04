@@ -1,5 +1,5 @@
 import { Button } from '@components'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import {
   MoonIcon,
@@ -40,6 +40,7 @@ import { useQuery } from '@tanstack/react-query'
 export function Header() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   let user = useSelector((state) => state.token.users).find(
     (user) => user.isOnline === true,
@@ -61,6 +62,11 @@ export function Header() {
     dispatch(tokenActions.logout())
   }
 
+  function handleNavigate(address, onClose) {
+    navigate(address)
+    onClose()
+  }
+
   let tokenExpired
   if (user && user.token && user.isOnline) {
     tokenExpired = isTokenExpired(user.token)
@@ -68,11 +74,9 @@ export function Header() {
     tokenExpired = true
   }
 
-  /*   if (isLoading) return <div>در حال بارگذاری...</div> // نمایش لودینگ هنگام بارگذاری
-  if (error) return <div>خطا در بارگذاری اطلاعات کاربر</div> // نمایش خطا در صورت وجود */
   return (
     <div className="fixed left-0 z-50 flex w-full items-center justify-between gap-16 bg-white/60 px-5 py-6 backdrop-blur-md dark:bg-black/60 max-lg:gap-0 lg:px-8">
-      <div className="flexC">
+      <Link to="/" className="flexC">
         <div className="-mt-3">
           <BahrLogo1 className="h-10 w-10 cursor-pointer" />
         </div>
@@ -80,7 +84,7 @@ export function Header() {
         <div className="lg:flexC hidden cursor-pointer">
           <img src={BahrLogo} className="" />
         </div>
-      </div>
+      </Link>
 
       <nav className="flex justify-center gap-10 whitespace-nowrap text-xl font-normal text-black dark:text-white max-md:hidden">
         <NavLink
@@ -130,9 +134,7 @@ export function Header() {
                 <PopoverTrigger>
                   <User
                     name={
-                      (userInfo?.fName || 'نام') +
-                      ' ' +
-                      (userInfo?.lName || 'نام خانوادگی')
+                      (userInfo?.fName || '') + ' ' + (userInfo?.lName || '')
                     }
                     description={userInfo?.phoneNumber}
                     className="cursor-pointer"
@@ -144,6 +146,7 @@ export function Header() {
                     avatarProps={{ size: 'lg', ...avatarImg }}
                   />
                 </PopoverTrigger>
+
                 <PopoverContent className="border-1 border-blue-200 p-2">
                   <div className="flex flex-col gap-2 px-2 text-center">
                     <Link
@@ -203,7 +206,7 @@ export function Header() {
               }}
             >
               <ModalContent className="relative bottom-36">
-                {() => (
+                {(onClose) => (
                   <>
                     <ModalHeader className="flex flex-col gap-1">
                       <ShortLine className="relative right-40 -mt-2 mr-3" />
@@ -218,10 +221,37 @@ export function Header() {
                             <Phone />
                           </div>
                           <div className="flex h-full w-32 flex-col gap-2 pr-2 pt-1 text-lg leading-10">
-                            <Link to="/">خانه</Link>
-                            <Link to="/courses">دوره ها</Link>
-                            <Link to="/articles">اخبار و مقالات </Link>
-                            <Link to="/">ارتباط باما</Link>
+                            <p
+                              onClick={() => handleNavigate('/', onClose)}
+                              className="cursor-pointer"
+                            >
+                              خانه
+                            </p>
+
+                            <p
+                              onClick={() =>
+                                handleNavigate('/courses', onClose)
+                              }
+                              className="cursor-pointer"
+                            >
+                              دوره ها
+                            </p>
+
+                            <p
+                              onClick={() =>
+                                handleNavigate('/articles', onClose)
+                              }
+                              className="cursor-pointer"
+                            >
+                              اخبار و مقالات
+                            </p>
+
+                            <p
+                              onClick={() => handleNavigate('/', onClose)}
+                              className="cursor-pointer"
+                            >
+                              ارتباط باما
+                            </p>
                           </div>
                         </div>
                         <div className="flex h-full w-44 flex-col items-end gap-7 pt-1 text-base text-gray-500 dark:text-gray-400">

@@ -1,5 +1,5 @@
 import { store, tokenActions } from '@store/index'
-import { deleteLocalStorage, getLocalStroge } from '@core/index'
+import { deleteLocalStorage, getLocalStroge, isTokenExpired } from '@core/index'
 import axios from 'axios'
 
 export const api = axios.create({
@@ -13,6 +13,13 @@ function onSuccess(response) {
 function onError(error) {
   handleError(error)
   return error
+}
+
+function cheackTokenExpired() {
+  const currentUserToken = getLocalStroge('users')?.find(
+    (user) => user.isOnline,
+  ).token
+  return isTokenExpired(currentUserToken)
 }
 
 api.interceptors.response.use(onSuccess, onError)
@@ -41,7 +48,6 @@ const handleError = (error) => {
     switch (error.response.status) {
       case 401:
         alert('Unauthorized! Please log in again.')
-        deleteLocalStorage('token')
         window.location.pathname = '/auth'
         break
       case 403:
@@ -74,14 +80,15 @@ const handleError = (error) => {
     // The request was made but no response was received
     console.error('Request Error:', error.request)
     // alert('Network error! Please check your internet connection.')
-    if (error.request.status === 0) {
+    if (error.request.status === 0 && cheackTokenExpired()) {
       console.error('Network error or unauthorized access. Are you login??')
       store.dispatch(tokenActions.logout())
+      window.location.pathname = '/auth'
     }
   } else {
     // Something happened in setting up the request that triggered an Error
     console.error('Error:', error.message)
     alert('An unexpected error occurred. Please try again.')
   }
-  return Promise.reject(error) // Reject the promise to keep the error flowing
+  return Promise.reject(error)
 }

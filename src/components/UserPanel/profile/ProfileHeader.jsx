@@ -15,7 +15,7 @@ export function ProfileHeader({ onSelect, userInfo, defaultProfilePic }) {
           shape="circle"
           isDot
         >
-          <div className="flexC h-32 w-32 rounded-full border-[6px] border-white bg-primary-blue dark:border-black">
+          <div className="flexC h-32 w-32 rounded-full border-[7px] border-white bg-primary-blue dark:border-black">
             {defaultProfilePic && (
               <div className="bgg-red-600 overflow-hidden rounded-full">
                 <UseIcon icon={defaultProfilePic.icon} className="h-24 w-24" />

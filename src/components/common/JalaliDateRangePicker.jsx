@@ -16,6 +16,8 @@ export function JalaliDateRangePicker({
   onChange,
   onClear,
   placement,
+  classNames,
+  relative,
 }) {
   const firstRender = useRef(true)
   const [values, setValues] = useState(null)
@@ -58,6 +60,7 @@ export function JalaliDateRangePicker({
         className="mb-0"
         classNames={{
           input: 'ltr',
+          inputWrapper: `${classNames?.inputWrapper}`,
         }}
         onFocus={() => setIsCalendarOpen(true)}
         isReadOnly
@@ -65,7 +68,7 @@ export function JalaliDateRangePicker({
       />
       {isCalendarOpen && (
         <div
-          className={`absolute left-[50%] z-20 -translate-x-[50%] ${placement === 'up' ? '-mt-[338px]' : '-mt-1'}`}
+          className={`left-[50%] z-20 -translate-x-[50%] ${relative ? 'relative' : 'absolute'} ${placement === 'up' ? '-mt-[338px]' : '-mt-1'}`}
         >
           <Calendar
             value={values}
