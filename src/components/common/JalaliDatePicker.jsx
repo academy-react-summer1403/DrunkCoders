@@ -21,7 +21,6 @@ export function JalaliDatePicker({
   name,
   error,
 }) {
-  //   const firstRender = useRef(true)
   const [value, setValue] = useState(null)
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const darkMode = useSelector((state) => state.darkMode.darkMode)

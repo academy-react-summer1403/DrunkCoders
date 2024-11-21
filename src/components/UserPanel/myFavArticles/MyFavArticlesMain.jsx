@@ -34,7 +34,7 @@ export function MyFavArticlesMain() {
   detailedFavArticles =
     detailedFavArticles.some((article) => article === undefined) ||
     detailedFavArticles.length === 0
-      ? null
+      ? []
       : detailedFavArticles.map((article) => {
           article.courseName = article.title
           article.startDate = article.insertDate

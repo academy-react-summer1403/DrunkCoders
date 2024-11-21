@@ -34,7 +34,7 @@ export function MyFavCoursesMain() {
   CompleteFavCourse =
     CompleteFavCourse.some((course) => course === undefined) ||
     CompleteFavCourse.length === 0
-      ? null
+      ? []
       : CompleteFavCourse.map((course) => {
           course.courseName = course.title
           course.startDate = course.startTime
@@ -44,8 +44,6 @@ export function MyFavCoursesMain() {
           course.technologyList = course.techs.join('‌‌‌‌‌‌‌‌‌‌،')
           return course
         })
-
-  console.log(CompleteFavCourse)
 
   return (
     <MyCoursesAndArticlesLayout

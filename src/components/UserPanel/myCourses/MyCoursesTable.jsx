@@ -58,7 +58,7 @@ export function MyCoursesTable({ listOfMyCourses, onOpenSummaryModal }) {
           )
         case 'courseTitle':
           return (
-            <p className="text-md font-medium lg:text-xl">
+            <p className="text-md line-clamp-1 text-ellipsis font-medium lg:text-xl">
               {course.courseTitle}
             </p>
           )
