@@ -7,6 +7,7 @@ import {
 } from '@components/index'
 import { userPanelProfileTabs } from '@core/utils/constants.utils'
 import { Tab, Tabs } from '@nextui-org/react'
+import { Security } from './Security'
 
 export function ProfileTabs({ selectedItem, onSelect, userInfo }) {
   return (
@@ -44,6 +45,7 @@ export function ProfileTabs({ selectedItem, onSelect, userInfo }) {
             {tab.key === 'address' && <Address userInfo={userInfo} />}
             {tab.key === 'links' && <Links userInfo={userInfo} />}
             {tab.key === 'changePass' && <ChangePass userInfo={userInfo} />}
+            {tab.key === 'security' && <Security />}
           </div>
         </Tab>
       ))}

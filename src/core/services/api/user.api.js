@@ -140,3 +140,32 @@ export async function getMyFavoriteCourses() {
       console.log(error);
     }
   }
+
+  export async function editSecurity(data) {
+    try {
+      const response =await api.put('/SharePanel/EditSecurity',data)
+      return response
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  export async function getSecurityInfo() {
+    try {
+      const response = await api.get('/SharePanel/GetSecurityInfo')
+      return response
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+export async function towStepVerification(code, data) {
+  try {
+    const response = await api.post(`Sign/LoginTwoStep?VrifyCode=${code}`, data);
+    
+    return response;
+  } catch (error) {
+    console.error("Error in towStepVerification:", error);
+    throw error;
+  }
+}

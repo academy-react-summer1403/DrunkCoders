@@ -6,7 +6,9 @@ import { AuthLayout, Step, LoginForm, Verification } from "@components";
 export function LoginContainer() {
   const [currentStep, setCurrentStep] = useState(1);
   const { register, handleSubmit } = useForm();
+  const [loginData, setLoginData] = useState()
 
+  console.log(loginData);
   const onSubmit = (data) => {
     console.log("Form Data: ", data);
   };
@@ -42,15 +44,18 @@ export function LoginContainer() {
           onSubmit={onSubmit}
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
+          setLoginData={setLoginData}
         />
       ) : (
         <Verification
           handleSubmit={handleSubmit}
-          register={register}
+          data={loginData}
           onSubmit={onSubmit}
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
+          isLogin={true}
           nextStep={2}
+          message
         />
       )}
     </AuthLayout>

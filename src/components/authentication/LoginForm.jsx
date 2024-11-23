@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 import { tokenActions } from '@store/token-slice'
 import toast from 'react-hot-toast'
 
-export function LoginForm({ currentStep, setCurrentStep }) {
+export function LoginForm({ currentStep, setCurrentStep, setLoginData }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {
@@ -26,7 +26,8 @@ export function LoginForm({ currentStep, setCurrentStep }) {
   const { mutate, isPending } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      if (data.success) {
+      console.log(data);
+      if (data.success&& data.token) {
         toast.success(' ورود با موفقیت انجام شد. ')
         dispatch(
           tokenActions.login({
@@ -36,7 +37,11 @@ export function LoginForm({ currentStep, setCurrentStep }) {
           }),
         )
         navigate('/')
-      } else {
+      }else if (data.success){
+        toast.success(data.message)
+        setCurrentStep(2);
+      } 
+      else {
         toast.error('رمز‌عبور یا نام کاربری نادرست است')
       }
     },
@@ -47,6 +52,7 @@ export function LoginForm({ currentStep, setCurrentStep }) {
 
   const onSubmit = (data) => {
     mutate({ ...data, rememberMe })
+    setLoginData({ ...data, rememberMe })
     //setCurrentStep(2);
   }
 

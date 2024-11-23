@@ -7,9 +7,11 @@ import { MyBlogComments } from './MyBlogComments';
 
 export function MyCommentsModal({ isOpen, onOpenChange, data }) {
   const [selectedTab, setSelectedTab] = useState("courses");
+  const [scrollBehavior, setScrollBehavior] = useState("inside");
 
   return (
     <Modal
+      scrollBehavior={scrollBehavior}
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       size="5xl"

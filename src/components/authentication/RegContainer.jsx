@@ -25,9 +25,11 @@ export function RegContainer() {
     />,
     <Verification
       key={2}
+      data
       phoneNumber={phoneNumber}
       setCurrentStep={setCurrentStep}
       nextStep={3}
+      isLogin={false}
       message={(
         <>
           لطفا کد ارسال شده به شماره <span className='text-primary-blue'>{phoneNumber}</span> را وارد کنید
