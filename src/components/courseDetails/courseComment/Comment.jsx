@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@components';
 import { useDisclosure } from '@nextui-org/react';
 import { CommentModal } from '../../common/comments/CommentModal';
@@ -85,9 +85,11 @@ export function Comment({ courseId }) {
   function handleOpenModal(isOpen, comment = null, reply = false) {
     setIsReply(reply);
     setReplyToComment(comment);
-    setModalTitle(reply ? 'پاسخ شما' : 'نظر شما');
     onOpen(isOpen);
   }
+  useEffect(() => {
+    setModalTitle(isReply ? 'پاسخ شما' : 'نظر شما');
+  }, [isReply]);
 
   if (isLoading) return <div>Loading comments...</div>;
   if (error) return <div>Error loading comments</div>;
@@ -109,6 +111,7 @@ export function Comment({ courseId }) {
         setModalSubject={setModalSubject}
         addComment={addCourseComment}
         isReply={isReply}
+        setIsReply={setIsReply}
         replyToComment={replyToComment}
         addReply={addCourseReply}
       >

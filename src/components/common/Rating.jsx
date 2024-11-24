@@ -25,7 +25,7 @@ export function Rating({ courseId, newsId, isDisabled, userRate }) {
       }
     },
     onError: (error) => {
-      console.error('Error sending rating:', error);
+      toast.error(error.message);
     },
   });
 

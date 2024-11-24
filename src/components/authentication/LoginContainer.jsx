@@ -8,7 +8,6 @@ export function LoginContainer() {
   const { register, handleSubmit } = useForm();
   const [loginData, setLoginData] = useState()
 
-  console.log(loginData);
   const onSubmit = (data) => {
     console.log("Form Data: ", data);
   };

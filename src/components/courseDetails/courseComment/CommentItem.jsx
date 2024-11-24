@@ -37,7 +37,7 @@ export function CommentItem({ comment, handleOpenModal }) {
       queryClient.invalidateQueries(['courseComments'])
     },
     onError:(error) => {
-      console.log('error dissliking the comment', error);
+      toast.error(error.message);
     }
   })
 

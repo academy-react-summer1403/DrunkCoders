@@ -15,7 +15,8 @@ export function CommentModal({
   isReply,
   replyToComment,
   addReply,
-  children
+  children,
+  setIsReply
 }) {
   const [scrollBehavior, setScrollBehavior] = useState("inside");
 
@@ -45,6 +46,7 @@ export function CommentModal({
               modalSubject={modalSubject}
               setModalSubject={setModalSubject}
               replyToComment={replyToComment}
+              setIsReply={setIsReply}
             />
           </>
         )}

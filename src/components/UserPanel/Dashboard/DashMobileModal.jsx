@@ -5,6 +5,7 @@ import {
   JalaliDateRangePicker,
   MobileModal,
   ModalCloseBtn,
+  Pagination,
   PriceSlider,
   SearchBox,
   SelectOption,
@@ -34,6 +35,9 @@ export function DashMobileModal({ isOpen, onClose }) {
   const { filterId, dateRange, cost, order } = useSelector(
     (state) => state.sort,
   )
+  const { TeacherId, Query, StartDate, EndDate, CostUp, CostDown, PageNumber } =
+  useSelector((state) => state.dashSort.params)
+const { totalPageCount } = useSelector((state) => state.dashSort)
   const { params } = useSelector((state) => state.dashSort)
 
   const { data, isLoading, error } = useQuery({
@@ -71,6 +75,9 @@ export function DashMobileModal({ isOpen, onClose }) {
       dashSortFilterActions.setDateRange({ startDate: null, endDate: null }),
     )
   }
+  function handlePaginationChange(pageNumber) {
+    dispatch(dashSortFilterActions.setPageNumber(pageNumber))
+  }
   const courses = data?.courseFilterDtos ?? []
   console.log(courses)
   return (
@@ -106,6 +113,13 @@ export function DashMobileModal({ isOpen, onClose }) {
             </div>
           )
         })}
+            <div className="ltr m-auto">
+              <Pagination
+                currentPage={PageNumber}
+                totalPageCount={totalPageCount}
+                onChange={handlePaginationChange}
+              />
+            </div>
       </MobileModal>
 
       <Modal

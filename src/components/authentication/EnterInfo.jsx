@@ -52,7 +52,6 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
     mutationFn: registerFinalApi,
     onSuccess: (data, variables) => {
       alert(data.message)
-      console.log('variables: ', variables)
       if (data.success) {
         alert('ثبت نام با موفقیت انجام شد در حال ورد به حساب کاربریتان هستید')
         loginMutate({
@@ -72,18 +71,9 @@ export function EnterInfo({ currentStep, setCurrentStep, phoneNumber }) {
       ...data,
       phoneNumber, // Include phoneNumber in form data
     }
-    console.log('Form Data to be sent:', formData)
-
-    // const response = await registerFinalApi(formData)
 
     registerMutate(formData)
 
-    /* if (response && response.success) {
-      console.log('Registration successful:', response)
-      setCurrentStep(3)
-    } else {
-      console.error('Registration failed')
-    } */
   }
 
   return (

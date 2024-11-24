@@ -4,6 +4,7 @@ import { DashMain } from './DashMain'
 import { useQuery } from '@tanstack/react-query';
 import { getCurrentUserProfile } from '@core/index';
 import { ModalContainer } from './ModalContainer';
+import { Spinner } from '@nextui-org/react';
 
 export function Dashboard() {
   const { data, isLoading, error } = useQuery({
@@ -11,7 +12,11 @@ export function Dashboard() {
     queryFn: getCurrentUserProfile,
   });
   if (isLoading) {
-    return <div>Loading...</div>; // Show a loading message or spinner
+    return (
+      <div className="flex justify-center mt-10">
+        <Spinner size="lg" label="در حال دریافت ..." labelColor="primary" />
+      </div>
+    );
   }
 
   if (error) {

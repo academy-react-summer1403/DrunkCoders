@@ -35,7 +35,6 @@ export const OtpInput = ({ setCurrentStep, nextStep, phoneNumber, isLogin, login
   const { mutate, isPending, isError } = useMutation({
     mutationFn: async ({ code, data }) => await towStepVerification(code, data),
     onSuccess: (data) => {
-      console.log(data);
       if(data.success){
         toast.success(data.message);
         dispatch(
@@ -60,7 +59,6 @@ export const OtpInput = ({ setCurrentStep, nextStep, phoneNumber, isLogin, login
     mutationFn: (user) => verifyApi(user),
     onSuccess: (data) => {
       toast.success(data.message)
-      console.log(data);
       setCurrentStep(nextStep);
     },
     onError: (error) => {

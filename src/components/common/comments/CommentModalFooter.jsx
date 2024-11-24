@@ -13,9 +13,11 @@ export function CommentModalFooter({
   setModalInput,
   modalSubject,
   setModalSubject,
-  replyToComment
+  replyToComment,
+  setIsReply
 }) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  
 
   const onEmojiClick = (emojiData) => {
     setModalInput(prevInput => prevInput + emojiData.emoji);
@@ -26,15 +28,18 @@ export function CommentModalFooter({
   };
 
   return (
-    <ModalFooter className="flex w-full items-center">
+    <ModalFooter className="flex w-full items-center  ">
       <Button
         type="submit"
         onClick={isReply ? addReply : addComment}
+        className=" p-4"
       >
-        <Sent className="rounded-full p-2" />
+        <Sent  />
       </Button>
-        {isReply && replyToComment && <ReplySection replyToComment={replyToComment} />}
-        <div className="w-full rounded-3xl border p-2 ">
+      <div className="flex w-full flex-col">
+
+        {isReply && replyToComment && <ReplySection replyToComment={replyToComment} setIsReply={setIsReply} />}
+        <div className="w-full rounded-3xl border p-2 bg-white dark:bg-zinc-900">
           <input
             className="p-2 outline-none w-full bg-transparent"
             value={modalSubject}
@@ -51,6 +56,7 @@ export function CommentModalFooter({
             }
           />
         </div>
+      </div>
         <div
           onClick={() => setShowEmojiPicker(prev => !prev)}
           className="cursor-pointer rounded-full border-1 border-gray-300 p-2"

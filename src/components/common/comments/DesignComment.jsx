@@ -13,7 +13,7 @@ export function DesignComment({
 
   return (
     <div className="comment flex flex-col p-7">
-      <div className={`${isAccordionOpen ? 'border-r-3 border-b-3' : ''} rounded-3xl rounded-t-none rounded-l-none border-gray-400`}>
+      <div className={`${isAccordionOpen ? 'transition-all delay-100 duration-300 border-r-3 border-b-3' : ''} rounded-3xl rounded-t-none rounded-l-none border-gray-400`}>
         <div className="flex items-center gap-2 -mr-7">
           <Avatar src={pictureAddress} size="lg" />
           <div>

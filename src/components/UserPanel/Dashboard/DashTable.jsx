@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import {
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -33,7 +34,13 @@ export function DashTable() {
 
   const courses = data?.courseFilterDtos ?? []
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-10">
+        <Spinner size="lg" label="در حال دریافت ..." labelColor="primary" />
+      </div>
+    );
+  }
   if (error) return <div>Error: {error.message}</div>
 
   return (

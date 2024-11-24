@@ -33,7 +33,6 @@ export function CourseInteraction({course}) {
       },
       onError: (error) => {
         toast.error(error.message);
-        console.log('no remove', error);
       }
     });
     function removeFavoriteCourse(){
