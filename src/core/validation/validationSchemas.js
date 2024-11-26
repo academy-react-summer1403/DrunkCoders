@@ -86,3 +86,13 @@ export const changePass = z.object({
     .min(6, { message: 'رمز عبور باید حداقل 6 کاراکتر باشد' })
     .max(32, { message: 'رمز عبور نباید بیش از 32 کاراکتر باشد' }),
 })
+export const paymentStep1 = z.object({
+  Paid: z.preprocess(
+    (value) => parseFloat(value), // Convert string to number
+    z.number({ invalid_type_error: "مبلغ باید یک عدد باشد" }).min(1, { message: "مبلغ نمی‌تواند صفر یا کمتر باشد" })
+  ),
+  PaymentInvoiceNumber: z.preprocess(
+    (value) => parseInt(value, 10), // Convert string to integer
+    z.number({ invalid_type_error: "شناسه باید یک عدد باشد" }).min(1, { message: "شناسه واریزی الزامی است" })
+  ),
+})

@@ -52,7 +52,7 @@ export const userPanelMobileDropDown = [
     startIcon: <FileBookmark />,
     title: 'علاقه‌مندی مقاله',
   },
-  { key: 'Financials', startIcon: <PanelPay />, title: 'پرداخت ها' },
+  { key: 'financial', startIcon: <PanelPay />, title: 'پرداخت ها' },
   { key: 'accounts', startIcon: <ProfilePanel />, title: 'حساب‌های کاربری' },
   { key: 'logout', startIcon: <LogOutPanel />, title: 'خروج از حساب' },
 ]

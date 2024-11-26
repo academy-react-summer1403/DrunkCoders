@@ -59,7 +59,6 @@ export function Security() {
       </div>
     );
   }
-console.log(data);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-8">

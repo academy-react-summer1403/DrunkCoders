@@ -1,6 +1,7 @@
 import { store, tokenActions } from '@store/index'
 import { deleteLocalStorage, getLocalStroge, isTokenExpired } from '@core/index'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -16,10 +17,9 @@ function onError(error) {
 }
 
 function cheackTokenExpired() {
-  const currentUserToken = getLocalStroge('users')?.find(
-    (user) => user.isOnline,
-  ).token
-  return isTokenExpired(currentUserToken)
+  const currentUser = getLocalStroge('users')?.find((user) => user.isOnline)
+  const token = currentUser?.token
+  return token ? isTokenExpired(token) : 'noToken'
 }
 
 api.interceptors.response.use(onSuccess, onError)
@@ -79,11 +79,17 @@ const handleError = (error) => {
   } else if (error.request) {
     // The request was made but no response was received
     console.error('Request Error:', error.request)
-    // alert('Network error! Please check your internet connection.')
-    if (error.request.status === 0 && cheackTokenExpired()) {
-      console.error('Network error or unauthorized access. Are you login??')
-      store.dispatch(tokenActions.logout())
-      window.location.pathname = '/auth'
+    
+    const tokenStatus = cheackTokenExpired();
+    if (error.request.status === 0 && tokenStatus) {
+      if(tokenStatus==='noToken'){
+        toast.error('ابتدا وارد شوید')
+      } else{
+
+        console.error('Network error or unauthorized access. Are you login??')
+        store.dispatch(tokenActions.logout())
+        window.location.pathname = '/auth'
+      }
     }
   } else {
     // Something happened in setting up the request that triggered an Error

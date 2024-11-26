@@ -166,6 +166,59 @@ export async function towStepVerification(code, data) {
     return response;
   } catch (error) {
     console.error("Error in towStepVerification:", error);
-    throw error;
+  }
+}
+
+export async function coursePaymentFirstStep(data){
+  try {
+    const response = await api.post('/CoursePayment', data)
+    return response
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getPaymentList(){
+  try {
+    const response = await api.get('/CoursePayment/StudentUserPayList')
+    return response
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getPaidCourse(paymentId){
+  try {
+    const response = await api.get(`/CoursePayment/${paymentId}`)
+    return response
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function paymentStep2(formData){
+  try {
+    const response = await api.post('/CoursePayment/AddPeymentImage', formData)
+    return response
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updatePayment(formData){
+  try {
+    const response = await api.put('/CoursePayment', formData)
+    return response
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deletePayment(formData){
+  try {
+    const response = await api.delete('/CoursePayment', { data: formData })
+    return response
+  } catch (error) {
+    console.log(error);
   }
 }

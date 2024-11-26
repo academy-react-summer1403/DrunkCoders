@@ -1,0 +1,105 @@
+import React, { useState } from 'react';
+import {
+  Button,
+  Spinner,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from '@nextui-org/react';
+import { useQuery } from '@tanstack/react-query';
+import { getPaymentList } from '@core/services/api/user.api';
+import { PaymentTableCell } from './PaymentTableCell';
+import { ActionModal } from './ActionModal';
+import { PaymentModalContent } from './PaymentModalContent';
+
+export function PaymentList() {
+  const { data: payments, isLoading, isError } = useQuery({
+    queryKey: ['paidList'],
+    queryFn: getPaymentList,
+  });
+
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    paymentId: null,
+    action: null,
+  });
+
+  const columns = [
+    { key: 'paid', label: 'مبلغ پرداختی' },
+    { key: 'peymentDate', label: 'تاریخ پرداخت' },
+    { key: 'paymentId', label: 'شناسه پرداخت' },
+    { key: 'accept', label: 'تایید' },
+    { key: 'actions', label: 'سایر' },
+  ];
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-10">
+        <Spinner size="lg" label="در حال دریافت ..." labelColor="primary" />
+      </div>
+    );
+  }
+
+  if (isError) return <p>خطا در دریافت اطلاعات</p>;
+
+  if (!payments || payments.length === 0) {
+    return <p className="text-center text-gray-500">هیچ پرداختی یافت نشد</p>;
+  }
+
+  function handleModal(paymentId, action) {
+    setModalState({ isOpen: true, paymentId, action });
+  }
+
+  function closeModal() {
+    setModalState({ isOpen: false, paymentId: null, action: null });
+  }
+
+  return (
+    <>
+      <Table aria-label="Example static collection table">
+        <TableHeader columns={columns}>
+          {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+        </TableHeader>
+        <TableBody items={payments}>
+          {(item) => (
+            <TableRow key={item.paymentId}>
+              {(columnKey) => (
+                <TableCell>
+                  <PaymentTableCell
+                    columnKey={columnKey}
+                    item={item}
+                    onAction={handleModal}
+                  />
+                </TableCell>
+              )}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+
+      <ActionModal
+        isOpen={modalState.isOpen}
+        onClose={closeModal}
+        title={
+          modalState.action === 'details'
+            ? 'جزئیات پرداخت'
+            : modalState.action === 'edit'
+            ? 'ویرایش پرداخت'
+            : modalState.action ==='upload'
+            ? 'آپلود فیش' 
+            :
+            'حذف پرداخت'
+        }
+        content={
+          <PaymentModalContent
+            paymentId={modalState.paymentId}
+            action={modalState.action}
+          />
+        }
+      />
+    </>
+  );
+}

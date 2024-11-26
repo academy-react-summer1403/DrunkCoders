@@ -36,7 +36,7 @@ export const userPanelRoutes = [
         element: <FavoriteCourses />,
       },
       {
-        path: 'Financials',
+        path: 'financial',
         element: <Financials />,
       },
       {

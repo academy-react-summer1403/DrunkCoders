@@ -1,3 +1,7 @@
+import { PaymentList } from "@components/UserPanel/payment/paymentList";
+
 export function Financials() {
-  return <div>Financials</div>
+  return <div>
+    <PaymentList/>
+  </div>
 }

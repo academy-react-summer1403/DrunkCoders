@@ -13,25 +13,36 @@ import {
   Tooltip,
   TableCell,
   Image,
+  useDisclosure,
 } from '@nextui-org/react'
 import { useCallback, useEffect, useState } from 'react'
 import { PriceAndTomanLabel } from '@components/index'
+import { PaymentStep1 } from './PaymentStep1'
 
 export function MyCoursesTable({ listOfMyCourses, onOpenSummaryModal }) {
   const [windowWidth, setWindowWidth] = useState(
     window.innerWidth < 850 ? null : 'md',
   )
+  const [selectedCourse, setSelectedCourse] = useState(null) // State for selected courseId
 
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    const handleResize = () => {
       const width = window.innerWidth
-      if (width < 850) {
-        setWindowWidth(null)
-      } else {
-        setWindowWidth('md')
-      }
-    })
+      setWindowWidth(width < 850 ? null : 'md')
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  
+  const handleOpenPaymentModal = (course) => {
+    setSelectedCourse(course)
+    onOpen() // Open the modal
+  }
 
   const renderCell = useCallback(
     (course, columnKey) => {
@@ -96,7 +107,10 @@ export function MyCoursesTable({ listOfMyCourses, onOpenSummaryModal }) {
 
               <Tooltip content="پرداخت">
                 <span>
-                  <Money className="cursor-pointer text-primary-blue transition-all" />
+                  <Money
+                    className="cursor-pointer text-primary-blue transition-all"
+                    onClick={() => handleOpenPaymentModal(course)} // Pass courseId
+                  />
                 </span>
               </Tooltip>
             </div>
@@ -141,6 +155,12 @@ export function MyCoursesTable({ listOfMyCourses, onOpenSummaryModal }) {
           ))}
         </TableBody>
       </Table>
+
+      <PaymentStep1
+        isOpen={isOpen}
+        onClose={onOpenChange}
+        course={selectedCourse||{}}
+      />
     </>
   )
 }
