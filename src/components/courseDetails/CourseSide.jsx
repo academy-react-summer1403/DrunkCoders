@@ -11,9 +11,10 @@ import toast from 'react-hot-toast';
 import { CourseInteraction } from './CourseInteraction';
 
 export function OverView({ course }) {
+  console.log(course.courseReseveId);
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const courseId = course.courseId; ;
+  const courseId = course.courseId; 
 
   const farsiDateFormatter = new Intl.DateTimeFormat('fa-IR', {
     year: 'numeric',
@@ -26,18 +27,21 @@ export function OverView({ course }) {
   const mutation = useMutation({
     mutationFn: reserveCourse,
     onSuccess: (data) => {
-      toast.success(' به لیست رزرو اضافه شد ')
+      if(data.success){
+
+        toast.success(' به لیست رزرو اضافه شد ')
+      }else{
+        toast.error(' متاسفیم به لیست رزرو اضافه نشد  ')
+      }
     },
-    onError:() =>{
-      toast.error(' متاسفیم به لیست رزرو اضافه نشد  ')
-    }
   });
      
   function handleReserve() {
     mutation.mutate({ courseId });
   }
 
-
+  const isReserved = course.courseReseveId !== '00000000-0000-0000-0000-000000000000';
+  console.log('isReserved', isReserved);
   return (
     <>
       <div className='w-fit flex items-center gap-2 rounded-xl bg-[#FFD1CB] px-2 py-1 text-xs text-[#FF5454]'>
@@ -86,9 +90,15 @@ export function OverView({ course }) {
       </p>
 
       <div className='flex gap-2 items-center justify-between'>
+        {isReserved? 
+        <Button className='text-lg font-bold w-3/5' isDisabled >
+          رزرو شده
+        </Button>
+        :
         <Button className='text-lg font-bold w-3/5' onClick={() => { onOpen(); handleReserve(); }}>
           رزرو دوره
         </Button>
+        }
 
         <CourseInteraction
         course={course}

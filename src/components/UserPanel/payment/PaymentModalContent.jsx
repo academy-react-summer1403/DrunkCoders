@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Spinner } from '@nextui-org/react';
+import { Image, Spinner } from '@nextui-org/react';
 import { deletePayment, getPaidCourse, paymentStep2, updatePayment } from '@core/services/api/user.api';
 import { BaseInput, Button } from '@components/index';
 import { useForm } from 'react-hook-form';
@@ -12,10 +12,11 @@ import toast from 'react-hot-toast';
 export function PaymentModalContent({ paymentId, action }) {
   const queryClient = useQueryClient();
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['paidItem', paymentId],
+    queryKey: ['paidItem'],
     queryFn: () => getPaidCourse(paymentId),
     enabled: !!paymentId, // Fetch only when paymentId is provided
   });
+  console.log(data);
   const [file, setFile] = useState();
 //   function handleChange(e) {
 //     setFile(e.target.files[0]); // Save the actual file object
@@ -28,6 +29,7 @@ export function PaymentModalContent({ paymentId, action }) {
         queryClient.invalidateQueries(['paidList']);
       } else{
         toast.error(response.message)
+        console.log(response);
       }
     }
   })
@@ -49,6 +51,7 @@ export function PaymentModalContent({ paymentId, action }) {
       if(response.success){
         toast.success('دوره از پرداختی ها حذف شد')
         queryClient.invalidateQueries(['paidList']);
+        queryClient.invalidateQueries(['paidItem']);
       } else {
         toast.error(response.message)
       }
@@ -77,13 +80,13 @@ export function PaymentModalContent({ paymentId, action }) {
   const PeymentDate = moment().locale('en').format('YYYY-MM-DDTHH:mm:ss');
 
   function onSubmit(data) {
-    console.log(data);
     const formData = new FormData();
     formData.append('Id', paymentId);
     formData.append('Paid', data.Paid);
     formData.append('PeymentDate', PeymentDate)
     formData.append('PaymentInvoiceNumber', data.PaymentInvoiceNumber);
     mutate(formData)
+    console.log(formData);
   }
 
   function uploadInvoice(){
@@ -103,12 +106,23 @@ export function PaymentModalContent({ paymentId, action }) {
     case 'details':
       return (
         <>
-          <p> شناسه پرداخت: {paymentId}</p>
-          <p>دوره: {data.title}</p>
-          <p>پرداختی: {data.paid} تومان</p>
-          <p>مانده: {data.currentRemainder} تومان</p>
-          <p>شماره فاکتور: {data.paymentInvoiceNumber}</p>
-          <p>وضعیت: {data.accept ? 'تایید شده' : 'تایید نشده'}</p>
+          {data.paymentInvoiceImage ? (
+            <Image
+              src={data.paymentInvoiceImage}
+              alt="Payment Invoice"
+              className="object-cover"
+            />
+          ) : (
+            <p className="text-lg m-auto font-bold text-basic-gray">عکسی آپلود نشده</p>
+          )}
+          <div className='p-2'>
+            <p> شناسه پرداخت: {paymentId}</p>
+            <p>دوره: {data.title}</p>
+            <p>پرداختی: {data.paid} تومان</p>
+            <p>مانده: {data.currentRemainder} تومان</p>
+            <p>شماره فاکتور: {data.paymentInvoiceNumber}</p>
+            <p>وضعیت: {data.accept ? 'تایید شده' : 'تایید نشده'}</p>
+          </div>
         </>
       );
     case 'edit':
@@ -136,7 +150,7 @@ export function PaymentModalContent({ paymentId, action }) {
                   </p>
                 )}
                 <div className="flex justify-between mt-4">
-                  <Button type="submit" className="w-[70%]" isLoading={isPending}> 
+                  <Button type="submit" className="w-full text-lg" isLoading={isPending}> 
                     تایید
                   </Button>
                 </div>

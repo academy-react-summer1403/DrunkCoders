@@ -7,7 +7,6 @@ export async function getCourseDetails(id, { signal }) {
         params: { CourseId: id },
         signal,
       });
-      console.log("API Response:", response);
       return response; // Ensure you're returning the data
     } catch (error) {
       console.error("Error fetching course details:", error);

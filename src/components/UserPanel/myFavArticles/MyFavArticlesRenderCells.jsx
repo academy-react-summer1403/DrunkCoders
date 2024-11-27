@@ -1,13 +1,34 @@
 import { articleFallback, Cancel, HidePassword } from '@assets/index'
 
-import { convertGrigorianDateToJalaali, isValidUrl } from '@core/index'
-import { Image, Tooltip } from '@nextui-org/react'
+import { convertGrigorianDateToJalaali, delNewsFavorite, isValidUrl } from '@core/index'
+import { Image, Tooltip, useDisclosure } from '@nextui-org/react'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import { DelArtFavModal } from '../DelFavModal';
 
 export function MyFavArticlesRenderCells({
   item,
   columnKey,
   onOpenSummaryModal,
 }) {
+  const queryClient = useQueryClient();
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+  const { mutate: delFavNews, isPending } = useMutation({
+    mutationFn: (deleteEntityId) => delNewsFavorite(deleteEntityId),
+    onSuccess: (data) => {
+      console.log(data);
+      if(data.message=== "عملیات با موفقیت انجام شد."){
+        toast.success(' از موارد دلخواه پاک شد');
+        queryClient.invalidateQueries(['myFavArticles']);
+      }else{
+        toast.error(data.response.data.ErrorMessage[0])
+      }
+    },
+  });
+  function handleDel(){
+    delFavNews(item.currentUserFavoriteId)
+  }
   //   console.log(data)
   switch (columnKey) {
     case 'tumbImageAddress':
@@ -55,11 +76,19 @@ export function MyFavArticlesRenderCells({
           <Tooltip content="حذف">
             <span>
               <Cancel
-                onClick={() => onOpenSummaryModal(item)}
+                onClick={onOpen}
                 className="cursor-pointer text-primary-blue transition-all"
               />
             </span>
           </Tooltip>
+          <DelArtFavModal
+            isOpen={isOpen}
+            action={handleDel}
+            onClose={onOpenChange}
+            isLoading={isPending}
+            title='حذف علاقه مندی'
+            content= {<span className='font-bold text-red-500'> {item.title} </span>}
+          />
         </div>
       )
     default:

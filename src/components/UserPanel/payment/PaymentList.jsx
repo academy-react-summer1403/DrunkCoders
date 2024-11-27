@@ -14,6 +14,7 @@ import { getPaymentList } from '@core/services/api/user.api';
 import { PaymentTableCell } from './PaymentTableCell';
 import { ActionModal } from './ActionModal';
 import { PaymentModalContent } from './PaymentModalContent';
+import './PaymentList.css'; // Ensure you create this CSS file
 
 export function PaymentList() {
   const { data: payments, isLoading, isError } = useQuery({
@@ -28,9 +29,9 @@ export function PaymentList() {
   });
 
   const columns = [
-    { key: 'paid', label: 'مبلغ پرداختی' },
+    { key: 'paid', label: 'مبلغ پرداختی (تومان)',hideOnSmall: true },
     { key: 'peymentDate', label: 'تاریخ پرداخت' },
-    { key: 'paymentId', label: 'شناسه پرداخت' },
+    { key: 'paymentId', label: 'شناسه پرداخت', hideOnSmall: true }, // Add a property for conditional hiding
     { key: 'accept', label: 'تایید' },
     { key: 'actions', label: 'سایر' },
   ];
@@ -59,15 +60,28 @@ export function PaymentList() {
 
   return (
     <>
-      <Table aria-label="Example static collection table">
+      <Table aria-label="table">
         <TableHeader columns={columns}>
-          {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+          {(column) => (
+            <TableColumn
+              key={column.key}
+              className={column.hideOnSmall ? 'hide-on-small' : ''}
+            >
+              {column.label}
+            </TableColumn>
+          )}
         </TableHeader>
         <TableBody items={payments}>
           {(item) => (
             <TableRow key={item.paymentId}>
               {(columnKey) => (
-                <TableCell>
+                <TableCell
+                  className={
+                    columns.find((col) => col.key === columnKey)?.hideOnSmall
+                      ? 'hide-on-small'
+                      : ''
+                  }
+                >
                   <PaymentTableCell
                     columnKey={columnKey}
                     item={item}
@@ -88,10 +102,9 @@ export function PaymentList() {
             ? 'جزئیات پرداخت'
             : modalState.action === 'edit'
             ? 'ویرایش پرداخت'
-            : modalState.action ==='upload'
-            ? 'آپلود فیش' 
-            :
-            'حذف پرداخت'
+            : modalState.action === 'upload'
+            ? 'آپلود فیش'
+            : 'حذف پرداخت'
         }
         content={
           <PaymentModalContent
