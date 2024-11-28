@@ -2,7 +2,9 @@ import {
   BookDownload,
   Cancel,
   coursesFallback,
+  Delete,
   HidePassword,
+  ReservePanel,
 } from '@assets/index'
 import { PriceAndTomanLabel } from '@components/index'
 import { convertGrigorianDateToJalaali, isValidUrl, removeCourseFavorite, reserveCourse } from '@core/index'
@@ -18,12 +20,12 @@ export function MyFavCoursesRenderCells({
 }) {
   const queryClient = useQueryClient();
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const {isOpen:reserveIsOpen, onOpen:reserveOnOpen, onOpenChange:reserveOnOpenChange} = useDisclosure();
   console.log(item);
 
-  const mutation = useMutation({
+  const {mutate:mutation, isPending} = useMutation({
     mutationFn: reserveCourse,
     onSuccess: (data) => {
-      console.log(data);
       if(data.success){
         toast.success(' به لیست رزرو اضافه شد ')
         queryClient.invalidateQueries(['courseDetails']);
@@ -50,7 +52,7 @@ export function MyFavCoursesRenderCells({
   const courseId=item.courseId
   function handleReserve() {
     console.log(item);
-    mutation.mutate({courseId});
+    mutation({courseId});
   }
   function handleRemoveFav(){
     const formData = new FormData()
@@ -103,7 +105,7 @@ export function MyFavCoursesRenderCells({
           <Tooltip content="رزرو">
             <span>
               <BookDownload
-                onClick={handleReserve}
+                onClick={reserveOnOpen}
                 className="cursor-pointer text-primary-blue transition-all"
               />
             </span>
@@ -118,12 +120,38 @@ export function MyFavCoursesRenderCells({
             </span>
           </Tooltip>
           <DelArtFavModal
+                icon={<ReservePanel className='text-primary-blue'/>}
+                isOpen={reserveIsOpen}
+                action={handleReserve}
+                onClose={reserveOnOpenChange}
+                isLoading={isPending}
+                title='آیا از رزرو دوره مطمئن هستید؟'
+                confirmClass='bg-primary-blue text-lg w-[70%]'
+                content= {<>
+                <p className='text-basic-gray'>
+                در صورت تایید دوره
+                <span className='font-bold text-primary-blue'> {item.title} </span>
+                 به لیست رزرو دوره ها اضافه میشود تا ادمین ان را تایید کند
+                </p>
+                </>
+              }
+          />
+          <DelArtFavModal
+              icon={<Delete/>}
               isOpen={isOpen}
               action={handleRemoveFav}
               onClose={onOpenChange}
               isLoading={removePending}
-              title='حذف علاقه مندی'
-              content= {<span className='font-bold text-red-500'> {item.title} </span>}
+              title='آیا از حذف دوره مطمئن هستید؟'
+              confirmClass='bg-red-400 text-lg w-[70%]'
+              content= {<>
+              <p className='text-basic-gray'>
+              در صورت تایید دوره 
+              <span className='font-bold text-red-500'> {item.title} </span>
+               از لیست علاقه‌مندی دوره شما حذف خواهد شد
+              </p>
+              </>
+            }
           />
         </div>
       )

@@ -1,4 +1,4 @@
-import { articleFallback, Cancel, HidePassword } from '@assets/index'
+import { articleFallback, Cancel, Delete, HidePassword } from '@assets/index'
 
 import { convertGrigorianDateToJalaali, delNewsFavorite, isValidUrl } from '@core/index'
 import { Image, Tooltip, useDisclosure } from '@nextui-org/react'
@@ -82,13 +82,22 @@ export function MyFavArticlesRenderCells({
             </span>
           </Tooltip>
           <DelArtFavModal
+            icon={<Delete/>}
             isOpen={isOpen}
             action={handleDel}
             onClose={onOpenChange}
             isLoading={isPending}
-            title='حذف علاقه مندی'
-            content= {<span className='font-bold text-red-500'> {item.title} </span>}
-          />
+            confirmClass='bg-red-400 text-lg w-[70%]'
+            title='آیا از حذف مقاله مطمئن هستید؟'
+            content= {<>
+              <p className='text-basic-gray'>
+              در صورت تایید مقاله 
+              <span className='font-bold text-red-500'> {item.title} </span>
+               از لیست علاقه‌مندی مقالات شما حذف خواهد شد
+              </p>
+              </>
+            }          
+            />
         </div>
       )
     default:
