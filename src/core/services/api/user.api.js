@@ -1,5 +1,4 @@
 import { api } from '../interceptor'
-import { setLocalStorage, getLocalStroge } from '@core' // مسیر صحیح توابع
 
 export async function getCurrentUserProfile() {
   try {
@@ -121,118 +120,119 @@ export async function getMyFavoriteCourses() {
     return response
   } catch (error) {
     console.log(error)
-  }}
-
-  export async function getMyCoursesComments(){
-    try {
-      const response = await api.get('/SharePanel/GetMyCoursesComments');
-      return response.myCommentsDtos
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  export async function getMyNewsComments(){
-    try {
-      const response = await api.get('/SharePanel/GetMyNewsComments') 
-      return response.myNewsCommetDtos
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  export async function editSecurity(data) {
-    try {
-      const response =await api.put('/SharePanel/EditSecurity',data)
-      return response
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  export async function getSecurityInfo() {
-    try {
-      const response = await api.get('/SharePanel/GetSecurityInfo')
-      return response
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-export async function towStepVerification(code, data) {
-  try {
-    const response = await api.post(`Sign/LoginTwoStep?VrifyCode=${code}`, data);
-    
-    return response;
-  } catch (error) {
-    console.error("Error in towStepVerification:", error);
   }
 }
 
-export async function coursePaymentFirstStep(data){
+export async function getMyCoursesComments() {
+  try {
+    const response = await api.get('/SharePanel/GetMyCoursesComments')
+    return response.myCommentsDtos
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function getMyNewsComments() {
+  try {
+    const response = await api.get('/SharePanel/GetMyNewsComments')
+    return response.myNewsCommetDtos
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function editSecurity(data) {
+  try {
+    const response = await api.put('/SharePanel/EditSecurity', data)
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function getSecurityInfo() {
+  try {
+    const response = await api.get('/SharePanel/GetSecurityInfo')
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function towStepVerification(code, data) {
+  try {
+    const response = await api.post(`Sign/LoginTwoStep?VrifyCode=${code}`, data)
+
+    return response
+  } catch (error) {
+    console.error('Error in towStepVerification:', error)
+  }
+}
+
+export async function coursePaymentFirstStep(data) {
   try {
     const response = await api.post('/CoursePayment', data)
     return response
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
-export async function getPaymentList(){
+export async function getPaymentList() {
   try {
     const response = await api.get('/CoursePayment/StudentUserPayList')
     return response
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
-export async function getPaidCourse(paymentId){
+export async function getPaidCourse(paymentId) {
   try {
     const response = await api.get(`/CoursePayment/${paymentId}`)
     return response
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
-export async function paymentStep2(formData){
+export async function paymentStep2(formData) {
   try {
     const response = await api.post('/CoursePayment/AddPeymentImage', formData)
     return response
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
-export async function updatePayment(formData){
+export async function updatePayment(formData) {
   try {
     const response = await api.put('/CoursePayment', formData)
     return response
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
-export async function deletePayment(formData){
+export async function deletePayment(formData) {
   try {
     const response = await api.delete('/CoursePayment', { data: formData })
     return response
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
-export async function getMultiUserProfile(user) {
+export async function getMultiUserProfile(token) {
   try {
-    const response = await api.get("/SharePanel/GetProfileInfo", {
-      headers: { Authorization: `Bearer ${user.token}` },
-    });
-    console.log(user);
-    console.log(response);
-    return response;
+    const response = await api.get('/SharePanel/GetProfileInfo', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return response
   } catch (error) {
-    console.error("Error fetching profile:", error);
-    throw error;
+    console.error('Error fetching profile:', error)
+    throw error
   }
 }

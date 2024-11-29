@@ -5,31 +5,26 @@ import {
   ModalBody,
   ModalFooter,
   Avatar,
-} from "@nextui-org/react";
-import { Button, ModalCloseBtn } from "@components/index";
-import { AddCircle, LoginPanel, LogOutPanel } from "@assets/index";
-import { useSelector, useDispatch } from "react-redux";
-import { tokenActions } from "@store/token-slice";
-import { useNavigate } from "react-router-dom";
-import { useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getMultiUserProfile } from "@core/services/api/user.api";
+} from '@nextui-org/react'
+import { Button, ModalCloseBtn } from '@components/index'
+import { AddCircle, LoginPanel, LogOutPanel } from '@assets/index'
+import { useSelector, useDispatch } from 'react-redux'
+import { tokenActions } from '@store/token-slice'
+import { useNavigate } from 'react-router-dom'
+import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query'
+import { getMultiUserProfile } from '@core/services/api/user.api'
 
 export function AccountsModal({ isOpen, onClose }) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
-  // Accessing the users from the Redux store
-  const users = useSelector((state) => state.token.users);
-  users.map((user) =>{
-    console.log('user: ' + user.id);
-  })  
+  const users = useSelector((state) => state.token.users)
+
   let { data: multiUser } = useQueries({
     queries: users.map((user) => ({
       queryKey: ['single-user', user.id],
-      queryFn: () => getMultiUserProfile(user),
-      // enabled: Boolean(user.id),
+      queryFn: () => getMultiUserProfile(user.token),
     })),
     combine: (results) => {
       return {
@@ -37,27 +32,28 @@ export function AccountsModal({ isOpen, onClose }) {
       }
     },
   })
-  // console.log(multiUser);
-  // const {data} = useQuery({
-  //   queryKey: ['single-user'],
-  //   queryFn: () => getMultiUserProfile(users[0].token)
-  // })
-  // const {data:second} = useQuery({
-  //   queryKey: ['single-user'],
-  //   queryFn: () => getMultiUserProfile(users[1].token)
-  // })
-  // console.log(data||[]);
-  // console.log('second',second);
+  console.log(multiUser)
+
+  /* const { data } = useQuery({
+    queryKey: ['single-user', users[0].id],
+    queryFn: () => getMultiUserProfile(users[0].token),
+  })
+  const { data: second } = useQuery({
+    queryKey: ['single-user', users[1].id],
+    queryFn: () => getMultiUserProfile(users[1].token),
+  })
+  console.log('first : ', data)
+  console.log('second : ', second) */
 
   function handleLogout() {
-    dispatch(tokenActions.logout());
-    navigate("/");
+    dispatch(tokenActions.logout())
+    navigate('/')
   }
 
   // Handler to log in a specific user
   function handleLogin(user) {
     // Dispatch logout first
-    dispatch(tokenActions.logout());
+    dispatch(tokenActions.logout())
 
     // Then log in the selected user
     dispatch(
@@ -65,16 +61,15 @@ export function AccountsModal({ isOpen, onClose }) {
         token: user.token,
         id: user.id,
         roles: user.roles,
-      })
-    );
+      }),
+    )
     queryClient.invalidateQueries(['userProfileInfo'])
     navigate('/user-panel/dashboard')
   }
 
-  function handleNewUser(){
-    dispatch(tokenActions.logout());
+  function handleNewUser() {
+    dispatch(tokenActions.logout())
     navigate('/auth')
-
   }
 
   return (
@@ -95,11 +90,13 @@ export function AccountsModal({ isOpen, onClose }) {
               {users.map((user) => (
                 <div
                   key={user.id}
-                  className="flex gap-4 items-center justify-between"
+                  className="flex items-center justify-between gap-4"
                 >
-                  <div className="flex gap-4 items-center">
+                  <div className="flex items-center gap-4">
                     <Avatar
-                      src={user.defaultProfilePic || "https://i.pravatar.cc/150"}
+                      src={
+                        user.defaultProfilePic || 'https://i.pravatar.cc/150'
+                      }
                       size="lg"
                     />
                     <div>
@@ -112,14 +109,16 @@ export function AccountsModal({ isOpen, onClose }) {
                   {user.isOnline ? (
                     <span
                       onClick={handleLogout}
-                      className="text-red-500 text-sm cursor-pointer transition ease-in-out hover:scale-125"
+                      className="cursor-pointer text-sm text-red-500 transition ease-in-out hover:scale-125"
                     >
-                      <LogOutPanel/>
+                      <LogOutPanel />
                     </span>
                   ) : (
-                    <span onClick={() => handleLogin(user)}
-                    className="cursor-pointer transition ease-in-out hover:scale-125">
-                      <LoginPanel/>
+                    <span
+                      onClick={() => handleLogin(user)}
+                      className="cursor-pointer transition ease-in-out hover:scale-125"
+                    >
+                      <LoginPanel />
                     </span>
                   )}
                 </div>
@@ -127,7 +126,10 @@ export function AccountsModal({ isOpen, onClose }) {
             </ModalBody>
             <ModalFooter>
               <div className="m-auto">
-                <span className="flex justify-center cursor-pointer transition ease-in-out hover:scale-125" onClick={handleNewUser}>
+                <span
+                  className="flex cursor-pointer justify-center transition ease-in-out hover:scale-125"
+                  onClick={handleNewUser}
+                >
                   <AddCircle />
                 </span>
                 <p className="text-basic-gray">اضافه کردن حساب کاربری</p>
@@ -137,5 +139,5 @@ export function AccountsModal({ isOpen, onClose }) {
         )}
       </ModalContent>
     </Modal>
-  );
+  )
 }

@@ -28,7 +28,9 @@ api.interceptors.request.use(
     const user = getLocalStroge('users')?.find((user) => user.isOnline)
 
     if (user && user.token && user.isOnline) {
-      config.headers.Authorization = 'Bearer ' + user.token
+      if (!config.headers.Authorization) {
+        config.headers.Authorization = 'Bearer ' + user.token
+      }
     }
 
     return config
@@ -79,13 +81,12 @@ const handleError = (error) => {
   } else if (error.request) {
     // The request was made but no response was received
     console.error('Request Error:', error.request)
-    
-    const tokenStatus = cheackTokenExpired();
-    if (error.request.status === 0 && tokenStatus) {
-      if(tokenStatus==='noToken'){
-        toast.error('ابتدا وارد شوید')
-      } else{
 
+    const tokenStatus = cheackTokenExpired()
+    if (error.request.status === 0 && tokenStatus) {
+      if (tokenStatus === 'noToken') {
+        toast.error('ابتدا وارد شوید')
+      } else {
         console.error('Network error or unauthorized access. Are you login??')
         store.dispatch(tokenActions.logout())
         window.location.pathname = '/auth'
