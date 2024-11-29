@@ -34,16 +34,6 @@ export function AccountsModal({ isOpen, onClose }) {
   })
   console.log(multiUser)
 
-  /* const { data } = useQuery({
-    queryKey: ['single-user', users[0].id],
-    queryFn: () => getMultiUserProfile(users[0].token),
-  })
-  const { data: second } = useQuery({
-    queryKey: ['single-user', users[1].id],
-    queryFn: () => getMultiUserProfile(users[1].token),
-  })
-  console.log('first : ', data)
-  console.log('second : ', second) */
 
   function handleLogout() {
     dispatch(tokenActions.logout())
@@ -87,7 +77,10 @@ export function AccountsModal({ isOpen, onClose }) {
               <ModalCloseBtn onClose={onClose} />
             </ModalHeader>
             <ModalBody>
-              {users.map((user) => (
+            {users.map((user, index) => {
+              const userProfile = multiUser && multiUser[index]; // Match by index or shared key
+              
+              return (
                 <div
                   key={user.id}
                   className="flex items-center justify-between gap-4"
@@ -95,15 +88,19 @@ export function AccountsModal({ isOpen, onClose }) {
                   <div className="flex items-center gap-4">
                     <Avatar
                       src={
-                        user.defaultProfilePic || 'https://i.pravatar.cc/150'
+                        userProfile?.currentPictureAddress || 'https://i.pravatar.cc/150'
                       }
                       size="lg"
                     />
                     <div>
                       <p className="text-lg font-bold">
-                        {user.username || `User ${user.id}`}
+                      {userProfile?.fName && userProfile?.lName
+                      ? `${userProfile.fName} ${userProfile.lName}`
+                      : `نام کاربری در دسترس نیست`}
                       </p>
-                      <p className="text-basic-gray">{user.id}</p>
+                      <p className="text-basic-gray">
+                        {userProfile?.phoneNumber || `شماره همراه در دسترس نیست`}
+                      </p>
                     </div>
                   </div>
                   {user.isOnline ? (
@@ -122,7 +119,9 @@ export function AccountsModal({ isOpen, onClose }) {
                     </span>
                   )}
                 </div>
-              ))}
+              );
+            })}
+
             </ModalBody>
             <ModalFooter>
               <div className="m-auto">

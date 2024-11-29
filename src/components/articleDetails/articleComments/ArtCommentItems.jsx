@@ -48,7 +48,7 @@ export function ArtCommentItems({comment,handleOpenModal}) {
             : { dislike: !prevState.dislike, like: false }
         );
       }
-
+console.log(comment);
     if(isLoading)return <div>Loading replies...</div>
     const finalReplies = repliesData || [];
     const userLikeId = comment.currentUserLikeId;
@@ -57,6 +57,7 @@ export function ArtCommentItems({comment,handleOpenModal}) {
         <DesignComment
         insertDate={comment.insertDate}
         finalReplies={finalReplies}
+        title={comment.title}
         likeState={likeState}
         pictureAddress={comment.pictureAddress}
         author={comment.autor}

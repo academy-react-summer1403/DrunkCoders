@@ -34,7 +34,7 @@ export function DesignComment({
                 جواب دادن
               </Button>
             )}
-            <div className='flex gap-8 items-center mt-4 z-50'>
+            <div className='flex gap-8 items-center mt-4 z-40'>
               <div className='flex gap-1 items-center' onClick={() => handleLike("like")}>
                 <ThumbUp
                   className={`-mt-1 stroke-black dark:stroke-white hover:text-primary-blue
