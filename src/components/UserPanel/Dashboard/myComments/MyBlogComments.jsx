@@ -13,7 +13,6 @@ export function MyBlogComments({userData}) {
   });
   if (isLoading) return <Spinner size="lg" />;
   if (isError) return toast.error(error.message);
-  console.log(comments);
   return (
     <div className = 'flex flex-col'>
       <p className='text-basic-gray'>اخبار و مقالات</p>

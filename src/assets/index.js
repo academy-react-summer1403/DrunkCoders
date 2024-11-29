@@ -100,3 +100,6 @@ export { default as Hark } from './icons/Hark.svg?react'
 export { default as PanelIndicator } from './icons/panel/arrow-left.svg?react'
 export { default as View } from './icons/view.svg?react'
 export { default as BookDownload } from './icons/book-download.svg?react'
+
+export { default as AddCircle } from './icons/panel/add-circle.svg?react'
+export { default as LoginPanel } from './icons/panel/login-panel.svg?react'

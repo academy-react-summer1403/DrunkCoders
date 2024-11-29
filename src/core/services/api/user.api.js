@@ -222,3 +222,17 @@ export async function deletePayment(formData){
     console.log(error);
   }
 }
+
+export async function getMultiUserProfile(user) {
+  try {
+    const response = await api.get("/SharePanel/GetProfileInfo", {
+      headers: { Authorization: `Bearer ${user.token}` },
+    });
+    console.log(user);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    throw error;
+  }
+}

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { userPanelMenuBottom, userPanelMenuGlobal } from '@core/index'
 import { Cancel, LongLogo, PanelPay, ShortLogo } from '@assets/index'
-import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/react'
+import { Listbox, ListboxItem, ListboxSection, useDisclosure } from '@nextui-org/react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { darkModeActions } from '@store/dark-mode-slice'
 import { AnimatePresence, motion, useAnimate } from 'framer-motion'
 import { tokenActions } from '@store/token-slice'
 import { dashSortFilterActions } from '@store/index'
+import { AccountsModal } from './multiAccount/AccountsModal'
 
 export function SideMenu() {
   const dispatch = useDispatch()
@@ -16,6 +17,7 @@ export function SideMenu() {
   const { userPanelCurrentpage } = useSelector((state) => state.dashSort)
   const isMenuOpen = useSelector((state) => state.darkMode.userPanelSidebar)
   const [selectedKeys, setSelectedKeys] = useState(userPanelCurrentpage)
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   useEffect(() => {
     setSelectedKeys(userPanelCurrentpage)
@@ -30,7 +32,7 @@ export function SideMenu() {
     } else if (key === 'logout') {
       handleLogout()
     } else {
-      //
+      onOpen(true)
     }
 
     handleCloseMenu()
@@ -142,6 +144,10 @@ export function SideMenu() {
           </ListboxSection>
         </Listbox>
       </motion.aside>
+      <AccountsModal
+      isOpen={isOpen}
+      onClose={onOpenChange}
+      />
     </>
   )
 }

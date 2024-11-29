@@ -17,7 +17,6 @@ export function MyCourseComments({userData}) {
 
   if (isLoading) return <Spinner size="lg" />;
   if (isError) return toast.error(error.message);;
-  console.log(comments);
   return (
     <div  className = 'flex flex-col'>
       <p className='text-gray-500'>دوره ها</p>
