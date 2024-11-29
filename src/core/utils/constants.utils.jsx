@@ -14,8 +14,6 @@ import {
   ReservePanel,
   Smeed,
 } from '@assets/index'
-import { AccountsModal } from '@components/UserPanel/multiAccount/AccountsModal'
-import { useDisclosure } from '@nextui-org/react';
 export const userPanelMenuGlobal = [
   { key: 'dashboard', startIcon: <Dashboard />, title: 'داشبرد' },
   { key: 'profile', startIcon: <ProfilePanel />, title: 'پروفایل' },
@@ -38,7 +36,6 @@ export const userPanelMenuBottom = [
     key: 'accounts',
     startIcon: <ProfilePanel />, 
     title: 'حساب‌ های کاربری',
-    onClick: () => <AccountsModal/>
   },
   {
     key: 'logout',
