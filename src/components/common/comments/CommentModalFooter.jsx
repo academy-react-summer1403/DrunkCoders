@@ -28,7 +28,8 @@ export function CommentModalFooter({
   };
 
   return (
-    <ModalFooter className="flex w-full items-center  ">
+    <ModalFooter>
+    <div className="flex w-full items-center  ">
       <Button
         type="submit"
         onClick={isReply ? addReply : addComment}
@@ -37,9 +38,10 @@ export function CommentModalFooter({
         <Sent  />
       </Button>
       <div className="flex w-full flex-col">
-
-        {isReply && replyToComment && <ReplySection replyToComment={replyToComment} setIsReply={setIsReply} />}
-        <div className="w-full rounded-3xl border p-2 bg-white dark:bg-zinc-900">
+        <div className="relative">
+        {isReply && replyToComment && <ReplySection className='-bottom-5' replyToComment={replyToComment} setIsReply={setIsReply} />}
+        </div>
+        <div className="w-full rounded-3xl border p-2 bg-white dark:bg-zinc-900 z-40">
           <input
             className="p-2 outline-none w-full bg-transparent"
             value={modalSubject}
@@ -70,6 +72,7 @@ export function CommentModalFooter({
               className="dark:bg-zinc-900" />
             </div>
           )}
+    </div>
     </ModalFooter>
   );
 }

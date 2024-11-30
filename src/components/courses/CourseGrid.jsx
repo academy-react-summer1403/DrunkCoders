@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getCoursesWithPagination } from '@core/index'
 import { useEffect, useMemo, useRef } from 'react'
 import { sortFilterActions } from '@store/course-sort-filter-slice'
+import { Spinner } from '@nextui-org/react'
 
 export function CourseGrid() {
   const dispatch = useDispatch()
@@ -46,7 +47,7 @@ export function CourseGrid() {
     [pagination, order, descendingOrder, searchTerm, filterId, cost, dateRange],
   )
 
-  const { data: courses } = useQuery({
+  const { data: courses , isLoading } = useQuery({
     queryKey,
     queryFn: ({ signal }) =>
       getCoursesWithPagination({ params: queryKey[1], signal }),
@@ -60,6 +61,13 @@ export function CourseGrid() {
       dispatch(sortFilterActions.setAllCoursesQueryKey(queryKey))
     }
   }, [courses, dispatch])
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[50vh]">
+        <Spinner size="lg" label="در حال دریافت ..." labelColor="primary" />
+      </div>
+    );
+  }
 
   return (
     <>

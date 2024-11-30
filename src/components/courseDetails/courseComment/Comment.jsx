@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@components';
-import { useDisclosure } from '@nextui-org/react';
+import { Spinner, useDisclosure } from '@nextui-org/react';
 import { CommentModal } from '../../common/comments/CommentModal';
 import { CommentList } from './CommentList';
 import { CommentBlack, CommentWhite } from '@assets/index';
@@ -91,7 +91,13 @@ export function Comment({ courseId }) {
     setModalTitle(isReply ? 'پاسخ شما' : 'نظر شما');
   }, [isReply]);
 
-  if (isLoading) return <div>Loading comments...</div>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center ">
+        <Spinner size="md" label="در حال دریافت ..." labelColor="primary" />
+      </div>
+    );
+  } 
   if (error) return <div>Error loading comments</div>;
 
   return (

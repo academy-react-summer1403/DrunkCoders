@@ -98,6 +98,13 @@ export function LoginForm({ currentStep, setCurrentStep, setLoginData }) {
             فراموشی رمزعبور
           </Link>
         </div>
+        <p>
+          از کارکنان هستید؟
+          {' '}
+          <a className='text-primary' href='http://localhost:3000'>
+            ورود کارکنان
+          </a>
+        </p>
         <Button
           isLoading={isPending}
           type="submit"

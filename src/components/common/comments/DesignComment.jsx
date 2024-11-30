@@ -17,7 +17,7 @@ export function DesignComment({
         <div className="flex items-center gap-2 -mr-7">
           <Avatar src={pictureAddress} size="lg" />
           <div>
-          <p>{author}</p>
+          <p>{ author}</p>
           <p className='text-gray-500'>{jalaaliDate}</p>
           </div>
         </div>
@@ -60,13 +60,12 @@ export function DesignComment({
           className="p-0"
         >
           <AccordionItem
-            title={` مشاهده جواب‌ها (${finalReplies.length})` }
+            title={` ${isAccordionOpen ?'': 'مشاهده'} جواب‌ها (${finalReplies.length})` }
             classNames={{
               heading: 'w-fit lg:-mt-24 lg:mr-96 -mt-10 mr-10',
             }}
             indicator={({ isOpen }) => {
               setIsAccordionOpen(isOpen)
-              console.log(`Accordion item is ${isAccordionOpen ? 'open' : 'closed'}`);
             }}
           >
             <div className="replies mr-6">
@@ -74,7 +73,10 @@ export function DesignComment({
                 <div key={reply.id} className="reply bg-white mt-5 mr-7 dark:bg-black">
                   <div className="flex items-center gap-2">
                     <Avatar src={reply.pictureAddress} size="lg" />
-                    <span>{reply.author}</span>
+                    <div className='flex flex-col'>
+                      <span>{reply.author||reply.autor}</span>
+                      <p className='text-basic-gray'>{convertGrigorianDateToJalaali(reply.insertDate)}</p>
+                    </div>
                   </div>
                   <div className="mr-8">
                     <p><strong>{reply.title}</strong></p>

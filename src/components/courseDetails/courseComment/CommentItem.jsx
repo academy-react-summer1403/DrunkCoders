@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { delCourseCommentLike } from '@core/index';
 import { DesignComment } from '../../common/comments/DesignComment';
 import toast from 'react-hot-toast';
+import { Spinner } from '@nextui-org/react';
 
 export function CommentItem({ comment, handleOpenModal }) {
   const [likeState, setLikeState] = useState({
@@ -71,7 +72,13 @@ export function CommentItem({ comment, handleOpenModal }) {
   }
   
 
-  if (loadingReplies) return <div>Loading replies...</div>;
+  if (loadingReplies) {
+    return (
+      <div className="flex justify-center items-center ">
+        <Spinner size="md" label="در حال دریافت ..." labelColor="primary" />
+      </div>
+    );
+  }   
   if (repliesError) return <div>Error loading replies</div>;
 
   const finalReplies = repliesData || [];

@@ -1,5 +1,6 @@
 import { NewsCard } from '@components/index'
 import { filterDataByDateRange, getWeekNews } from '@core/index'
+import { Spinner } from '@nextui-org/react'
 import { articleSortFilterActions } from '@store/article-sort-filter-slice'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useMemo, useRef } from 'react'
@@ -34,7 +35,7 @@ export function ArticleGrid() {
     [pagination, order, descendingOrder, searchTerm, category, dateRange],
   )
 
-  let { data: news } = useQuery({
+  let { data: news, isLoading } = useQuery({
     queryKey,
     queryFn: ({ signal }) => getWeekNews({ params: queryKey[1], signal }),
   })
@@ -59,6 +60,13 @@ export function ArticleGrid() {
       )
     }
   }, [news, dispatch])
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[50vh]">
+        <Spinner size="lg" label="در حال دریافت ..." labelColor="primary" />
+      </div>
+    );
+  }
 
   return (
     <>

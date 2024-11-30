@@ -79,7 +79,6 @@ const { totalPageCount } = useSelector((state) => state.dashSort)
     dispatch(dashSortFilterActions.setPageNumber(pageNumber))
   }
   const courses = data?.courseFilterDtos ?? []
-  console.log(courses)
   return (
     <>
       <MobileModal

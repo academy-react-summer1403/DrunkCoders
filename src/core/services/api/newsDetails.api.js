@@ -96,7 +96,7 @@ export async function postNewsComment(commentData) {
 
 export async function postNewsReply(replyData) {
   try {
-    const response = await api.post(`/News/CreateNewsComment`, replyData)
+    const response = await api.post(`/News/CreateNewsReplyComment`, replyData)
     return response
   } catch (error) {
     console.log('Error posting reply:', error)

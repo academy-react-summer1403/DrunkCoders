@@ -1,7 +1,7 @@
 import { CommentGray } from '@assets/index';
 import { Button } from '@components/index';
 import { getNewsComment, postNewsComment, postNewsReply } from '@core/index';
-import { useDisclosure } from '@nextui-org/react';
+import { Spinner, useDisclosure } from '@nextui-org/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { ArticleCommentList } from './ArticleCommentList'; // Adjust this import as needed
@@ -37,7 +37,8 @@ export function ArticleComments({ data}) {
   
   const mutation = useMutation({
     mutationFn: postNewsComment,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
       toast.success('کامنت ارسال شد');
       queryClient.invalidateQueries(['newsDetails'])
     },
@@ -60,23 +61,26 @@ export function ArticleComments({ data}) {
 
   const replyMutation = useMutation ({
     mutationFn: postNewsReply,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log('replyMutation');
+      console.log(data);
       toast.success('پاسخ شما ارسال شد');
       queryClient.invalidateQueries(['newsDetails'])
     },
     onError: (err) => {
+      console.log(err);
       toast.error(err.message)
     }
   })
 
   const handleReply = () => {
     const replyData = {
-      newsId: newsId,
+      newsId: replyToComment.newsId,
       userIpAddress: "192.168.1.1",
       title: modalSubject,
       describe: modalInput,
       userId: data.userId,  
-      parentId: replyToComment?.parentId,
+      parentId: replyToComment.id,
     };
     replyMutation.mutate(replyData);
     resetModalFields();
@@ -86,9 +90,14 @@ export function ArticleComments({ data}) {
     setModalSubject('');
   }
 
-  if (isLoading) return <p>Loading comments...</p>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center ">
+        <Spinner size="md" label="در حال دریافت ..." labelColor="primary" />
+      </div>
+    );
+  } 
   if (isError || !comments) return <p>Error loading comments.</p>;
-  
   return (
     <div className="comment-section rounded-3xl border-3 p-3 flex flex-col">
       {/* Button to open the modal for adding a new comment */}
@@ -96,7 +105,7 @@ export function ArticleComments({ data}) {
         <CommentGray />
         نظر شما
       </Button>
-
+      
       {/* Modal for adding or replying to a comment */}
       <CommentModal
         isOpen={isOpen}

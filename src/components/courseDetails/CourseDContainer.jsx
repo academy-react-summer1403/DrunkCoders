@@ -6,6 +6,7 @@ import { OverView } from "./CourseSide";
 import { getCategory, getCourseDetails } from "@core/index";
 import { RelatedCourse } from "./RelatedCourse";
 import { DetailsLayout } from "../common/detail/DetailsLayout";
+import { Spinner } from "@nextui-org/react";
 
 
 export function CourseDContainer() {
@@ -23,7 +24,13 @@ export function CourseDContainer() {
   })
 
   
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[50vh]">
+        <Spinner size="lg" label="در حال دریافت ..." labelColor="primary" />
+      </div>
+    );
+  }
   if (error) return <div>Error loading course details</div>;
 
   const getMatchingCategoryIds = () => {

@@ -11,7 +11,6 @@ import toast from 'react-hot-toast';
 import { CourseInteraction } from './CourseInteraction';
 
 export function OverView({ course }) {
-  console.log(course.courseReseveId);
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const courseId = course.courseId; 
@@ -55,7 +54,7 @@ export function OverView({ course }) {
       </h1>
 
       <div className='flex gap-2 w-fit'>
-        {course.techs.map((tech, index) => (
+        {course.techs.slice(0,4).map((tech, index) => (
           <Button key={index} className='text-xs bg-[#5A7EFF] p-1 px-2'>
             {tech}
           </Button>

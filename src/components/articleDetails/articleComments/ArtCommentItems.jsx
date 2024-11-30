@@ -1,6 +1,7 @@
 import { DesignComment } from '@components/common/comments/DesignComment'
 import { deleteArticleCommentLike, getNewsReply, postArticleCommentLike } from '@core/index'
 import { postNewsComment } from '@core/services/api/newsDetails.api';
+import { Spinner } from '@nextui-org/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
@@ -17,8 +18,11 @@ export function ArtCommentItems({comment,handleOpenModal}) {
     const {mutate:addArtCommentLike, isPending, isError:errorLikeComment} = useMutation({
         mutationFn: () => postArticleCommentLike(comment.id),
         onSuccess: (data) =>{
-            alert('liked comment');
+          if(data.success){
             queryClient.invalidateQueries(['articleComments',data])
+          } else{
+            toast.error(' کامنت لایک نشد ')
+          }
         },
         onError:(err) =>{
           toast.error(' کامنت لایک نشد ')
@@ -48,9 +52,14 @@ export function ArtCommentItems({comment,handleOpenModal}) {
             : { dislike: !prevState.dislike, like: false }
         );
       }
-console.log(comment);
-    if(isLoading)return <div>Loading replies...</div>
-    const finalReplies = repliesData || [];
+      if (isLoading) {
+        return (
+          <div className="flex justify-center items-center ">
+            <Spinner size="md" label="در حال دریافت ..." labelColor="primary" />
+          </div>
+        );
+      }    
+      const finalReplies = repliesData || [];
     const userLikeId = comment.currentUserLikeId;
   return (
     <>
