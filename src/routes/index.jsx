@@ -7,5 +7,5 @@ export const routes = [
   ...rootRoutes,
   ...authRoutes,
   ...userPanelRoutes,
-  { path: '*', element: <NotFound /> },
+  { path: '*', element: <NotFound notFound /> },
 ]

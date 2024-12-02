@@ -10,14 +10,14 @@ import {
 import { useQueries, useQuery } from '@tanstack/react-query'
 
 export function MyFavArticlesMain() {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['myFavArticles'],
     queryFn: getMyFavoriteNews,
   })
 
   const ids = data ? data.myFavoriteNews.map((article) => article.newsId) : []
 
-  let { data: detailedFavArticles } = useQueries({
+  let { data: detailedFavArticles, pending } = useQueries({
     queries: ids.map((id) => ({
       queryKey: ['single-favArticle', id],
       queryFn: () => getNewsById(id),
@@ -26,15 +26,16 @@ export function MyFavArticlesMain() {
     combine: (results) => {
       return {
         data: results.map((result) => result.data?.detailsNewsDto),
-        //   pending: results.some((result) => result.isPending),
+        pending: results.some((result) => result.isPending),
       }
     },
   })
 
   detailedFavArticles =
     detailedFavArticles.some((article) => article === undefined) ||
-    detailedFavArticles.length === 0
-      ? []
+    pending ||
+    isLoading
+      ? null
       : detailedFavArticles.map((article) => {
           article.courseName = article.title
           article.startDate = article.insertDate

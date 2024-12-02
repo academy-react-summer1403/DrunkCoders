@@ -26,8 +26,8 @@ export function LoginForm({ currentStep, setCurrentStep, setLoginData }) {
   const { mutate, isPending } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      console.log(data);
-      if (data.success&& data.token) {
+      // console.log(data);
+      if (data.success && data.token) {
         toast.success(' ورود با موفقیت انجام شد. ')
         dispatch(
           tokenActions.login({
@@ -37,17 +37,16 @@ export function LoginForm({ currentStep, setCurrentStep, setLoginData }) {
           }),
         )
         navigate('/')
-      }else if (data.success){
+      } else if (data.success) {
         toast.success(data.message)
-        setCurrentStep(2);
-      } 
-      else {
+        setCurrentStep(2)
+      } else {
         toast.error('رمز‌عبور یا نام کاربری نادرست است')
       }
     },
-    onError:(err) => {
+    onError: (err) => {
       toast.error(err.message)
-    }
+    },
   })
 
   const onSubmit = (data) => {
@@ -99,9 +98,8 @@ export function LoginForm({ currentStep, setCurrentStep, setLoginData }) {
           </Link>
         </div>
         <p>
-          از کارکنان هستید؟
-          {' '}
-          <a className='text-primary' href='http://localhost:3000'>
+          از کارکنان هستید؟{' '}
+          <a className="text-primary" href="http://localhost:3000">
             ورود کارکنان
           </a>
         </p>

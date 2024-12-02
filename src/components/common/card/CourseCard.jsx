@@ -100,8 +100,6 @@ export function CourseCard({
               />
             </div>
           </CardBody>
-
-          {/* <CardFooter className="mb-2 flex flex-row items-center justify-between gap-2 dark:text-white lg:flex-col lg:items-start xl:flex-row xl:items-center xl:justify-between"></CardFooter> */}
         </NextUiCard>
       )}
     </>

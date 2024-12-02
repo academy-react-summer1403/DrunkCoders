@@ -4,6 +4,7 @@ import './App.css'
 import { useSelector } from 'react-redux'
 import { Toaster } from 'react-hot-toast'
 import { routes } from '../routes/index.jsx'
+import { BackToTop } from '@components/index'
 
 export const queryClient = new QueryClient({
   defaultOptions: { queries: { gcTime: 1000 * 60 * 30 } },
@@ -20,6 +21,15 @@ export function App() {
     if (document.body.classList.contains('dark'))
       document.body.classList.toggle('dark')
   }
+
+  /* document.addEventListener(
+    'scroll',
+    (event) => {
+      const scrollingElement = event.target
+      console.log('Scrolling element:', scrollingElement)
+    },
+    true,
+  ) */
 
   return (
     <QueryClientProvider client={queryClient}>

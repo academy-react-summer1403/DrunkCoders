@@ -11,6 +11,8 @@ export function TableMainLayout({
 }) {
   const [currentPage, setCurrentPage] = useState(1)
 
+  // console.log(allData)
+
   const paginatedData = allData?.filter((_, index) => {
     return index >= (currentPage - 1) * 4 && index < currentPage * 4
   })

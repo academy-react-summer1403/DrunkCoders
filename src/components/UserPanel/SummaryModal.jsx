@@ -22,17 +22,24 @@ import { getCourseById, getTeacherById } from '@core/index'
 import { Link } from 'react-router-dom'
 
 export function SummaryModal({ isOpen, onOpenChange, title, data, type }) {
+  //
+
   const { data: course } = useQuery({
     queryKey: ['single-course', data.courseId],
     queryFn: () => getCourseById(data.courseId),
-    enabled: type !== 'myFavArticles',
+    enabled: Boolean(type !== 'myFavArticles'),
   })
 
+  // || data.teacherId
+
   const { data: teacher } = useQuery({
+    enabled: Boolean(course),
     queryKey: ['single-teacher', course?.teacherId],
-    queryFn: () => getTeacherById(course?.teacherId || data.teacherId),
-    enabled: Boolean(course?.teacherId),
+    queryFn: () => getTeacherById(course?.teacherId),
   })
+
+  // console.log(course?.teacherId)
+  // console.log(teacher)
 
   return (
     <Modal

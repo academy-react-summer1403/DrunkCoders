@@ -51,7 +51,7 @@ export function GridLayout({
             )
           })}
         {windowWidth === 'sm' &&
-          dataArray.map((item, index) => {
+          dataArray?.map((item, index) => {
             const buttonColor = isPopularCourses
               ? index % 2 === 0
                 ? '#5A7EFF'

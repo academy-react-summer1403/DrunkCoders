@@ -23,6 +23,7 @@ export function AccountsModal({ isOpen, onClose }) {
 
   let { data: multiUser } = useQueries({
     queries: users.map((user) => ({
+      enabled: isOpen,
       queryKey: ['single-user', user.id],
       queryFn: () => getMultiUserProfile(user.token),
     })),
@@ -32,8 +33,7 @@ export function AccountsModal({ isOpen, onClose }) {
       }
     },
   })
-  console.log(multiUser)
-
+  // console.log(multiUser)
 
   function handleLogout() {
     dispatch(tokenActions.logout())
@@ -77,51 +77,52 @@ export function AccountsModal({ isOpen, onClose }) {
               <ModalCloseBtn onClose={onClose} />
             </ModalHeader>
             <ModalBody>
-            {users.map((user, index) => {
-              const userProfile = multiUser && multiUser[index]; // Match by index or shared key
-              
-              return (
-                <div
-                  key={user.id}
-                  className="flex items-center justify-between gap-4"
-                >
-                  <div className="flex items-center gap-4">
-                    <Avatar
-                      src={
-                        userProfile?.currentPictureAddress || 'https://i.pravatar.cc/150'
-                      }
-                      size="lg"
-                    />
-                    <div>
-                      <p className="text-lg font-bold">
-                      {userProfile?.fName && userProfile?.lName
-                      ? `${userProfile.fName} ${userProfile.lName}`
-                      : `نام کاربری در دسترس نیست`}
-                      </p>
-                      <p className="text-basic-gray">
-                        {userProfile?.phoneNumber || `شماره همراه در دسترس نیست`}
-                      </p>
-                    </div>
-                  </div>
-                  {user.isOnline ? (
-                    <span
-                      onClick={handleLogout}
-                      className="cursor-pointer text-sm text-red-500 transition ease-in-out hover:scale-125"
-                    >
-                      <LogOutPanel />
-                    </span>
-                  ) : (
-                    <span
-                      onClick={() => handleLogin(user)}
-                      className="cursor-pointer transition ease-in-out hover:scale-125"
-                    >
-                      <LoginPanel />
-                    </span>
-                  )}
-                </div>
-              );
-            })}
+              {users.map((user, index) => {
+                const userProfile = multiUser && multiUser[index] // Match by index or shared key
 
+                return (
+                  <div
+                    key={user.id}
+                    className="flex items-center justify-between gap-4"
+                  >
+                    <div className="flex items-center gap-4">
+                      <Avatar
+                        src={
+                          userProfile?.currentPictureAddress ||
+                          'https://i.pravatar.cc/150'
+                        }
+                        size="lg"
+                      />
+                      <div>
+                        <p className="text-lg font-bold">
+                          {userProfile?.fName && userProfile?.lName
+                            ? `${userProfile.fName} ${userProfile.lName}`
+                            : `نام کاربری در دسترس نیست`}
+                        </p>
+                        <p className="text-basic-gray">
+                          {userProfile?.phoneNumber ||
+                            `شماره همراه در دسترس نیست`}
+                        </p>
+                      </div>
+                    </div>
+                    {user.isOnline ? (
+                      <span
+                        onClick={handleLogout}
+                        className="cursor-pointer text-sm text-red-500 transition ease-in-out hover:scale-125"
+                      >
+                        <LogOutPanel />
+                      </span>
+                    ) : (
+                      <span
+                        onClick={() => handleLogin(user)}
+                        className="cursor-pointer transition ease-in-out hover:scale-125"
+                      >
+                        <LoginPanel />
+                      </span>
+                    )}
+                  </div>
+                )
+              })}
             </ModalBody>
             <ModalFooter>
               <div className="m-auto">

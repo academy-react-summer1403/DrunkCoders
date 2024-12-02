@@ -5,12 +5,14 @@ import {
   CourseDetail,
   ArticlesDetail,
   Articles,
+  ErrorBlock,
 } from '@pages/index'
 
 export const rootRoutes = [
   {
     path: '/',
     element: <RootLayout />,
+    errorElement: <ErrorBlock />,
     children: [
       {
         index: true,

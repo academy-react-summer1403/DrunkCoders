@@ -92,6 +92,8 @@ const handleError = (error) => {
         window.location.pathname = '/auth'
       }
     }
+  } else if (error.request.status === 0 && !cheackTokenExpired()) {
+    // window.location.pathname = '/error'
   } else {
     // Something happened in setting up the request that triggered an Error
     console.error('Error:', error.message)

@@ -6,11 +6,12 @@ import {
   HeroSection,
   Certificates,
   ServicesDivider,
-} from '@components'
+  BackToTop,
+} from '@components/index'
 
 export function Home() {
   return (
-    <>
+    <div className="h-full">
       <HeroSection />
       <Services />
       <ServicesDivider />
@@ -18,6 +19,7 @@ export function Home() {
       <PopularCourses />
       <WeekTeacher />
       <NewAndArticle />
-    </>
+      <BackToTop />
+    </div>
   )
 }

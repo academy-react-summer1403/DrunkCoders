@@ -8,7 +8,7 @@ import { useQueries, useQuery } from '@tanstack/react-query'
 import { MyFavCoursesRenderCells } from './MyFavCoursesRenderCells'
 
 export function MyFavCoursesMain() {
-  const { data, isSuccess: reserveSuccess } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['myFavCourses'],
     queryFn: getMyFavoriteCourses,
   })
@@ -17,25 +17,28 @@ export function MyFavCoursesMain() {
     ? data.favoriteCourseDto.map((course) => course.courseId)
     : []
 
-  let { data: CompleteFavCourse } = useQueries({
+  let { data: completeFavCourse, pending } = useQueries({
     queries: ids.map((id) => ({
       queryKey: ['single-favCourse', id],
       queryFn: () => getCourseById(id),
-      enabled: Boolean(id),
+      enabled: Boolean(ids.length !== 0),
     })),
     combine: (results) => {
       return {
         data: results.map((result) => result.data),
-        //   pending: results.some((result) => result.isPending),
+        pending: results.some((result) => result.isPending),
       }
     },
   })
 
-  CompleteFavCourse =
-    CompleteFavCourse.some((course) => course === undefined) ||
-    CompleteFavCourse.length === 0
-      ? []
-      : CompleteFavCourse.map((course) => {
+  //  || completeFavCourse.length === 0
+
+  completeFavCourse =
+    completeFavCourse.some((course) => course === undefined) ||
+    pending ||
+    isLoading
+      ? null
+      : completeFavCourse.map((course) => {
           course.courseName = course.title
           course.startDate = course.startTime
           course.tumbImageAddress = course.imageAddress
@@ -45,12 +48,14 @@ export function MyFavCoursesMain() {
           return course
         })
 
+  // console.log(completeFavCourse)
+
   return (
     <MyCoursesAndArticlesLayout
       title="علاقه‌مندی دوره"
-      data={CompleteFavCourse}
+      data={completeFavCourse}
       renderCell={MyFavCoursesRenderCells}
-      key={CompleteFavCourse}
+      key={completeFavCourse}
       onSort={null}
       sort={null}
       type="myFavCourses"

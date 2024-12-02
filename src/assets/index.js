@@ -103,3 +103,4 @@ export { default as BookDownload } from './icons/book-download.svg?react'
 
 export { default as AddCircle } from './icons/panel/add-circle.svg?react'
 export { default as LoginPanel } from './icons/panel/login-panel.svg?react'
+export { default as BackToTopIcon } from './icons/back-to-top.svg?react'

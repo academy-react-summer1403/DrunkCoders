@@ -4,6 +4,7 @@ import {
   Register,
   ForgetPassStep1,
   ForgetPassStep2,
+  ErrorBlock,
 } from '@pages/index'
 import { AuthRoutesProtector } from './ProtectedRoute'
 
@@ -11,6 +12,7 @@ export const authRoutes = [
   {
     path: '/auth',
     element: <AuthRoutesProtector route={<Authentication />} />,
+    errorElement: <ErrorBlock />,
     children: [
       {
         index: true,
