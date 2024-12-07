@@ -1,12 +1,14 @@
 import { StarInCircle } from '@assets';
 import { DetailStar } from '@assets/index';
 import { rateCourse, rateNews } from '@core/index';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
 export function Rating({ courseId, newsId, isDisabled, userRate }) {
   const [rating, setRating] = useState(userRate);
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationFn: (newRating) => {
       if (courseId) {
@@ -19,6 +21,9 @@ export function Rating({ courseId, newsId, isDisabled, userRate }) {
     },
     onSuccess: (response) => {
       if (response.success) {
+        queryClient.invalidateQueries(['newsDetails']);
+        queryClient.invalidateQueries(['courseDetails']);
+
         toast.success(response.message);
       } else {
         toast.error(response.message);

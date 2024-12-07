@@ -36,6 +36,7 @@ export function PaymentStep1({ isOpen, onClose, course }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(paymentStep1),
@@ -47,10 +48,13 @@ export function PaymentStep1({ isOpen, onClose, course }) {
       if (response.success) {
         toast.success('پرداخت موفق')
       } else {
-        toast.error(response.message)
-        console.log('response', response)
+        toast.error(response.response.data.ErrorMessage[0])
       }
     },
+    onError: err =>{
+      const data = JSON.parse(err.message).data
+            toast.error(data.ErrorMessage.join(' - '))
+    }
   })
   const onSubmit = (data) => {
     console.log(data)
@@ -61,10 +65,12 @@ export function PaymentStep1({ isOpen, onClose, course }) {
     formData.append('StudentId', StudentId)
     formData.append('PeymentDate', PeymentDate)
     mutate(formData)
+    onClose(true)
+    reset()
   }
   return (
     <>
-      <Modal isOpen={isOpen} onOpenChange={onClose} hideCloseButton size="2xl">
+      <Modal isOpen={isOpen} onOpenChange={() => { onClose(); reset(); }} hideCloseButton size="2xl">
         <ModalContent>
           {(onClose) => (
             <>

@@ -28,15 +28,18 @@ export function Comment({ courseId }) {
   const mutation = useMutation({
     mutationFn: sendCourseComment,
     onSuccess: (data) => {
-      toast.success(' کامنت ارسال شد ')
-      setModalInput('');
-      setModalSubject('');
-      onOpen(false);
-      queryClient.invalidateQueries(['courseDetails', data]);
+      if(data.success){
+        toast.success(' کامنت ارسال شد ')
+        setModalInput('');
+        setModalSubject('');
+        queryClient.invalidateQueries(['courseDetails', data]);
+      }else{
+        toast.error(data.response?.data?.ErrorMessage[0]|| 'ارسال نشد')
+      }
     },
-    onError:(err) => {
-      console.log('error', err);
-    }
+    onError:(error) => {
+      const err = JSON.parse(error.message).data
+      toast.error(err.ErrorMessage.join(' - '))    }
   });
 
   function addCourseComment() {
@@ -55,14 +58,19 @@ export function Comment({ courseId }) {
   const setReply = useMutation({
     mutationFn: sendCourseReply,
     onSuccess: (data) => {
-      toast.success(' پاسخ ارسال شد ');
-      setModalInput('');
-      setModalSubject('');
-      onOpen(false);
-      queryClient.invalidateQueries(['courseDetails', data]);
+      if(data.success){
+        toast.success(' پاسخ ارسال شد ');
+        setModalInput('');
+        setModalSubject('');
+        onOpen(false);
+        queryClient.invalidateQueries(['courseDetails', data]);
+      }else{
+        toast.error(data.response?.data?.ErrorMessage[0]|| 'ارسال نشد')
+      }
     },
     onError: (error) => {
-      console.error('No response received:', error.message);
+      const err = JSON.parse(error.message).data
+      toast.error(err.ErrorMessage.join(' - '))
     },
   });
 

@@ -11,6 +11,8 @@ import toast from 'react-hot-toast';
 import { CourseInteraction } from './CourseInteraction';
 
 export function OverView({ course }) {
+  const queryClient = useQueryClient();
+
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const courseId = course.courseId; 
@@ -27,6 +29,7 @@ export function OverView({ course }) {
     mutationFn: reserveCourse,
     onSuccess: (data) => {
       if(data.success){
+        queryClient.invalidateQueries(['courseDetails']);
 
         toast.success(' به لیست رزرو اضافه شد ')
       }else{
