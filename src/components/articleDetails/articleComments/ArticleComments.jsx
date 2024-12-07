@@ -42,8 +42,7 @@ export function ArticleComments({ data}) {
         toast.success('کامنت ارسال شد');
         queryClient.invalidateQueries(['newsDetails'])
       } else {
-        const data = JSON.parse(data.message).data
-        toast.error(data.ErrorMessage.join(' - '))
+        toast.error(data.response?.data?.ErrorMessage[0]|| 'ارسال نشد')
       }
     },
     onError: (error) => {
@@ -72,12 +71,13 @@ export function ArticleComments({ data}) {
         toast.success('پاسخ شما ارسال شد');
         queryClient.invalidateQueries(['articleComments'])
       } else {
-        const data = JSON.parse(data.message).data
-        toast.error(data.ErrorMessage.join(' - '))
+        toast.error(data.response?.data?.ErrorMessage[0]|| 'ارسال نشد')
+
       }
     },
     onError: (err) => {
-      toast.error(err.message)
+      const data = JSON.parse(data.message).data
+      toast.error(data.ErrorMessage.join(' - '))
     }
   })
 

@@ -28,8 +28,7 @@ export function PaymentModalContent({ paymentId, action }) {
         toast.success('پرداخت شما بروز شد')
         queryClient.invalidateQueries(['paidList']);
       } else{
-        toast.error(response.message)
-        console.log(response);
+        toast.error(response.response.data.ErrorMessage[0])
       }
     }
   })
