@@ -28,11 +28,11 @@ export function UserInformationForm({ userInfo }) {
     onSuccess: (data) => {
       console.log(data)
       toast.success(' پروفایل با موفقیت ذخیره شد ')
-      if (data.success) {
+      /* if (data.success) {
         if (data.newToken) {
           // dispatch(tokenActions.login({ token: data.token, id: data.id }))
         }
-      }
+      } */
       queryClient.invalidateQueries(['userProfileInfo'])
     },
     onError: () => {
@@ -52,7 +52,7 @@ export function UserInformationForm({ userInfo }) {
 
     let newDateObj = {}
     if (userInfo.linkdinProfile !== null) {
-      newDateObj.LinkdinProfile = userInfo.linkdinProfile``
+      newDateObj.LinkdinProfile = userInfo.linkdinProfile
       newDateObj.TelegramLink = userInfo.telegramLink
     }
 
