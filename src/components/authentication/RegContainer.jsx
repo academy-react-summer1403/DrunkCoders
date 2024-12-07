@@ -30,6 +30,7 @@ export function RegContainer() {
       setCurrentStep={setCurrentStep}
       nextStep={3}
       isLogin={false}
+      resend
       message={(
         <>
           لطفا کد ارسال شده به شماره <span className='text-primary-blue'>{phoneNumber}</span> را وارد کنید

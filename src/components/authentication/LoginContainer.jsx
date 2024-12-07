@@ -54,6 +54,7 @@ export function LoginContainer() {
           setCurrentStep={setCurrentStep}
           isLogin={true}
           nextStep={2}
+          resend={loginData}
           message
         />
       )}
