@@ -66,7 +66,7 @@ export function CommentModalFooter({
           <Smile />
         </div>
           {showEmojiPicker && (
-            <div className="absolute bottom-3 bg-white dark:bg-zinc-800 p-3 rounded-3xl">
+            <div className="z-50 absolute bottom-5 bg-white dark:bg-zinc-800 p-3 rounded-3xl left-0">
               <ModalCloseBtn onClose={handleEmojiClose}/>
               <EmojiPicker onEmojiClick={onEmojiClick}
               className="dark:bg-zinc-900" />

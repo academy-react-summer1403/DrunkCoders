@@ -14,8 +14,10 @@ import { useQuery } from '@tanstack/react-query'
 import { getLatestCourses } from '@core/index'
 import { useDispatch, useSelector } from 'react-redux'
 import { dashSortFilterActions } from '@store/dashPanel-filter'
+import { useNavigate } from 'react-router-dom'
 
 export function DashTable() {
+  const navigate = useNavigate();
   const dispatch = useDispatch()
   const { params } = useSelector((state) => state.dashSort)
 
@@ -82,7 +84,9 @@ export function DashTable() {
                   </TableCell>
                   <TableCell>
                     <Tooltip content="مشاهده">
-                      <span>
+                      <span
+                        onClick={() => navigate('/courses/'+ course.courseId)}
+                      >
                         <HidePassword />
                       </span>
                     </Tooltip>

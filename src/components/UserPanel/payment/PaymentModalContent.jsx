@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Image, Spinner } from '@nextui-org/react';
 import { deletePayment, getPaidCourse, paymentStep2, updatePayment } from '@core/services/api/user.api';
@@ -53,17 +53,27 @@ export function PaymentModalContent({ paymentId, action }) {
         queryClient.invalidateQueries(['paidList']);
         queryClient.invalidateQueries(['paidItem']);
       } else {
-        toast.error(response.message)
+        toast.error(response.response.data.ErrorMessage[0])
       }
     }
   })
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(paymentStep1),
   })
+  useEffect(() => {
+    if (data) {
+      // Reset the form with the fetched data
+      reset({
+        Paid: data.paid, // Prefill with the current paid amount
+        PaymentInvoiceNumber: data.paymentInvoiceNumber, // Prefill with the current invoice number
+      });
+    }
+  }, [data, reset]);
 
   if (isLoading) {
     return <Spinner size="lg" label="در حال دریافت جزئیات ..." />;

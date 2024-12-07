@@ -38,12 +38,17 @@ export function ArticleComments({ data}) {
   const mutation = useMutation({
     mutationFn: postNewsComment,
     onSuccess: (data) => {
-      console.log(data);
-      toast.success('کامنت ارسال شد');
-      queryClient.invalidateQueries(['newsDetails'])
+      if(data.success){
+        toast.success('کامنت ارسال شد');
+        queryClient.invalidateQueries(['newsDetails'])
+      } else {
+        const data = JSON.parse(data.message).data
+        toast.error(data.ErrorMessage.join(' - '))
+      }
     },
     onError: (error) => {
-      console.error('Error posting comment:', error);
+      const data = JSON.parse(error.message).data
+      toast.error(data.ErrorMessage.join(' - '))
     },
   });
 
@@ -62,13 +67,16 @@ export function ArticleComments({ data}) {
   const replyMutation = useMutation ({
     mutationFn: postNewsReply,
     onSuccess: (data) => {
-      console.log('replyMutation');
-      console.log(data);
-      toast.success('پاسخ شما ارسال شد');
-      queryClient.invalidateQueries(['newsDetails'])
+      if (data.success){
+
+        toast.success('پاسخ شما ارسال شد');
+        queryClient.invalidateQueries(['articleComments'])
+      } else {
+        const data = JSON.parse(data.message).data
+        toast.error(data.ErrorMessage.join(' - '))
+      }
     },
     onError: (err) => {
-      console.log(err);
       toast.error(err.message)
     }
   })

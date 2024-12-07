@@ -24,7 +24,7 @@ export function PaymentList() {
     queryKey: ['paidList'],
     queryFn: getPaymentList,
   })
-
+  
   const [modalState, setModalState] = useState({
     isOpen: false,
     paymentId: null,
