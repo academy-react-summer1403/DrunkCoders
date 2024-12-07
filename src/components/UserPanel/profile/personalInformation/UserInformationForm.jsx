@@ -23,16 +23,17 @@ export function UserInformationForm({ userInfo }) {
     formState: { errors },
   } = useForm({ resolver: zodResolver(userProfileInformationSchema) })
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: EditUserProfile,
     onSuccess: (data) => {
+      console.log(data)
       toast.success(' پروفایل با موفقیت ذخیره شد ')
       if (data.success) {
         if (data.newToken) {
-          dispatch(tokenActions.login({ token: data.token, id: data.id }))
+          // dispatch(tokenActions.login({ token: data.token, id: data.id }))
         }
-        queryClient.invalidateQueries(['userProfileInfo'])
       }
+      queryClient.invalidateQueries(['userProfileInfo'])
     },
     onError: () => {
       toast.error(' مشکلی پیش آمد ')
@@ -40,12 +41,18 @@ export function UserInformationForm({ userInfo }) {
   })
 
   function onSubmit(data) {
-    data.BirthDay = convertPersianDateToGerigorian(data.BirthDay)
+    data.BirthDay = userInfo
+      ? userInfo.birthDay
+      : convertPersianDateToGerigorian(data.BirthDay)
+    // convertPersianDateToGerigorian(data.BirthDay) || userInfo?.birthDay
+
+    // console.log(data.BirthDay)
+
     data.Gender = data.Gender === 'true' ? true : false
 
     let newDateObj = {}
     if (userInfo.linkdinProfile !== null) {
-      newDateObj.LinkdinProfile = userInfo.linkdinProfile
+      newDateObj.LinkdinProfile = userInfo.linkdinProfile``
       newDateObj.TelegramLink = userInfo.telegramLink
     }
 
@@ -197,7 +204,7 @@ export function UserInformationForm({ userInfo }) {
         errorMessage={errors?.HomeAdderess?.message}
       />
 
-      <Button type="submit" className="w-fit px-6 py-3">
+      <Button type="submit" className="w-fit px-6 py-3" isLoading={isPending}>
         اعمال تغییرات
       </Button>
     </form>

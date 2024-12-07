@@ -49,20 +49,20 @@ const handleError = (error) => {
     // Handle specific status codes
     switch (error.response.status) {
       case 401:
-        alert('Unauthorized! Please log in again.')
+        //alert('Unauthorized! Please log in again.')
         window.location.pathname = '/auth'
         break
       case 403:
-        alert('Forbidden! You don’t have permission to access this resource.')
+        //alert('Forbidden! You don’t have permission to access this resource.')
         break
       case 404:
-        alert('Not Found! The requested resource was not found.')
+        //alert('Not Found! The requested resource was not found.')
         break
       case 405:
-        alert('Wrong http method provided. Method not allowed.')
+        //alert('Wrong http method provided. Method not allowed.')
         break
       case 500:
-        alert('Internal Server Error! Please try again later.')
+        //alert('Internal Server Error! Please try again later.')
         break
 
       default:
@@ -74,7 +74,7 @@ const handleError = (error) => {
           error.response.status < 600
         ) {
           // Handle all other 5xx errors
-          alert('A server error occurred! Status: ' + error.response.status)
+          // alert('A server error occurred! Status: ' + error.response.status)
         }
         break
     }
@@ -97,7 +97,7 @@ const handleError = (error) => {
   } else {
     // Something happened in setting up the request that triggered an Error
     console.error('Error:', error.message)
-    alert('An unexpected error occurred. Please try again.')
+    // alert('An unexpected error occurred. Please try again.')
   }
   return Promise.reject(error)
 }

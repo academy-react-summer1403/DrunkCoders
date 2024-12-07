@@ -32,7 +32,10 @@ export function CardHeader({ data, buttonColor, type, view }) {
           />
 
           <div className="absolute right-3 top-3 z-10 flex items-center justify-center gap-2">
-            <Button className={`${buttonBgClass} text-white`} size="sm">
+            <Button
+              className={`${buttonBgClass} max-w-32 text-white`}
+              size="sm"
+            >
               {type === 'course'
                 ? data.typeName || data.technologyList
                 : 'مقاله'}

@@ -25,6 +25,8 @@ export function MyCoursesTable({ listOfMyCourses, onOpenSummaryModal }) {
   )
   const [selectedCourse, setSelectedCourse] = useState(null) // State for selected courseId
 
+  console.log(listOfMyCourses)
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth
@@ -38,7 +40,7 @@ export function MyCoursesTable({ listOfMyCourses, onOpenSummaryModal }) {
   }, [])
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  
+
   const handleOpenPaymentModal = (course) => {
     setSelectedCourse(course)
     onOpen() // Open the modal
@@ -91,7 +93,7 @@ export function MyCoursesTable({ listOfMyCourses, onOpenSummaryModal }) {
           return course.paymentStatus === 'پرداخت نشده' ? (
             <p>پرداخت نشده</p>
           ) : (
-            ''
+            'پرداخت شده'
           )
         case 'actions':
           return (
@@ -159,7 +161,7 @@ export function MyCoursesTable({ listOfMyCourses, onOpenSummaryModal }) {
       <PaymentStep1
         isOpen={isOpen}
         onClose={onOpenChange}
-        course={selectedCourse||{}}
+        course={selectedCourse || {}}
       />
     </>
   )
