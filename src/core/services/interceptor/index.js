@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 
 export const api = axios.create({
   //"https://classapi.sepehracademy.ir/api"
-  baseURL: "https://classapi.sepehracademy.ir/api",
+  baseURL: "https://sepehracademy.liara.run",
 })
 
 function onSuccess(response) {
